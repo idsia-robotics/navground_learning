@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Index &#8212; navground_learning 0.0.1 documentation</title>
+    <title>Index &#8212; navground_learning 0.0.2 documentation</title>
   
   
   
@@ -37,7 +37,7 @@
 
     <script src="_static/jquery.js?v=5d32c60e"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="_static/documentation_options.js?v=e645c8fa"></script>
+    <script src="_static/documentation_options.js?v=f131489c"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
@@ -131,7 +131,7 @@
   
   
   
-    <p class="title logo__title">navground_learning 0.0.1 documentation</p>
+    <p class="title logo__title">navground_learning 0.0.2 documentation</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -155,6 +155,8 @@
 <li class="toctree-l2"><a class="reference internal" href="tutorials/Gym.html">Navground-Gymnasium integration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorials/IL.html">Train a policy using Imitation Learning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorials/RL.html">Train a policy using RL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/CorridorScenario.html">Navigate along a corridor with one obstacle: scenario</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/LearningCorridor.html">Navigate along a corridor with one obstacle: learning</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="reference.html">Reference</a></li>
@@ -276,6 +278,7 @@ document.write(`
  | <a href="#P"><strong>P</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
  
 </div>
 <h2 id="A">A</h2>
@@ -319,11 +322,17 @@ document.write(`
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference.html#navground_learning.env.NavgroundEnv.get_behavior_and_sensor">get_behavior_and_sensor() (navground_learning.env.NavgroundEnv method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference.html#navground_learning.env.NavgroundEnv.get_init_args">get_init_args() (navground_learning.env.NavgroundEnv method)</a>
 </li>
+      <li><a href="reference.html#navground_learning.rollout.get_trajectories_from_experiment">get_trajectories_from_experiment() (in module navground_learning.rollout)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference.html#navground_learning.rollout.get_trajectories_from_run">get_trajectories_from_run() (in module navground_learning.rollout)</a>
+</li>
       <li><a href="reference.html#navground_learning.env.GymAgentConfig">GymAgentConfig (class in navground_learning.env)</a>
+</li>
+      <li><a href="reference.html#navground_learning.probes.GymProbe">GymProbe (class in navground_learning.probes)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -362,6 +371,12 @@ document.write(`
 </li>
       </ul></li>
   </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference.html#navground_learning.behaviors.PolicyBehavior.max_acceleration">max_acceleration (navground_learning.behaviors.PolicyBehavior property)</a>
+</li>
+      <li><a href="reference.html#navground_learning.behaviors.PolicyBehavior.max_angular_acceleration">max_angular_acceleration (navground_learning.behaviors.PolicyBehavior property)</a>
+</li>
+  </ul></td>
 </tr></table>
 
 <h2 id="N">N</h2>
@@ -380,6 +395,10 @@ document.write(`
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference.html#navground_learning.env.GymAgentConfig.observation_space">observation_space (navground_learning.env.GymAgentConfig property)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference.html#navground_learning.policies.OrderInvariantCombinedExtractor">OrderInvariantCombinedExtractor (class in navground_learning.policies)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -435,6 +454,18 @@ document.write(`
         <li><a href="reference.html#navground_learning.il.dagger.Trainer">(class in navground_learning.il.dagger)</a>
 </li>
       </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference.html#navground_learning.behaviors.PolicyBehavior.use_acceleration_action">use_acceleration_action (navground_learning.behaviors.PolicyBehavior property)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference.html#navground_learning.behaviors.PolicyBehavior.use_wheels">use_wheels (navground_learning.behaviors.PolicyBehavior property)</a>
+</li>
   </ul></td>
 </tr></table>
 

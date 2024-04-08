@@ -164,3 +164,4 @@ examples
 __pycache__
 *.1.*
 notebooks
+logs

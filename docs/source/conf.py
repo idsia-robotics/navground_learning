@@ -9,7 +9,7 @@
 project = 'navground_learning'
 copyright = '2024, Jerome Guzzi et al. (IDSIA, USI-SUPSI)'
 author = 'Jerome Guzzi et al. (IDSIA, USI-SUPSI)'
-release = '0.0.1'
+release = '0.0.2'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
