@@ -8,7 +8,6 @@ from ..utils import GymAgent, GymAgentConfig
 
 
 class PolicyBehavior(core.Behavior, name="Policy"):
-
     """
     A navigation behavior that evaluates a ML policy
 
@@ -22,6 +21,10 @@ class PolicyBehavior(core.Behavior, name="Policy"):
     - :py:attr:`include_target_distance` (bool)
     - :py:attr:`include_velocity` (bool)
     - :py:attr:`include_radius` (bool)
+    - :py:attr:`use_wheels` (bool)
+    - :py:attr:`use_acceleration_action` (bool)
+    - :py:attr:`max_acceleration` (float)
+    - :py:attr:`max_angular_acceleration` (float)
 
     *State*: :py:class:`SensingState`
 
@@ -75,7 +78,9 @@ class PolicyBehavior(core.Behavior, name="Policy"):
         self._policy_path = str(value)
 
     @property
-    @core.register(True, "Whether to include the target distance in the observations")
+    @core.register(True,
+                   "Whether to include the target distance in the observations"
+                   )
     def include_target_distance(self) -> bool:
         """
         See :py:attr:`GymAgentConfig.include_target_distance`
@@ -87,7 +92,8 @@ class PolicyBehavior(core.Behavior, name="Policy"):
         self._config.include_target_distance = value
 
     @property
-    @core.register(True, "Whether to include the target direction in the observations")
+    @core.register(
+        True, "Whether to include the target direction in the observations")
     def include_target_direction(self) -> bool:
         """
         See :py:attr:`GymAgentConfig.include_target_direction`
@@ -99,7 +105,8 @@ class PolicyBehavior(core.Behavior, name="Policy"):
         self._config.include_target_direction = value
 
     @property
-    @core.register(False, "Whether to include the current velocity in the observations")
+    @core.register(
+        False, "Whether to include the current velocity in the observations")
     def include_velocity(self) -> bool:
         """
         See :py:attr:`GymAgentConfig.include_velocity`
@@ -111,7 +118,8 @@ class PolicyBehavior(core.Behavior, name="Policy"):
         self._config.include_velocity = value
 
     @property
-    @core.register(False, "Whether to include the own radius in the observations")
+    @core.register(False,
+                   "Whether to include the own radius in the observations")
     def include_radius(self) -> bool:
         """
         See :py:attr:`GymAgentConfig.include_radius`
@@ -148,31 +156,94 @@ class PolicyBehavior(core.Behavior, name="Policy"):
 
     @property
     @core.register(False, "Whether to keep orientation fixed")
-    def fix_orientation(self) -> int:
+    def fix_orientation(self) -> bool:
         """
         See :py:attr:`GymAgentConfig.fix_orientation`
         """
         return self._config.fix_orientation
 
     @fix_orientation.setter  # type: ignore[no-redef]
-    def fix_orientation(self, value: int) -> None:
+    def fix_orientation(self, value: bool) -> None:
         self._config.fix_orientation = value
+
+    @property
+    @core.register(
+        False,
+        "Whether action and observation uses wheel speeds or accelerations")
+    def use_wheels(self) -> bool:
+        """
+        See :py:attr:`GymAgentConfig.use_wheels`
+        """
+        return self._config.use_wheels
+
+    @use_wheels.setter  # type: ignore[no-redef]
+    def use_wheels(self, value: bool) -> None:
+        self._config.use_wheels = value
+
+    @property
+    @core.register(False, "Whether actions are accelerations.")
+    def use_acceleration_action(self) -> bool:
+        """
+        See :py:attr:`GymAgentConfig.use_acceleration_action`
+        """
+        return self._config.use_acceleration_action
+
+    @use_acceleration_action.setter  # type: ignore[no-redef]
+    def use_acceleration_action(self, value: bool) -> None:
+        self._config.use_acceleration_action = value
+
+    @property
+    @core.register(10.0, "The upper bound of the acceleration.")
+    def max_acceleration(self) -> float:
+        """
+        See :py:attr:`GymAgentConfig.max_acceleration`
+        """
+        return self._config.max_acceleration
+
+    @max_acceleration.setter  # type: ignore[no-redef]
+    def max_acceleration(self, value: float) -> None:
+        self._config.max_acceleration = value
+
+    @property
+    @core.register(100.0, "The upper bound of the angular acceleration.")
+    def max_angular_acceleration(self) -> float:
+        """
+        See :py:attr:`GymAgentConfig.max_angular_acceleration`
+        """
+        return self._config.max_angular_acceleration
+
+    @max_angular_acceleration.setter  # type: ignore[no-redef]
+    def max_angular_acceleration(self, value: float) -> None:
+        self._config.max_angular_acceleration = value
 
     def get_environment_state(self) -> core.SensingState:
         return self._state
+
+    # TODO: target should not be inferred from behavior.target
+    # but passed explicitly using velocity and or point
+    def cmd_twist_towards_velocity(self, velocity: core.Vector2,
+                                   time_step: float,
+                                   frame: core.Frame) -> core.Twist2:
+        if self._policy is None:
+            return core.Twist2((0, 0), 0, frame=frame)
+        if not self._gym_agent:
+            self._gym_agent = GymAgent(self._config, self, self._state)
+        obs = self._gym_agent.update_observations()
+        act, _ = self._policy.predict(obs)
+        cmd = self._gym_agent.get_cmd_from_action(act, time_step)
+        return self.feasible_twist(cmd, frame)
 
     def cmd_twist_towards_point(self, point: core.Vector2, speed: float,
                                 time_step: float,
                                 frame: core.Frame) -> core.Twist2:
         if self._policy is None:
-            return core.Twist2((0, 0), frame)
+            return core.Twist2((0, 0), 0, frame=frame)
         if not self._gym_agent:
-            self._gym_agent = GymAgent(
-                self._config.configure(behavior=self, state=self._state))
-        # TODO(Jerome): use point instead of target
-        obs = self._gym_agent.update_observations(self, self._state)
+            self._gym_agent = GymAgent(self._config, self, self._state)
+        # ?(Jerome): use point instead of target
+        obs = self._gym_agent.update_observations()
         act, _ = self._policy.predict(obs)
-        cmd = self._config.get_cmd_from_action(act)
+        cmd = self._gym_agent.get_cmd_from_action(act, time_step)
         return self.feasible_twist(cmd, frame)
 
     @classmethod

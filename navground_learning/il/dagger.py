@@ -64,16 +64,22 @@ class Trainer(BaseTrainer):
                  n_envs: int = 1,
                  seed: int = 0,
                  verbose: bool = False,
+                 bc_kwargs: dict[str, Any] = {},
+                 dagger_kwargs: dict[str, Any] = {},
                  **kwargs: Any):
+        self._bc_kwargs = bc_kwargs
+        self._dagger_kwargs = dagger_kwargs
         super().__init__(env, parallel, n_envs, seed, **kwargs)
 
     def init_trainer(self) -> None:
-        self.temp_dir = tempfile.TemporaryDirectory(prefix="dagger_example_")
+        self.temp_dir = tempfile.TemporaryDirectory(prefix="dagger")
         self.bc_trainer = bc.BC(
             observation_space=self.env.observation_space,
             action_space=self.env.action_space,
             rng=self.rng,
             custom_logger=self.logger,
+            policy=self._policy,
+            **self._bc_kwargs
         )
         self.trainer = SimpleDAggerTrainer(
             venv=self.env,
@@ -81,6 +87,8 @@ class Trainer(BaseTrainer):
             expert_policy=self.expert,
             bc_trainer=self.bc_trainer,
             rng=self.rng,
+            custom_logger=self.logger,
+            **self._dagger_kwargs
         )
 
     def __del__(self):
