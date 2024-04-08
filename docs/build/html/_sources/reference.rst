@@ -26,6 +26,13 @@ Inference
    :members:
    :show-inheritance:
 
+Models
+======
+
+.. autoclass:: navground_learning.policies.OrderInvariantCombinedExtractor
+   :members:
+   :show-inheritance:
+
 Training
 ========
 
@@ -42,3 +49,15 @@ DAgger
 .. autoclass:: navground_learning.il.dagger.Trainer
    :members:
    :inherited-members:
+
+
+Record Runs
+===========
+
+.. autoclass:: navground_learning.probes.GymProbe
+   :members:
+   :inherited-members:
+
+.. autofunction:: navground_learning.rollout.get_trajectories_from_run
+
+.. autofunction:: navground_learning.rollout.get_trajectories_from_experiment

@@ -4,7 +4,7 @@ Installation
 
 Install the package dependencies:
 
-- ``navground_sim``: `instructions <https://idsia-robotics.github.io/navground/_build/html/installation.html#simulation-c-and-python>`
+- ``navground_sim``: `instructions <https://idsia-robotics.github.io/navground/_build/html/installation.html#simulation-c-and-python>`_
 - ``gymnasium`` (required), ``imitation`` (optional) and ``stable-baseline3`` (optional)
 
   .. code-block:: console

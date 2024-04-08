@@ -8,5 +8,7 @@ Tutorials
    Gym
    IL
    RL
+   CorridorScenario
+   LearningCorridor
 
 
