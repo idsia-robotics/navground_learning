@@ -1,17 +1,22 @@
 import pathlib
-from typing import Any
+from typing import Any, Sequence
+import datetime
 
 import gymnasium as gym
 import numpy as np
 import torch
 import yaml
-from imitation.util.logger import HierarchicalLogger
+from imitation.util.logger import configure
 from navground import core, sim
 from navground_learning.behaviors.policy import PolicyBehavior
-from navground_learning.utils import get_expert
-from stable_baselines3.common.logger import Logger
+from navground_learning.utils import Expert
+from stable_baselines3.common.policies import ActorCriticPolicy
+from stable_baselines3.common import torch_layers
+import torch as th
 
 from . import make_imitation_venv
+
+ISO_TIMESTAMP = "%Y%m%d_%H%M%S"
 
 
 class BaseTrainer:
@@ -22,17 +27,31 @@ class BaseTrainer:
                  n_envs: int = 1,
                  seed: int = 0,
                  verbose: bool = False,
+                 log_directory: str = "logs",
+                 log_formats: Sequence[str] = [],
+                 net_arch: list[int] = [32, 32],
                  **kwargs: Any):
 
-        self.verbose = verbose
-        if not self.verbose:
-            self.logger = HierarchicalLogger(Logger(None, []), [])
+        timestamp = datetime.datetime.now().strftime(ISO_TIMESTAMP)
+        if any(l != 'stdout' for l in log_formats):
+            path = f"{log_directory}/{timestamp}"
         else:
-            self.logger = None
+            path = None
+        self.logger = configure(path, log_formats)
         self.rng = np.random.default_rng(seed)
         self.env, self.config, self.original_behavior, self.sensor = make_imitation_venv(
             env=env, parallel=parallel, n_envs=n_envs, rng=self.rng, **kwargs)
-        self.expert = get_expert(self.config)
+        self.expert = Expert(self.config)
+        if isinstance(self.config.observation_space, gym.spaces.Dict):
+            extractor = torch_layers.CombinedExtractor
+        else:
+            extractor = torch_layers.FlattenExtractor
+        self._policy = ActorCriticPolicy(
+            observation_space=self.config.observation_space,
+            action_space=self.config.action_space,
+            lr_schedule=lambda _: th.finfo(th.float32).max,
+            features_extractor_class=extractor,
+            net_arch=net_arch)
         self.init_trainer()
         self.behavior = PolicyBehavior.clone_behavior(self.original_behavior,
                                                       policy=self.policy,

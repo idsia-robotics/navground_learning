@@ -1,5 +1,7 @@
 from typing import Any
 
+# import multiprocess as mp
+# from itertools import chain
 import gymnasium as gym
 from imitation.algorithms import bc
 from imitation.data import rollout
@@ -15,6 +17,35 @@ def sample_expert_transitions(env, expert, rng, runs=1000):
         rng=rng,
     )
     return rollout.flatten_trajectories(rollouts)
+
+# def f(env, seed, n_envs, expert):
+#     rng = np.random.default_rng(seed)
+#     venv = make_vec_env("navground",
+#         rng=rng,
+#         post_wrappers=[lambda env, _: RolloutInfoWrapper(env)],
+#         env_make_kwargs=env.spec.kwargs,
+#         parallel=False,
+#         n_envs=n_envs)
+#     rollouts = rollout.rollout(
+#         expert, venv,
+#         rollout.make_sample_until(min_timesteps=None, min_episodes=runs),
+#         rng=rng)
+#     return rollouts
+
+
+# def sample_expert_transitions_mp(venv, expert, rng, processes=1, runs=1000):
+
+#     with mp.Pool(processes=processes) as pool:
+#         rollouts = pool.map(f, range(12))
+#     return rollout.flatten_trajectories(list(chain(*rollouts)))
+
+#     rollouts = rollout.rollout(
+#         expert,
+#         env,
+#         rollout.make_sample_until(min_timesteps=None, min_episodes=runs // processes),
+#         rng=rng,
+#     )
+#     return rollout.flatten_trajectories(rollouts)
 
 
 # def train(scenario: sim.Scenario,
@@ -68,9 +99,11 @@ class Trainer(BaseTrainer):
                  seed: int = 0,
                  verbose: bool = False,
                  runs: int = 0,
+                 bc_kwargs: dict[str, Any] = {},
                  **kwargs: Any,
                  ):
         self.transitions = None
+        self._bc_kwargs = bc_kwargs
         super().__init__(env, parallel, n_envs, seed, **kwargs)
         if runs:
             self.collect_runs(runs)
@@ -82,6 +115,8 @@ class Trainer(BaseTrainer):
             demonstrations=self.transitions,
             rng=self.rng,
             custom_logger=self.logger,
+            policy=self._policy,
+            **self._bc_kwargs,
         )
 
     def collect_runs(self, runs: int) -> None:

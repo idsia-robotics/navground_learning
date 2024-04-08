@@ -1,5 +1,5 @@
 import logging
-from typing import Any, Callable, Dict, Mapping, Optional, Tuple
+from typing import Any, Callable, Dict, Mapping, Tuple, cast
 
 import gymnasium as gym
 import numpy as np
@@ -32,12 +32,19 @@ def null_reward(agent: sim.Agent, world: sim.World, time_step: float) -> float:
 
 def social_reward(alpha: float = 0.0,
                   beta: float = 1.0,
+                  critical_safety_margin: float = 0.0,
+                  safety_margin: float | None = None,
                   default_social_margin: float = 0.0,
                   social_margins: Mapping[int, float] = {}) -> Reward:
     """
     Reward function for social navigation, see (TODO add citation)
 
     :param      alpha:                  The weight of social margin violations
+    :param      beta:                   The weight of efficacy
+    :param      critical_safety_margin: Violation of this margin has maximal penalty of -1
+    :param      safety_margin:          Violations between this and the critical
+                                        safety_margin have a linear penalty. If not set,
+                                        it defaults to the agent's own safety_margin.
     :param      beta:                   The weight of efficacy
     :param      default_social_margin:  The default social margin
     :param      social_margins:         The social margins assigned to neighbors' ids
@@ -52,21 +59,34 @@ def social_reward(alpha: float = 0.0,
     max_social_margin = social_margin.max_value
 
     def reward(agent: sim.Agent, world: sim.World, time_step: float) -> float:
-        sv = world.compute_safety_violation(agent)
-        if sv > 0:
+        if safety_margin is None:
+            if agent.behavior:
+                sm = agent.behavior.safety_margin
+            else:
+                sm = 0
+        else:
+            sm = safety_margin
+        max_violation = sm
+        sv = world.compute_safety_violation(agent, sm)
+        max_violation = sm - critical_safety_margin
+        if sv >= sm:
             return -1.0
-        r = 0.0
+        elif sv > max_violation:
+            r = -1.0
+        else:
+            r = -sv / max_violation
         if max_social_margin > 0:
             ns = world.get_neighbors(agent, max_social_margin)
             for n in ns:
-                distance = np.linalg.norm(n.position - agent.position)
-                margin = social_margin.get(distance, n.id)
+                distance = cast(float,
+                                np.linalg.norm(n.position - agent.position))
+                margin = social_margin.get(n.id, distance)
                 if margin > distance:
                     r += (distance - margin) * alpha * time_step
         if agent.task and agent.task.done():
             r += 1.0
         if agent.behavior:
-            r += agent.behavior.efficacy * beta  # * time_step
+            r += (agent.behavior.efficacy - 1) * beta  # * time_step
         return r
 
     return reward
@@ -123,24 +143,22 @@ class NavgroundEnv(gym.Env):
     metadata = {"render_modes": ["human", "rgb_array"], 'render_fps': 30}
     MAX_SEED = 2**31 - 1
 
-    def __init__(
-        self,
-        scenario: sim.Scenario | str | Dict[str, Any] = None,
-        agent_index: int = 0,
-        sensor: sim.Sensor | str | Dict[str, Any] | None = None,
-        config: GymAgentConfig | None = None,
-        reward: Reward | None = None,
-        time_step: float = 0.1,
-        max_duration: float = -1.0,
-        bounds: Tuple[np.ndarray, np.ndarray] | None = None,
-        truncate_outside_bounds: bool = True,
-        render_mode: str | None = None,
-        render_kwargs: Mapping[str, Any] = {},
-        realtime_factor: float = 1.0
-    ) -> None:
+    def __init__(self,
+                 scenario: sim.Scenario | str | Dict[str, Any] | None = None,
+                 agent_index: int = 0,
+                 sensor: sim.Sensor | str | Dict[str, Any] | None = None,
+                 config: GymAgentConfig | None = None,
+                 reward: Reward | None = None,
+                 time_step: float = 0.1,
+                 max_duration: float = -1.0,
+                 bounds: Tuple[np.ndarray, np.ndarray] | None = None,
+                 truncate_outside_bounds: bool = True,
+                 render_mode: str | None = None,
+                 render_kwargs: Mapping[str, Any] = {},
+                 realtime_factor: float = 1.0) -> None:
 
         assert render_mode is None or render_mode in self.metadata[
-            "render_modes"]
+            "render_modes"]  # type: ignore
 
         self.scenario = scenario
         self.agent_index = agent_index
@@ -164,18 +182,23 @@ class NavgroundEnv(gym.Env):
         if isinstance(scenario, dict):
             scenario = yaml.dump(scenario)
         if isinstance(scenario, str):
-            self._scenario = sim.load_scenario(scenario)
+            self._scenario: sim._Scenario | None = sim.load_scenario(scenario)
         else:
             self._scenario = scenario
 
         if isinstance(sensor, dict):
             sensor = yaml.dump(sensor)
         if isinstance(sensor, str):
-            self._se = sim.load_state_estimation(sensor)
+            se = sim.load_state_estimation(sensor)
+            if isinstance(se, sim.Sensor):
+                self._se: sim.Sensor | None = se
+            else:
+                print(f"State estimation {se} is not a sensor")
+                self._se = None
         else:
             self._se = sensor
         if self._se:
-            self._state = core.SensingState()
+            self._state: core.SensingState | None = core.SensingState()
             self._se.prepare(self._state)
         else:
             self._state = None
@@ -185,9 +208,11 @@ class NavgroundEnv(gym.Env):
 
             from navground.sim.ui import WebUI
 
-            self._loop = asyncio.get_event_loop()
-            self._rt_clock = SyncClock(self.time_step, factor=realtime_factor)
-            self._ui = WebUI(port=8002)
+            self._loop: asyncio.AbstractEventLoop | None = asyncio.get_event_loop(
+            )
+            self._rt_clock: SyncClock | None = SyncClock(
+                self.time_step, factor=realtime_factor)
+            self._ui: WebUI | None = WebUI(port=8002)
             self._loop.run_until_complete(self._ui.prepare())
         else:
             self._loop = None
@@ -205,15 +230,17 @@ class NavgroundEnv(gym.Env):
         self.action_space = self._config.action_space
 
     def get_behavior_and_sensor(
-            self) -> Tuple[core.Behavior | None, sim.Sensor | None]:
+            self) -> Tuple[core.Behavior | None, sim.Sensor | None] | None:
         """
         Sample a navigation behavior from the scenario and possibly a sensor,
         if not configured to use a specific sensor
 
         :returns:   The agent navigation behavior and the sensor used by the MDP
         """
-        return get_behavior_and_sensor(self.scenario, self.agent_index,
-                                       self._se)
+        if self._scenario is not None:
+            return get_behavior_and_sensor(self._scenario, self.agent_index,
+                                           self._se)
+        return None
 
     def get_init_args(self) -> Dict[str, Any]:
         """
@@ -243,7 +270,11 @@ class NavgroundEnv(gym.Env):
             self._world.copy_random_generator(world)
         if seed is not None:
             seed = seed & self.MAX_SEED
+        if not self._scenario:
+            return None, None
         self._scenario.init_world(self._world, seed=seed)
+        # Update dry does change last_cmd. Let's cache it to restore it afterwards
+        last_cmds = [a.last_cmd for a in self._world.agents]
         self._world.update_dry(self.time_step, advance_time=False)
         self._agent = self._world.agents[self.agent_index]
         self._agent.color = 'orange'
@@ -253,16 +284,21 @@ class NavgroundEnv(gym.Env):
             self._state = state
         # self._gym_agent.use_behavior(behavior)
         # self._gym_agent.reset()
-        self._gym_agent = GymAgent(self._config)
+        self._gym_agent = GymAgent(self._config, behavior, self._state)
         obs = self._update_observations()
         if self.render_mode == "human" and self._ui:
             self._loop.run_until_complete(
                 self._ui.init(self._world, bounds=self.bounds))
-        return obs, self._get_infos()
+        infos = self._get_infos()
+        # ... restore last_cmd
+        for a, cmd in zip(self._world.agents, last_cmds):
+            a.last_cmd = cmd
+        return obs, infos
 
     def step(self, action: np.ndarray):
+        assert self._world is not None
         try:
-            cmd = self._config.get_cmd_from_action(action)
+            cmd = self._gym_agent.get_cmd_from_action(action, self.time_step)
             self._agent.last_cmd = self._agent.behavior.feasible_twist(
                 cmd, core.Frame.absolute)
         except Exception as e:
@@ -291,22 +327,25 @@ class NavgroundEnv(gym.Env):
 
     def close(self) -> None:
         super().close()
-        if self._ui:
+        if self._ui and self._loop:
             self._loop.run_until_complete(self._ui.stop())
             self._ui = None
 
     def _update_observations(self):
         if self._se:
             self._se.update(self._agent, self._world, self._state)
-        return self._gym_agent.update_observations(self._agent.behavior,
-                                                   self._state)
+        return self._gym_agent.update_observations()
 
     def _has_terminated(self) -> bool:
-        if self._agent.task:
-            return self._agent.task.done()
-        return True
+        return (self._world.should_terminate() or self._agent.idle
+                or self._agent.has_been_stuck_since(1.0))
+        # if self._agent.task:
+        #     agents_are_idle_or_stuck
+        #     return self._agent.task.done()
+        # return True
 
     def _should_be_truncated(self) -> bool:
+        assert self._world is not None
         if self.max_duration > 0 and self.max_duration <= self._world.time:
             return True
         if self.truncate_outside_bounds and self.bounds is not None:
@@ -316,9 +355,7 @@ class NavgroundEnv(gym.Env):
 
     def _get_infos(self) -> Dict[str, np.ndarray]:
         # print(self._gym_agent.action.shape)
-        return {
-            'navground_action': self._config.get_action(self._agent.behavior)
-        }
+        return {'navground_action': self._gym_agent.get_action(self.time_step)}
 
 
 register(
