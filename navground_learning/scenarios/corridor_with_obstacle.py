@@ -52,6 +52,7 @@ class CorridorWithObstacle(sim.Scenario,
 
         ro = rng.uniform(self._min_radius, self._max_radius)
         margin = ro + r
+        # TODO(Jerome): should be 2
         if rng.integers(1):
             y = rng.uniform(ro, self._width - margin)
         else:

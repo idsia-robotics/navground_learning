@@ -1,10 +1,11 @@
 import logging
 import pathlib
-from typing import Any, Dict, Optional
+from typing import Any, Optional
 
 from navground import core
 
-from ..utils import GymAgent, GymAgentConfig
+from ..core import (ActionConfig, ControlActionConfig, GymAgent,
+                    ObservationConfig)
 
 
 class PolicyBehavior(core.Behavior, name="Policy"):
@@ -25,6 +26,7 @@ class PolicyBehavior(core.Behavior, name="Policy"):
     - :py:attr:`use_acceleration_action` (bool)
     - :py:attr:`max_acceleration` (float)
     - :py:attr:`max_angular_acceleration` (float)
+    - :py:attr:`deterministic` (bool)
 
     *State*: :py:class:`SensingState`
 
@@ -34,19 +36,23 @@ class PolicyBehavior(core.Behavior, name="Policy"):
     :param config: How to use the policy (default if not specified)
     """
 
-    _policies: Dict[str, Any] = {}
+    _policies: dict[str, Any] = {}
 
     def __init__(self,
                  kinematics: Optional[core.Kinematics] = None,
                  radius: float = 0.0,
                  policy: Any = None,
-                 config: GymAgentConfig | None = None):
+                 action_config: ControlActionConfig = ControlActionConfig(),
+                 observation_config: ObservationConfig = ObservationConfig(),
+                 deterministic: bool = False):
         super().__init__(kinematics, radius)
         self._state = core.SensingState()
         self._policy = policy
         self._policy_path = ""
         self._gym_agent: Optional[GymAgent] = None
-        self._config = config or GymAgentConfig()
+        self._action_config = action_config
+        self._observation_config = observation_config
+        self._deterministic = deterministic
 
     @classmethod
     def load_policy(cls, path: str) -> Any:
@@ -78,18 +84,17 @@ class PolicyBehavior(core.Behavior, name="Policy"):
         self._policy_path = str(value)
 
     @property
-    @core.register(True,
-                   "Whether to include the target distance in the observations"
-                   )
+    @core.register(
+        True, "Whether to include the target distance in the observations")
     def include_target_distance(self) -> bool:
         """
         See :py:attr:`GymAgentConfig.include_target_distance`
         """
-        return self._config.include_target_distance
+        return self._observation_config.include_target_distance
 
     @include_target_distance.setter  # type: ignore[no-redef]
     def include_target_distance(self, value: bool) -> None:
-        self._config.include_target_distance = value
+        self._observation_config.include_target_distance = value
 
     @property
     @core.register(
@@ -98,11 +103,11 @@ class PolicyBehavior(core.Behavior, name="Policy"):
         """
         See :py:attr:`GymAgentConfig.include_target_direction`
         """
-        return self._config.include_target_direction
+        return self._observation_config.include_target_direction
 
     @include_target_direction.setter  # type: ignore[no-redef]
     def include_target_direction(self, value: bool) -> None:
-        self._config.include_target_direction = value
+        self._observation_config.include_target_direction = value
 
     @property
     @core.register(
@@ -111,11 +116,11 @@ class PolicyBehavior(core.Behavior, name="Policy"):
         """
         See :py:attr:`GymAgentConfig.include_velocity`
         """
-        return self._config.include_velocity
+        return self._observation_config.include_velocity
 
     @include_velocity.setter  # type: ignore[no-redef]
     def include_velocity(self, value: bool) -> None:
-        self._config.include_velocity = value
+        self._observation_config.include_velocity = value
 
     @property
     @core.register(False,
@@ -124,11 +129,11 @@ class PolicyBehavior(core.Behavior, name="Policy"):
         """
         See :py:attr:`GymAgentConfig.include_radius`
         """
-        return self._config.include_radius
+        return self._observation_config.include_radius
 
     @include_radius.setter  # type: ignore[no-redef]
     def include_radius(self, value: bool) -> None:
-        self._config.include_radius = value
+        self._observation_config.include_radius = value
 
     @property
     @core.register(False, "Whether to flatten the observations")
@@ -136,11 +141,11 @@ class PolicyBehavior(core.Behavior, name="Policy"):
         """
         See :py:attr:`GymAgentConfig.flat`
         """
-        return self._config.flat
+        return self._observation_config.flat
 
     @flat.setter  # type: ignore[no-redef]
     def flat(self, value: bool) -> None:
-        self._config.flat = value
+        self._observation_config.flat = value
 
     @property
     @core.register(False, "Length of the queue")
@@ -148,11 +153,11 @@ class PolicyBehavior(core.Behavior, name="Policy"):
         """
         See :py:attr:`GymAgentConfig.history`
         """
-        return self._config.history
+        return self._observation_config.history
 
     @history.setter  # type: ignore[no-redef]
     def history(self, value: int) -> None:
-        self._config.history = value
+        self._observation_config.history = value
 
     @property
     @core.register(False, "Whether to keep orientation fixed")
@@ -160,11 +165,11 @@ class PolicyBehavior(core.Behavior, name="Policy"):
         """
         See :py:attr:`GymAgentConfig.fix_orientation`
         """
-        return self._config.fix_orientation
+        return self._action_config.fix_orientation
 
     @fix_orientation.setter  # type: ignore[no-redef]
     def fix_orientation(self, value: bool) -> None:
-        self._config.fix_orientation = value
+        self._action_config.fix_orientation = value
 
     @property
     @core.register(
@@ -174,11 +179,11 @@ class PolicyBehavior(core.Behavior, name="Policy"):
         """
         See :py:attr:`GymAgentConfig.use_wheels`
         """
-        return self._config.use_wheels
+        return self._action_config.use_wheels
 
     @use_wheels.setter  # type: ignore[no-redef]
     def use_wheels(self, value: bool) -> None:
-        self._config.use_wheels = value
+        self._action_config.use_wheels = value
 
     @property
     @core.register(False, "Whether actions are accelerations.")
@@ -186,11 +191,11 @@ class PolicyBehavior(core.Behavior, name="Policy"):
         """
         See :py:attr:`GymAgentConfig.use_acceleration_action`
         """
-        return self._config.use_acceleration_action
+        return self._action_config.use_acceleration_action
 
     @use_acceleration_action.setter  # type: ignore[no-redef]
     def use_acceleration_action(self, value: bool) -> None:
-        self._config.use_acceleration_action = value
+        self._action_config.use_acceleration_action = value
 
     @property
     @core.register(10.0, "The upper bound of the acceleration.")
@@ -198,11 +203,11 @@ class PolicyBehavior(core.Behavior, name="Policy"):
         """
         See :py:attr:`GymAgentConfig.max_acceleration`
         """
-        return self._config.max_acceleration
+        return self._action_config.max_acceleration
 
     @max_acceleration.setter  # type: ignore[no-redef]
     def max_acceleration(self, value: float) -> None:
-        self._config.max_acceleration = value
+        self._action_config.max_acceleration = value
 
     @property
     @core.register(100.0, "The upper bound of the angular acceleration.")
@@ -210,11 +215,23 @@ class PolicyBehavior(core.Behavior, name="Policy"):
         """
         See :py:attr:`GymAgentConfig.max_angular_acceleration`
         """
-        return self._config.max_angular_acceleration
+        return self._action_config.max_angular_acceleration
 
     @max_angular_acceleration.setter  # type: ignore[no-redef]
     def max_angular_acceleration(self, value: float) -> None:
-        self._config.max_angular_acceleration = value
+        self._action_config.max_angular_acceleration = value
+
+    @property
+    @core.register(False, "Whether or not to output deterministic actions")
+    def deterministic(self) -> bool:
+        """
+        Whether or not to output deterministic actions
+        """
+        return self._deterministic
+
+    @deterministic.setter  # type: ignore[no-redef]
+    def deterministic(self, value: bool) -> None:
+        self._deterministic = value
 
     def get_environment_state(self) -> core.SensingState:
         return self._state
@@ -227,9 +244,11 @@ class PolicyBehavior(core.Behavior, name="Policy"):
         if self._policy is None:
             return core.Twist2((0, 0), 0, frame=frame)
         if not self._gym_agent:
-            self._gym_agent = GymAgent(self._config, self, self._state)
+            self._gym_agent = GymAgent(observation=self._observation_config,
+                                       action=self._action_config,
+                                       behavior=self)
         obs = self._gym_agent.update_observations()
-        act, _ = self._policy.predict(obs)
+        act, _ = self._policy.predict(obs, deterministic=self.deterministic)
         cmd = self._gym_agent.get_cmd_from_action(act, time_step)
         return self.feasible_twist(cmd, frame)
 
@@ -239,26 +258,36 @@ class PolicyBehavior(core.Behavior, name="Policy"):
         if self._policy is None:
             return core.Twist2((0, 0), 0, frame=frame)
         if not self._gym_agent:
-            self._gym_agent = GymAgent(self._config, self, self._state)
+            self._gym_agent = GymAgent(observation=self._observation_config,
+                                       action=self._action_config,
+                                       behavior=self)
         # ?(Jerome): use point instead of target
         obs = self._gym_agent.update_observations()
-        act, _ = self._policy.predict(obs)
+        act, _ = self._policy.predict(obs, deterministic=self.deterministic)
         cmd = self._gym_agent.get_cmd_from_action(act, time_step)
         return self.feasible_twist(cmd, frame)
 
     @classmethod
-    def clone_behavior(cls, behavior: core.Behavior, policy: Any,
-                       config: GymAgentConfig) -> 'PolicyBehavior':
+    def clone_behavior(cls,
+                       behavior: core.Behavior,
+                       policy: Any,
+                       action_config: ControlActionConfig,
+                       observation_config: ObservationConfig,
+                       deterministic: bool = False) -> 'PolicyBehavior':
         """
         Configure a new policy behavior from a behavior.
 
-        :param      behavior:  The behavior to replicate
-        :param      policy:    The policy
-        :param      config:    The configuration
+        :param      behavior:         The behavior to replicate
+        :param      policy:           The policy
+        :param      config:           The configuration
+        :param      deterministic:    Whether or not to output deterministic actions
 
         :returns:   The configured policy behavior
         """
-        pb = cls(policy=policy, config=config)
+        pb = cls(policy=policy,
+                 action_config=action_config,
+                 observation_config=observation_config,
+                 deterministic=deterministic)
         pb.set_state_from(behavior)
         return pb
 
@@ -268,4 +297,9 @@ class PolicyBehavior(core.Behavior, name="Policy"):
 
         :returns:   Copy of this object.
         """
-        return PolicyBehavior.clone_behavior(self, self._policy, self._config)
+        return PolicyBehavior.clone_behavior(
+            behavior=self,
+            policy=self._policy,
+            action_config=self._action_config,
+            observation_config=self._observation_config,
+            deterministic=self._deterministic)

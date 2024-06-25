@@ -6,6 +6,7 @@ Tutorials
    :maxdepth: 3
 
    Gym
+   PettingZoo
    IL
    RL
    CorridorScenario
