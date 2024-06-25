@@ -35,7 +35,7 @@ class ForwardScenario(sim.Scenario, name='Forward'):  # type: ignore
                 p = core.Pose2((0, 0), rng.uniform(high=2 * np.pi))
             else:
                 alpha = rng.uniform(high=2 * np.pi)
-                e = np.array((np.cos(alpha), np.sin(alpha)))
+                e = (np.cos(alpha), np.sin(alpha))
                 p = core.Pose2((rng.uniform(low=0, high=self.length),
                                 rng.uniform(low=-self.width * 0.5,
                                             high=self.width * 0.5)), alpha)

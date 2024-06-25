@@ -1,28 +1,37 @@
-import pathlib
-from typing import Any, Sequence
 import datetime
+import pathlib
+from collections.abc import Sequence
+from typing import Any, cast
 
 import gymnasium as gym
 import numpy as np
+import pettingzoo as pz
 import torch
 import yaml
+from imitation.algorithms import bc
 from imitation.util.logger import configure
 from navground import core, sim
-from navground_learning.behaviors.policy import PolicyBehavior
-from navground_learning.utils import Expert
-from stable_baselines3.common.policies import ActorCriticPolicy
 from stable_baselines3.common import torch_layers
-import torch as th
+from stable_baselines3.common.callbacks import BaseCallback
+from stable_baselines3.common.policies import ActorCriticPolicy
 
-from . import make_imitation_venv
+from ..behaviors.policy import PolicyBehavior
+from ..core import Agent, ControlActionConfig, Expert
+from .utils import make_venv
+
+ExtractorFactory = Any
 
 ISO_TIMESTAMP = "%Y%m%d_%H%M%S"
 
 
 class BaseTrainer:
 
+    bc_trainer: bc.BC
+    trainer: Any
+    agent: Agent
+
     def __init__(self,
-                 env: gym.Env | None = None,
+                 env: gym.Env | pz.ParallelEnv | None = None,
                  parallel: bool = False,
                  n_envs: int = 1,
                  seed: int = 0,
@@ -30,6 +39,8 @@ class BaseTrainer:
                  log_directory: str = "logs",
                  log_formats: Sequence[str] = [],
                  net_arch: list[int] = [32, 32],
+                 features_extractor: ExtractorFactory | None = None,
+                 features_extractor_kwargs: dict[str, Any] = {},
                  **kwargs: Any):
 
         timestamp = datetime.datetime.now().strftime(ISO_TIMESTAMP)
@@ -39,23 +50,39 @@ class BaseTrainer:
             path = None
         self.logger = configure(path, log_formats)
         self.rng = np.random.default_rng(seed)
-        self.env, self.config, self.original_behavior, self.sensor = make_imitation_venv(
-            env=env, parallel=parallel, n_envs=n_envs, rng=self.rng, **kwargs)
-        self.expert = Expert(self.config)
-        if isinstance(self.config.observation_space, gym.spaces.Dict):
-            extractor = torch_layers.CombinedExtractor
-        else:
-            extractor = torch_layers.FlattenExtractor
+        self.venv, self.env = make_venv(env=env,
+                                        parallel=parallel,
+                                        n_envs=n_envs,
+                                        rng=self.rng,
+                                        **kwargs)
+        self.agent = next(iter(self.env._possible_agents.values()))
+        if not self.env._possible_agents:
+            raise ValueError("No agent to imitate")
+        if not (self.agent.navground and self.agent.gym):
+            raise ValueError("Agent to imitate not valid")
+        action_space = self.agent.gym.action_space
+        observation_space = self.agent.gym.observation_space
+        self.expert = Expert(action_space=action_space,
+                             observation_space=observation_space)
+        if features_extractor is None:
+            if isinstance(observation_space, gym.spaces.Dict):
+                features_extractor = torch_layers.CombinedExtractor
+            else:
+                features_extractor = torch_layers.FlattenExtractor
         self._policy = ActorCriticPolicy(
-            observation_space=self.config.observation_space,
-            action_space=self.config.action_space,
-            lr_schedule=lambda _: th.finfo(th.float32).max,
-            features_extractor_class=extractor,
+            observation_space=observation_space,
+            action_space=action_space,
+            lr_schedule=lambda _: torch.finfo(torch.float32).max,
+            features_extractor_class=features_extractor,
+            features_extractor_kwargs=features_extractor_kwargs,
             net_arch=net_arch)
         self.init_trainer()
-        self.behavior = PolicyBehavior.clone_behavior(self.original_behavior,
-                                                      policy=self.policy,
-                                                      config=self.config)
+        self.behavior = PolicyBehavior.clone_behavior(
+            behavior=self.agent.navground.behavior,
+            policy=self.policy,
+            action_config=cast(ControlActionConfig,
+                               self.agent.gym.action_config),
+            observation_config=self.agent.gym.observation_config)
 
     def make_behavior(self,
                       behavior: core.Behavior | None = None) -> PolicyBehavior:
@@ -66,18 +93,24 @@ class BaseTrainer:
 
         :returns:   The configured policy behavior.
         """
-        return PolicyBehavior.clone_behavior(behavior
-                                             or self.original_behavior,
-                                             policy=self.policy,
-                                             config=self.config)
+        pb = self.behavior.clone()
+        if behavior:
+            pb.set_state_from(behavior)
+        return pb
 
     def init_trainer(self) -> None:
         ...
 
-    def train(self, *args, **kwargs) -> None:
+    def train(self,
+              *args,
+              callback: BaseCallback | None = None,
+              **kwargs) -> None:
         """
         Train the policy, passing all arguments to the ``imitation`` trainer.
         """
+        # if callback:
+        #     callback.init_callback_for_imitation(self)
+        #     kwargs['on_batch_end'] = lambda steps: callback.step(steps=steps)
         self.trainer.train(*args, **kwargs)
 
     @property
@@ -89,7 +122,7 @@ class BaseTrainer:
 
     def yaml(self) -> str:
         b = yaml.safe_load(sim.dump(self.behavior))
-        s = yaml.safe_load(sim.dump(self.sensor))
+        s = self.agent.get_sensor()
         return yaml.dump({'behavior': b, 'state_estimation': s})
 
     def save(self, path: pathlib.Path) -> None:

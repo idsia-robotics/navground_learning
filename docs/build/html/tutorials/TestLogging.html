@@ -1,0 +1,1048 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Reinforcement learning with SAC &#8212; navground_learning 0.0.3 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+
+    <script src="../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="../_static/documentation_options.js?v=4acdca81"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/TestLogging';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">navground_learning 0.0.3 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="index.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Gym.html">Navground-Gymnasium integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PettingZoo.html">Navground-PettingZoo integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="IL.html">Train a policy using Imitation Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="RL.html">Train a policy using RL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CorridorScenario.html">Navigate along a corridor with one obstacle: scenario</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LearningCorridor.html">Navigate along a corridor with one obstacle: learning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/tutorials/TestLogging.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Reinforcement learning with SAC</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Reinforcement learning with SAC</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Comparision-with-HL">Comparision with HL</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p>TODOs - [x] begin: text infos - [x] end: eval, ignoring log_*_interval - [x] begin: hparams - [ ] adapt to use in imitation - [x] option to dump in sync with logging - [x] begin: graph - [ ] network (just use eval callback or CheckpointCallback)</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+The autoreload extension is already loaded. To reload it, use:
+  %reload_ext autoreload
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">navground</span> <span class="kn">import</span> <span class="n">core</span><span class="p">,</span> <span class="n">sim</span>
+<span class="kn">from</span> <span class="nn">navground_learning.scenarios.corridor_with_obstacle</span> <span class="kn">import</span> <span class="n">CorridorWithObstacle</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import datasets.utils</span>
+<span class="c1"># import tqdm.autonotebook</span>
+<span class="c1"># import imitation.algorithms.bc</span>
+
+<span class="c1"># datasets.utils.tqdm = tqdm.autonotebook.tqdm</span>
+<span class="c1"># imitation.algorithms.bc.tqdm = tqdm.autonotebook</span>
+<span class="c1"># datasets.utils.disable_progress_bar()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">gymnasium</span> <span class="k">as</span> <span class="nn">gym</span>
+<span class="kn">from</span> <span class="nn">navground</span> <span class="kn">import</span> <span class="n">core</span><span class="p">,</span> <span class="n">sim</span>
+<span class="kn">from</span> <span class="nn">navground_learning.scenarios.corridor_with_obstacle</span> <span class="kn">import</span> <span class="n">CorridorWithObstacle</span>
+<span class="kn">from</span> <span class="nn">navground_learning.utils</span> <span class="kn">import</span> <span class="n">GymAgentConfig</span>
+<span class="kn">from</span> <span class="nn">navground_learning.env</span> <span class="kn">import</span> <span class="n">SocialReward</span>
+
+<span class="n">scenario</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">load_scenario</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">type: CorridorWithObstacle</span>
+<span class="s2">length: 1.0</span>
+<span class="s2">width: 1.0</span>
+<span class="s2">min_radius: 0.2</span>
+<span class="s2">max_radius: 0.2</span>
+<span class="s2">groups:</span>
+<span class="s2">  -</span>
+<span class="s2">    type: thymio</span>
+<span class="s2">    number: 1</span>
+<span class="s2">    radius: 0.08</span>
+<span class="s2">    control_period: 0.05</span>
+<span class="s2">    color: gold</span>
+<span class="s2">    kinematics:</span>
+<span class="s2">      type: 2WDiff</span>
+<span class="s2">      wheel_axis: 0.094</span>
+<span class="s2">      max_speed: 0.12</span>
+<span class="s2">    behavior:</span>
+<span class="s2">      type: HL</span>
+<span class="s2">      optimal_speed: 0.12</span>
+<span class="s2">      horizon: 10</span>
+<span class="s2">      tau: 0.25</span>
+<span class="s2">      eta: 0.5</span>
+<span class="s2">      safety_margin: 0.05</span>
+<span class="s2">      barrier_angle: 1.0</span>
+<span class="s2">    state_estimation:</span>
+<span class="s2">      type: Bounded</span>
+<span class="s2">      range: 1.0</span>
+<span class="s2">      update_static_obstacles: true</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+
+<span class="n">sensor</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">load_state_estimation</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">type: Combination</span>
+<span class="s2">sensors:</span>
+<span class="s2">  - type: Boundary</span>
+<span class="s2">    min_y: 0</span>
+<span class="s2">    max_y: 1</span>
+<span class="s2">    range: 1</span>
+<span class="s2">  - type: Discs</span>
+<span class="s2">    number: 1</span>
+<span class="s2">    range: 1</span>
+<span class="s2">    max_speed: 0.0</span>
+<span class="s2">    max_radius: 0.0</span>
+<span class="s2">    include_valid: false</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+
+
+<span class="n">duration</span> <span class="o">=</span> <span class="mf">40.0</span>
+<span class="n">time_step</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">GymAgentConfig</span><span class="p">(</span><span class="n">include_target_distance</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">include_velocity</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                        <span class="n">include_angular_speed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_acceleration</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                        <span class="n">max_angular_acceleration</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">use_acceleration_action</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                        <span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># we do not penalize small safety_margin violations</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s1">&#39;navground&#39;</span><span class="p">,</span>
+    <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span>
+    <span class="n">sensor</span><span class="o">=</span><span class="n">sensor</span><span class="p">,</span>
+    <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
+    <span class="n">time_step</span><span class="o">=</span><span class="n">time_step</span><span class="p">,</span>
+    <span class="n">max_duration</span><span class="o">=</span><span class="n">duration</span><span class="p">,</span>
+    <span class="n">reward</span><span class="o">=</span><span class="n">SocialReward</span><span class="p">(</span><span class="n">safety_margin</span><span class="o">=</span><span class="mf">0.04</span><span class="p">))</span>
+<br/></pre></div>
+</div>
+</div>
+<p>We define a functions to plot and display runs when the agents follow a ML policy</p>
+<section id="Reinforcement-learning-with-SAC">
+<h1>Reinforcement learning with SAC<a class="headerlink" href="#Reinforcement-learning-with-SAC" title="Link to this heading">#</a></h1>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">stable_baselines3</span> <span class="kn">import</span> <span class="n">SAC</span>
+<span class="kn">from</span> <span class="nn">stable_baselines3.common.logger</span> <span class="kn">import</span> <span class="n">configure</span>
+
+
+<span class="n">logs</span> <span class="o">=</span> <span class="s2">&quot;logs/test_log/SAC13&quot;</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">SAC</span><span class="p">(</span><span class="s2">&quot;MlpPolicy&quot;</span><span class="p">,</span> <span class="n">env</span><span class="p">,</span> <span class="n">policy_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;net_arch&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">]})</span> <span class="c1">#, train_freq=(10, &quot;step&quot;))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">set_logger</span><span class="p">(</span><span class="n">configure</span><span class="p">(</span><span class="n">logs</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;csv&quot;</span><span class="p">,</span> <span class="s2">&quot;tensorboard&quot;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># model.policy.predict??</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">stable_baselines3.common.callbacks</span> <span class="kn">import</span> <span class="n">CheckpointCallback</span><span class="p">,</span> <span class="n">CallbackList</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">navground_learning.logging</span> <span class="kn">import</span> <span class="n">log_env</span><span class="p">,</span> <span class="n">log_yaml</span><span class="p">,</span> <span class="n">LogTrajectoriesCallback</span><span class="p">,</span> <span class="n">TrajectoryPlotConfig</span><span class="p">,</span> <span class="n">get_tb_logger</span><span class="p">,</span> <span class="n">VideoConfig</span>
+<span class="kn">import</span> <span class="nn">torch</span> <span class="k">as</span> <span class="nn">th</span>
+
+
+<span class="n">tc</span> <span class="o">=</span> <span class="n">TrajectoryPlotConfig</span><span class="p">(</span><span class="n">enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">vc</span> <span class="o">=</span> <span class="n">VideoConfig</span><span class="p">(</span><span class="n">enabled</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">cb</span> <span class="o">=</span> <span class="n">LogTrajectoriesCallback</span><span class="p">(</span><span class="n">trajectory_plot_config</span><span class="o">=</span><span class="n">tc</span><span class="p">,</span> <span class="n">log_step_interval</span><span class="o">=</span><span class="mi">1_000</span><span class="p">,</span> <span class="n">video_config</span><span class="o">=</span><span class="n">vc</span><span class="p">,</span> <span class="n">episodes</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                             <span class="n">hparams</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;net_arch&#39;</span><span class="p">:</span>  <span class="n">th</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">policy_kwargs</span><span class="p">[</span><span class="s1">&#39;net_arch&#39;</span><span class="p">]),</span>
+                                      <span class="s1">&#39;net_size&#39;</span><span class="p">:</span>  <span class="n">model</span><span class="o">.</span><span class="n">policy_kwargs</span><span class="p">[</span><span class="s1">&#39;net_arch&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]},</span>
+                             <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;policy_kwargs&quot;</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">policy_kwargs</span><span class="p">},</span> <span class="n">log_graph</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># writer = get_tb_logger(model.logger).writer</span>
+<span class="c1"># log_env(writer, model.get_env().envs[0].unwrapped)</span>
+<span class="c1"># log_yaml(writer, &quot;policy_kwargs&quot;, model.policy_kwargs)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+
+
+<span class="n">checkpoint_callback</span> <span class="o">=</span> <span class="n">CheckpointCallback</span><span class="p">(</span>
+  <span class="n">save_freq</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+  <span class="n">save_path</span><span class="o">=</span><span class="n">logs</span><span class="p">,</span>
+  <span class="n">name_prefix</span><span class="o">=</span><span class="s2">&quot;checkpoints&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">cb</span> <span class="o">=</span> <span class="n">CallbackList</span><span class="p">([</span><span class="n">checkpoint_callback</span><span class="p">,</span> <span class="n">cb</span><span class="p">])</span>
+
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="n">total_timesteps</span><span class="o">=</span><span class="mi">5_000</span><span class="p">,</span> <span class="n">progress_bar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tb_log_name</span><span class="o">=</span><span class="s2">&quot;SAC&quot;</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="n">cb</span><span class="p">,</span> <span class="n">reset_num_timesteps</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Training took </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="si">:</span><span class="s1"> .0f</span><span class="si">}</span><span class="s1"> seconds&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Training took  19 seconds
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_TestLogging_12_1.png" src="../_images/tutorials_TestLogging_12_1.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_TestLogging_12_2.png" src="../_images/tutorials_TestLogging_12_2.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">num_timesteps</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+5000
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model.logger.dump<span class="o">??</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">Signature:</span> model<span class="ansi-blue-fg">.</span>logger<span class="ansi-blue-fg">.</span>dump<span class="ansi-blue-fg">(</span>step<span class="ansi-blue-fg">:</span> int <span class="ansi-blue-fg">=</span> <span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">-&gt;</span> <span class="ansi-green-fg">None</span>
+<span class="ansi-red-fg">Source:</span>
+    <span class="ansi-green-fg">def</span> dump<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> step<span class="ansi-blue-fg">:</span> int <span class="ansi-blue-fg">=</span> <span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">-&gt;</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
+        <span class="ansi-blue-fg">&#34;&#34;&#34;</span>
+<span class="ansi-blue-fg">        Write all of the diagnostics from the current iteration</span>
+<span class="ansi-blue-fg">        &#34;&#34;&#34;</span>
+        <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>level <span class="ansi-blue-fg">==</span> DISABLED<span class="ansi-blue-fg">:</span>
+            <span class="ansi-green-fg">return</span>
+        <span class="ansi-green-fg">for</span> _format <span class="ansi-green-fg">in</span> self<span class="ansi-blue-fg">.</span>output_formats<span class="ansi-blue-fg">:</span>
+            <span class="ansi-green-fg">if</span> isinstance<span class="ansi-blue-fg">(</span>_format<span class="ansi-blue-fg">,</span> KVWriter<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+                _format<span class="ansi-blue-fg">.</span>write<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>name_to_value<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>name_to_excluded<span class="ansi-blue-fg">,</span> step<span class="ansi-blue-fg">)</span>
+
+        self<span class="ansi-blue-fg">.</span>name_to_value<span class="ansi-blue-fg">.</span>clear<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+        self<span class="ansi-blue-fg">.</span>name_to_count<span class="ansi-blue-fg">.</span>clear<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+        self<span class="ansi-blue-fg">.</span>name_to_excluded<span class="ansi-blue-fg">.</span>clear<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-red-fg">File:</span>      ~/Dev/venv/ros_jazzy/lib/python3.12/site-packages/stable_baselines3/common/logger.py
+<span class="ansi-red-fg">Type:</span>      method
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import torch as th</span>
+
+<span class="c1"># th.Tensor(model.policy_kwargs[&#39;net_arch&#39;])</span>
+</pre></div>
+</div>
+</div>
+<p>It learns at good performing policy in about 50000 steps. It takes about 5x longer compared to Dagger but the policy is also better, especialy the worst case.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import torch</span>
+
+<span class="c1"># x = env.observation_space.sample()</span>
+<span class="c1"># x = np.expand_dims(x, axis=0)</span>
+<span class="c1"># x = torch.from_numpy(x)</span>
+<span class="c1"># writer.add_graph(model.policy.actor, x, use_strict_trace=True, verbose=True)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># writer.flush()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># !pip install onnx</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># class OnnxablePolicy(torch.nn.Module):</span>
+<span class="c1">#     def __init__(self, actor: torch.nn.Module):</span>
+<span class="c1">#         super().__init__()</span>
+<span class="c1">#         self.actor = actor</span>
+
+<span class="c1">#     def forward(self, observation: torch.Tensor) -&gt; torch.Tensor:</span>
+<span class="c1">#         # NOTE: You may have to postprocess (unnormalize) actions</span>
+<span class="c1">#         # to the correct bounds (see commented code below)</span>
+<span class="c1">#         return self.actor(observation, deterministic=True)</span>
+
+<span class="c1"># onnxable_model = OnnxablePolicy(model.policy.actor)</span>
+
+<span class="c1"># torch.onnx.export(</span>
+<span class="c1">#     onnxable_model,</span>
+<span class="c1">#     x,</span>
+<span class="c1">#     &quot;my_sac_actor.onnx&quot;,</span>
+<span class="c1">#     opset_version=17,</span>
+<span class="c1">#     input_names=[&quot;input&quot;],</span>
+<span class="c1"># )</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># writer.add_onnx_graph(&#39;my_sac_actor.onnx&#39;)</span>
+<span class="c1"># writer.flush()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># from stable_baselines3.common.logger import HParam</span>
+
+<span class="c1"># hparam_dict = {</span>
+<span class="c1">#     &quot;algorithm1&quot;: &quot;TEST&quot;,</span>
+<span class="c1">#     &quot;learning rate1&quot;: 0.1,</span>
+<span class="c1">#     &quot;size1&quot;: 1}</span>
+<span class="c1"># metric_dict = {</span>
+<span class="c1">#     &quot;eval/reward/mean&quot;: 0.0,</span>
+<span class="c1">#     &quot;eval/reward/min&quot;: 0.0}</span>
+<span class="c1"># model.logger.record(</span>
+<span class="c1">#     &quot;hparams&quot;,</span>
+<span class="c1">#     HParam(hparam_dict, metric_dict),</span>
+<span class="c1">#     exclude=(&quot;stdout&quot;, &quot;log&quot;, &quot;json&quot;, &quot;csv&quot;))</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># writer.flush()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># exp = sim.Experiment()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># exp.remove_all_runs()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">logs</span><span class="si">}</span><span class="s1">/progress.csv&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;rollout/ep_rew_mean&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;time/total_timesteps&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_test_runs</span><span class="p">(</span><span class="n">policy</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">policy</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">stable_baselines3.common.evaluation</span> <span class="kn">import</span> <span class="n">evaluate_policy</span>
+
+<span class="n">sac_rewards</span><span class="p">,</span> <span class="n">steps</span> <span class="o">=</span> <span class="n">evaluate_policy</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">policy</span><span class="p">,</span> <span class="n">test_venv</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">return_episode_rewards</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">sac_rewards</span><span class="p">),</span>  <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sac_rewards</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">sac_rewards</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">sac_rewards</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sac_rewards</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;reward&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;probability&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Policy trained with SAC&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">logs</span><span class="si">}</span><span class="s2">/model&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Comparision-with-HL">
+<h1>Comparision with HL<a class="headerlink" href="#Comparision-with-HL" title="Link to this heading">#</a></h1>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hl_rewards</span> <span class="o">=</span> <span class="n">evaluate_expert</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">runs</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sac_rewards</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">sac_rewards</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">sac_rewards</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">),</span> <span class="mi">10</span><span class="p">),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;SAC&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bc_rewards</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">bc_rewards</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">bc_rewards</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">),</span> <span class="mi">30</span><span class="p">),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;BC&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">dagger_rewards</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">dagger_rewards</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">dagger_rewards</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">),</span> <span class="mi">10</span><span class="p">),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;DAgger&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">hl_rewards</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">hl_rewards</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">hl_rewards</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">),</span> <span class="mi">10</span><span class="p">),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;HL&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;reward&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;probability&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_comparison_test_runs</span><span class="p">(</span><span class="n">policies</span><span class="o">=</span><span class="p">((</span><span class="n">bc_trainer</span><span class="o">.</span><span class="n">policy</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="s1">&#39;BC&#39;</span><span class="p">),</span>
+                                    <span class="p">(</span><span class="n">dagger_trainer</span><span class="o">.</span><span class="n">policy</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;DAgger&#39;</span><span class="p">),</span>
+                                    <span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">policy</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;SAC&#39;</span><span class="p">),</span>
+                                    <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;Expert&#39;</span><span class="p">)),</span> <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">rows</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">.75</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">output_formats</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fs</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">output_formats</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">sb3</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">TensorBoardOutputFormat</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">fs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torch.utils.tensorboard.writer</span> <span class="kn">import</span> <span class="n">SummaryWriter</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">stable_baselines3</span> <span class="k">as</span> <span class="nn">sb3</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Reinforcement learning with SAC</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Comparision-with-HL">Comparision with HL</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jerome Guzzi et al. (IDSIA, USI-SUPSI)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Jerome Guzzi et al. (IDSIA, USI-SUPSI).
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

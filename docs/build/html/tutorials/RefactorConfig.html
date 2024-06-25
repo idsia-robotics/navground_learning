@@ -1,0 +1,1666 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>&lt;no title&gt; &#8212; navground_learning 0.0.3 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+
+    <script src="../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="../_static/documentation_options.js?v=4acdca81"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/RefactorConfig';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">navground_learning 0.0.3 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="index.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Gym.html">Navground-Gymnasium integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PettingZoo.html">Navground-PettingZoo integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="IL.html">Train a policy using Imitation Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="RL.html">Train a policy using RL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CorridorScenario.html">Navigate along a corridor with one obstacle: scenario</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LearningCorridor.html">Navigate along a corridor with one obstacle: learning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/tutorials/RefactorConfig.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1><no title></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">navground</span> <span class="kn">import</span> <span class="n">core</span><span class="p">,</span> <span class="n">sim</span>
+<span class="kn">from</span> <span class="nn">navground_learning</span> <span class="kn">import</span> <span class="n">ObservationConfig</span><span class="p">,</span> <span class="n">ControlActionConfig</span><span class="p">,</span> <span class="n">GymAgent</span><span class="p">,</span> <span class="n">TuningActionConfig</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">behavior</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">behaviors</span><span class="o">.</span><span class="n">HLBehavior</span><span class="p">(</span><span class="n">kinematics</span><span class="o">=</span><span class="n">core</span><span class="o">.</span><span class="n">kinematics</span><span class="o">.</span><span class="n">OmnidirectionalKinematics</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="n">radius</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">sensor</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">state_estimations</span><span class="o">.</span><span class="n">DiscsStateEstimation</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">observation_config</span> <span class="o">=</span> <span class="n">ObservationConfig</span><span class="p">(</span><span class="n">include_target_distance</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">observation_config</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+ObservationConfig(dtype=&#39;&#39;, max_speed=inf, max_angular_speed=inf, dof=None, flat=False, history=1, include_target_distance=False, max_target_distance=inf, include_target_direction=True, include_velocity=False, include_angular_speed=False, include_radius=False, max_radius=inf)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">observation_config</span><span class="o">.</span><span class="n">is_configured</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+True
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">action_config</span> <span class="o">=</span> <span class="n">ControlActionConfig</span><span class="p">(</span><span class="n">max_speed</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dof</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">has_wheels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fix_orientation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">action_config</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+ControlActionConfig(dtype=&#39;&#39;, max_speed=1, max_angular_speed=inf, dof=3, max_acceleration=inf, max_angular_acceleration=inf, use_acceleration_action=False, fix_orientation=True, use_wheels=False, has_wheels=True)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">action_config</span><span class="o">.</span><span class="n">is_configured</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+True
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">dir</span><span class="p">(</span><span class="n">observation_config</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&#39;__annotations__&#39;,
+ &#39;__class__&#39;,
+ &#39;__dataclass_fields__&#39;,
+ &#39;__dataclass_params__&#39;,
+ &#39;__delattr__&#39;,
+ &#39;__dict__&#39;,
+ &#39;__dir__&#39;,
+ &#39;__doc__&#39;,
+ &#39;__eq__&#39;,
+ &#39;__format__&#39;,
+ &#39;__ge__&#39;,
+ &#39;__getattribute__&#39;,
+ &#39;__getstate__&#39;,
+ &#39;__gt__&#39;,
+ &#39;__hash__&#39;,
+ &#39;__init__&#39;,
+ &#39;__init_subclass__&#39;,
+ &#39;__le__&#39;,
+ &#39;__lt__&#39;,
+ &#39;__match_args__&#39;,
+ &#39;__module__&#39;,
+ &#39;__ne__&#39;,
+ &#39;__new__&#39;,
+ &#39;__post_init__&#39;,
+ &#39;__reduce__&#39;,
+ &#39;__reduce_ex__&#39;,
+ &#39;__repr__&#39;,
+ &#39;__setattr__&#39;,
+ &#39;__sizeof__&#39;,
+ &#39;__str__&#39;,
+ &#39;__subclasshook__&#39;,
+ &#39;__weakref__&#39;,
+ &#39;_add_target&#39;,
+ &#39;_dtype&#39;,
+ &#39;asdict&#39;,
+ &#39;configure&#39;,
+ &#39;dof&#39;,
+ &#39;dtype&#39;,
+ &#39;flat&#39;,
+ &#39;get_item_space&#39;,
+ &#39;get_observations&#39;,
+ &#39;get_space&#39;,
+ &#39;history&#39;,
+ &#39;include_angular_speed&#39;,
+ &#39;include_radius&#39;,
+ &#39;include_target&#39;,
+ &#39;include_target_direction&#39;,
+ &#39;include_target_distance&#39;,
+ &#39;include_velocity&#39;,
+ &#39;is_configured&#39;,
+ &#39;max_angular_speed&#39;,
+ &#39;max_radius&#39;,
+ &#39;max_speed&#39;,
+ &#39;max_target_distance&#39;,
+ &#39;should_flatten_observations&#39;,
+ &#39;state_space&#39;]
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">SensingState</span><span class="p">()</span>
+<span class="n">sensor</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+<span class="n">agent</span> <span class="o">=</span> <span class="n">GymAgent</span><span class="p">(</span><span class="n">observation</span><span class="o">=</span><span class="n">observation_config</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="n">action_config</span><span class="p">,</span> <span class="n">behavior</span><span class="o">=</span><span class="n">behavior</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">dataclasses</span> <span class="k">as</span> <span class="nn">dc</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dc</span><span class="o">.</span><span class="n">asdict</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">action_config</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;dtype&#39;: &#39;&#39;,
+ &#39;max_speed&#39;: 1,
+ &#39;max_angular_speed&#39;: 1.0,
+ &#39;dof&#39;: 3,
+ &#39;max_acceleration&#39;: inf,
+ &#39;max_angular_acceleration&#39;: inf,
+ &#39;use_acceleration_action&#39;: False,
+ &#39;fix_orientation&#39;: True,
+ &#39;use_wheels&#39;: False,
+ &#39;has_wheels&#39;: True}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">agent</span><span class="o">.</span><span class="n">observation_space</span><span class="p">,</span> <span class="n">agent</span><span class="o">.</span><span class="n">action_space</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(Dict(&#39;position&#39;: Box(-1.0, 1.0, (1, 2), float64), &#39;radius&#39;: Box(0.0, 1.0, (1,), float64), &#39;valid&#39;: MultiBinary((1,)), &#39;velocity&#39;: Box(-1.0, 1.0, (1, 2), float64), &#39;ego_target_direction&#39;: Box(-1.0, 1.0, (2,), float64)),
+ Box(-1.0, 1.0, (2,), float64))
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">action</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">get_action</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">agent</span><span class="o">.</span><span class="n">get_cmd_from_action</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Twist2((0.000000, 0.000000), 0.000000, frame=Frame.relative)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">agent</span><span class="o">.</span><span class="n">update_observations</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;position&#39;: array([[0., 0.]]),
+ &#39;radius&#39;: array([0.]),
+ &#39;valid&#39;: array([0], dtype=uint8),
+ &#39;velocity&#39;: array([[0., 0.]])}
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># tuning</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;tau&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;high&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span> <span class="s1">&#39;dtype&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="s1">&#39;discrete&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+                <span class="s1">&#39;optimal_speed&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;high&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;dtype&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="s1">&#39;discrete&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}}</span>
+<span class="n">action_config</span> <span class="o">=</span> <span class="n">TuningActionConfig</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">agent</span> <span class="o">=</span> <span class="n">GymAgent</span><span class="p">(</span><span class="n">observation</span><span class="o">=</span><span class="n">observation_config</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="n">action_config</span><span class="p">,</span> <span class="n">behavior</span><span class="o">=</span><span class="n">behavior</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">)</span>
+<span class="n">agent</span><span class="o">.</span><span class="n">observation_space</span><span class="p">,</span> <span class="n">agent</span><span class="o">.</span><span class="n">action_space</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(Dict(&#39;position&#39;: Box(-1.0, 1.0, (1, 2), float64), &#39;radius&#39;: Box(0.0, 1.0, (1,), float64), &#39;valid&#39;: MultiBinary((1,)), &#39;velocity&#39;: Box(-1.0, 1.0, (1, 2), float64), &#39;ego_target_direction&#39;: Box(-1.0, 1.0, (2,), float64)),
+ Box(0.0, [1. 2.], (2,), float64))
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">action</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">get_action</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">action_config</span><span class="o">.</span><span class="n">get_params_from_action</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;optimal_speed&#39;: 1.0, &#39;tau&#39;: 0.125}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">agent</span><span class="o">.</span><span class="n">get_cmd_from_action</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Twist2((0.000000, 0.000000), 0.000000, frame=Frame.absolute)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gymnasium</span> <span class="k">as</span> <span class="nn">gym</span>
+
+<span class="n">gym</span><span class="o">.</span><span class="n">spaces</span><span class="o">.</span><span class="n">Dict</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+gymnasium.spaces.dict.Dict
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">space</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">action_space</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">{[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]:</span> <span class="mi">1</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[23], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> {[<span style="color: rgb(98,98,98)">1</span>,<span style="color: rgb(98,98,98)">2</span>]: <span style="color: rgb(98,98,98)">1</span>}
+
+<span class="ansi-red-fg">TypeError</span>: unhashable type: &#39;list&#39;
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">tuple</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))[</span><span class="nb">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[9, 8]
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">navground_learning.core</span> <span class="kn">import</span> <span class="n">to_list</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">to_list</span><span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">))[</span><span class="nb">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[29, 28]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">3</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-cyan-fg">  Cell </span><span class="ansi-green-fg">In[28], line 1</span>
+<span class="ansi-red-fg">    -1:-3:-1</span>
+    ^
+<span class="ansi-red-fg">SyntaxError</span><span class="ansi-red-fg">:</span> illegal target for annotation
+
+</pre></div></div>
+</div>
+<ul class="simple">
+<li><p>variable number</p></li>
+<li><p>more groups</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">indices</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">indices</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="n">indices</span><span class="o">.</span><span class="n">stop</span><span class="p">,</span> <span class="n">indices</span><span class="o">.</span><span class="n">step</span> <span class="ow">or</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[-5, -4, -3, -2]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">indices</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="n">indices</span><span class="o">.</span><span class="n">stop</span><span class="p">,</span> <span class="n">indices</span><span class="o">.</span><span class="n">step</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(-5, -1, 1)
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Literal</span>
+<span class="n">All</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;All&#39;</span><span class="p">]</span>
+<span class="n">Indices</span> <span class="o">=</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="nb">slice</span> <span class="o">|</span> <span class="n">All</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">dir</span><span class="p">(</span><span class="n">All</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&#39;__args__&#39;,
+ &#39;__call__&#39;,
+ &#39;__class__&#39;,
+ &#39;__delattr__&#39;,
+ &#39;__dict__&#39;,
+ &#39;__dir__&#39;,
+ &#39;__doc__&#39;,
+ &#39;__eq__&#39;,
+ &#39;__format__&#39;,
+ &#39;__ge__&#39;,
+ &#39;__getattr__&#39;,
+ &#39;__getattribute__&#39;,
+ &#39;__getitem__&#39;,
+ &#39;__getstate__&#39;,
+ &#39;__gt__&#39;,
+ &#39;__hash__&#39;,
+ &#39;__init__&#39;,
+ &#39;__init_subclass__&#39;,
+ &#39;__instancecheck__&#39;,
+ &#39;__iter__&#39;,
+ &#39;__le__&#39;,
+ &#39;__lt__&#39;,
+ &#39;__module__&#39;,
+ &#39;__mro_entries__&#39;,
+ &#39;__ne__&#39;,
+ &#39;__new__&#39;,
+ &#39;__or__&#39;,
+ &#39;__origin__&#39;,
+ &#39;__parameters__&#39;,
+ &#39;__reduce__&#39;,
+ &#39;__reduce_ex__&#39;,
+ &#39;__repr__&#39;,
+ &#39;__ror__&#39;,
+ &#39;__setattr__&#39;,
+ &#39;__sizeof__&#39;,
+ &#39;__slots__&#39;,
+ &#39;__str__&#39;,
+ &#39;__subclasscheck__&#39;,
+ &#39;__subclasshook__&#39;,
+ &#39;__weakref__&#39;,
+ &#39;_determine_new_args&#39;,
+ &#39;_getitem&#39;,
+ &#39;_inst&#39;,
+ &#39;_make_substitution&#39;,
+ &#39;_name&#39;,
+ &#39;copy_with&#39;]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">agent</span><span class="o">.</span><span class="n">action_config</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+TuningActionConfig(params={&#39;tau&#39;: {&#39;high&#39;: 2.0, &#39;dtype&#39;: &lt;class &#39;float&#39;&gt;, &#39;discrete&#39;: False}, &#39;optimal_speed&#39;: {&#39;high&#39;: 1.0, &#39;dtype&#39;: &lt;class &#39;float&#39;&gt;, &#39;discrete&#39;: False}})
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">agent</span><span class="o">.</span><span class="n">action_config</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+TuningActionConfig(params={&#39;tau&#39;: {&#39;high&#39;: 2.0, &#39;dtype&#39;: &lt;class &#39;float&#39;&gt;, &#39;discrete&#39;: False}, &#39;optimal_speed&#39;: {&#39;high&#39;: 1.0, &#39;dtype&#39;: &lt;class &#39;float&#39;&gt;, &#39;discrete&#39;: False}})
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">navground_learning.env</span> <span class="kn">import</span> <span class="n">NavgroundBaseEnv</span><span class="p">,</span> <span class="n">AgentConfig</span><span class="p">,</span> <span class="n">NavgroundEnv</span>
+<span class="kn">from</span> <span class="nn">navground</span> <span class="kn">import</span> <span class="n">core</span><span class="p">,</span> <span class="n">sim</span>
+<span class="kn">from</span> <span class="nn">navground_learning</span> <span class="kn">import</span> <span class="n">ObservationConfig</span><span class="p">,</span> <span class="n">ControlActionConfig</span><span class="p">,</span> <span class="n">GymAgent</span><span class="p">,</span> <span class="n">TuningActionConfig</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">scenario</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">load_scenario</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">type: Cross</span>
+<span class="s2">agent_margin: 0.1</span>
+<span class="s2">side: 4</span>
+<span class="s2">target_margin: 0.1</span>
+<span class="s2">tolerance: 0.5</span>
+<span class="s2">groups:</span>
+<span class="s2">  -</span>
+<span class="s2">    type: thymio</span>
+<span class="s2">    number: 20</span>
+<span class="s2">    radius: 0.1</span>
+<span class="s2">    control_period: 0.1</span>
+<span class="s2">    speed_tolerance: 0.02</span>
+<span class="s2">    color: gray</span>
+<span class="s2">    kinematics:</span>
+<span class="s2">      type: 2WDiff</span>
+<span class="s2">      wheel_axis: 0.094</span>
+<span class="s2">      max_speed: 0.12</span>
+<span class="s2">    behavior:</span>
+<span class="s2">      type: HL</span>
+<span class="s2">      optimal_speed: 0.12</span>
+<span class="s2">      horizon: 5.0</span>
+<span class="s2">      tau: 0.25</span>
+<span class="s2">      eta: 0.5</span>
+<span class="s2">      safety_margin: 0.1</span>
+<span class="s2">    state_estimation:</span>
+<span class="s2">      type: Bounded</span>
+<span class="s2">      range: 5.0</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+<span class="n">scenario</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;navground.sim._navground_sim.CrossScenario at 0x318071bb0&gt;
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Sequence</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Sequence</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+collections.abc.Sequence
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="p">[</span><span class="n">AgentConfig</span><span class="p">(</span><span class="n">indices</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">action</span><span class="o">=</span><span class="n">ControlActionConfig</span><span class="p">(</span><span class="n">max_speed</span><span class="o">=</span><span class="mi">1</span><span class="p">)),</span>
+          <span class="n">AgentConfig</span><span class="p">(</span><span class="n">indices</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">action</span><span class="o">=</span><span class="n">ControlActionConfig</span><span class="p">(</span><span class="n">max_speed</span><span class="o">=</span><span class="mi">10</span><span class="p">))]</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">NavgroundBaseEnv</span><span class="p">(</span><span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">config</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[AgentConfig(action=ControlActionConfig(dtype=&#39;&#39;, max_speed=1, max_angular_speed=inf, dof=None, max_acceleration=inf, max_angular_acceleration=inf, use_acceleration_action=False, fix_orientation=False, use_wheels=False, has_wheels=None), indices=[1], sensor=None, reward=NullReward(), observation=ObservationConfig(dtype=&#39;&#39;, max_speed=inf, max_angular_speed=inf, dof=None, flat=False, history=1, include_target_distance=True, max_target_distance=inf, include_target_direction=True, include_velocity=False, include_angular_speed=False, include_radius=False, max_radius=inf)),
+ AgentConfig(action=ControlActionConfig(dtype=&#39;&#39;, max_speed=10, max_angular_speed=inf, dof=None, max_acceleration=inf, max_angular_acceleration=inf, use_acceleration_action=False, fix_orientation=False, use_wheels=False, has_wheels=None), indices=[2], sensor=None, reward=NullReward(), observation=ObservationConfig(dtype=&#39;&#39;, max_speed=inf, max_angular_speed=inf, dof=None, flat=False, history=1, include_target_distance=True, max_target_distance=inf, include_target_direction=True, include_velocity=False, include_angular_speed=False, include_radius=False, max_radius=inf))]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env</span><span class="o">.</span><span class="n">_action_space</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{1: Box(-1.0, 1.0, (2,), float64), 2: Box(-1.0, 1.0, (2,), float64)}
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">dataclasses</span> <span class="k">as</span> <span class="nn">dc</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ControlActionConfig</span><span class="p">(</span><span class="n">max_speed</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">asdict</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;dtype&#39;: &#39;float64&#39;,
+ &#39;max_speed&#39;: 1,
+ &#39;max_angular_speed&#39;: inf,
+ &#39;dof&#39;: None,
+ &#39;max_acceleration&#39;: inf,
+ &#39;max_angular_acceleration&#39;: inf,
+ &#39;use_acceleration_action&#39;: False,
+ &#39;fix_orientation&#39;: False,
+ &#39;use_wheels&#39;: False,
+ &#39;has_wheels&#39;: None,
+ &#39;type&#39;: &#39;ControlActionConfig&#39;}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">yaml</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">safe_dump</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">asdict</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+config:
+- action:
+    dof: null
+    dtype: &#39;&#39;
+    fix_orientation: false
+    has_wheels: null
+    max_acceleration: .inf
+    max_angular_acceleration: .inf
+    max_angular_speed: .inf
+    max_speed: 1
+    use_acceleration_action: false
+    use_wheels: false
+  indices:
+  - 1
+  observation:
+    dof: null
+    dtype: &#39;&#39;
+    flat: false
+    history: 1
+    include_angular_speed: false
+    include_radius: false
+    include_target_direction: true
+    include_target_distance: true
+    include_velocity: false
+    max_angular_speed: .inf
+    max_radius: .inf
+    max_speed: .inf
+    max_target_distance: .inf
+  reward:
+    type: zero
+  sensor: null
+- action:
+    dof: null
+    dtype: &#39;&#39;
+    fix_orientation: false
+    has_wheels: null
+    max_acceleration: .inf
+    max_angular_acceleration: .inf
+    max_angular_speed: .inf
+    max_speed: 10
+    use_acceleration_action: false
+    use_wheels: false
+  indices:
+  - 2
+  observation:
+    dof: null
+    dtype: &#39;&#39;
+    flat: false
+    history: 1
+    include_angular_speed: false
+    include_radius: false
+    include_target_direction: true
+    include_target_distance: true
+    include_velocity: false
+    max_angular_speed: .inf
+    max_radius: .inf
+    max_speed: .inf
+    max_target_distance: .inf
+  reward:
+    type: zero
+  sensor: null
+max_duration: -1.0
+realtime_factor: 1.0
+render_kwargs: {}
+render_mode: null
+scenario:
+  add_safety_to_agent_margin: true
+  agent_margin: 0.1
+  groups:
+  - behavior:
+      eta: 0.5
+      horizon: 5
+      optimal_speed: 0.12
+      safety_margin: 0.1
+      tau: 0.25
+      type: HL
+    color: gray
+    control_period: 0.1
+    kinematics:
+      max_speed: 0.12
+      type: 2WDiff
+      wheel_axis: 0.094
+    number: 20
+    radius: 0.1
+    state_estimation:
+      range: 5
+      type: Bounded
+    type: thymio
+  obstacles: []
+  side: 4
+  target_margin: 0.1
+  tolerance: 0.5
+  type: Cross
+  walls: []
+time_step: 0.1
+truncate_outside_bounds: true
+
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env</span> <span class="o">=</span> <span class="n">NavgroundEnv</span><span class="p">(</span><span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+({&#39;ego_target_direction&#39;: array([ 1.00000000e+00, -3.41599925e-17]),
+  &#39;ego_target_distance&#39;: array([2.1121034])},
+ {&#39;navground_action&#39;: array([0.32967995, 0.        ])})
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="o">.</span><span class="n">sample</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+({&#39;ego_target_direction&#39;: array([ 0.99682682, -0.07960086]),
+  &#39;ego_target_distance&#39;: array([2.1038486])},
+ 0.0,
+ False,
+ False,
+ {&#39;navground_action&#39;: array([0.76875113, 0.1886284 ])})
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">navground_learning.env.pz</span> <span class="kn">import</span> <span class="n">shared_parallel_env</span><span class="p">,</span> <span class="n">parallel_env</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env</span> <span class="o">=</span> <span class="n">shared_parallel_env</span><span class="p">(</span><span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span> <span class="n">agent_indices</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env</span><span class="o">.</span><span class="n">possible_agents</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env</span><span class="o">.</span><span class="n">agents</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+({0: {&#39;ego_target_direction&#39;: array([ 1.00000000e+00, -3.41599925e-17]),
+   &#39;ego_target_distance&#39;: array([2.1121034])},
+  1: {&#39;ego_target_direction&#39;: array([ 1.00000000e+00, -1.75166968e-16]),
+   &#39;ego_target_distance&#39;: array([3.61000402])},
+  2: {&#39;ego_target_direction&#39;: array([1.00000000e+00, 2.39894612e-17]),
+   &#39;ego_target_distance&#39;: array([2.48412877])},
+  3: {&#39;ego_target_direction&#39;: array([ 1.00000000e+00, -2.76738983e-17]),
+   &#39;ego_target_distance&#39;: array([0.82982272])},
+  4: {&#39;ego_target_direction&#39;: array([1.00000000e+00, 1.08220085e-18]),
+   &#39;ego_target_distance&#39;: array([2.86357659])},
+  5: {&#39;ego_target_direction&#39;: array([ 1.00000000e+00, -1.94044861e-17]),
+   &#39;ego_target_distance&#39;: array([3.16806796])},
+  6: {&#39;ego_target_direction&#39;: array([ 1.00000000e+00, -5.67650252e-17]),
+   &#39;ego_target_distance&#39;: array([0.84435221])},
+  7: {&#39;ego_target_direction&#39;: array([1.00000000e+00, 6.75048741e-17]),
+   &#39;ego_target_distance&#39;: array([2.63648157])},
+  8: {&#39;ego_target_direction&#39;: array([1.00000000e+00, 3.88705449e-17]),
+   &#39;ego_target_distance&#39;: array([3.04487092])},
+  9: {&#39;ego_target_direction&#39;: array([ 1.00000000e+00, -7.48278767e-17]),
+   &#39;ego_target_distance&#39;: array([1.54236152])},
+  10: {&#39;ego_target_direction&#39;: array([1.00000000e+00, 9.31867372e-17]),
+   &#39;ego_target_distance&#39;: array([0.84102021])},
+  11: {&#39;ego_target_direction&#39;: array([ 1.00000000e+00, -9.51441561e-17]),
+   &#39;ego_target_distance&#39;: array([2.60651629])},
+  12: {&#39;ego_target_direction&#39;: array([1.00000000e+00, 4.94557457e-18]),
+   &#39;ego_target_distance&#39;: array([1.20268305])},
+  13: {&#39;ego_target_direction&#39;: array([ 1.0000000e+00, -5.8512973e-18]),
+   &#39;ego_target_distance&#39;: array([2.43504972])},
+  14: {&#39;ego_target_direction&#39;: array([1.00000000e+00, 4.17108025e-17]),
+   &#39;ego_target_distance&#39;: array([2.57953419])},
+  15: {&#39;ego_target_direction&#39;: array([ 1.00000000e+00, -5.98964053e-17]),
+   &#39;ego_target_distance&#39;: array([3.13566432])},
+  16: {&#39;ego_target_direction&#39;: array([ 1.00000000e+00, -9.23088085e-18]),
+   &#39;ego_target_distance&#39;: array([3.3749174])},
+  17: {&#39;ego_target_direction&#39;: array([ 1.00000000e+00, -2.66927802e-16]),
+   &#39;ego_target_distance&#39;: array([1.87468356])},
+  18: {&#39;ego_target_direction&#39;: array([ 1.00000000e+00, -7.97080155e-17]),
+   &#39;ego_target_distance&#39;: array([2.65354455])},
+  19: {&#39;ego_target_direction&#39;: array([ 1.00000000e+00, -9.09048564e-17]),
+   &#39;ego_target_distance&#39;: array([2.377292])}},
+ {0: {&#39;navground_action&#39;: array([0.32967995, 0.        ])},
+  1: {&#39;navground_action&#39;: array([0.2332862 , 0.09639375])},
+  2: {&#39;navground_action&#39;: array([ 0.26541745, -0.0642625 ])},
+  3: {&#39;navground_action&#39;: array([0.32967995, 0.        ])},
+  4: {&#39;navground_action&#39;: array([ 0.18508932, -0.14459063])},
+  5: {&#39;navground_action&#39;: array([ 0.2975487 , -0.03213125])},
+  6: {&#39;navground_action&#39;: array([ 0.28148308, -0.04819688])},
+  7: {&#39;navground_action&#39;: array([0.32967995, 0.        ])},
+  8: {&#39;navground_action&#39;: array([0.18508932, 0.14459063])},
+  9: {&#39;navground_action&#39;: array([0.32967995, 0.        ])},
+  10: {&#39;navground_action&#39;: array([0.32967995, 0.        ])},
+  11: {&#39;navground_action&#39;: array([0.32967995, 0.        ])},
+  12: {&#39;navground_action&#39;: array([0.31361433, 0.01606563])},
+  13: {&#39;navground_action&#39;: array([ 0.2975487 , -0.03213125])},
+  14: {&#39;navground_action&#39;: array([0.13689245, 0.19278751])},
+  15: {&#39;navground_action&#39;: array([ 0.2332862 , -0.09639375])},
+  16: {&#39;navground_action&#39;: array([0.18508932, 0.14459063])},
+  17: {&#39;navground_action&#39;: array([0.31361433, 0.01606563])},
+  18: {&#39;navground_action&#39;: array([ 0.07262994, -0.25705001])},
+  19: {&#39;navground_action&#39;: array([0.32967995, 0.        ])}})
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env</span> <span class="o">=</span> <span class="n">parallel_env</span><span class="p">(</span><span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+({1: {&#39;ego_target_direction&#39;: array([ 1.00000000e+00, -1.75166968e-16]),
+   &#39;ego_target_distance&#39;: array([3.61000402])},
+  2: {&#39;ego_target_direction&#39;: array([1.00000000e+00, 2.39894612e-17]),
+   &#39;ego_target_distance&#39;: array([2.48412877])}},
+ {1: {&#39;navground_action&#39;: array([0.02799434, 0.09639375])},
+  2: {&#39;navground_action&#39;: array([ 0.00318501, -0.0642625 ])}})
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env</span><span class="o">.</span><span class="n">asdict</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;config&#39;: [{&#39;action&#39;: {&#39;dtype&#39;: &#39;&#39;,
+    &#39;max_speed&#39;: 1,
+    &#39;max_angular_speed&#39;: inf,
+    &#39;dof&#39;: None,
+    &#39;max_acceleration&#39;: inf,
+    &#39;max_angular_acceleration&#39;: inf,
+    &#39;use_acceleration_action&#39;: False,
+    &#39;fix_orientation&#39;: False,
+    &#39;use_wheels&#39;: False,
+    &#39;has_wheels&#39;: None},
+   &#39;indices&#39;: [1],
+   &#39;sensor&#39;: None,
+   &#39;reward&#39;: {&#39;type&#39;: &#39;zero&#39;},
+   &#39;observation&#39;: {&#39;dtype&#39;: &#39;&#39;,
+    &#39;max_speed&#39;: inf,
+    &#39;max_angular_speed&#39;: inf,
+    &#39;dof&#39;: None,
+    &#39;flat&#39;: False,
+    &#39;history&#39;: 1,
+    &#39;include_target_distance&#39;: True,
+    &#39;max_target_distance&#39;: inf,
+    &#39;include_target_direction&#39;: True,
+    &#39;include_velocity&#39;: False,
+    &#39;include_angular_speed&#39;: False,
+    &#39;include_radius&#39;: False,
+    &#39;max_radius&#39;: inf}},
+  {&#39;action&#39;: {&#39;dtype&#39;: &#39;&#39;,
+    &#39;max_speed&#39;: 10,
+    &#39;max_angular_speed&#39;: inf,
+    &#39;dof&#39;: None,
+    &#39;max_acceleration&#39;: inf,
+    &#39;max_angular_acceleration&#39;: inf,
+    &#39;use_acceleration_action&#39;: False,
+    &#39;fix_orientation&#39;: False,
+    &#39;use_wheels&#39;: False,
+    &#39;has_wheels&#39;: None},
+   &#39;indices&#39;: [2],
+   &#39;sensor&#39;: None,
+   &#39;reward&#39;: {&#39;type&#39;: &#39;zero&#39;},
+   &#39;observation&#39;: {&#39;dtype&#39;: &#39;&#39;,
+    &#39;max_speed&#39;: inf,
+    &#39;max_angular_speed&#39;: inf,
+    &#39;dof&#39;: None,
+    &#39;flat&#39;: False,
+    &#39;history&#39;: 1,
+    &#39;include_target_distance&#39;: True,
+    &#39;max_target_distance&#39;: inf,
+    &#39;include_target_direction&#39;: True,
+    &#39;include_velocity&#39;: False,
+    &#39;include_angular_speed&#39;: False,
+    &#39;include_radius&#39;: False,
+    &#39;max_radius&#39;: inf}}],
+ &#39;time_step&#39;: 0.1,
+ &#39;max_duration&#39;: -1.0,
+ &#39;truncate_outside_bounds&#39;: True,
+ &#39;render_mode&#39;: None,
+ &#39;render_kwargs&#39;: {},
+ &#39;realtime_factor&#39;: 1.0,
+ &#39;scenario&#39;: {&#39;type&#39;: &#39;Cross&#39;,
+  &#39;add_safety_to_agent_margin&#39;: True,
+  &#39;agent_margin&#39;: 0.1,
+  &#39;side&#39;: 4,
+  &#39;target_margin&#39;: 0.1,
+  &#39;tolerance&#39;: 0.5,
+  &#39;obstacles&#39;: [],
+  &#39;walls&#39;: [],
+  &#39;groups&#39;: [{&#39;behavior&#39;: {&#39;type&#39;: &#39;HL&#39;,
+     &#39;optimal_speed&#39;: 0.12,
+     &#39;horizon&#39;: 5,
+     &#39;tau&#39;: 0.25,
+     &#39;eta&#39;: 0.5,
+     &#39;safety_margin&#39;: 0.1},
+    &#39;kinematics&#39;: {&#39;type&#39;: &#39;2WDiff&#39;, &#39;wheel_axis&#39;: 0.094, &#39;max_speed&#39;: 0.12},
+    &#39;state_estimation&#39;: {&#39;type&#39;: &#39;Bounded&#39;, &#39;range&#39;: 5},
+    &#39;radius&#39;: 0.1,
+    &#39;control_period&#39;: 0.1,
+    &#39;number&#39;: 20,
+    &#39;type&#39;: &#39;thymio&#39;,
+    &#39;color&#39;: &#39;gray&#39;}]}}
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@dc</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+    <span class="n">a</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="nd">@dc</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="n">b</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">B</span><span class="p">(</span><span class="o">**</span><span class="n">dc</span><span class="o">.</span><span class="n">asdict</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">b</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+B(a=1, b=10)
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jerome Guzzi et al. (IDSIA, USI-SUPSI)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Jerome Guzzi et al. (IDSIA, USI-SUPSI).
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
