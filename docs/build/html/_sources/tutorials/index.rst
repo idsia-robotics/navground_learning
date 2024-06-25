@@ -9,6 +9,7 @@ Tutorials
    PettingZoo
    IL
    RL
+   RL-MA
    CorridorScenario
    LearningCorridor
 
