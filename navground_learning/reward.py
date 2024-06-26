@@ -81,15 +81,19 @@ class SocialReward:
                 sm = 0
         else:
             sm = self.safety_margin
-        max_violation = sm
-        sv = world.compute_safety_violation(agent, sm)
-        max_violation = sm - self.critical_safety_margin
-        if sv >= sm:
-            return -1.0
-        elif sv > max_violation:
-            r = -1.0
+        if sm > 0:
+            max_violation = max(0, sm - self.critical_safety_margin)
+            sv = world.compute_safety_violation(agent, sm)
+            # if sv >= sm:
+            #     return -1.0
+            if sv == 0:
+                r = 0
+            elif sv > max_violation:
+                r = -1.0
+            else:
+                r = -sv / max_violation
         else:
-            r = -sv / max_violation
+            r = 0
         if self._max_social_margin > 0:
             ns = world.get_neighbors(agent, self._max_social_margin)
             for n in ns:

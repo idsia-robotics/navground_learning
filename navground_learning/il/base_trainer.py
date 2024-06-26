@@ -16,6 +16,7 @@ from stable_baselines3.common.callbacks import BaseCallback
 from stable_baselines3.common.policies import ActorCriticPolicy
 
 from ..behaviors.policy import PolicyBehavior
+from ..config import get_sensor_as_dict
 from ..core import Agent, ControlActionConfig, Expert
 from .utils import make_venv
 
@@ -121,19 +122,44 @@ class BaseTrainer:
         return self.trainer.policy
 
     def yaml(self) -> str:
-        b = yaml.safe_load(sim.dump(self.behavior))
-        s = self.agent.get_sensor()
-        return yaml.dump({'behavior': b, 'state_estimation': s})
+        rs = {'behavior': yaml.safe_load(sim.dump(self.behavior))}
+        if self.agent.sensor:
+            rs['sensor'] = yaml.safe_load(sim.dump(self.agent.sensor))
+        return yaml.dump(rs)
 
-    def save(self, path: pathlib.Path) -> None:
+    def save(self, path: pathlib.Path | str) -> None:
         """
         Save model and config to a path.
 
         :param      path:  The path to the directory to create
         """
+        if isinstance(path, str):
+            path = pathlib.Path(path)
         path.mkdir(parents=True, exist_ok=False)
         policy_path = path / 'policy.th'
         torch.save(self.policy, policy_path)
         self.behavior.reset_policy_path('policy.th')
         with open(path / 'policy.yaml', 'w') as f:
             f.write(self.yaml())
+
+    def load(self, path: pathlib.Path | str) -> None:
+        if isinstance(path, str):
+            path = pathlib.Path(path)
+        with open(path / 'policy.yaml', 'r') as f:
+            data = yaml.safe_load(f)
+        if 'behavior' in data:
+            if 'policy_path' in data['behavior']:
+                policy_path = data['behavior'].pop('policy_path')
+            else:
+                policy_path = 'policy.th'
+            self._behavior = core.load_behavior(yaml.dump(data['behavior']))
+            self._behavior.policy_path = str(path / policy_path)
+            self._policy = self._behavior._policy
+        else:
+            self._policy = torch.load(policy_path=path / 'policy.th')
+        sensor: sim.Sensor | None = None
+        if 'sensor' in data:
+            se = sim.load_state_estimation(yaml.dump(data['sensor']))
+            if not isinstance(se, sim.Sensor):
+                sensor = se
+        self.agent = Agent(sensor=sensor)

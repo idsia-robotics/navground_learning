@@ -52,7 +52,7 @@ def parallel_env(scenario: sim.Scenario | str | dict[str, Any] | None = None,
                  time_step: float = 0.1,
                  max_duration: float = -1.0,
                  bounds: tuple[np.ndarray, np.ndarray] | None = None,
-                 terminate_outside_bounds: bool = True,
+                 terminate_outside_bounds: bool = False,
                  render_mode: str | None = None,
                  render_kwargs: Mapping[str, Any] = {},
                  realtime_factor: float = 1.0) -> MultiAgentNavgroundEnv:
@@ -119,7 +119,7 @@ def shared_parallel_env(
         time_step: float = 0.1,
         max_duration: float = -1.0,
         bounds: tuple[np.ndarray, np.ndarray] | None = None,
-        terminate_outside_bounds: bool = True,
+        terminate_outside_bounds: bool = False,
         render_mode: str | None = None,
         render_kwargs: Mapping[str, Any] = {},
         realtime_factor: float = 1.0) -> MultiAgentNavgroundEnv:

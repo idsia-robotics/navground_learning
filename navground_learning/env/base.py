@@ -76,7 +76,7 @@ class NavgroundBaseEnv:
                  time_step: float = 0.1,
                  max_duration: float = -1.0,
                  bounds: tuple[np.ndarray, np.ndarray] | None = None,
-                 terminate_outside_bounds: bool = True,
+                 terminate_outside_bounds: bool = False,
                  render_mode: str | None = None,
                  render_kwargs: Mapping[str, Any] = {},
                  realtime_factor: float = 1.0) -> None:
@@ -165,7 +165,7 @@ class NavgroundBaseEnv:
     @property
     def asdict(self) -> dict[str, Any]:
         rs = {
-            'config': dc.asdict(self.config),
+            'config': self.config.asdict,
             'time_step': self.time_step,
             'max_duration': self.max_duration,
             'terminate_outside_bounds': self.terminate_outside_bounds,
