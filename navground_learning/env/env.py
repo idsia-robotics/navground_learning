@@ -86,7 +86,7 @@ class NavgroundEnv(NavgroundBaseEnv, gym.Env):
                  time_step: float = 0.1,
                  max_duration: float = -1.0,
                  bounds: tuple[np.ndarray, np.ndarray] | None = None,
-                 terminate_outside_bounds: bool = True,
+                 terminate_outside_bounds: bool = False,
                  render_mode: str | None = None,
                  render_kwargs: Mapping[str, Any] = {},
                  realtime_factor: float = 1.0) -> None:
@@ -129,13 +129,10 @@ class NavgroundEnv(NavgroundBaseEnv, gym.Env):
 
     @property
     def asdict(self) -> dict[str, Any]:
-        rs = NavgroundBaseEnv.asdict(self)
-        config = rs.pop('config')[0]
-        rs['agent_index'] = config['indices'][0]
-        rs['reward'] = config['reward']
-        rs['action'] = config['action']
-        rs['observation'] = config['observation']
-        rs['sensor'] = config['sensor']
+        rs = NavgroundBaseEnv.asdict.fget(self)
+        config = rs.pop('config')['groups'][0]
+        agent_index = config.pop('indices')[0]
+        rs.update(config)
         return rs
 
     def reset(self, seed=None, options=None):

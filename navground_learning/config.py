@@ -65,6 +65,16 @@ def make_sensor(
     return cast(sim.Sensor | None, value)
 
 
+def get_sensor_as_dict(sensor: sim.Sensor | None | str | dict) -> dict[str, Any]:
+    if sensor is None:
+        return {}
+    if isinstance(sensor, dict):
+        return sensor
+    if isinstance(sensor, str):
+        return yaml.safe_load(sensor)
+    return yaml.safe_load(sim.dump(self.sensor))
+
+
 @dc.dataclass
 class GroupConfig:
     """
@@ -91,11 +101,21 @@ class GroupConfig:
 
     @property
     def asdict(self) -> dict[str, Any]:
-        rs = dc.asdict(self)
-        if isinstance(self.sensor, sim.Sensor):
-            rs['sensor'] = yaml.safe_load(sim.dump(self.sensor))
-        elif isinstance(self.sensor, str):
-            rs['sensor'] = yaml.safe_load(self.sensor)
+        rs: dict[str, Any] = {}
+        if self.observation:
+            rs['observation'] = dc.asdict(self.observation)
+        if self.action:
+            rs['action'] = dc.asdict(self.action)
+        if self.reward:
+            rs['reward'] = dc.asdict(self.reward)
+        if self.indices is None or isinstance(self.indices, list):
+            rs['indices'] = self.indices
+        else:
+            rs['indices'] = {
+                'start': self.indices.start,
+                'stop': self.indices.stop,
+                'step': self.indices.step}
+        rs['sensor'] = get_sensor_as_dict(self.sensor)
         return rs
 
     def get_sensor(self) -> sim.Sensor | None:
@@ -107,6 +127,13 @@ class WorldConfig:
     groups: list[GroupConfig] = dc.field(default_factory=list)
     policies: list[tuple[Indices, Any]] = dc.field(default_factory=list)
     reward: Reward | None = None
+
+    @property
+    def asdict(self) -> dict[str, Any]:
+        rs = {'groups': [g.asdict for g in self.groups]}
+        if self.reward:
+            rs['reward'] = self.reward.asdict
+        return rs
 
     def get_first_reward(self) -> Reward | None:
         for group in self.groups:

@@ -8,6 +8,7 @@ Tutorials
    Gym
    PettingZoo
    IL
+   IL-DAgger
    RL
    RL-MA
    CorridorScenario
