@@ -163,3 +163,4 @@ __pycache__
 *.1.*
 logs
 archive
+notebooks
