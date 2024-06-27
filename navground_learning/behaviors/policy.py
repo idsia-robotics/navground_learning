@@ -1,11 +1,10 @@
 import logging
 import pathlib
-from typing import Any, Optional
+from typing import Any
 
 from navground import core
 
-from ..core import (ActionConfig, ControlActionConfig, GymAgent,
-                    ObservationConfig)
+from ..core import ControlActionConfig, GymAgent, ObservationConfig
 
 
 class PolicyBehavior(core.Behavior, name="Policy"):
@@ -19,7 +18,11 @@ class PolicyBehavior(core.Behavior, name="Policy"):
     - :py:attr:`history` (int)
     - :py:attr:`fix_orientation` (bool)
     - :py:attr:`include_target_direction` (bool)
+    - :py:attr:`include_target_direction_validity` (bool)
     - :py:attr:`include_target_distance` (bool)
+    - :py:attr:`include_target_distance_validity` (bool)
+    - :py:attr:`include_target_speed` (bool)
+    - :py:attr:`include_target_angular_speed` (bool)
     - :py:attr:`include_velocity` (bool)
     - :py:attr:`include_radius` (bool)
     - :py:attr:`use_wheels` (bool)
@@ -39,7 +42,7 @@ class PolicyBehavior(core.Behavior, name="Policy"):
     _policies: dict[str, Any] = {}
 
     def __init__(self,
-                 kinematics: Optional[core.Kinematics] = None,
+                 kinematics: core.Kinematics | None = None,
                  radius: float = 0.0,
                  policy: Any = None,
                  action_config: ControlActionConfig = ControlActionConfig(),
@@ -49,7 +52,7 @@ class PolicyBehavior(core.Behavior, name="Policy"):
         self._state = core.SensingState()
         self._policy = policy
         self._policy_path = ""
-        self._gym_agent: Optional[GymAgent] = None
+        self._gym_agent: GymAgent | None = None
         self._action_config = action_config
         self._observation_config = observation_config
         self._deterministic = deterministic
@@ -98,6 +101,20 @@ class PolicyBehavior(core.Behavior, name="Policy"):
 
     @property
     @core.register(
+        True,
+        "Whether to include the target distance validity in the observations")
+    def include_target_distance_validity(self) -> bool:
+        """
+        See :py:attr:`GymAgentConfig.include_target_distance_validity`
+        """
+        return self._observation_config.include_target_distance_validity
+
+    @include_target_distance_validity.setter  # type: ignore[no-redef]
+    def include_target_distance_validity(self, value: bool) -> None:
+        self._observation_config.include_target_distance_validity = value
+
+    @property
+    @core.register(
         True, "Whether to include the target direction in the observations")
     def include_target_direction(self) -> bool:
         """
@@ -108,6 +125,46 @@ class PolicyBehavior(core.Behavior, name="Policy"):
     @include_target_direction.setter  # type: ignore[no-redef]
     def include_target_direction(self, value: bool) -> None:
         self._observation_config.include_target_direction = value
+
+    @property
+    @core.register(
+        True,
+        "Whether to include the target direction validity in the observations")
+    def include_target_direction_validity(self) -> bool:
+        """
+        See :py:attr:`GymAgentConfig.include_target_direction_validity`
+        """
+        return self._observation_config.include_target_direction_validity
+
+    @include_target_direction_validity.setter  # type: ignore[no-redef]
+    def include_target_direction_validity(self, value: bool) -> None:
+        self._observation_config.include_target_direction_validity = value
+
+    @property
+    @core.register(False,
+                   "Whether to include the target speed in the observations")
+    def include_target_speed(self) -> bool:
+        """
+        See :py:attr:`GymAgentConfig.include_target_speed`
+        """
+        return self._observation_config.include_target_speed
+
+    @include_target_speed.setter  # type: ignore[no-redef]
+    def include_target_speed(self, value: bool) -> None:
+        self._observation_config.include_target_speed = value
+
+    @property
+    @core.register(False,
+                   "Whether to include the target speed in the observations")
+    def include_target_angular_speed(self) -> bool:
+        """
+        See :py:attr:`GymAgentConfig.include_target_angular_speed`
+        """
+        return self._observation_config.include_target_angular_speed
+
+    @include_target_angular_speed.setter  # type: ignore[no-redef]
+    def include_target_angular_speed(self, value: bool) -> None:
+        self._observation_config.include_target_angular_speed = value
 
     @property
     @core.register(
@@ -236,32 +293,14 @@ class PolicyBehavior(core.Behavior, name="Policy"):
     def get_environment_state(self) -> core.SensingState:
         return self._state
 
-    # TODO: target should not be inferred from behavior.target
-    # but passed explicitly using velocity and or point
-    def cmd_twist_towards_velocity(self, velocity: core.Vector2,
-                                   time_step: float,
-                                   frame: core.Frame) -> core.Twist2:
+    def compute_cmd_internal(self, time_step: float,
+                             frame: core.Frame) -> core.Twist2:
         if self._policy is None:
             return core.Twist2((0, 0), 0, frame=frame)
         if not self._gym_agent:
             self._gym_agent = GymAgent(observation=self._observation_config,
                                        action=self._action_config,
                                        behavior=self)
-        obs = self._gym_agent.update_observations()
-        act, _ = self._policy.predict(obs, deterministic=self.deterministic)
-        cmd = self._gym_agent.get_cmd_from_action(act, time_step)
-        return self.feasible_twist(cmd, frame)
-
-    def cmd_twist_towards_point(self, point: core.Vector2, speed: float,
-                                time_step: float,
-                                frame: core.Frame) -> core.Twist2:
-        if self._policy is None:
-            return core.Twist2((0, 0), 0, frame=frame)
-        if not self._gym_agent:
-            self._gym_agent = GymAgent(observation=self._observation_config,
-                                       action=self._action_config,
-                                       behavior=self)
-        # ?(Jerome): use point instead of target
         obs = self._gym_agent.update_observations()
         act, _ = self._policy.predict(obs, deterministic=self.deterministic)
         cmd = self._gym_agent.get_cmd_from_action(act, time_step)

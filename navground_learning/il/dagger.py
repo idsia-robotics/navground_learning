@@ -12,7 +12,7 @@ class Trainer(BaseTrainer):
     """
     A simplified interface to :py:class:`imitation.algorithms.dagger.SimpleDAggerTrainer`
 
-    :param env: the [navground] enviroment.
+    :param env: the [navground] environment.
     :param parallel: whether to parallize the env
     :param n_envs: the number of vectorized envs
     :param seed: the random seed

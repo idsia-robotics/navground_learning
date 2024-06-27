@@ -156,10 +156,10 @@ class BaseTrainer:
             self._behavior.policy_path = str(path / policy_path)
             self._policy = self._behavior._policy
         else:
-            self._policy = torch.load(policy_path=path / 'policy.th')
+            self._policy = torch.load(path / 'policy.th')
         sensor: sim.Sensor | None = None
         if 'sensor' in data:
             se = sim.load_state_estimation(yaml.dump(data['sensor']))
-            if not isinstance(se, sim.Sensor):
+            if isinstance(se, sim.Sensor):
                 sensor = se
         self.agent = Agent(sensor=sensor)
