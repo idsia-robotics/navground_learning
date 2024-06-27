@@ -72,7 +72,7 @@ def get_sensor_as_dict(sensor: sim.Sensor | None | str | dict) -> dict[str, Any]
         return sensor
     if isinstance(sensor, str):
         return yaml.safe_load(sensor)
-    return yaml.safe_load(sim.dump(self.sensor))
+    return yaml.safe_load(sim.dump(sensor))
 
 
 @dc.dataclass
@@ -107,7 +107,7 @@ class GroupConfig:
         if self.action:
             rs['action'] = dc.asdict(self.action)
         if self.reward:
-            rs['reward'] = dc.asdict(self.reward)
+            rs['reward'] = self.reward.asdict
         if self.indices is None or isinstance(self.indices, list):
             rs['indices'] = self.indices
         else:
@@ -130,7 +130,7 @@ class WorldConfig:
 
     @property
     def asdict(self) -> dict[str, Any]:
-        rs = {'groups': [g.asdict for g in self.groups]}
+        rs: dict[str, Any] = {'groups': [g.asdict for g in self.groups]}
         if self.reward:
             rs['reward'] = self.reward.asdict
         return rs

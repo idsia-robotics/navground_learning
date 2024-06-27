@@ -87,7 +87,7 @@ class SocialReward:
             # if sv >= sm:
             #     return -1.0
             if sv == 0:
-                r = 0
+                r = 0.0
             elif sv > max_violation:
                 r = -1.0
             else:

@@ -129,9 +129,9 @@ class NavgroundEnv(NavgroundBaseEnv, gym.Env):
 
     @property
     def asdict(self) -> dict[str, Any]:
-        rs = NavgroundBaseEnv.asdict.fget(self)
+        rs = NavgroundBaseEnv.asdict.fget(self)  # type: ignore
         config = rs.pop('config')['groups'][0]
-        agent_index = config.pop('indices')[0]
+        rs['agent_index'] = config.pop('indices')[0]
         rs.update(config)
         return rs
 

@@ -124,14 +124,22 @@ class ObservationConfig(ConfigWithKinematic):
 
     :param include_target_distance: Whether to include the target distance in the observations.
 
+    :param include_target_distance_validity: Whether to include whether the target distnace is valid in the observations.
+
     :param max_target_distance: The upper bound of target distance.
                                 Only relevant if ``include_target_distance=True``
 
     :param include_target_direction: Whether to include the target direction in the observations.
 
+    :param include_target_direction_validity: Whether to include whether the target direction is valid in the observations.
+
     :param include_velocity: Whether to include the current velocity in the observations.
 
     :param include_angular_speed: Whether to include the current angular_speed in the observations.
+
+    :param include_target_speed: Whether to include the target speed in the observations.
+
+    :param include_target_angular_speed: Whether to include the target angular speed in the observations.
 
     :param max_speed: The upper bound of the speed.
 
@@ -150,16 +158,16 @@ class ObservationConfig(ConfigWithKinematic):
     flat: bool = False
     history: int = 1
     include_target_distance: bool = True
+    include_target_distance_validity: bool = False
     max_target_distance: float = np.inf
     include_target_direction: bool = True
+    include_target_direction_validity: bool = False
     include_velocity: bool = False
     include_angular_speed: bool = False
     include_radius: bool = False
+    include_target_speed: bool = False
+    include_target_angular_speed: bool = False
     max_radius: float = np.inf
-
-    @property
-    def include_target(self):
-        return self.include_target_direction or self.include_target_distance
 
     @property
     def should_flatten_observations(self):
@@ -167,16 +175,18 @@ class ObservationConfig(ConfigWithKinematic):
 
     @property
     def is_configured(self) -> bool:
-        if self.include_velocity and (self.dof is None
-                                      or not math.isfinite(self.max_speed)):
+        if not math.isfinite(self.max_speed):
+            if self.include_velocity or self.include_target_speed:
+                return False
+        if self.dof is None and self.include_velocity:
             return False
-        if self.include_angular_speed and not math.isfinite(
-                self.max_angular_speed):
+        if not math.isfinite(self.max_angular_speed):
+            if self.include_angular_speed or self.include_target_angular_speed:
+                return False
+        if not math.isfinite(
+                self.max_target_distance) and self.include_target_distance:
             return False
-        if self.include_target_distance and not math.isfinite(
-                self.max_target_distance):
-            return False
-        if self.include_radius and not math.isfinite(self.max_radius):
+        if not math.isfinite(self.max_radius) and self.include_radius:
             return False
         return True
 
@@ -194,9 +204,16 @@ class ObservationConfig(ConfigWithKinematic):
             ds['ego_target_direction'] = gym.spaces.Box(-1,
                                                         1, (2, ),
                                                         dtype=np.float64)
+            if self.include_target_direction_validity:
+                ds['ego_target_direction_valid'] = gym.spaces.Box(
+                    0, 1, (1, ), dtype=np.uint8)
+                # gym.spaces.Discrete(n=2)
         if self.include_target_distance:
             ds['ego_target_distance'] = gym.spaces.Box(
                 0, self.max_target_distance, (1, ), dtype=np.float64)
+            if self.include_target_direction_validity:
+                ds['ego_target_distance_valid'] = gym.spaces.Box(
+                    0, 1, (1, ), dtype=np.uint8)
         if self.include_velocity:
             if self.dof is None:
                 raise ValueError("Set the DOF first")
@@ -213,6 +230,13 @@ class ObservationConfig(ConfigWithKinematic):
             ds['ego_radius'] = gym.spaces.Box(0,
                                               self.max_radius, (1, ),
                                               dtype=np.float64)
+        if self.include_target_speed:
+            ds['ego_target_speed'] = gym.spaces.Box(0,
+                                                    self.max_speed, (1, ),
+                                                    dtype=np.float64)
+        if self.include_target_angular_speed:
+            ds['ego_target_angular_speed'] = gym.spaces.Box(
+                0, self.max_angular_speed, (1, ), dtype=np.float64)
         return gym.spaces.Dict(ds)  # type: ignore
 
     def get_item_space(self, sensing_space: gym.spaces.Dict) -> gym.Space:
@@ -244,18 +268,19 @@ class ObservationConfig(ConfigWithKinematic):
             buffers: Mapping[str, core.Buffer],
             item_space: gym.Space) -> dict[str, np.ndarray] | np.ndarray:
         rs = {k: b.data for k, b in buffers.items()}
-        if self.include_velocity and behavior:
-            v = core.to_relative(behavior.velocity, behavior.pose)
-            if self.dof == 2:
-                rs['ego_velocity'] = v[:1]
-            else:
-                rs['ego_velocity'] = v
-        if self.include_angular_speed and behavior:
-            rs['ego_angular_speed'] = np.array([behavior.angular_speed],
-                                               dtype=np.float64)
-        if self.include_radius and behavior:
-            rs['ego_radius'] = np.array([behavior.radius], dtype=np.float64)
-        if self.include_target and behavior:
+        if behavior:
+            if self.include_velocity:
+                v = core.to_relative(behavior.velocity, behavior.pose)
+                if self.dof == 2:
+                    rs['ego_velocity'] = v[:1]
+                else:
+                    rs['ego_velocity'] = v
+            if self.include_angular_speed:
+                rs['ego_angular_speed'] = np.array([behavior.angular_speed],
+                                                   dtype=np.float64)
+            if self.include_radius:
+                rs['ego_radius'] = np.array([behavior.radius],
+                                            dtype=np.float64)
             self._add_target(behavior, rs)
         if not self.should_flatten_observations:
             return rs
@@ -266,20 +291,45 @@ class ObservationConfig(ConfigWithKinematic):
 
     def _add_target(self, behavior: core.Behavior,
                     rs: dict[str, np.ndarray]) -> None:
-        if behavior.target.position is not None:
-            p = core.to_relative(behavior.target.position - behavior.position,
-                                 behavior.pose)
-            dist = np.linalg.norm(p)
-            if self.include_target_direction:
-                if dist > 0:
-                    p = p / dist
-                rs['ego_target_direction'] = p
-            if self.include_target_distance:
-                rs['ego_target_distance'] = np.array(
-                    [min(dist, behavior.horizon)])
-        elif behavior.target.direction is not None and self.include_target_direction:
-            rs['ego_target_direction'] = core.to_relative(
-                behavior.target.direction, behavior.pose)
+        if self.include_target_distance:
+            distance = behavior.get_target_distance()
+            rs['ego_target_distance'] = np.array(
+                [min(distance or 0.0, self.max_target_distance)])
+            if self.include_target_distance_validity:
+                value = 0 if distance is None else 1
+                rs['ego_target_distance_valid'] = np.array([value], np.uint8)
+        if self.include_target_direction:
+            e = behavior.get_target_direction(core.Frame.relative)
+            rs['ego_target_direction'] = e if e is not None else np.zeros(2)
+            if self.include_target_direction_validity:
+                value = 0 if e is None else 1
+                rs['ego_target_direction_valid'] = np.array([value], np.uint8)
+        if self.include_target_speed:
+            rs['ego_target_speed'] = np.array(
+                [min(behavior.get_target_speed(), self.max_speed)])
+
+        if self.include_target_angular_speed:
+            rs['ego_target_angular_speed'] = np.array([
+                min(behavior.get_target_angular_speed(),
+                    self.max_angular_speed)
+            ])
+
+    # def _add_target(self, behavior: core.Behavior,
+    #                 rs: dict[str, np.ndarray]) -> None:
+    #     if behavior.target.position is not None:
+    #         p = core.to_relative(behavior.target.position - behavior.position,
+    #                              behavior.pose)
+    #         dist = np.linalg.norm(p)
+    #         if self.include_target_direction:
+    #             if dist > 0:
+    #                 p = p / dist
+    #             rs['ego_target_direction'] = p
+    #         if self.include_target_distance:
+    #             rs['ego_target_distance'] = np.array(
+    #                 [min(dist, behavior.horizon)])
+    #     elif behavior.target.direction is not None and self.include_target_direction:
+    #         rs['ego_target_direction'] = core.to_relative(
+    #             behavior.target.direction, behavior.pose)
 
     @property
     def asdict(self) -> dict[str, Any]:
