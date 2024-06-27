@@ -13,5 +13,6 @@ Tutorials
    RL-MA
    CorridorScenario
    LearningCorridor
+   CrossingWithDifferentSpeeds
 
 
