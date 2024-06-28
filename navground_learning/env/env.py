@@ -89,7 +89,8 @@ class NavgroundEnv(NavgroundBaseEnv, gym.Env):
                  terminate_outside_bounds: bool = False,
                  render_mode: str | None = None,
                  render_kwargs: Mapping[str, Any] = {},
-                 realtime_factor: float = 1.0) -> None:
+                 realtime_factor: float = 1.0,
+                 stuck_timeout: float = 1) -> None:
 
         config = GroupConfig(indices=[agent_index],
                              sensor=sensor,
@@ -106,7 +107,8 @@ class NavgroundEnv(NavgroundBaseEnv, gym.Env):
             terminate_outside_bounds=terminate_outside_bounds,
             render_mode=render_mode,
             render_kwargs=render_kwargs,
-            realtime_factor=realtime_factor)
+            realtime_factor=realtime_factor,
+            stuck_timeout=stuck_timeout)
         self._spec.pop('config')
         self._spec['agent_index'] = agent_index
         self._spec['reward'] = reward

@@ -55,7 +55,8 @@ def parallel_env(scenario: sim.Scenario | str | dict[str, Any] | None = None,
                  terminate_outside_bounds: bool = False,
                  render_mode: str | None = None,
                  render_kwargs: Mapping[str, Any] = {},
-                 realtime_factor: float = 1.0) -> MultiAgentNavgroundEnv:
+                 realtime_factor: float = 1.0,
+                 stuck_timeout: float = 1) -> MultiAgentNavgroundEnv:
     """
     Create a multi-agent PettingZoo environment that uses
     a :py:class:`navground.sim.Scenario` to
@@ -105,7 +106,8 @@ def parallel_env(scenario: sim.Scenario | str | dict[str, Any] | None = None,
         terminate_outside_bounds=terminate_outside_bounds,
         render_mode=render_mode,
         render_kwargs=render_kwargs,
-        realtime_factor=realtime_factor)
+        realtime_factor=realtime_factor,
+        stuck_timeout=stuck_timeout)
 
 
 def shared_parallel_env(
@@ -122,7 +124,8 @@ def shared_parallel_env(
         terminate_outside_bounds: bool = False,
         render_mode: str | None = None,
         render_kwargs: Mapping[str, Any] = {},
-        realtime_factor: float = 1.0) -> MultiAgentNavgroundEnv:
+        realtime_factor: float = 1.0,
+        stuck_timeout: float = 1) -> MultiAgentNavgroundEnv:
     """
     Create a multi-agent PettingZoo environment that uses
     a :py:class:`navground.sim.Scenario` to
@@ -191,4 +194,5 @@ def shared_parallel_env(
         terminate_outside_bounds=terminate_outside_bounds,
         render_mode=render_mode,
         render_kwargs=render_kwargs,
-        realtime_factor=realtime_factor)
+        realtime_factor=realtime_factor,
+        stuck_timeout=stuck_timeout)

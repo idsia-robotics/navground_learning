@@ -79,7 +79,8 @@ class NavgroundBaseEnv:
                  terminate_outside_bounds: bool = False,
                  render_mode: str | None = None,
                  render_kwargs: Mapping[str, Any] = {},
-                 realtime_factor: float = 1.0) -> None:
+                 realtime_factor: float = 1.0,
+                 stuck_timeout: float = 1) -> None:
 
         assert render_mode is None or render_mode in self.metadata[
             "render_modes"]  # type: ignore
@@ -91,6 +92,7 @@ class NavgroundBaseEnv:
         self.render_mode = render_mode
         self.render_kwargs = render_kwargs
         self.realtime_factor = realtime_factor
+        self.stuck_timeout = stuck_timeout
         self._spec: dict[str, Any] = {
             'max_number_of_agents': max_number_of_agents,
             'config': config,
@@ -102,7 +104,8 @@ class NavgroundBaseEnv:
             'terminate_outside_bounds': terminate_outside_bounds,
             'render_mode': render_mode,
             'render_kwargs': render_kwargs,
-            'realtime_factor': realtime_factor
+            'realtime_factor': realtime_factor,
+            'stuck_timeout': stuck_timeout
         }
         if self.render_mode == "human":
             import asyncio
@@ -171,7 +174,8 @@ class NavgroundBaseEnv:
             'terminate_outside_bounds': self.terminate_outside_bounds,
             'render_mode': self.render_mode,
             'render_kwargs': self.render_kwargs,
-            'realtime_factor': self.realtime_factor
+            'realtime_factor': self.realtime_factor,
+            'stuck_timeout': self.stuck_timeout
         }
         if self._scenario:
             rs['scenario'] = yaml.safe_load(sim.dump(self._scenario))
@@ -268,7 +272,8 @@ class NavgroundBaseEnv:
         return {
             index:
             (should_terminate or agent.navground.idle
-             or agent.navground.has_been_stuck_since(1.0)
+             or (self.stuck_timeout > 0
+                 and agent.navground.has_been_stuck_since(self.stuck_timeout))
              or (out and self.is_outside_bounds(agent.navground.position)))
             for index, agent in self._agents.items() if agent.navground
         }
