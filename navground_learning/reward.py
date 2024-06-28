@@ -53,7 +53,7 @@ class SocialReward:
     Reward function for social navigation, see (TODO add citation)
 
     :param      alpha:                  The weight of social margin violations
-    :param      beta:                   The weight of efficacy
+    :param      beta:                   The weight of safety violations
     :param      critical_safety_margin: Violation of this margin has maximal penalty of -1
     :param      safety_margin:          Violations between this and the critical
                                         safety_margin have a linear penalty. If not set,
@@ -89,9 +89,9 @@ class SocialReward:
             if sv == 0:
                 r = 0.0
             elif sv > max_violation:
-                r = -1.0
+                r = -self.beta
             else:
-                r = -sv / max_violation
+                r = -self.beta * sv / max_violation
         else:
             r = 0
         if self._max_social_margin > 0:
@@ -105,7 +105,7 @@ class SocialReward:
         if agent.task and agent.task.done():
             r += 1.0
         if agent.behavior:
-            r += (agent.behavior.efficacy - 1) * self.beta  # * time_step
+            r += np.clip(0, 1, agent.behavior.efficacy) - 1
         return r
 
     @property
