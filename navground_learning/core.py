@@ -393,15 +393,21 @@ class TemporaryBehaviorParams:
 def single_param_space(low: Any = 0,
                        high: Any = 1,
                        dtype: str = 'float',
-                       discrete: bool = False) -> gym.spaces.Space:
+                       discrete: bool = False,
+                       normalized: bool = False) -> gym.spaces.Space:
     if discrete:
         return gym.spaces.Discrete(start=low, n=int(high - low))
+    if normalized:
+        low = -1
+        high = 1
     return gym.spaces.Box(low, high, dtype=dtype)  # type: ignore
 
 
-def param_space(params: dict[str, dict[str, Any]]):
+def param_space(params: dict[str, dict[str, Any]],
+                normalized: bool = False) -> gym.spaces.Dict:
     return gym.spaces.Dict({
-        key: single_param_space(**value)
+        key:
+        single_param_space(normalized=normalized, **value)
         for key, value in params.items()
     })
 
@@ -412,11 +418,27 @@ class ModulationActionConfig(ActionConfig):
     params: dict[str, dict[str, Any]] = dc.field(default_factory=dict)
 
     def __post_init__(self):
-        self.param_space = param_space(self.params)
+        self.param_space = param_space(self.params, normalized=True)
 
     @property
     def is_configured(self) -> bool:
         return True
+
+    def normalize(self, key: str, value: Any) -> Any:
+        param = self.params[key]
+        if 'discrete' in param:
+            return value
+        low = param['low']
+        high = param['high']
+        return np.clip(-1, 1, -1 + 2 * (value - low) / (high - low))
+
+    def de_normalize(self, key: str, value: Any) -> Any:
+        param = self.params[key]
+        if 'discrete' in param:
+            return value
+        low = param['low']
+        high = param['high']
+        return low + (value + 1) / 2 * (high - low)
 
     @property
     def space(self) -> gym.Space:
@@ -424,7 +446,7 @@ class ModulationActionConfig(ActionConfig):
 
     def get_params_from_action(self, action: np.ndarray) -> dict[str, Any]:
         return {
-            k: to_py(v)
+            k: to_py(self.de_normalize(k, v))
             for k, v in gym.spaces.unflatten(self.param_space, action).items()
         }
 
@@ -439,7 +461,10 @@ class ModulationActionConfig(ActionConfig):
 
     def get_action(self, behavior: core.Behavior,
                    time_step: float) -> np.ndarray:
-        params = {k: getattr(behavior, k) for k in self.param_space}
+        params = {
+            k: self.normalize(k, getattr(behavior, k))
+            for k in self.param_space
+        }
         return cast(np.ndarray, gym.spaces.flatten(self.param_space, params))
 
     def configure(self, behavior: core.Behavior) -> None:
