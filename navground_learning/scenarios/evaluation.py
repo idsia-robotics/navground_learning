@@ -34,12 +34,14 @@ class EvaluationScenario(sim.Scenario):
                  scenario: sim.Scenario,
                  config: WorldConfig = WorldConfig(),
                  bounds: tuple[np.ndarray, np.ndarray] | None = None,
-                 terminate_outside_bounds: bool = True):
+                 terminate_outside_bounds: bool = True,
+                 deterministic: bool = True):
         sim.Scenario.__init__(self)
         self._scenario = scenario
         self._config = config
         self._bounds = bounds
         self._terminate_outside_bounds = terminate_outside_bounds
+        self._deterministic = deterministic
 
     def init_world(self, world: sim.World, seed: int | None = None) -> None:
         self._scenario.init_world(world, seed=seed)
@@ -59,6 +61,7 @@ class EvaluationScenario(sim.Scenario):
                     behavior=ng_agent.behavior,
                     policy=agent.policy,
                     action_config=cast(ControlActionConfig, agent.gym.action_config),
-                    observation_config=agent.gym.observation_config)
+                    observation_config=agent.gym.observation_config,
+                    deterministic=self._deterministic)
                 if agent.sensor is not None:
                     ng_agent.state_estimation = agent.sensor
