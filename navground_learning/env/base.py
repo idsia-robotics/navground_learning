@@ -1,8 +1,8 @@
-import dataclasses as dc
 import logging
 from collections.abc import Mapping
 from typing import Any, cast
 
+import gymnasium as gym
 import numpy as np
 import yaml
 from navground import core, sim
@@ -142,6 +142,13 @@ class NavgroundBaseEnv:
             i: cast(GymAgent, agent.gym).action_space
             for i, agent in self._possible_agents.items()
         }
+        self._observation_item_space = {
+            i: cast(GymAgent, agent.gym).observation_item_space
+            for i, agent in self._possible_agents.items()
+        }
+
+    def get_observation_item_space(self, index: int) -> gym.spaces.Dict | None:
+        return self._observation_item_space.get(index)
 
     def update_agents(self):
         if not self._world:
