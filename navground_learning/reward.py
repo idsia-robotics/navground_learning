@@ -58,7 +58,7 @@ class SocialReward:
     :param      safety_margin:          Violations between this and the critical
                                         safety_margin have a linear penalty. If not set,
                                         it defaults to the agent's own safety_margin.
-    :param      beta:                   The weight of efficacy
+    :param      beta:                   The weight of safety violation
     :param      default_social_margin:  The default social margin
     :param      social_margins:         The social margins assigned to neighbors' ids
 
