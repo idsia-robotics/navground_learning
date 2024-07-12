@@ -175,5 +175,5 @@ docs/source/tutorials/*.onnx
 docs/source/tutorials/*.mp4
 docs/source/tutorials/*.json
 private
-docs/build/.doctrees
-docs/build/_sources
+docs/build/html/.doctrees
+docs/build/html/_sources
