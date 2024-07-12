@@ -176,3 +176,4 @@ docs/source/tutorials/*.mp4
 docs/source/tutorials/*.json
 private
 docs/build/.doctrees
+docs/build/_sources
