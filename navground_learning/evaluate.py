@@ -48,6 +48,7 @@ def make_experiment_with_env(env: NavgroundBaseEnv,
                              use_first_reward: bool = True,
                              steps: int = 1000,
                              seed: int = 0) -> sim.Experiment:
+    env = env.unwrapped
     if not env._scenario:
         raise ValueError("No scenario")
     if reward is None and use_first_reward:
@@ -98,6 +99,7 @@ def evaluate_expert_with_env(
         deterministic: bool = True,
         return_episode_rewards: bool = False,
         **kwargs: Any) -> tuple[list[float], list[int]] | tuple[float, float]:
+    env = env.unwrapped
     if not env._scenario:
         raise ValueError("No scenario")
     config = WorldConfig(groups=[
