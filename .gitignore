@@ -8,7 +8,6 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-build/
 develop-eggs/
 dist/
 downloads/
@@ -25,6 +24,7 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+.doctrees
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -69,7 +69,7 @@ instance/
 .scrapy
 
 # Sphinx documentation
-docs/_build/
+# docs/_build/
 
 # PyBuilder
 .pybuilder/
@@ -164,3 +164,15 @@ __pycache__
 logs
 archive
 notebooks
+launch
+docs/source/tutorials/policies
+docs/source/tutorials/logs
+docs/source/tutorials/single_*
+docs/source/tutorials/multi_*
+Makefile
+make.bat
+docs/source/tutorials/*.onnx
+docs/source/tutorials/*.mp4
+docs/source/tutorials/*.json
+private
+docs/build/.doctrees
