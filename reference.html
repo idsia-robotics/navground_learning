@@ -1,0 +1,1263 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Reference &#8212; navground_learning 0.0.3 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="_static/jquery.js?v=5d32c60e"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="_static/documentation_options.js?v=9284a570"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Crossings with different speeds" href="tutorials/CrossingWithDifferentSpeeds.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">navground_learning 0.0.3 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="tutorials/index.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/Gym.html">Navground-Gymnasium integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/PettingZoo.html">Navground-PettingZoo integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/IL.html">Train a policy using Imitation Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/IL-DAgger.html">Train a policy using Imitation Learning part 2: DAgger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/RL.html">Train a policy using RL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/RL-MA.html">Train a policy using RL, part 2: multi-agent environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/CorridorScenario.html">Navigate along a corridor with one obstacle: scenario</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/LearningCorridor.html">Navigate along a corridor with one obstacle: learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/CrossingWithDifferentSpeeds.html">Crossings with different speeds</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Reference</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Reference</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actions">Actions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#end-to-end">End-to-end</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.ControlActionConfig"><code class="docutils literal notranslate"><span class="pre">ControlActionConfig</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h6 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.ControlActionConfig.space"><code class="docutils literal notranslate"><span class="pre">ControlActionConfig.space</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#behavior-modulation">Behavior Modulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.ModulationActionConfig"><code class="docutils literal notranslate"><span class="pre">ModulationActionConfig</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#observations">Observations</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.ObservationConfig"><code class="docutils literal notranslate"><span class="pre">ObservationConfig</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-agent-system">Multi-agent system</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.GroupConfig"><code class="docutils literal notranslate"><span class="pre">GroupConfig</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.WorldConfig"><code class="docutils literal notranslate"><span class="pre">WorldConfig</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reward-functions">Reward functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#null">Null</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.reward.NullReward"><code class="docutils literal notranslate"><span class="pre">NullReward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#social">Social</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.reward.SocialReward"><code class="docutils literal notranslate"><span class="pre">SocialReward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inference">Inference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#behaviors">Behaviors</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.clone"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.clone()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.clone_behavior"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.clone_behavior()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.deterministic"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.deterministic</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.fix_orientation"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.fix_orientation</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.flat"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.flat</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.history"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.history</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.include_radius"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.include_radius</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.include_target_angular_speed"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.include_target_angular_speed</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.include_target_direction"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.include_target_direction</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.include_target_direction_validity"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.include_target_direction_validity</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.include_target_distance"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.include_target_distance</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.include_target_distance_validity"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.include_target_distance_validity</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.include_target_speed"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.include_target_speed</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.include_velocity"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.include_velocity</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.max_acceleration"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.max_acceleration</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.max_angular_acceleration"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.max_angular_acceleration</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.policy_path"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.policy_path</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.use_acceleration_action"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.use_acceleration_action</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.use_wheels"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.use_wheels</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environments">Environments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-agent-gymnasium">Single-agent (Gymnasium)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.env.NavgroundEnv"><code class="docutils literal notranslate"><span class="pre">NavgroundEnv</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-agent-pettingzoo">Multi-agent (Pettingzoo)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.env.pz.shared_parallel_env"><code class="docutils literal notranslate"><span class="pre">shared_parallel_env()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.env.pz.parallel_env"><code class="docutils literal notranslate"><span class="pre">parallel_env()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning">Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imitation-learning">Imitation Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#behavior-cloning">Behavior Cloning</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dagger">DAgger</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recording-data">Recording data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probes">Probes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#experiments">Experiments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rollouts">Rollouts</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#models">Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.policies.OrderInvariantCombinedExtractor"><code class="docutils literal notranslate"><span class="pre">OrderInvariantCombinedExtractor</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scenarios">Scenarios</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corridorwithobstacle">CorridorWithObstacle</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.scenarios.CorridorWithObstacle"><code class="docutils literal notranslate"><span class="pre">CorridorWithObstacle</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forward">Forward</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.scenarios.ForwardScenario"><code class="docutils literal notranslate"><span class="pre">ForwardScenario</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.scenarios.EvaluationScenario"><code class="docutils literal notranslate"><span class="pre">EvaluationScenario</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="reference">
+<h1>Reference<a class="headerlink" href="#reference" title="Link to this heading">#</a></h1>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h2>
+<section id="actions">
+<h3>Actions<a class="headerlink" href="#actions" title="Link to this heading">#</a></h3>
+<section id="end-to-end">
+<h4>End-to-end<a class="headerlink" href="#end-to-end" title="Link to this heading">#</a></h4>
+<dl class="py class">
+<dt class="sig sig-object py" id="navground_learning.ControlActionConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">navground_learning.</span></span><span class="sig-name descname"><span class="pre">ControlActionConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_angular_speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dof</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_acceleration</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_angular_acceleration</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_acceleration_action</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fix_orientation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_wheels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">has_wheels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#navground_learning.ControlActionConfig" title="Link to this definition">#</a></dt>
+<dd><p>Configuration of actions consumed by a <a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/agent.html#navground.sim.Agent" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground.sim.Agent</span></code></a>
+in a <a class="reference internal" href="#navground_learning.env.NavgroundEnv" title="navground_learning.env.NavgroundEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground_learning.env.NavgroundEnv</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>max_speed</strong> (<em>float</em>) – The upper bound of the speed.</p></li>
+<li><p><strong>max_angular_speed</strong> (<em>float</em>) – The upper bound of the angular speed.</p></li>
+<li><p><strong>max_acceleration</strong> (<em>float</em>) – The upper bound of the acceleration.</p></li>
+<li><p><strong>max_angular_acceleration</strong> (<em>float</em>) – The upper bound of the angular acceleration.</p></li>
+<li><p><strong>use_acceleration_action</strong> (<em>bool</em>) – Whether actions are accelerations.
+If not set, actions are velocities.</p></li>
+<li><p><strong>use_wheels</strong> (<em>bool</em>) – Whether action uses wheel speeds/acceleration
+instead of body speeds/acceleration.
+Only effective if the b behavior has a wheeled kinematics.</p></li>
+<li><p><strong>fix_orientation</strong> (<em>bool</em>) – Whether to force the agent not to control orientation,
+i.e., to not include the angular command in actions.</p></li>
+<li><p><strong>dtype</strong> (<em>str</em>)</p></li>
+<li><p><strong>dof</strong> (<em>int</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>has_wheels</strong> (<em>bool</em><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="navground_learning.ControlActionConfig.space">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">space</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://gymnasium.farama.org/api/spaces/#gymnasium.spaces.Space" title="(in Gymnasium)"><span class="pre">Space</span></a></em><a class="headerlink" href="#navground_learning.ControlActionConfig.space" title="Link to this definition">#</a></dt>
+<dd><p>The configured action space</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The action space</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="behavior-modulation">
+<h4>Behavior Modulation<a class="headerlink" href="#behavior-modulation" title="Link to this heading">#</a></h4>
+<dl class="py class">
+<dt class="sig sig-object py" id="navground_learning.ModulationActionConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">navground_learning.</span></span><span class="sig-name descname"><span class="pre">ModulationActionConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params:</span> <span class="pre">dict[str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dict[str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">typing.Any]]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#navground_learning.ModulationActionConfig" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>params</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em><em>]</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+<section id="observations">
+<h3>Observations<a class="headerlink" href="#observations" title="Link to this heading">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="navground_learning.ObservationConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">navground_learning.</span></span><span class="sig-name descname"><span class="pre">ObservationConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_angular_speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dof</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">history</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_target_distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_target_distance_validity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_target_distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_target_direction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_target_direction_validity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_velocity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_angular_speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_radius</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_target_speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_target_angular_speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_radius</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#navground_learning.ObservationConfig" title="Link to this definition">#</a></dt>
+<dd><p>Configuration of observations produced consumed
+by a <a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/agent.html#navground.sim.Agent" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground.sim.Agent</span></code></a>
+in a <a class="reference internal" href="#navground_learning.env.NavgroundEnv" title="navground_learning.env.NavgroundEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground_learning.env.NavgroundEnv</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>flat</strong> (<em>bool</em>) – Whether to use a flat observation space</p></li>
+<li><p><strong>history</strong> (<em>int</em>) – The size of the queue to use for observations.
+If larger than 1, recent observations will be stacked,
+and then flattened.</p></li>
+<li><p><strong>include_target_distance</strong> (<em>bool</em>) – Whether to include the target distance in the observations.</p></li>
+<li><p><strong>include_target_distance_validity</strong> (<em>bool</em>) – Whether to include whether the target distnace is valid in the observations.</p></li>
+<li><p><strong>max_target_distance</strong> (<em>float</em>) – The upper bound of target distance.
+Only relevant if <code class="docutils literal notranslate"><span class="pre">include_target_distance=True</span></code></p></li>
+<li><p><strong>include_target_direction</strong> (<em>bool</em>) – Whether to include the target direction in the observations.</p></li>
+<li><p><strong>include_target_direction_validity</strong> (<em>bool</em>) – Whether to include whether the target direction is valid in the observations.</p></li>
+<li><p><strong>include_velocity</strong> (<em>bool</em>) – Whether to include the current velocity in the observations.</p></li>
+<li><p><strong>include_angular_speed</strong> (<em>bool</em>) – Whether to include the current angular_speed in the observations.</p></li>
+<li><p><strong>include_target_speed</strong> (<em>bool</em>) – Whether to include the target speed in the observations.</p></li>
+<li><p><strong>include_target_angular_speed</strong> (<em>bool</em>) – Whether to include the target angular speed in the observations.</p></li>
+<li><p><strong>max_speed</strong> (<em>float</em>) – The upper bound of the speed.</p></li>
+<li><p><strong>max_angular_speed</strong> (<em>float</em>) – The upper bound of the angular speed.</p></li>
+<li><p><strong>include_radius</strong> (<em>bool</em>) – Whether to include the own radius in the observations.</p></li>
+<li><p><strong>max_radius</strong> (<em>float</em>) – The upper bound of own radius.
+Only relevant if <code class="docutils literal notranslate"><span class="pre">include_radius=True</span></code>.</p></li>
+<li><p><strong>use_wheels</strong> – Whether observation uses wheel speeds instead of body velocity.
+Only effective if the agent uses a wheeled kinematics.</p></li>
+<li><p><strong>dtype</strong> (<em>str</em>)</p></li>
+<li><p><strong>dof</strong> (<em>int</em><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="multi-agent-system">
+<h3>Multi-agent system<a class="headerlink" href="#multi-agent-system" title="Link to this heading">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="navground_learning.GroupConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">navground_learning.</span></span><span class="sig-name descname"><span class="pre">GroupConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ActionConfig</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">slice</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/state_estimations/sensor.html#navground.sim.Sensor" title="(in navground)"><span class="pre">Sensor</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reward</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Reward</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#navground_learning.ObservationConfig" title="navground_learning.core.ObservationConfig"><span class="pre">ObservationConfig</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#navground_learning.GroupConfig" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>indices</strong> (<em>list</em><em>[</em><em>int</em><em>] </em><em>| </em><em>slice</em><em> | </em><em>None</em>) – The world indices of the agents.</p></li>
+<li><p><strong>sensor</strong> (<a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/state_estimations/sensor.html#navground.sim.Sensor" title="(in navground)"><em>Sensor</em></a><em> | </em><em>str</em><em> | </em><em>dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>] </em><em>| </em><em>None</em>) – A sensor to produce observations for the agents.
+If a <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, it will be interpreted as the YAML
+representation of a sensor.
+If a <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>, it will be dumped to YAML and
+then treated as a <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>.
+If None, it will use the agents’ own state estimation, if a sensor.</p></li>
+<li><p><strong>action</strong> (<em>ActionConfig</em><em> | </em><em>None</em>) – The configuration of the action and observation space to use.</p></li>
+<li><p><strong>observation</strong> (<a class="reference internal" href="#navground_learning.ObservationConfig" title="navground_learning.core.ObservationConfig"><em>ObservationConfig</em></a><em> | </em><em>None</em>) – The configuration of the observation space to use.</p></li>
+<li><p><strong>reward</strong> (<em>Reward</em><em> | </em><em>None</em>) – The reward function to use.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="navground_learning.WorldConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">navground_learning.</span></span><span class="sig-name descname"><span class="pre">WorldConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">groups:</span> <span class="pre">list[navground_learning.config.GroupConfig]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">policies:</span> <span class="pre">list[tuple[list[int]</span> <span class="pre">|</span> <span class="pre">slice</span> <span class="pre">|</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">typing.Any]]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reward:</span> <span class="pre">navground_learning.reward.Reward</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#navground_learning.WorldConfig" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>groups</strong> (<em>list</em><em>[</em><a class="reference internal" href="#navground_learning.GroupConfig" title="navground_learning.config.GroupConfig"><em>GroupConfig</em></a><em>]</em>)</p></li>
+<li><p><strong>policies</strong> (<em>list</em><em>[</em><em>tuple</em><em>[</em><em>list</em><em>[</em><em>int</em><em>] </em><em>| </em><em>slice</em><em> | </em><em>None</em><em>, </em><em>Any</em><em>]</em><em>]</em>)</p></li>
+<li><p><strong>reward</strong> (<em>Reward</em><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+<section id="reward-functions">
+<h2>Reward functions<a class="headerlink" href="#reward-functions" title="Link to this heading">#</a></h2>
+<section id="null">
+<h3>Null<a class="headerlink" href="#null" title="Link to this heading">#</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="navground_learning.reward.NullReward">
+<span class="sig-prename descclassname"><span class="pre">navground_learning.reward.</span></span><span class="sig-name descname"><span class="pre">NullReward</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#navground_learning.reward.NullReward" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="social">
+<h3>Social<a class="headerlink" href="#social" title="Link to this heading">#</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="navground_learning.reward.SocialReward">
+<span class="sig-prename descclassname"><span class="pre">navground_learning.reward.</span></span><span class="sig-name descname"><span class="pre">SocialReward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">critical_safety_margin:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">safety_margin:</span> <span class="pre">float</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_social_margin:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">social_margins:</span> <span class="pre">dict[int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">float]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#navground_learning.reward.SocialReward" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>alpha</strong> (<em>float</em>)</p></li>
+<li><p><strong>beta</strong> (<em>float</em>)</p></li>
+<li><p><strong>critical_safety_margin</strong> (<em>float</em>)</p></li>
+<li><p><strong>safety_margin</strong> (<em>float</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>default_social_margin</strong> (<em>float</em>)</p></li>
+<li><p><strong>social_margins</strong> (<em>dict</em><em>[</em><em>int</em><em>, </em><em>float</em><em>]</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+<section id="inference">
+<h2>Inference<a class="headerlink" href="#inference" title="Link to this heading">#</a></h2>
+<section id="behaviors">
+<h3>Behaviors<a class="headerlink" href="#behaviors" title="Link to this heading">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="navground_learning.behaviors.PolicyBehavior">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">navground_learning.behaviors.</span></span><span class="sig-name descname"><span class="pre">PolicyBehavior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kinematics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://idsia-robotics.github.io/navground/reference/core/python/kinematics/kinematics.html#navground.core.Kinematics" title="(in navground)"><span class="pre">Kinematics</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">policy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#navground_learning.ControlActionConfig" title="navground_learning.core.ControlActionConfig"><span class="pre">ControlActionConfig</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">ControlActionConfig(dtype='',</span> <span class="pre">max_speed=inf,</span> <span class="pre">max_angular_speed=inf,</span> <span class="pre">dof=None,</span> <span class="pre">max_acceleration=inf,</span> <span class="pre">max_angular_acceleration=inf,</span> <span class="pre">use_acceleration_action=False,</span> <span class="pre">fix_orientation=False,</span> <span class="pre">use_wheels=False,</span> <span class="pre">has_wheels=None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observation_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#navground_learning.ObservationConfig" title="navground_learning.core.ObservationConfig"><span class="pre">ObservationConfig</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">ObservationConfig(dtype='',</span> <span class="pre">max_speed=inf,</span> <span class="pre">max_angular_speed=inf,</span> <span class="pre">dof=None,</span> <span class="pre">flat=False,</span> <span class="pre">history=1,</span> <span class="pre">include_target_distance=True,</span> <span class="pre">include_target_distance_validity=False,</span> <span class="pre">max_target_distance=inf,</span> <span class="pre">include_target_direction=True,</span> <span class="pre">include_target_direction_validity=False,</span> <span class="pre">include_velocity=False,</span> <span class="pre">include_angular_speed=False,</span> <span class="pre">include_radius=False,</span> <span class="pre">include_target_speed=False,</span> <span class="pre">include_target_angular_speed=False,</span> <span class="pre">max_radius=inf)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deterministic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#navground_learning.behaviors.PolicyBehavior" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://idsia-robotics.github.io/navground/reference/core/python/behaviors/behavior.html#navground.core.Behavior" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Behavior</span></code></a></p>
+<p>A navigation behavior that evaluates a ML policy</p>
+<p><em>Registered properties</em>:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#navground_learning.behaviors.PolicyBehavior.policy_path" title="navground_learning.behaviors.PolicyBehavior.policy_path"><code class="xref py py-attr docutils literal notranslate"><span class="pre">policy_path</span></code></a> (str)</p></li>
+<li><p><a class="reference internal" href="#navground_learning.behaviors.PolicyBehavior.flat" title="navground_learning.behaviors.PolicyBehavior.flat"><code class="xref py py-attr docutils literal notranslate"><span class="pre">flat</span></code></a> (bool)</p></li>
+<li><p><a class="reference internal" href="#navground_learning.behaviors.PolicyBehavior.history" title="navground_learning.behaviors.PolicyBehavior.history"><code class="xref py py-attr docutils literal notranslate"><span class="pre">history</span></code></a> (int)</p></li>
+<li><p><a class="reference internal" href="#navground_learning.behaviors.PolicyBehavior.fix_orientation" title="navground_learning.behaviors.PolicyBehavior.fix_orientation"><code class="xref py py-attr docutils literal notranslate"><span class="pre">fix_orientation</span></code></a> (bool)</p></li>
+<li><p><a class="reference internal" href="#navground_learning.behaviors.PolicyBehavior.include_target_direction" title="navground_learning.behaviors.PolicyBehavior.include_target_direction"><code class="xref py py-attr docutils literal notranslate"><span class="pre">include_target_direction</span></code></a> (bool)</p></li>
+<li><p><a class="reference internal" href="#navground_learning.behaviors.PolicyBehavior.include_target_direction_validity" title="navground_learning.behaviors.PolicyBehavior.include_target_direction_validity"><code class="xref py py-attr docutils literal notranslate"><span class="pre">include_target_direction_validity</span></code></a> (bool)</p></li>
+<li><p><a class="reference internal" href="#navground_learning.behaviors.PolicyBehavior.include_target_distance" title="navground_learning.behaviors.PolicyBehavior.include_target_distance"><code class="xref py py-attr docutils literal notranslate"><span class="pre">include_target_distance</span></code></a> (bool)</p></li>
+<li><p><a class="reference internal" href="#navground_learning.behaviors.PolicyBehavior.include_target_distance_validity" title="navground_learning.behaviors.PolicyBehavior.include_target_distance_validity"><code class="xref py py-attr docutils literal notranslate"><span class="pre">include_target_distance_validity</span></code></a> (bool)</p></li>
+<li><p><a class="reference internal" href="#navground_learning.behaviors.PolicyBehavior.include_target_speed" title="navground_learning.behaviors.PolicyBehavior.include_target_speed"><code class="xref py py-attr docutils literal notranslate"><span class="pre">include_target_speed</span></code></a> (bool)</p></li>
+<li><p><a class="reference internal" href="#navground_learning.behaviors.PolicyBehavior.include_target_angular_speed" title="navground_learning.behaviors.PolicyBehavior.include_target_angular_speed"><code class="xref py py-attr docutils literal notranslate"><span class="pre">include_target_angular_speed</span></code></a> (bool)</p></li>
+<li><p><a class="reference internal" href="#navground_learning.behaviors.PolicyBehavior.include_velocity" title="navground_learning.behaviors.PolicyBehavior.include_velocity"><code class="xref py py-attr docutils literal notranslate"><span class="pre">include_velocity</span></code></a> (bool)</p></li>
+<li><p><a class="reference internal" href="#navground_learning.behaviors.PolicyBehavior.include_radius" title="navground_learning.behaviors.PolicyBehavior.include_radius"><code class="xref py py-attr docutils literal notranslate"><span class="pre">include_radius</span></code></a> (bool)</p></li>
+<li><p><a class="reference internal" href="#navground_learning.behaviors.PolicyBehavior.use_wheels" title="navground_learning.behaviors.PolicyBehavior.use_wheels"><code class="xref py py-attr docutils literal notranslate"><span class="pre">use_wheels</span></code></a> (bool)</p></li>
+<li><p><a class="reference internal" href="#navground_learning.behaviors.PolicyBehavior.use_acceleration_action" title="navground_learning.behaviors.PolicyBehavior.use_acceleration_action"><code class="xref py py-attr docutils literal notranslate"><span class="pre">use_acceleration_action</span></code></a> (bool)</p></li>
+<li><p><a class="reference internal" href="#navground_learning.behaviors.PolicyBehavior.max_acceleration" title="navground_learning.behaviors.PolicyBehavior.max_acceleration"><code class="xref py py-attr docutils literal notranslate"><span class="pre">max_acceleration</span></code></a> (float)</p></li>
+<li><p><a class="reference internal" href="#navground_learning.behaviors.PolicyBehavior.max_angular_acceleration" title="navground_learning.behaviors.PolicyBehavior.max_angular_acceleration"><code class="xref py py-attr docutils literal notranslate"><span class="pre">max_angular_acceleration</span></code></a> (float)</p></li>
+<li><p><a class="reference internal" href="#navground_learning.behaviors.PolicyBehavior.deterministic" title="navground_learning.behaviors.PolicyBehavior.deterministic"><code class="xref py py-attr docutils literal notranslate"><span class="pre">deterministic</span></code></a> (bool)</p></li>
+</ul>
+<p><em>State</em>: <code class="xref py py-class docutils literal notranslate"><span class="pre">SensingState</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kinematics</strong> (<a class="reference external" href="https://idsia-robotics.github.io/navground/reference/core/python/kinematics/kinematics.html#navground.core.Kinematics" title="(in navground)"><em>Kinematics</em></a><em> | </em><em>None</em>) – The agent kinematics</p></li>
+<li><p><strong>radius</strong> (<em>float</em>) – The agent radius</p></li>
+<li><p><strong>policy</strong> (<em>Any</em>) – The policy</p></li>
+<li><p><strong>config</strong> – How to use the policy (default if not specified)</p></li>
+<li><p><strong>action_config</strong> (<a class="reference internal" href="#navground_learning.ControlActionConfig" title="navground_learning.core.ControlActionConfig"><em>ControlActionConfig</em></a>)</p></li>
+<li><p><strong>observation_config</strong> (<a class="reference internal" href="#navground_learning.ObservationConfig" title="navground_learning.core.ObservationConfig"><em>ObservationConfig</em></a>)</p></li>
+<li><p><strong>deterministic</strong> (<em>bool</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="navground_learning.behaviors.PolicyBehavior.clone">
+<span class="sig-name descname"><span class="pre">clone</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#navground_learning.behaviors.PolicyBehavior" title="navground_learning.behaviors.policy.PolicyBehavior"><span class="pre">PolicyBehavior</span></a></span></span><a class="headerlink" href="#navground_learning.behaviors.PolicyBehavior.clone" title="Link to this definition">#</a></dt>
+<dd><p>Creates a new policy behavior with same properties but a separate state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Copy of this object.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#navground_learning.behaviors.PolicyBehavior" title="navground_learning.behaviors.policy.PolicyBehavior"><em>PolicyBehavior</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="navground_learning.behaviors.PolicyBehavior.clone_behavior">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">clone_behavior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">behavior</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://idsia-robotics.github.io/navground/reference/core/python/behaviors/behavior.html#navground.core.Behavior" title="(in navground)"><span class="pre">Behavior</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">policy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#navground_learning.ControlActionConfig" title="navground_learning.core.ControlActionConfig"><span class="pre">ControlActionConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">observation_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#navground_learning.ObservationConfig" title="navground_learning.core.ObservationConfig"><span class="pre">ObservationConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">deterministic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#navground_learning.behaviors.PolicyBehavior" title="navground_learning.behaviors.policy.PolicyBehavior"><span class="pre">PolicyBehavior</span></a></span></span><a class="headerlink" href="#navground_learning.behaviors.PolicyBehavior.clone_behavior" title="Link to this definition">#</a></dt>
+<dd><p>Configure a new policy behavior from a behavior.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>behavior</strong> (<a class="reference external" href="https://idsia-robotics.github.io/navground/reference/core/python/behaviors/behavior.html#navground.core.Behavior" title="(in navground)"><em>Behavior</em></a>) – The behavior to replicate</p></li>
+<li><p><strong>policy</strong> (<em>Any</em>) – The policy</p></li>
+<li><p><strong>config</strong> – The configuration</p></li>
+<li><p><strong>deterministic</strong> (<em>bool</em>) – Whether or not to output deterministic actions</p></li>
+<li><p><strong>action_config</strong> (<a class="reference internal" href="#navground_learning.ControlActionConfig" title="navground_learning.core.ControlActionConfig"><em>ControlActionConfig</em></a>)</p></li>
+<li><p><strong>observation_config</strong> (<a class="reference internal" href="#navground_learning.ObservationConfig" title="navground_learning.core.ObservationConfig"><em>ObservationConfig</em></a>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The configured policy behavior</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#navground_learning.behaviors.PolicyBehavior" title="navground_learning.behaviors.policy.PolicyBehavior"><em>PolicyBehavior</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="navground_learning.behaviors.PolicyBehavior.deterministic">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deterministic</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#navground_learning.behaviors.PolicyBehavior.deterministic" title="Link to this definition">#</a></dt>
+<dd><p>Whether or not to output deterministic actions</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="navground_learning.behaviors.PolicyBehavior.fix_orientation">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fix_orientation</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#navground_learning.behaviors.PolicyBehavior.fix_orientation" title="Link to this definition">#</a></dt>
+<dd><p>See <code class="xref py py-attr docutils literal notranslate"><span class="pre">GymAgentConfig.fix_orientation</span></code></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="navground_learning.behaviors.PolicyBehavior.flat">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">flat</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#navground_learning.behaviors.PolicyBehavior.flat" title="Link to this definition">#</a></dt>
+<dd><p>See <code class="xref py py-attr docutils literal notranslate"><span class="pre">GymAgentConfig.flat</span></code></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="navground_learning.behaviors.PolicyBehavior.history">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">history</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#navground_learning.behaviors.PolicyBehavior.history" title="Link to this definition">#</a></dt>
+<dd><p>See <code class="xref py py-attr docutils literal notranslate"><span class="pre">GymAgentConfig.history</span></code></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="navground_learning.behaviors.PolicyBehavior.include_radius">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">include_radius</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#navground_learning.behaviors.PolicyBehavior.include_radius" title="Link to this definition">#</a></dt>
+<dd><p>See <code class="xref py py-attr docutils literal notranslate"><span class="pre">GymAgentConfig.include_radius</span></code></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="navground_learning.behaviors.PolicyBehavior.include_target_angular_speed">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">include_target_angular_speed</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#navground_learning.behaviors.PolicyBehavior.include_target_angular_speed" title="Link to this definition">#</a></dt>
+<dd><p>See <code class="xref py py-attr docutils literal notranslate"><span class="pre">GymAgentConfig.include_target_angular_speed</span></code></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="navground_learning.behaviors.PolicyBehavior.include_target_direction">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">include_target_direction</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#navground_learning.behaviors.PolicyBehavior.include_target_direction" title="Link to this definition">#</a></dt>
+<dd><p>See <code class="xref py py-attr docutils literal notranslate"><span class="pre">GymAgentConfig.include_target_direction</span></code></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="navground_learning.behaviors.PolicyBehavior.include_target_direction_validity">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">include_target_direction_validity</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#navground_learning.behaviors.PolicyBehavior.include_target_direction_validity" title="Link to this definition">#</a></dt>
+<dd><p>See <code class="xref py py-attr docutils literal notranslate"><span class="pre">GymAgentConfig.include_target_direction_validity</span></code></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="navground_learning.behaviors.PolicyBehavior.include_target_distance">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">include_target_distance</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#navground_learning.behaviors.PolicyBehavior.include_target_distance" title="Link to this definition">#</a></dt>
+<dd><p>See <code class="xref py py-attr docutils literal notranslate"><span class="pre">GymAgentConfig.include_target_distance</span></code></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="navground_learning.behaviors.PolicyBehavior.include_target_distance_validity">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">include_target_distance_validity</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#navground_learning.behaviors.PolicyBehavior.include_target_distance_validity" title="Link to this definition">#</a></dt>
+<dd><p>See <code class="xref py py-attr docutils literal notranslate"><span class="pre">GymAgentConfig.include_target_distance_validity</span></code></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="navground_learning.behaviors.PolicyBehavior.include_target_speed">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">include_target_speed</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#navground_learning.behaviors.PolicyBehavior.include_target_speed" title="Link to this definition">#</a></dt>
+<dd><p>See <code class="xref py py-attr docutils literal notranslate"><span class="pre">GymAgentConfig.include_target_speed</span></code></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="navground_learning.behaviors.PolicyBehavior.include_velocity">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">include_velocity</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#navground_learning.behaviors.PolicyBehavior.include_velocity" title="Link to this definition">#</a></dt>
+<dd><p>See <code class="xref py py-attr docutils literal notranslate"><span class="pre">GymAgentConfig.include_velocity</span></code></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="navground_learning.behaviors.PolicyBehavior.max_acceleration">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">max_acceleration</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#navground_learning.behaviors.PolicyBehavior.max_acceleration" title="Link to this definition">#</a></dt>
+<dd><p>See <code class="xref py py-attr docutils literal notranslate"><span class="pre">GymAgentConfig.max_acceleration</span></code></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="navground_learning.behaviors.PolicyBehavior.max_angular_acceleration">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">max_angular_acceleration</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#navground_learning.behaviors.PolicyBehavior.max_angular_acceleration" title="Link to this definition">#</a></dt>
+<dd><p>See <code class="xref py py-attr docutils literal notranslate"><span class="pre">GymAgentConfig.max_angular_acceleration</span></code></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="navground_learning.behaviors.PolicyBehavior.policy_path">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">policy_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#navground_learning.behaviors.PolicyBehavior.policy_path" title="Link to this definition">#</a></dt>
+<dd><p>The file from which to load the model</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="navground_learning.behaviors.PolicyBehavior.use_acceleration_action">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">use_acceleration_action</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#navground_learning.behaviors.PolicyBehavior.use_acceleration_action" title="Link to this definition">#</a></dt>
+<dd><p>See <code class="xref py py-attr docutils literal notranslate"><span class="pre">GymAgentConfig.use_acceleration_action</span></code></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="navground_learning.behaviors.PolicyBehavior.use_wheels">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">use_wheels</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#navground_learning.behaviors.PolicyBehavior.use_wheels" title="Link to this definition">#</a></dt>
+<dd><p>See <code class="xref py py-attr docutils literal notranslate"><span class="pre">GymAgentConfig.use_wheels</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+<section id="environments">
+<h2>Environments<a class="headerlink" href="#environments" title="Link to this heading">#</a></h2>
+<section id="single-agent-gymnasium">
+<h3>Single-agent (Gymnasium)<a class="headerlink" href="#single-agent-gymnasium" title="Link to this heading">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="navground_learning.env.NavgroundEnv">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">navground_learning.env.</span></span><span class="sig-name descname"><span class="pre">NavgroundEnv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scenario</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/scenarios/scenario.html#navground.sim.Scenario" title="(in navground)"><span class="pre">Scenario</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agent_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/state_estimations/sensor.html#navground.sim.Sensor" title="(in navground)"><span class="pre">Sensor</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ActionConfig</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">ControlActionConfig(dtype='',</span> <span class="pre">max_speed=inf,</span> <span class="pre">max_angular_speed=inf,</span> <span class="pre">dof=None,</span> <span class="pre">max_acceleration=inf,</span> <span class="pre">max_angular_acceleration=inf,</span> <span class="pre">use_acceleration_action=False,</span> <span class="pre">fix_orientation=False,</span> <span class="pre">use_wheels=False,</span> <span class="pre">has_wheels=None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#navground_learning.ObservationConfig" title="navground_learning.core.ObservationConfig"><span class="pre">ObservationConfig</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">ObservationConfig(dtype='',</span> <span class="pre">max_speed=inf,</span> <span class="pre">max_angular_speed=inf,</span> <span class="pre">dof=None,</span> <span class="pre">flat=False,</span> <span class="pre">history=1,</span> <span class="pre">include_target_distance=True,</span> <span class="pre">include_target_distance_validity=False,</span> <span class="pre">max_target_distance=inf,</span> <span class="pre">include_target_direction=True,</span> <span class="pre">include_target_direction_validity=False,</span> <span class="pre">include_velocity=False,</span> <span class="pre">include_angular_speed=False,</span> <span class="pre">include_radius=False,</span> <span class="pre">include_target_speed=False,</span> <span class="pre">include_target_angular_speed=False,</span> <span class="pre">max_radius=inf)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reward</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Reward</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">NullReward()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_duration</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">terminate_outside_bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">render_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">render_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">realtime_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stuck_timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#navground_learning.env.NavgroundEnv" title="Link to this definition">#</a></dt>
+<dd><p>This class describes an environment that uses
+a <a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/scenarios/scenario.html#navground.sim.Scenario" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground.sim.Scenario</span></code></a> to
+generate and then simulate a <a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/world.html#navground.sim.World" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground.sim.World</span></code></a>.</p>
+<p>Actions and observations relates to a single selected
+individual <a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/agent.html#navground.sim.Agent" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground.sim.Agent</span></code></a>.</p>
+<p>The behavior is registered under the id <code class="docutils literal notranslate"><span class="pre">&quot;navground&quot;</span></code>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">gymnasium</span> <span class="k">as</span> <span class="nn">gym</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">navground_learning.env</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">navground</span> <span class="kn">import</span> <span class="n">sim</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scenario</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">load_scenario</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s2">&quot;navground&quot;</span><span class="p">,</span> <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scenario</strong> (<a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/scenarios/scenario.html#navground.sim.Scenario" title="(in navground)"><em>Scenario</em></a><em> | </em><em>str</em><em> | </em><em>dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>] </em><em>| </em><em>None</em>) – The scenario to initialize all simulated worlds.
+If a <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, it will be interpreted as the YAML
+representation of a scenario.
+If a <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>, it will be dumped to YAML and
+then treated as a <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>.</p></li>
+<li><p><strong>agent_index</strong> (<em>int</em>) – The world index of the selected agent,
+must be smaller than the number of agents.</p></li>
+<li><p><strong>sensor</strong> (<a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/state_estimations/sensor.html#navground.sim.Sensor" title="(in navground)"><em>Sensor</em></a><em> | </em><em>str</em><em> | </em><em>dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>] </em><em>| </em><em>None</em>) – A sensor to produce observations for the selected agents.
+If a <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, it will be interpreted as the YAML
+representation of a sensor.
+If a <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>, it will be dumped to YAML and
+then treated as a <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>.
+If None, it will use the agents’ own state estimation, if a sensor.</p></li>
+<li><p><strong>action</strong> (<em>ActionConfig</em>) – The configuration of the action space to use.</p></li>
+<li><p><strong>observation</strong> (<a class="reference internal" href="#navground_learning.ObservationConfig" title="navground_learning.core.ObservationConfig"><em>ObservationConfig</em></a>) – The configuration of the observation space to use.</p></li>
+<li><p><strong>reward</strong> (<em>Reward</em>) – The reward function to use.</p></li>
+<li><p><strong>time_step</strong> (<em>float</em>) – The simulation time step applied at every <code class="xref py py-meth docutils literal notranslate"><span class="pre">step()</span></code>.</p></li>
+<li><p><strong>max_duration</strong> (<em>float</em>) – If positive, it will signal a truncation after this simulated time.</p></li>
+<li><p><strong>terminate_outside_bounds</strong> (<em>bool</em>) – Whether to terminate when an agent exit the bounds</p></li>
+<li><p><strong>bounds</strong> (<em>tuple</em><em>[</em><em>ndarray</em><em>, </em><em>ndarray</em><em>] </em><em>| </em><em>None</em>) – The area to render and a fence for truncating processes when agents exit it.</p></li>
+<li><p><strong>render_mode</strong> (<em>str</em><em> | </em><em>None</em>) – The render mode.
+If <cite>“human”</cite>, it renders a simulation in real time via
+websockets (see <a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/visualization/real_time.html#navground.sim.ui.WebUI" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground.sim.ui.WebUI</span></code></a>).
+If <cite>“rgb_array”</cite>, it uses
+<a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/visualization/image.html#navground.sim.ui.render.image_for_world" title="(in navground)"><code class="xref py py-func docutils literal notranslate"><span class="pre">navground.sim.ui.render.image_for_world()</span></code></a>
+to render the world on demand.</p></li>
+<li><p><strong>render_kwargs</strong> (<em>Mapping</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – Arguments passed to <a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/visualization/image.html#navground.sim.ui.render.image_for_world" title="(in navground)"><code class="xref py py-func docutils literal notranslate"><span class="pre">navground.sim.ui.render.image_for_world()</span></code></a></p></li>
+<li><p><strong>realtime_factor</strong> (<em>float</em>) – a realtime factor for <cite>render_mode=”human”</cite>: larger values
+speed up the simulation.</p></li>
+<li><p><strong>stuck_timeout</strong> (<em>float</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="multi-agent-pettingzoo">
+<h3>Multi-agent (Pettingzoo)<a class="headerlink" href="#multi-agent-pettingzoo" title="Link to this heading">#</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="navground_learning.env.pz.shared_parallel_env">
+<span class="sig-prename descclassname"><span class="pre">navground_learning.env.pz.</span></span><span class="sig-name descname"><span class="pre">shared_parallel_env</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scenario</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/scenarios/scenario.html#navground.sim.Scenario" title="(in navground)"><span class="pre">Scenario</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_number_of_agents</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agent_indices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">slice</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/state_estimations/sensor.html#navground.sim.Sensor" title="(in navground)"><span class="pre">Sensor</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ActionConfig</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">ControlActionConfig(dtype='',</span> <span class="pre">max_speed=inf,</span> <span class="pre">max_angular_speed=inf,</span> <span class="pre">dof=None,</span> <span class="pre">max_acceleration=inf,</span> <span class="pre">max_angular_acceleration=inf,</span> <span class="pre">use_acceleration_action=False,</span> <span class="pre">fix_orientation=False,</span> <span class="pre">use_wheels=False,</span> <span class="pre">has_wheels=None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#navground_learning.ObservationConfig" title="navground_learning.core.ObservationConfig"><span class="pre">ObservationConfig</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">ObservationConfig(dtype='',</span> <span class="pre">max_speed=inf,</span> <span class="pre">max_angular_speed=inf,</span> <span class="pre">dof=None,</span> <span class="pre">flat=False,</span> <span class="pre">history=1,</span> <span class="pre">include_target_distance=True,</span> <span class="pre">include_target_distance_validity=False,</span> <span class="pre">max_target_distance=inf,</span> <span class="pre">include_target_direction=True,</span> <span class="pre">include_target_direction_validity=False,</span> <span class="pre">include_velocity=False,</span> <span class="pre">include_angular_speed=False,</span> <span class="pre">include_radius=False,</span> <span class="pre">include_target_speed=False,</span> <span class="pre">include_target_angular_speed=False,</span> <span class="pre">max_radius=inf)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reward</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Reward</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">NullReward()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_duration</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">terminate_outside_bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">render_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">render_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">realtime_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stuck_timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">MultiAgentNavgroundEnv</span></span></span><a class="headerlink" href="#navground_learning.env.pz.shared_parallel_env" title="Link to this definition">#</a></dt>
+<dd><p>Create a multi-agent PettingZoo environment that uses
+a <a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/scenarios/scenario.html#navground.sim.Scenario" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground.sim.Scenario</span></code></a> to
+generate and then simulate a <a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/world.html#navground.sim.World" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground.sim.World</span></code></a>.
+All controlled agents share the same configuration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scenario</strong> (<a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/scenarios/scenario.html#navground.sim.Scenario" title="(in navground)"><em>Scenario</em></a><em> | </em><em>str</em><em> | </em><em>dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>] </em><em>| </em><em>None</em>) – The scenario to initialize all simulated worlds.
+If a <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, it will be interpreted as the YAML
+representation of a scenario.
+If a <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>, it will be dumped to YAML and
+then treated as a <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>.</p></li>
+<li><p><strong>max_number_of_agents</strong> (<em>int</em><em> | </em><em>None</em>) – The maximal number of agents that we will expose.
+It needs to be specified only for scenarios
+that generate world with a variable number of agents.</p></li>
+<li><p><strong>agent_indices</strong> (<em>list</em><em>[</em><em>int</em><em>] </em><em>| </em><em>slice</em><em> | </em><em>None</em>) – The world indices of the agent to control.
+All other agents are controlled solely by navground.</p></li>
+<li><p><strong>sensor</strong> (<a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/state_estimations/sensor.html#navground.sim.Sensor" title="(in navground)"><em>Sensor</em></a><em> | </em><em>str</em><em> | </em><em>dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>] </em><em>| </em><em>None</em>) – A sensor to produce observations for the selected agents.
+If a <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, it will be interpreted as the YAML
+representation of a sensor.
+If a <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>, it will be dumped to YAML and
+then treated as a <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>.
+If None, it will use the agents’ own state estimation, if a sensor.</p></li>
+<li><p><strong>action</strong> (<em>ActionConfig</em>) – The configuration of the action space to use.</p></li>
+<li><p><strong>observation</strong> (<a class="reference internal" href="#navground_learning.ObservationConfig" title="navground_learning.core.ObservationConfig"><em>ObservationConfig</em></a>) – The configuration of the observation space to use.</p></li>
+<li><p><strong>reward</strong> (<em>Reward</em>) – The reward function to use.</p></li>
+<li><p><strong>time_step</strong> (<em>float</em>) – The simulation time step applied at every <code class="xref py py-meth docutils literal notranslate"><span class="pre">step()</span></code>.</p></li>
+<li><p><strong>max_duration</strong> (<em>float</em>) – If positive, it will signal a truncation after this simulated time.</p></li>
+<li><p><strong>terminate_outside_bounds</strong> (<em>bool</em>) – Whether to terminate when an agent exit the bounds</p></li>
+<li><p><strong>bounds</strong> (<em>tuple</em><em>[</em><em>ndarray</em><em>, </em><em>ndarray</em><em>] </em><em>| </em><em>None</em>) – The area to render and a fence for truncating processes when agents exit it.</p></li>
+<li><p><strong>render_mode</strong> (<em>str</em><em> | </em><em>None</em>) – The render mode.
+If <cite>“human”</cite>, it renders a simulation in real time via
+websockets (see <a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/visualization/real_time.html#navground.sim.ui.WebUI" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground.sim.ui.WebUI</span></code></a>).
+If <cite>“rgb_array”</cite>, it uses
+<a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/visualization/image.html#navground.sim.ui.render.image_for_world" title="(in navground)"><code class="xref py py-func docutils literal notranslate"><span class="pre">navground.sim.ui.render.image_for_world()</span></code></a>
+to render the world on demand.</p></li>
+<li><p><strong>render_kwargs</strong> (<em>Mapping</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – Arguments passed to <a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/visualization/image.html#navground.sim.ui.render.image_for_world" title="(in navground)"><code class="xref py py-func docutils literal notranslate"><span class="pre">navground.sim.ui.render.image_for_world()</span></code></a></p></li>
+<li><p><strong>realtime_factor</strong> (<em>float</em>) – a realtime factor for <cite>render_mode=”human”</cite>: larger values
+speed up the simulation.</p></li>
+<li><p><strong>stuck_timeout</strong> (<em>float</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The multi agent navground environment.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>MultiAgentNavgroundEnv</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="navground_learning.env.pz.parallel_env">
+<span class="sig-prename descclassname"><span class="pre">navground_learning.env.pz.</span></span><span class="sig-name descname"><span class="pre">parallel_env</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scenario</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/scenarios/scenario.html#navground.sim.Scenario" title="(in navground)"><span class="pre">Scenario</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#navground_learning.WorldConfig" title="navground_learning.config.WorldConfig"><span class="pre">WorldConfig</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">WorldConfig(groups=[],</span> <span class="pre">policies=[],</span> <span class="pre">reward=None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_number_of_agents</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_duration</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">terminate_outside_bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">render_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">render_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">realtime_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stuck_timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">MultiAgentNavgroundEnv</span></span></span><a class="headerlink" href="#navground_learning.env.pz.parallel_env" title="Link to this definition">#</a></dt>
+<dd><p>Create a multi-agent PettingZoo environment that uses
+a <a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/scenarios/scenario.html#navground.sim.Scenario" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground.sim.Scenario</span></code></a> to
+generate and then simulate a <a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/world.html#navground.sim.World" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground.sim.World</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scenario</strong> (<a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/scenarios/scenario.html#navground.sim.Scenario" title="(in navground)"><em>Scenario</em></a><em> | </em><em>str</em><em> | </em><em>dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>] </em><em>| </em><em>None</em>) – The scenario to initialize all simulated worlds.
+If a <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, it will be interpreted as the YAML
+representation of a scenario.
+If a <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>, it will be dumped to YAML and
+then treated as a <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>.</p></li>
+<li><p><strong>config</strong> (<a class="reference internal" href="#navground_learning.WorldConfig" title="navground_learning.config.WorldConfig"><em>WorldConfig</em></a>) – The configuration of the agents controlled by the environment.
+All other agents are controlled solely by navground.</p></li>
+<li><p><strong>max_number_of_agents</strong> (<em>int</em><em> | </em><em>None</em>) – The maximal number of agents that we will expose.
+It needs to be specified only for scenarios
+that generate world with a variable number of agents.</p></li>
+<li><p><strong>time_step</strong> (<em>float</em>) – The simulation time step applied at every <code class="xref py py-meth docutils literal notranslate"><span class="pre">step()</span></code>.</p></li>
+<li><p><strong>max_duration</strong> (<em>float</em>) – If positive, it will signal a truncation after this simulated time.</p></li>
+<li><p><strong>terminate_outside_bounds</strong> (<em>bool</em>) – Whether to terminate when an agent exit the bounds</p></li>
+<li><p><strong>bounds</strong> (<em>tuple</em><em>[</em><em>ndarray</em><em>, </em><em>ndarray</em><em>] </em><em>| </em><em>None</em>) – The area to render and a fence for truncating processes when agents exit it.</p></li>
+<li><p><strong>render_mode</strong> (<em>str</em><em> | </em><em>None</em>) – The render mode.
+If <cite>“human”</cite>, it renders a simulation in real time via
+websockets (see <a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/visualization/real_time.html#navground.sim.ui.WebUI" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground.sim.ui.WebUI</span></code></a>).
+If <cite>“rgb_array”</cite>, it uses
+<a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/visualization/image.html#navground.sim.ui.render.image_for_world" title="(in navground)"><code class="xref py py-func docutils literal notranslate"><span class="pre">navground.sim.ui.render.image_for_world()</span></code></a>
+to render the world on demand.</p></li>
+<li><p><strong>render_kwargs</strong> (<em>Mapping</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – Arguments passed to <a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/visualization/image.html#navground.sim.ui.render.image_for_world" title="(in navground)"><code class="xref py py-func docutils literal notranslate"><span class="pre">navground.sim.ui.render.image_for_world()</span></code></a></p></li>
+<li><p><strong>realtime_factor</strong> (<em>float</em>) – a realtime factor for <cite>render_mode=”human”</cite>: larger values
+speed up the simulation.</p></li>
+<li><p><strong>stuck_timeout</strong> (<em>float</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The multi agent navground environment.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>MultiAgentNavgroundEnv</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+<section id="learning">
+<h2>Learning<a class="headerlink" href="#learning" title="Link to this heading">#</a></h2>
+<section id="imitation-learning">
+<h3>Imitation Learning<a class="headerlink" href="#imitation-learning" title="Link to this heading">#</a></h3>
+<section id="behavior-cloning">
+<h4>Behavior Cloning<a class="headerlink" href="#behavior-cloning" title="Link to this heading">#</a></h4>
+</section>
+<section id="dagger">
+<h4>DAgger<a class="headerlink" href="#dagger" title="Link to this heading">#</a></h4>
+</section>
+</section>
+</section>
+<section id="recording-data">
+<h2>Recording data<a class="headerlink" href="#recording-data" title="Link to this heading">#</a></h2>
+<section id="probes">
+<h3>Probes<a class="headerlink" href="#probes" title="Link to this heading">#</a></h3>
+</section>
+<section id="experiments">
+<h3>Experiments<a class="headerlink" href="#experiments" title="Link to this heading">#</a></h3>
+</section>
+<section id="rollouts">
+<h3>Rollouts<a class="headerlink" href="#rollouts" title="Link to this heading">#</a></h3>
+</section>
+</section>
+<section id="models">
+<h2>Models<a class="headerlink" href="#models" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="navground_learning.policies.OrderInvariantCombinedExtractor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">navground_learning.policies.</span></span><span class="sig-name descname"><span class="pre">OrderInvariantCombinedExtractor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">observation_space:</span> <span class="pre">~gymnasium.spaces.dict.Dict,</span> <span class="pre">cnn_output_dim:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">256,</span> <span class="pre">normalized_image:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False,</span> <span class="pre">order_invariant_keys:</span> <span class="pre">~collections.abc.Collection[str]</span> <span class="pre">=</span> <span class="pre">[],</span> <span class="pre">replicated_keys:</span> <span class="pre">~collections.abc.Collection[str]</span> <span class="pre">=</span> <span class="pre">[],</span> <span class="pre">filter_key='',</span> <span class="pre">removed_keys:</span> <span class="pre">~collections.abc.Collection[str]</span> <span class="pre">=</span> <span class="pre">[],</span> <span class="pre">net_arch:</span> <span class="pre">list[int]</span> <span class="pre">=</span> <span class="pre">[8],</span> <span class="pre">activation_fn=&lt;class</span> <span class="pre">'torch.nn.modules.activation.ReLU'&gt;,</span> <span class="pre">reductions:</span> <span class="pre">~collections.abc.Sequence[~typing.Callable[[~torch.Tensor,</span> <span class="pre">int,</span> <span class="pre">bool],</span> <span class="pre">~torch.Tensor]]</span> <span class="pre">=</span> <span class="pre">[&lt;built-in</span> <span class="pre">method</span> <span class="pre">sum</span> <span class="pre">of</span> <span class="pre">type</span> <span class="pre">object&gt;]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#navground_learning.policies.OrderInvariantCombinedExtractor" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseFeaturesExtractor</span></code></p>
+<p>A variation of SB3 <cite>CombinedExtractor</cite>
+that applies a ordering invariant MLP feature extractor to a group of keys
+after optionally masking it.</p>
+<p>Same as the original <cite>CombinedExtractor</cite>:
+Combined features extractor for Dict observation spaces.
+Builds a features extractor for each key of the space. Input from each space
+is fed through a separate submodule (CNN or MLP, depending on input shape),
+the output features are concatenated and fed through additional MLP network (“combined”).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>observation_space</strong> (<a class="reference external" href="https://gymnasium.farama.org/api/spaces/composite/#gymnasium.spaces.Dict" title="(in Gymnasium)"><em>Dict</em></a>)</p></li>
+<li><p><strong>cnn_output_dim</strong> (<em>int</em>) – Number of features to output from each CNN submodule(s). Defaults to
+256 to avoid exploding network sizes.</p></li>
+<li><p><strong>normalized_image</strong> (<em>bool</em>) – Whether to assume that the image is already normalized
+or not (this disables dtype and bounds checks): when True, it only checks that
+the space is a Box and has 3 dimensions.
+Otherwise, it checks that it has expected dtype (uint8) and bounds (values in [0, 255]).</p></li>
+<li><p><strong>order_invariant_keys</strong> (<em>Collection</em><em>[</em><em>str</em><em>]</em>) – the keys to group together and process by an ordering invariant feature extractor</p></li>
+<li><p><strong>replicated_keys</strong> (<em>Collection</em><em>[</em><em>str</em><em>]</em>) – additional keys to add to the ordering invariant groups, replicating the values for each group</p></li>
+<li><p><strong>filter_key</strong> – the key to use for masking to select items with positive values of this key</p></li>
+<li><p><strong>removed_keys</strong> (<em>Collection</em><em>[</em><em>str</em><em>]</em>) – keys removed from the observations before concatenating with ordering invariant features</p></li>
+<li><p><strong>net_arch</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – the ordering invariant MLP layers sizes</p></li>
+<li><p><strong>activation_fn</strong> – the ordering invariant MLP activation function</p></li>
+<li><p><strong>reductions</strong> (<em>Sequence</em><em>[</em><em>Callable</em><em>[</em><em>[</em><em>Tensor</em><em>, </em><em>int</em><em>, </em><em>bool</em><em>]</em><em>, </em><em>Tensor</em><em>]</em><em>]</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="scenarios">
+<h2>Scenarios<a class="headerlink" href="#scenarios" title="Link to this heading">#</a></h2>
+<section id="corridorwithobstacle">
+<h3>CorridorWithObstacle<a class="headerlink" href="#corridorwithobstacle" title="Link to this heading">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="navground_learning.scenarios.CorridorWithObstacle">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">navground_learning.scenarios.</span></span><span class="sig-name descname"><span class="pre">CorridorWithObstacle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_radius</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_radius</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#navground_learning.scenarios.CorridorWithObstacle" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/scenarios/scenario.html#navground.sim.Scenario" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Scenario</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>length</strong> (<em>float</em>)</p></li>
+<li><p><strong>width</strong> (<em>float</em>)</p></li>
+<li><p><strong>min_radius</strong> (<em>float</em>)</p></li>
+<li><p><strong>max_radius</strong> (<em>float</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="forward">
+<h3>Forward<a class="headerlink" href="#forward" title="Link to this heading">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="navground_learning.scenarios.ForwardScenario">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">navground_learning.scenarios.</span></span><span class="sig-name descname"><span class="pre">ForwardScenario</span></span><a class="headerlink" href="#navground_learning.scenarios.ForwardScenario" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/scenarios/scenario.html#navground.sim.Scenario" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Scenario</span></code></a></p>
+</dd></dl>
+
+</section>
+<section id="evaluation">
+<h3>Evaluation<a class="headerlink" href="#evaluation" title="Link to this heading">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="navground_learning.scenarios.EvaluationScenario">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">navground_learning.scenarios.</span></span><span class="sig-name descname"><span class="pre">EvaluationScenario</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scenario</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/scenarios/scenario.html#navground.sim.Scenario" title="(in navground)"><span class="pre">Scenario</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#navground_learning.WorldConfig" title="navground_learning.config.WorldConfig"><span class="pre">WorldConfig</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">WorldConfig(groups=[],</span> <span class="pre">policies=[],</span> <span class="pre">reward=None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">terminate_outside_bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deterministic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#navground_learning.scenarios.EvaluationScenario" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/scenarios/scenario.html#navground.sim.Scenario" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Scenario</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scenario</strong> (<a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/scenarios/scenario.html#navground.sim.Scenario" title="(in navground)"><em>Scenario</em></a>)</p></li>
+<li><p><strong>config</strong> (<a class="reference internal" href="#navground_learning.WorldConfig" title="navground_learning.config.WorldConfig"><em>WorldConfig</em></a>)</p></li>
+<li><p><strong>bounds</strong> (<em>tuple</em><em>[</em><em>ndarray</em><em>, </em><em>ndarray</em><em>] </em><em>| </em><em>None</em>)</p></li>
+<li><p><strong>terminate_outside_bounds</strong> (<em>bool</em>)</p></li>
+<li><p><strong>deterministic</strong> (<em>bool</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="tutorials/CrossingWithDifferentSpeeds.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Crossings with different speeds</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actions">Actions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#end-to-end">End-to-end</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.ControlActionConfig"><code class="docutils literal notranslate"><span class="pre">ControlActionConfig</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h6 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.ControlActionConfig.space"><code class="docutils literal notranslate"><span class="pre">ControlActionConfig.space</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#behavior-modulation">Behavior Modulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.ModulationActionConfig"><code class="docutils literal notranslate"><span class="pre">ModulationActionConfig</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#observations">Observations</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.ObservationConfig"><code class="docutils literal notranslate"><span class="pre">ObservationConfig</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-agent-system">Multi-agent system</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.GroupConfig"><code class="docutils literal notranslate"><span class="pre">GroupConfig</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.WorldConfig"><code class="docutils literal notranslate"><span class="pre">WorldConfig</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reward-functions">Reward functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#null">Null</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.reward.NullReward"><code class="docutils literal notranslate"><span class="pre">NullReward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#social">Social</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.reward.SocialReward"><code class="docutils literal notranslate"><span class="pre">SocialReward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inference">Inference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#behaviors">Behaviors</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.clone"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.clone()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.clone_behavior"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.clone_behavior()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.deterministic"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.deterministic</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.fix_orientation"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.fix_orientation</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.flat"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.flat</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.history"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.history</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.include_radius"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.include_radius</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.include_target_angular_speed"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.include_target_angular_speed</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.include_target_direction"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.include_target_direction</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.include_target_direction_validity"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.include_target_direction_validity</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.include_target_distance"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.include_target_distance</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.include_target_distance_validity"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.include_target_distance_validity</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.include_target_speed"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.include_target_speed</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.include_velocity"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.include_velocity</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.max_acceleration"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.max_acceleration</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.max_angular_acceleration"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.max_angular_acceleration</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.policy_path"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.policy_path</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.use_acceleration_action"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.use_acceleration_action</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.behaviors.PolicyBehavior.use_wheels"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior.use_wheels</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environments">Environments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-agent-gymnasium">Single-agent (Gymnasium)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.env.NavgroundEnv"><code class="docutils literal notranslate"><span class="pre">NavgroundEnv</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-agent-pettingzoo">Multi-agent (Pettingzoo)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.env.pz.shared_parallel_env"><code class="docutils literal notranslate"><span class="pre">shared_parallel_env()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.env.pz.parallel_env"><code class="docutils literal notranslate"><span class="pre">parallel_env()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning">Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imitation-learning">Imitation Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#behavior-cloning">Behavior Cloning</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dagger">DAgger</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recording-data">Recording data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probes">Probes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#experiments">Experiments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rollouts">Rollouts</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#models">Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.policies.OrderInvariantCombinedExtractor"><code class="docutils literal notranslate"><span class="pre">OrderInvariantCombinedExtractor</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scenarios">Scenarios</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corridorwithobstacle">CorridorWithObstacle</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.scenarios.CorridorWithObstacle"><code class="docutils literal notranslate"><span class="pre">CorridorWithObstacle</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forward">Forward</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.scenarios.ForwardScenario"><code class="docutils literal notranslate"><span class="pre">ForwardScenario</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground_learning.scenarios.EvaluationScenario"><code class="docutils literal notranslate"><span class="pre">EvaluationScenario</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jerome Guzzi et al. (IDSIA, USI-SUPSI)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Jerome Guzzi et al. (IDSIA, USI-SUPSI).
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
