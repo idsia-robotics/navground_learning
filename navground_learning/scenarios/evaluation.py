@@ -2,11 +2,14 @@ from typing import Callable, cast
 
 import numpy as np
 from navground import sim
-from navground.sim.ui.to_svg import bounds_for_world
 
 from ..behaviors.policy import PolicyBehavior
 from ..config import Indices, WorldConfig, get_elements_at
 from ..core import ControlActionConfig
+
+
+def to_bounds(bb: sim.BoundingBox) -> tuple[np.ndarray, np.ndarray]:
+    return bb.p1, bb.p2
 
 
 def is_outside(p: np.ndarray, bounds: tuple[np.ndarray, np.ndarray]) -> bool:
@@ -20,7 +23,7 @@ def is_any_agents_outside(
     def f(world: sim.World) -> bool:
         nonlocal bounds
         if bounds is None:
-            bounds = bounds_for_world(world)
+            bounds = to_bounds(world.bounding_box)
         return any(
             is_outside(agent.position, bounds)
             for agent in get_elements_at(agent_indices, world.agents))
@@ -56,11 +59,12 @@ class EvaluationScenario(sim.Scenario):
             ng_agent = agent.navground
             if ng_agent is None:
                 continue
-            if agent.policy is not None and agent.gym is not None:
+            if agent.policy is not None and agent.gym is not None and ng_agent.behavior:
                 ng_agent.behavior = PolicyBehavior.clone_behavior(
                     behavior=ng_agent.behavior,
                     policy=agent.policy,
-                    action_config=cast(ControlActionConfig, agent.gym.action_config),
+                    action_config=cast(ControlActionConfig,
+                                       agent.gym.action_config),
                     observation_config=agent.gym.observation_config,
                     deterministic=self._deterministic)
                 if agent.sensor is not None:
