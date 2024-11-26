@@ -37,7 +37,9 @@ autodoc_type_aliases = {}
 
 intersphinx_mapping = {
     'gymnasium': ('https://gymnasium.farama.org', None),
-    'navground': ('https://idsia-robotics.github.io/navground/_build/html', None),
+    'navground': ('https://idsia-robotics.github.io/navground', None),
+    'pettingzoo': ('https://pettingzoo.farama.org/index.html', None),
+
 }
 
 

@@ -18,7 +18,9 @@ class SelectionBehavior(core.Behavior, name="Selection"):
         data = yaml.safe_load(value)
         behaviors = data.get('behaviors', [])
         for behavior in behaviors:
-            self.behaviors.append(core.load_behavior(yaml.safe_dump(behavior)))
+            b = core.load_behavior(yaml.safe_dump(behavior))
+            if b:
+                self.behaviors.append(b)
 
     def encode(self) -> str:
         behaviors = [
@@ -37,7 +39,7 @@ class SelectionBehavior(core.Behavior, name="Selection"):
     def index(self, value: int) -> None:
         self._index = max(0, value)
 
-    def compute_cmd_internal(self, time_step: float, frame: core.Frame):
+    def compute_cmd_internal(self, time_step: float):
         if self.index < len(self.behaviors):
             behavior = self.behaviors[self.index]
             behavior.set_state_from(self)
@@ -46,8 +48,8 @@ class SelectionBehavior(core.Behavior, name="Selection"):
                 state.neighbors = self._state.neighbors
                 state.static_obstacles = self._state.static_obstacles
                 state.line_obstacles = self._state.line_obstacles
-            return behavior.compute_cmd_internal(time_step, frame)
-        return super().compute_cmd_internal(time_step, frame)
+            return behavior.compute_cmd_internal(time_step)
+        return super().compute_cmd_internal(time_step)
 
     def get_environment_state(self):
         return self._state

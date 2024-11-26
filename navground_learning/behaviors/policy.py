@@ -293,10 +293,9 @@ class PolicyBehavior(core.Behavior, name="Policy"):
     def get_environment_state(self) -> core.SensingState:
         return self._state
 
-    def compute_cmd_internal(self, time_step: float,
-                             frame: core.Frame) -> core.Twist2:
+    def compute_cmd_internal(self, time_step: float) -> core.Twist2:
         if self._policy is None:
-            return core.Twist2((0, 0), 0, frame=frame)
+            return core.Twist2((0, 0), 0, frame=core.Frame.relative)
         if not self._gym_agent:
             self._gym_agent = GymAgent(observation=self._observation_config,
                                        action=self._action_config,
@@ -304,7 +303,7 @@ class PolicyBehavior(core.Behavior, name="Policy"):
         obs = self._gym_agent.update_observations()
         act, _ = self._policy.predict(obs, deterministic=self.deterministic)
         cmd = self._gym_agent.get_cmd_from_action(act, time_step)
-        return self.feasible_twist(cmd, frame)
+        return self.feasible_twist(cmd)
 
     @classmethod
     def clone_behavior(cls,

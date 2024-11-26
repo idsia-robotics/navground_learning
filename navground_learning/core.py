@@ -105,7 +105,7 @@ class ConfigWithKinematic(Config):
         if not math.isfinite(self.max_angular_speed):
             self.max_angular_speed = kinematics.max_angular_speed
         if self.dof is None:
-            self.dof = kinematics.dof
+            self.dof = kinematics.dof()
 
 
 @dc.dataclass
@@ -239,7 +239,7 @@ class ObservationConfig(ConfigWithKinematic):
                 0, self.max_angular_speed, (1, ), dtype=np.float64)
         return gym.spaces.Dict(ds)  # type: ignore
 
-    def get_item_space(self, sensing_space: gym.spaces.Dict) -> gym.Space:
+    def get_item_space(self, sensing_space: gym.spaces.Dict) -> gym.spaces.Dict:
         return gym.spaces.Dict(**sensing_space, **self.state_space)
 
     def get_space(self, item_space: gym.Space) -> gym.Space:
@@ -539,7 +539,7 @@ class ControlActionConfig(ConfigWithKinematic, ActionConfig):
     def configure(self, behavior: core.Behavior) -> None:
         super().configure(behavior)
         if self.has_wheels is None:
-            self.has_wheels = behavior.kinematics.is_wheeled
+            self.has_wheels = behavior.kinematics.is_wheeled()
 
     @property
     def should_fix_orientation(self) -> bool:
@@ -701,7 +701,7 @@ def get_state(behavior: core.Behavior | None,
 class GymAgent:
 
     sensing_space: gym.spaces.Dict
-    observation_item_space: gym.spaces.Space
+    observation_item_space: gym.spaces.Dict
     observation_space: gym.spaces.Space
     action_space: gym.spaces.Space
 

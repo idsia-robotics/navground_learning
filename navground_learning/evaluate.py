@@ -41,14 +41,18 @@ def make_experiment(scenario: sim.Scenario,
     return experiment
 
 
-def make_experiment_with_env(env: NavgroundBaseEnv,
+# TODO(Jerome): check whether we are accepting a wrapped and/or unwrapped env.
+def make_experiment_with_env(env: NavgroundBaseEnv | Any,
                              policies: list[tuple[Indices, Any]] = [],
                              policy: Any = None,
                              reward: Reward | None = None,
                              use_first_reward: bool = True,
                              steps: int = 1000,
-                             seed: int = 0) -> sim.Experiment:
-    env = env.unwrapped
+                             seed: int = 0) -> sim.Experiment | None:
+    if not isinstance(env, NavgroundBaseEnv):
+        env = env.unwrapped
+    if not isinstance(env, NavgroundBaseEnv):
+        return None
     if not env._scenario:
         raise ValueError("No scenario")
     if reward is None and use_first_reward:
@@ -94,12 +98,15 @@ def evaluate_expert(scenario: sim.Scenario,
 # Mimic SB3 `evaluate_policy`
 # https://stable-baselines3.readthedocs.io/en/master/common/evaluation.html#module-stable_baselines3.common.evaluation
 def evaluate_expert_with_env(
-        env: NavgroundBaseEnv,
+        env: NavgroundBaseEnv | Any,
         n_eval_episodes: int = 10,
         deterministic: bool = True,
         return_episode_rewards: bool = False,
         **kwargs: Any) -> tuple[list[float], list[int]] | tuple[float, float]:
-    env = env.unwrapped
+    if not isinstance(env, NavgroundBaseEnv):
+        env = env.unwrapped
+    if not isinstance(env, NavgroundBaseEnv):
+        raise TypeError(f"{env} is not a NavgroundBaseEnv")
     if not env._scenario:
         raise ValueError("No scenario")
     config = WorldConfig(groups=[

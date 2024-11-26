@@ -17,7 +17,7 @@ class RewardProbe(sim.RecordProbe):
         for index, agent in self._config.init_agents(run.world).items():
             if agent.reward is not None:
                 self._reward[index] = agent.reward
-        super()._prepare(run)
+        super().prepare(run)
 
     def update(self, run: sim.ExperimentalRun) -> None:
         for i, reward in self._reward.items():
@@ -26,5 +26,5 @@ class RewardProbe(sim.RecordProbe):
                            time_step=run.time_step)
             self.data.push(value)
 
-    def get_shape(self, world: sim.World) -> tuple[int, ...]:
-        return (len(self._reward), )
+    def get_shape(self, world: sim.World) -> list[int]:
+        return [len(self._reward)]

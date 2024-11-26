@@ -39,10 +39,12 @@ class CorridorWithObstacle(sim.Scenario,
         assert len(world.agents) == 1
         rng = world.random_generator
         agent = world.agents[0]
-        r = agent.radius + agent.behavior.safety_margin
+        r = agent.radius
+        if agent.behavior:
+            r += agent.behavior.safety_margin
+            agent.twist = core.Twist2((agent.behavior.optimal_speed, 0), 0)
         agent.pose = core.Pose2((0, rng.uniform(r, self._width - r)), 0)
         agent.controller.follow_direction((1, 0))
-        agent.twist = core.Twist2((agent.behavior.optimal_speed, 0), 0)
         agent.last_cmd = agent.twist
 
         def t(world):

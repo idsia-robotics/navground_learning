@@ -16,7 +16,7 @@ from stable_baselines3.common.callbacks import BaseCallback
 from stable_baselines3.common.policies import ActorCriticPolicy
 
 from ..behaviors.policy import PolicyBehavior
-from ..config import get_sensor_as_dict
+# from ..config import get_sensor_as_dict
 from ..core import Agent, ControlActionConfig, Expert
 from .utils import make_venv
 
@@ -78,12 +78,13 @@ class BaseTrainer:
             features_extractor_kwargs=features_extractor_kwargs,
             net_arch=net_arch)
         self.init_trainer()
-        self.behavior = PolicyBehavior.clone_behavior(
-            behavior=self.agent.navground.behavior,
-            policy=self.policy,
-            action_config=cast(ControlActionConfig,
-                               self.agent.gym.action_config),
-            observation_config=self.agent.gym.observation_config)
+        if self.agent.navground.behavior:
+            self.behavior = PolicyBehavior.clone_behavior(
+                behavior=self.agent.navground.behavior,
+                policy=self.policy,
+                action_config=cast(ControlActionConfig,
+                                   self.agent.gym.action_config),
+                observation_config=self.agent.gym.observation_config)
 
     def make_behavior(self,
                       behavior: core.Behavior | None = None) -> PolicyBehavior:
@@ -152,9 +153,11 @@ class BaseTrainer:
                 policy_path = data['behavior'].pop('policy_path')
             else:
                 policy_path = 'policy.th'
-            self._behavior = core.load_behavior(yaml.dump(data['behavior']))
-            self._behavior.policy_path = str(path / policy_path)
-            self._policy = self._behavior._policy
+            behavior = core.load_behavior(yaml.dump(data['behavior']))
+            if behavior and isinstance(behavior, PolicyBehavior):
+                behavior.policy_path = str(path / policy_path)
+                self._policy = behavior._policy
+                self.behavior = behavior
         else:
             self._policy = torch.load(path / 'policy.th')
         sensor: sim.Sensor | None = None

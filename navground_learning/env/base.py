@@ -223,8 +223,8 @@ class NavgroundBaseEnv:
                     if agent.navground and agent.gym:
                         cmd = agent.gym.get_cmd_from_action(
                             action, self.time_step)
-                        agent.navground.last_cmd = agent.navground.behavior.feasible_twist(
-                            cmd, core.Frame.absolute)
+                        if agent.navground.behavior:
+                            agent.navground.last_cmd = agent.navground.behavior.feasible_twist(cmd)
         except Exception as e:
             logging.warning(e)
             pass

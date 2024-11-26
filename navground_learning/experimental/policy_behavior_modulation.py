@@ -65,9 +65,9 @@ class PolicyModulation(core.BehaviorModulation):
 
 
 def add_modulation(config: WorldConfig,
-                   policy: Any) -> Callable[[sim.World], None]:
+                   policy: Any) -> Callable[[sim.World, int | None], None]:
 
-    def f(world: sim.World) -> None:
+    def f(world: sim.World, seed: int | None = None) -> None:
         for group in config.groups:
             for agent in get_elements_at(group.indices, world.agents):
                 obs = update_state(group.get_sensor(), world, agent)
@@ -101,7 +101,7 @@ class ModProbe(sim.RecordProbe):
                 ])
         if not len(set(self.sizes.values())) < 2:
             raise ValueError(f"Unnormal param sizes {self.sizes}")
-        super()._prepare(run)
+        super().prepare(run)
 
     def update(self, run: sim.ExperimentalRun) -> None:
 
@@ -111,13 +111,13 @@ class ModProbe(sim.RecordProbe):
                 for k, v in params.items():
                     self.data.push(v)
 
-    def get_shape(self, world: sim.World) -> tuple[int, ...]:
+    def get_shape(self, world: sim.World) -> list[int]:
         sizes = list(self.sizes.values())
         if sizes:
             size = sizes[0]
         else:
             size = 0
-        return (len(self.sizes), size)
+        return [len(self.sizes), size]
 
 
 def make_experiment_with_env(

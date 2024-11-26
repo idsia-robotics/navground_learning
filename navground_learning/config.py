@@ -158,7 +158,7 @@ class WorldConfig:
             for i in indices:
                 if sensor:
                     state = core.SensingState()
-                    sensor.prepare(state)
+                    sensor.prepare_state(state)
                 else:
                     state = None
                 if i >= 0 and i < len(world.agents):
