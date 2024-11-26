@@ -20,11 +20,11 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx_rtd_theme',
     'nbsphinx',
-    'sphinx.ext.intersphinx',
+    'sphinx.ext.intersphinx'
 ]
 
 templates_path = ['_templates']
-exclude_patterns = ['Thumbs.db', '.DS_Store']
+exclude_patterns = ['Thumbs.db', '.DS_Store', '**.ipynb_checkpoints']
 
 # autodoc_typehints_format = 'short'
 # autodoc_member_order = 'groupwise'
@@ -41,7 +41,6 @@ intersphinx_mapping = {
     'pettingzoo': ('https://pettingzoo.farama.org/index.html', None),
 
 }
-
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output

@@ -1,0 +1,25 @@
+name: TestPublish
+on:
+  workflow_dispatch:
+jobs:
+  publish_to_test_pypi:
+    runs-on: ubuntu-latest
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/navground
+    permissions:
+      id-token: write  # IMPORTANT: mandatory for trusted publishing
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.13
+          cache: 'pip'
+      - name: install deps
+        run: pip install -U pip build setuptools_git_versioning
+      - name: build
+        run: python -m build
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
+          skip-existing: true
