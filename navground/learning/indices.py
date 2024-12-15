@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Sequence
+from collections.abc import Sequence, Mapping
 from enum import IntEnum
 from operator import itemgetter
 from typing import Any, Literal, TypeAlias, TypeVar, cast
@@ -161,7 +161,7 @@ class Indices:
         return rs
 
     @classmethod
-    def from_dict(cls, rs: dict[str, Any]) -> Indices:
+    def from_dict(cls, rs: Mapping[str, Any]) -> Indices:
         """
         Read the indices from the representation :py:attr:`asdict`.
 

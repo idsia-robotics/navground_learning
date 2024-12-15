@@ -6,6 +6,7 @@ import numbers
 from collections import deque
 from collections.abc import Collection, Mapping
 from typing import Any, Protocol
+import warnings
 
 import gymnasium as gym
 import numpy as np
@@ -18,6 +19,9 @@ from ..types import Array, Reward
 class ActionProtocol(Protocol):
 
     def configure(self, behavior: core.Behavior) -> None:
+        ...
+
+    def is_configured(self, warn: bool = False) -> bool:
         ...
 
     @property
@@ -35,8 +39,11 @@ class ActionProtocol(Protocol):
 
 class ObservationProtocol(Protocol):
 
-    def configure(self, behavior: core.Behavior,
+    def configure(self, behavior: core.Behavior | None,
                   sensing_space: gym.spaces.Dict) -> None:
+        ...
+
+    def is_configured(self, warn: bool = False) -> bool:
         ...
 
     def get_observation(
@@ -120,8 +127,12 @@ class GymAgent:
         self.action_config = copy.copy(action)
         if behavior:
             self.action_config.configure(behavior)
-            self.observation_config.configure(behavior, sensing_space)
+        self.observation_config.configure(behavior, sensing_space)
         self.init(behavior, state)
+
+    def is_configured(self, warn: bool = False) -> bool:
+        return (self.action_config.is_configured(warn)
+                and self.observation_config.is_configured(warn))
 
     @property
     def action_space(self) -> gym.Space[Any]:
@@ -197,6 +208,13 @@ class Agent:
     def update_state(self, world: sim.World) -> None:
         if self.sensor and self.state and self.navground:
             self.sensor.update(self.navground, world, self.state)
+
+    def is_configured(self, warn: bool = False) -> bool:
+        if self.gym:
+            return self.gym.is_configured(warn)
+        if warn:
+            warnings.warn("No Gymnasium configuration", stacklevel=1)
+        return False
 
 
 def create_agents_in_group(

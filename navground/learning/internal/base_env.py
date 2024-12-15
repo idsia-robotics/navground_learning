@@ -220,7 +220,7 @@ class NavgroundBaseEnv:
         return rs
 
     @classmethod
-    def from_dict(cls, value: dict[str, Any]) -> Self:
+    def from_dict(cls, value: Mapping[str, Any]) -> Self:
         """
         Load the class from the JSON representation
 

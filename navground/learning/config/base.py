@@ -74,7 +74,7 @@ class DataclassConfig:
         return dc.asdict(self)
 
     @classmethod
-    def make_from_dict(cls, value: dict[str, Any]) -> Any:
+    def make_from_dict(cls, value: Mapping[str, Any]) -> Any:
         return cls(**value)
 
 
@@ -100,7 +100,7 @@ class ObservationConfig(abc.ABC, Registrable):
         ...
 
     @abc.abstractmethod
-    def configure(self, behavior: core.Behavior,
+    def configure(self, behavior: core.Behavior | None,
                   sensing_space: gym.spaces.Dict) -> None:
         """
         Complete the configuration for a target behavior is known.
@@ -110,9 +110,8 @@ class ObservationConfig(abc.ABC, Registrable):
         """
         ...
 
-    @property
     @abc.abstractmethod
-    def is_configured(self) -> bool:
+    def is_configured(self, warn: bool = False) -> bool:
         """
         Whether is the configuration is complete.
 
@@ -200,9 +199,8 @@ class ActionConfig(abc.ABC, Registrable):
         """
         ...
 
-    @property
     @abc.abstractmethod
-    def is_configured(self) -> bool:
+    def is_configured(self, warn: bool = False) -> bool:
         """
         Whether is the configuration is complete.
 

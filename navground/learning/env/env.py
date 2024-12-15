@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from collections.abc import Mapping
 from typing import Any, TypeAlias
+import warnings
 
 import gymnasium as gym
 from gymnasium.envs.registration import register
@@ -130,20 +131,33 @@ class NavgroundEnv(NavgroundBaseEnv, BaseEnv):
             stuck_timeout=stuck_timeout)
         if scenario is not None:
             agent = self._possible_agents[agent_index]
-            self.observation_space = self._observation_space[agent_index]
-            self.action_space = self._action_space[agent_index]
-            if agent.gym:
-                self.action_config = agent.gym.action_config
-                self.observation_config = agent.gym.observation_config
+            with warnings.catch_warnings(record=True) as ws:
+                warnings.simplefilter("always")
+                configured = agent.is_configured(warn=True)
+            if configured:
+                self.observation_space = self._observation_space[agent_index]
+                self.action_space = self._action_space[agent_index]
+            else:
+                msgs = ', '.join([str(w.message) for w in ws])
+                warnings.warn(
+                    f"Configuration of agent at {agent_index} is not complete. "
+                    "Check that the scenario spawns the agent "
+                    "and that the action and observation configs have "
+                    f"the required information: {msgs}",
+                    stacklevel=0)
+                self.observation_space = gym.spaces.Box(0, 1)
+                self.action_space = gym.spaces.Box(0, 1)
             self.reward = agent.reward
         else:
             self.observation_space = gym.spaces.Box(0, 1)
             self.action_space = gym.spaces.Box(0, 1)
+            self.action_config = None
+            self.observation_config = None
             self.reward = None
 
     def _init_spec(
-        self, scenario: sim.Scenario | str | dict[str, Any] | None
-    ) -> None:
+            self,
+            scenario: sim.Scenario | str | dict[str, Any] | None) -> None:
         super()._init_spec(scenario)
         self._spec.pop('groups')
         group = next(iter(self.groups_config))

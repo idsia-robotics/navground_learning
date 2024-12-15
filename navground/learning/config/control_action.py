@@ -14,7 +14,10 @@ from .base import ActionConfig, ConfigWithKinematic, DataclassConfig
 
 
 @dc.dataclass(repr=False)
-class ControlActionConfig(DataclassConfig, ConfigWithKinematic, ActionConfig, name="Control"):
+class ControlActionConfig(DataclassConfig,
+                          ConfigWithKinematic,
+                          ActionConfig,
+                          name="Control"):
     """
     Configuration of the conversion between control actions
     and control commands. Actions are either command accelerations
@@ -67,30 +70,60 @@ class ControlActionConfig(DataclassConfig, ConfigWithKinematic, ActionConfig, na
             return bool(self.has_wheels)
         return False
 
-    @property
-    def is_configured(self) -> bool:
+    def is_configured(self, warn: bool = False) -> bool:
         if self.use_wheels and self.has_wheels is None:
+            if warn:
+                warnings.warn(
+                    "Configured to use wheels but does not know whether the agent has wheels",
+                    stacklevel=1)
+
             return False
         if self.fix_orientation and self.dof is None:
+            if warn:
+                warnings.warn(
+                    "Configured to keep orientation fixed but does not know the number of dof",
+                    stacklevel=1)
+
             return False
         if self.use_acceleration_action:
             if not math.isfinite(self.max_acceleration) or self.dof is None:
+                if warn:
+                    warnings.warn(
+                        "Configured to output accelerations but does not know max acceleration",
+                        stacklevel=1)
+
                 return False
             if not self.should_fix_orientation and not self.should_use_wheels and not math.isfinite(
                     self.max_angular_acceleration):
+                if warn:
+                    warnings.warn(
+                        "Configured to output accelerations but "
+                        "does not know max angular acceleration",
+                        stacklevel=1)
                 return False
         else:
             if not math.isfinite(self.max_speed):
+                if warn:
+                    warnings.warn(
+                        "Configured to output velocities but does not know max speed",
+                        stacklevel=1)
                 return False
             if not self.should_fix_orientation and not self.should_use_wheels and not math.isfinite(
                     self.max_angular_speed):
+                if warn:
+                    warnings.warn(
+                        "Configured to output velocities but does not know max angular speed",
+                        stacklevel=1)
                 return False
         return True
 
     def configure(self, behavior: core.Behavior) -> None:
         super().configure_kinematics(behavior)
         if self.has_wheels is None:
-            self.has_wheels = behavior.kinematics.is_wheeled()
+            if behavior.kinematics:
+                self.has_wheels = behavior.kinematics.is_wheeled()
+            else:
+                self.has_wheels = False
 
     @property
     def should_fix_orientation(self) -> bool:

@@ -1,4 +1,5 @@
 from __future__ import annotations
+from collections.abc import Mapping
 
 from typing import Any
 try:
@@ -22,17 +23,18 @@ class Registrable:
         return {}
 
     @classmethod
-    def make_from_dict(cls, value: dict[str, Any]) -> Self:
+    def make_from_dict(cls, value: Mapping[str, Any]) -> Self:
         return cls()
 
     @classmethod
-    def from_dict(cls, value: dict[str, Any]) -> Self:
+    def from_dict(cls, value: Mapping[str, Any]) -> Self:
         if 'type' not in value:
             raise ValueError(f"{cls.__name__}: type not provided")
-        t = value.pop('type')
+        t = value.get('type')
         for subcls in cls.__subclasses__():
             if subcls._type == t:
-                return subcls.make_from_dict(value)
+                vs = {k: v for k, v in value.items() if k != 'type'}
+                return subcls.make_from_dict(vs)
         raise ValueError(f"{cls.__name__}: type {value['type']} not registered")
 
     def __init_subclass__(cls, name: str = '') -> None:

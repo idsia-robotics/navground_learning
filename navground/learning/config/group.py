@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import dataclasses as dc
-from collections.abc import Collection
+from collections.abc import Collection, Mapping
 from typing import Any, cast
 
 import yaml
@@ -125,7 +125,7 @@ class GroupConfig:
         return rs
 
     @classmethod
-    def from_dict(cls, value: dict[str, Any]) -> GroupConfig:
+    def from_dict(cls, value: Mapping[str, Any]) -> GroupConfig:
         loadables: dict[str, type] = {
             'observation': ObservationConfig,
             'action': ActionConfig,

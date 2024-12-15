@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import dataclasses as dc
+import warnings
 from types import TracebackType
 from typing import Any, cast
 
@@ -81,8 +82,10 @@ class ModulationActionConfig(DataclassConfig, ActionConfig, name='Modulation'):
     def __post_init__(self) -> None:
         self.param_space = param_space(self.params, normalized=True)
 
-    @property
-    def is_configured(self) -> bool:
+    def is_configured(self, warn: bool = False) -> bool:
+        if not self.params:
+            warnings.warn("No parameters", stacklevel=1)
+            return False
         return True
 
     def normalize(self, key: str, value: Any) -> Any:
@@ -107,7 +110,10 @@ class ModulationActionConfig(DataclassConfig, ActionConfig, name='Modulation'):
         The action space is a flattened :py:class:`gymnasium.spaces.Dict`
         with one entry per controlled parameter.
         """
-        return gym.spaces.flatten_space(self.param_space)
+        if self.param_space:
+            return gym.spaces.flatten_space(self.param_space)
+        else:
+            return self.param_space
 
     def get_params_from_action(self, action: Array) -> dict[str, Any]:
         values: dict[str,

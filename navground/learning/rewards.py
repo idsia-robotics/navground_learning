@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import dataclasses as dc
+from collections.abc import Mapping
 from typing import Any, cast
 
 try:
@@ -13,6 +14,7 @@ except ImportError:
 
 import numpy as np
 from navground import core, sim
+
 from .types import Reward
 
 
@@ -138,5 +140,5 @@ class SocialReward(Reward, name="Social"):
         return dc.asdict(self)
 
     @classmethod
-    def make_from_dict(cls, value: dict[str, Any]) -> Self:
+    def make_from_dict(cls, value: Mapping[str, Any]) -> Self:
         return cls(**value)

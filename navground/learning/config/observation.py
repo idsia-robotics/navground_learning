@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import dataclasses as dc
 import math
+import warnings
 from collections.abc import Mapping
 from typing import Any, cast
 
@@ -11,7 +12,7 @@ from navground import core
 from navground.core import FloatType
 
 from ..types import Array, Observation
-from .base import ConfigWithKinematic, ObservationConfig, DataclassConfig
+from .base import ConfigWithKinematic, DataclassConfig, ObservationConfig
 
 
 @dc.dataclass(repr=False)
@@ -72,7 +73,7 @@ class DefaultObservationConfig(DataclassConfig,
     max_target_distance: float = np.inf
     """The upper bound of target distance.
        Only relevant if :py:attr:`include_target_distance` is set."""
-    include_target_direction: bool = False
+    include_target_direction: bool = True
     """Whether observations include the target direction."""
     include_target_direction_validity: bool = False
     """Whether observations include whether the validity of the target direction."""
@@ -90,29 +91,51 @@ class DefaultObservationConfig(DataclassConfig,
     """The upper bound of own radius.
        Only relevant if :py:attr:`include_radius` is set."""
 
-    @property
-    def is_configured(self) -> bool:
+    def __post_init__(self) -> None:
+        super().__post_init__()
+        self._item_space: gym.spaces.Dict = gym.spaces.Dict()
+
+    def is_configured(self, warn: bool = False) -> bool:
+        if not self._item_space:
+            if warn:
+                warnings.warn("Observation space is empty", stacklevel=1)
+            return False
         if not math.isfinite(self.max_speed):
             if self.include_velocity or self.include_target_speed:
+                if warn:
+                    warnings.warn("Does not know max ego speed", stacklevel=1)
                 return False
         if self.dof is None and self.include_velocity:
+            if warn:
+                warnings.warn("Does not know the number of dof", stacklevel=1)
             return False
         if not math.isfinite(self.max_angular_speed):
             if self.include_angular_speed or self.include_target_angular_speed:
+                if warn:
+                    warnings.warn("Does not know max ego angular speed",
+                                  stacklevel=1)
                 return False
         if not math.isfinite(
                 self.max_target_distance) and self.include_target_distance:
+            if warn:
+                warnings.warn("Does not know max target distance",
+                              stacklevel=1)
             return False
-        return math.isfinite(self.max_radius) or not self.include_radius
+        if not math.isfinite(self.max_radius) and self.include_radius:
+            if warn:
+                warnings.warn("Does not know max ego radius", stacklevel=1)
+            return False
+        return True
 
-    def configure(self, behavior: core.Behavior,
+    def configure(self, behavior: core.Behavior | None,
                   sensing_space: gym.spaces.Dict) -> None:
-        super().configure_kinematics(behavior)
+        if behavior:
+            super().configure_kinematics(behavior)
+            if not math.isfinite(self.max_target_distance):
+                self.max_target_distance = behavior.horizon
+            if not math.isfinite(self.max_radius):
+                self.max_radius = behavior.radius
         self._item_space = self._make_item_space(sensing_space)
-        if not math.isfinite(self.max_target_distance):
-            self.max_target_distance = behavior.horizon
-        if not math.isfinite(self.max_radius):
-            self.max_radius = behavior.radius
 
     def _make_state_space(self) -> gym.spaces.Dict:
         ds: dict[str, gym.Space[Any]] = {}
@@ -257,4 +280,3 @@ class DefaultObservationConfig(DataclassConfig,
     #     elif behavior.target.direction is not None and self.include_target_direction:
     #         rs['ego_target_direction'] = core.to_relative(
     #             behavior.target.direction, behavior.pose)
-

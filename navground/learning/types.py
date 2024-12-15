@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import inspect
 import os
-from collections.abc import Callable
+from collections.abc import Callable, Mapping
 from typing import Any, Protocol, TypeAlias
 
 try:
@@ -42,7 +42,7 @@ class JSONAble(Protocol):
         ...
 
     @classmethod
-    def from_dict(cls, value: dict[str, Any]) -> Self:
+    def from_dict(cls, value: Mapping[str, Any]) -> Self:
         """
         Load the class from the JSON representation
 
