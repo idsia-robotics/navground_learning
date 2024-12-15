@@ -19,6 +19,8 @@ from .types import PathLike
 
 if TYPE_CHECKING:
     from stable_baselines3.common.policies import BasePolicy
+    from stable_baselines3.common.base_class import BaseAlgorithm
+    from .il import BaseILAlgorithm
 
 
 def _get_agent(env: NavgroundBaseEnv,
@@ -54,7 +56,10 @@ def _get_sensor(env: NavgroundBaseEnv,
     return None
 
 
-def save_env(env: BaseEnv | BaseParallelEnv, path: PathLike, ) -> None:
+def save_env(
+    env: BaseEnv | BaseParallelEnv,
+    path: PathLike,
+) -> None:
     """
     Export a NavgroundEnv to YAML
 
@@ -75,10 +80,30 @@ def load_env(path: PathLike) -> MultiAgentNavgroundEnv | NavgroundEnv:
                 NavgroundBaseEnv.from_dict(data))
 
 
-def save_as_behavior(path: PathLike,
-                     policy: BasePolicy | None = None,
-                     env: BaseEnv | BaseParallelEnv | None = None,
-                     index: int | None = None) -> None:
+def export_behavior(
+    model: BaseAlgorithm | BaseILAlgorithm,
+    path: PathLike,
+) -> None:
+    """
+    Export a model using :py:func:`export_policy_as_behavior`
+
+    :param      model:   The model
+    :param      path:    The directory where to save the files
+    """
+    venv = model.env
+    if venv:
+        value = venv.get_attr("asdict", [0])[0]
+        env: NavgroundBaseEnv | None = NavgroundBaseEnv.from_dict(value)
+    else:
+        env = None
+    export_policy_as_behavior(path=path, policy=model.policy, env=env)
+
+
+def export_policy_as_behavior(path: PathLike,
+                              policy: BasePolicy | None = None,
+                              env: BaseEnv | BaseParallelEnv | NavgroundBaseEnv
+                              | None = None,
+                              index: int | None = None) -> None:
     """
     Export a policy (using :py:func:`navground.learning.onnx.export`)
     together with the YAML representation of the behavior and sensor to use it.
@@ -100,15 +125,17 @@ def save_as_behavior(path: PathLike,
         path.mkdir(parents=True)
     if policy:
         export(policy, path / "policy.onnx")
-    if not (env and isinstance(env.unwrapped, NavgroundBaseEnv)):
+    if env and not isinstance(env, NavgroundBaseEnv):
+        env = env.unwrapped
+    if not (env and isinstance(env, NavgroundBaseEnv)):
         return
-    behavior = _get_policy_behavior(env.unwrapped, index=index)
+    behavior = _get_policy_behavior(env, index=index)
     if behavior:
         if policy:
             behavior.set_policy_path('policy.onnx', load_policy=False)
         with open(path / 'behavior.yaml', 'w') as f:
             f.write(behavior.dump())
-    sensor = _get_sensor(env.unwrapped, index=index)
+    sensor = _get_sensor(env, index=index)
     if sensor:
         with open(path / 'sensor.yaml', 'w') as f:
             f.write(sensor.dump())

@@ -294,7 +294,7 @@ Once we have trained a policy (and possibly exported it to onnx using :py:func:`
    
    world.run(time_step=0.1, steps=1000)
 
-In practice, we do not need to perform the configuration manually. Instead, we can load it from a YAML file (exported e.g. using :py:func:`.io.save_as_behavior`), like common in navground:
+In practice, we do not need to perform the configuration manually. Instead, we can load it from a YAML file (exported e.g. using :py:func:`.io.export_policy_as_behavior`), like common in navground:
 
 .. code-block:: YAML
    :caption: scenario.yaml

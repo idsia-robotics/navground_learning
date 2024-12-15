@@ -10,6 +10,8 @@ Saving and Loading
 
 .. autofunction:: load_env
 
-.. autofunction:: save_as_behavior
+.. autofunction:: export_behavior
+
+.. autofunction:: export_policy_as_behavior
 
 .. autofunction:: load_behavior
