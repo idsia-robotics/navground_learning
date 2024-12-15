@@ -110,10 +110,8 @@ The API is slightly simpler
 
    import navground as sim
    
-   world = sim.World()
    scenario = MyScenario(...)
-   scenario.init_world(world)
-   
+   world = scenario.make_world(seed=1)
    for _ in range(1000):
        world.update(time_step=0.1)
 
@@ -129,106 +127,54 @@ Navground simulations may features many diverse agents types, using different ki
 Navground Gymnasium Environment
 -------------------------------
 
-:py:class:`navground_learning.env.NavgroundEnv` wraps a :py:class:`navground.sim.Scenario` in an :py:class:`gymnasium.Env` that conforms to the standard API expected by gymnasium, with actions and observations linked to a *single* navground agent. In particular (with some simplifications):
+.. currentmodule:: navground.learning
+
+:py:class:`.env.NavgroundEnv` wraps a :py:class:`navground.sim.Scenario` in an :py:class:`gymnasium.Env` that conforms to the standard API expected by gymnasium, with actions and observations linked to a *single* navground agent. In particular (with some simplifications):
 
 .. code-block:: python
 
    NavgroundEnv(scenario: sim.Scenario, 
-                action_config: ActionConfig = ActionConfig(), 
-                observation_config: ObservationConfig = ObservationConfig(), 
+                action_config: ActionConfig, 
+                observation_config: ObservationConfig, 
                 sensor: sim.Sensor | None = None, ...)
   
 instantiates a gymnasium environment whose worlds will be spawned using a navground scenario. If specified, the agent will use a sensor to generate observations, instead of its predefined state estimation. The action and observation spaces of the agent can be customized, for instance whether to include the distance to the target, or to control the agent orientation.
   
 .. code-block:: python
  
-   NavgroundEnv.reset(seed: int | None = None, options : Dict | None = None)
+   NavgroundEnv.reset(seed: int | None = None, options: dict[str, Any] | None = None)
 
 Initializes a navground world from the navground scenario using a random seed and selects one of navground agents.
 
 .. code-block:: python
   
-   NavgroundEnv.step(action: numpy.ndarray)
+   NavgroundEnv.step(action: numpy.typing.NDArray[Any])
 
 Passes the action to the selected navground agent, updates the navground world and return the selected navground agent's observations and reward.
 
 
 By specifying 
 
-- :py:class:`navground_learning.ObservationConfig`, we control how to
-  convert a :py:class:`navground.core.SensingState` to gymnasium observations
-- :py:class:`navground_learning.ActionConfig`, we control how to
+- :py:class:`.ObservationConfig`, we control how to
+  convert a :py:class:`navground.core.SensingState` to gymnasium observations. As of now, as single concrete class is implemented:
+
+  - :py:class:`.DefaultObservationConfig` that configures which parts of the ego-state and target information to include in the observations.
+
+- :py:class:`.ActionConfig`, we control how to
   convert gymnasium actions to :py:class:`navground.core.Twist2` to be actuated by a  :py:class:`navground.core.Behavior`, with different subclasses:
 
-  - :py:class:`navground_learning.ControlActionConfig` where the policy outputs a control command
-  - :py:class:`navground_learning.ModulationActionConfig`  where the policy outputs parameters of an underlying deterministic navigation behavior.
+  - :py:class:`.ControlActionConfig` where the policy outputs a control command
+  - :py:class:`.ModulationActionConfig` where the policy outputs parameters of an underlying deterministic navigation behavior.
 
 PettingZoo Navground Environment
 --------------------------------
 
-Similarly, :py:class:`navground_learning.env.pz.MultiAgentNavgroundEnv` provides a environment for which actions and observations are linked to a *multiple* navground agents.
+Similarly, :py:class:`.parallel_env.MultiAgentNavgroundEnv` provides a environment for which actions and observations are linked to a *multiple* navground agents.
 
-:py:func:`navground_learning.env.pz.parallel_env` instantiate an environment where different agents may use different configurations (such as action spaces, rewards, ...), while
-:py:func:`navground_learning.env.pz.shared_parallel_env` instantiate an environment where all specified agents share the same configuration.
+:py:func:`.parallel_env.parallel_env` instantiate an environment where different agents may use different configurations (such as action spaces, rewards, ...), while
+:py:func:`.parallel_env.shared_parallel_env` instantiate an environment where all specified agents share the same configuration.
 
-The rest of the functionality is very similar to the Gymnasium Environment (and in fact, most of it is implemented in the same base class :py:class:`navground_learning.env.NavgroundBaseEnv`), but conform to the PettingZoo API instead.
-
-Use ML policies in navground 
-============================
-
-Once we have trained a policy in the environments,
-the class :py:class:`navground_learning.behaviors.PolicyBehavior`
-integrates it in navground. For instance, we can exchange the original behavior of an agent to use a policy instead:
-
-.. code-block:: python
-
-   import navground as sim
-   import gymnasium as gym
-   from navground_learning.behaviors import PolicyBehavior
-
-   scenario = MyScenario(...)
-   my_sensor = MySensor(....)
-   action_config = ActionConfig(...)
-   observation_config = ObservationConfig(...)
-   env = gym.make("navground", scenario=scenario, sensor=my_sensor,
-                  action_config=action_config, observation_config=observation_config)
-
-   # train a policy using the scenario and sensor
-   # ...
-   # evaluate the policy
-
-   world = sim.World()
-   scenario.init_world(world)
-   
-   # set the first agent to use the policy and the sensor, 
-   # instead of the original behavior and state estimation
-
-   world.agents[0].behavior = PolicyBehavior.clone_behavior(
-      agent.behavior, policy=my_trained_policy, 
-      action_config=action_config, observation_config=observation_config)
-   world.agents[0].state_estimation = my_sensor
-   
-   for _ in range(1000):
-       world.update(time_step=0.1)
-
-or we can directly configure the scenario (for instance in YAML) so that some agents uses this policy:
-
-.. code-block:: python
-
-   import navground as sim
-   from navground_learning.behaviors import PolicyBehavior
-
-   world = sim.World()
-   scenario = sim.load_scenario(...)
-   scenario.init_world(world)
-
-   for _ in range(1000):
-      world.update(time_step=0.1)
-
-.. note:: 
-
-   By using :py:class:`navground_learning.behaviors.PolicyBehavior`, we don't need to run the gymnasium environment anymore to perform validation simulation but can instead use the many tools available in navground. Nonetheless, we can use gymnasium for validation too, if we prefer.
-   
+The rest of the functionality is very similar to the Gymnasium Environment (and in fact, they share the same base class), but conform to the PettingZoo API instead.
 
 
 Train ML policies in navground 
@@ -237,7 +183,6 @@ Train ML policies in navground
 .. note::
 
    Have a look at the tutorials to see the interaction between gymnasium and navground in action and how to use it to train a navigation policy using IL or RL.
-
 
 Imitation Learning
 ------------------
@@ -253,28 +198,24 @@ To learn to imitate a behavior, we can run
 
 .. code-block:: python
 
-   import navground as sim
    import gymnasium as gym
-   from navground_learning import il
+   import navground.learning.env
+   from navground.learning.il import BC, DAgger
 
-   scenario = MyScenario(...)
-   sensor = MySensor(....)
-   env = gym.make("navground", scenario=scenario, sensor=sensor, max_episode_steps=1000)
+   env = gym.make("navground", scenario=..., sensor=...,
+                  observation_config=..., action_config=..., 
+                  max_episode_steps=100)
 
    # Behavior cloning
-   trainer = il.bc.Trainer(env=env, runs=100)
-   trainer.train(n_epochs=1)
+   bc = BC(env=env, runs=100)
+   bc.learn(n_epochs=1)
+   bc.save("BC")
 
    # DAgger
-   # trainer = il.dagger.Trainer(env=env)
-   # trainer.train(n_epochs=1)
-
-   trainer.save("results")
-   behavior = trainer.make_behavior()
-
-   # use the behavior in navground
-   # ...
-
+   dagger = DAgger(env=env)
+   dagger.learn(total_timesteps=10_000, 
+                rollout_round_min_timesteps=100)
+   dagger.save("DAgger")
 
 Reinforcement Learning
 ----------------------
@@ -284,17 +225,125 @@ DLR-RM.
 
 .. code-block:: python
 
-   import navground as sim
    import gymnasium as gym
+   import navground.learning.env
    from stable_baselines3 import SAC
 
-   scenario = MyScenario(...)
-   sensor = MySensor(....)
-   env = gym.make("navground", scenario=scenario, sensor=sensor, max_episode_steps=1000)
+   env = gym.make("navground", scenario=..., sensor=...,
+                  observation_config=..., action_config=..., 
+                  max_episode_steps=100)
+   sac = SAC("MlpPolicy", env)
+   sac.learn(total_timesteps=10_000)
+   sac.save("SAC")
 
-   model = SAC("MlpPolicy", env, verbose=0)
-   model.learn(total_timesteps=100000, progress_bar=True);
+Parallel Multi-agent Learning
+-----------------------------
 
+Using the multi-agent navground-gymnasium environment, we can train a policy in parallel for all agents in the environment, that is, the agents
+learn to navigate among peers that are learning the *same* policy.
+We instantiate the parallel environment using :py:func:`.parallel_env.shared_parallel_env`, and transform it to a Stable-Baseline compatible (sigle-agent) vectorized environment using :py:func:`.parallel_env.make_vec_from_penv`. While learning, from the view-point of the ``SAC`` algorithm, rollouts will generate by a single agent in ``n`` environments that compose ``venv``, while in reality they will be generate in a single ``penv`` by ``n`` agents.
+
+.. code-block:: python
+
+   import gymnasium as gym
+   from navground.learning.parallel_env import make_vec_from_penv, shared_parallel_env
+   from stable_baselines3 import SAC
+
+   penv = shared_parallel_env(scenario=..., sensor=...,
+                              observation_config=..., action_config=..., 
+                              max_episode_steps=100)
+   venv = make_vec_from_penv(penv)
+   psac = SAC("MlpPolicy", venv)
+   psac_ma.learn(total_timesteps=10_000)
+   psac.save("PSAC")
+
+
+Evaluation
+==========
+
+Once trained, we can evaluate the policies with common tools, such as 
+:py:func:`stable_baselines3.common.evaluation.evaluate_policy` and its extensions in :py:mod:`.evaluation` that supports parallel environments with groups using different policies.
+
+
+Use ML policies in navground 
+----------------------------
+
+Evaluation can also be performed using the tools available in navground,
+which are specifically designed to support large experiments with many runs and agents, distributing the work over multiple processor if desired.
+
+Once we have trained a policy (and possibly exported it to onnx using :py:func:`.onnx.export`), :py:class:`.behaviors.PolicyBehavior` executes it as a navigation behavior in navground. As a basic example, we can load it and assign it to some of the agents in the simulation:
+
+.. code-block:: python
+
+   import navground as sim
+   import gymnasium as gym
+   from navground.learning.behaviors import PolicyBehavior
+
+   # we load the same scenario and sensor used to train the policy
+   scenario = sim.Scenario.load(...)
+   sensor = sim.Sensor.load(...)
+   world = scenario.make_world(seed=1)
+   
+   # and configure the first five agents to use the policy
+   # instead of the original behavior
+   for agent in world.agents[:5]:
+      agent.behavior = PolicyBehavior.clone_behavior(
+         agent.behavior, policy='policy.onnx', 
+         action_config=..., observation_config=...)
+      agent.state_estimation = sensor
+   
+   world.run(time_step=0.1, steps=1000)
+
+In practice, we do not need to perform the configuration manually. Instead, we can load it from a YAML file (exported e.g. using :py:func:`.io.save_as_behavior`), like common in navground:
+
+.. code-block:: YAML
+   :caption: scenario.yaml
+
+   groups:
+     - number: 5
+       behavior:
+         type: PolicyBehavior
+         policy_path: policy.onnx
+         # action and observation config
+         ...
+       state_estimation:
+         # sensor config
+         ...
+       # remaining of the agents config
+       ...
+
+When loaded, the 5 agents in this group will use the policy to navigate
+
+.. code-block:: python
+
+   import navground as sim
+
+   # loads the navground.learning components such as PolicyBehavior
+   sim.load_plugins()
+
+   with open('scenario.yaml') as f:
+      scenario = sim.Scenario.load(f.read())
+
+   world = scenario.make_world(seed=1)
+   world.run(time_step=0.1, steps=1000)
+
+or we could embed it in an experiment to record trajectories and performance metrics:
+
+.. code-block:: YAML
+  :caption: experiment.yaml
+
+   runs: 1000
+   time_step: 0.1
+   steps: 10000
+   record_pose: true
+   record_efficacy: true
+   scenario:
+       groups:
+         - number: 5
+           behavior:
+             type: PolicyBehavior
+             policy_path: policy.onnx
+           ...
 
 Acknowledgement and disclaimer
 ==============================

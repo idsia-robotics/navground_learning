@@ -1,0 +1,14 @@
+type: CrossTorus
+agent_margin: 0.1
+side: 2
+groups:
+  -
+    type: thymio
+    number: 10
+    radius: 0.1
+    control_period: 0.1
+    speed_tolerance: 0.02
+    kinematics:
+      type: 2WDiff
+      wheel_axis: 0.094
+      max_speed: 0.12

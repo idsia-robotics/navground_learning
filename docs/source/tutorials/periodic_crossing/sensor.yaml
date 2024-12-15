@@ -1,0 +1,5 @@
+type: Discs
+number: 5
+range: 1.0
+max_speed: 0.12
+max_radius: 0

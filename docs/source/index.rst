@@ -13,7 +13,7 @@ Welcome to navground_learning's documentation!
    introduction
    installation
    tutorials/index
-   reference
+   reference/index
 
 Indices and tables
 ==================
@@ -21,3 +21,5 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+

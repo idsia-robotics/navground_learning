@@ -1,12 +1,12 @@
-from setuptools import setup, find_packages
+from setuptools import setup, find_namespace_packages
 import glob
 
 package_name = 'navground_learning'
 
 setup(
     name=package_name,
-    version='0.0.0',
-    packages=find_packages(),
+    version='0.1.0',
+    packages=find_namespace_packages(where='.', include=['navground.learning']),
     data_files=[
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),

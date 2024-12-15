@@ -1,0 +1,49 @@
+type: Cross
+agent_margin: 0.1
+side: 4
+target_margin: 0.1
+tolerance: 0.5
+groups:
+  -
+    type: thymio
+    number: 1
+    radius: 0.1
+    control_period: 0.1
+    speed_tolerance: 0.02
+    color: red
+    kinematics:
+      type: 2WDiff
+      wheel_axis: 0.094
+      max_speed: 0.12
+    behavior:
+      type: Policy
+      include_target_direction: true
+      include_target_distance: true
+      policy_path: policy.onnx
+    state_estimation:
+      type: Discs
+      number: 5
+      range: 5.0
+      max_speed: 0.12
+      max_radius: 0.1
+  -
+    type: thymio
+    number: 19
+    radius: 0.1
+    control_period: 0.1
+    speed_tolerance: 0.02
+    color: gray
+    kinematics:
+      type: 2WDiff
+      wheel_axis: 0.094
+      max_speed: 0.12
+    behavior:
+      type: HL
+      optimal_speed: 0.12
+      horizon: 5.0
+      tau: 0.25
+      eta: 0.5
+      safety_margin: 0.1
+    state_estimation:
+      type: Bounded
+      range: 5.0

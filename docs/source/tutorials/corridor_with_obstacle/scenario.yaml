@@ -1,0 +1,28 @@
+type: CorridorWithObstacle
+length: 1.0
+width: 1.0
+min_radius: 0.2
+max_radius: 0.2
+groups:
+  -
+    type: thymio
+    number: 1
+    radius: 0.08
+    control_period: 0.05
+    color: firebrick
+    kinematics:
+      type: 2WDiff
+      wheel_axis: 0.094
+      max_speed: 0.12
+    behavior:
+      type: HL
+      optimal_speed: 0.12
+      horizon: 10
+      tau: 0.25
+      eta: 0.5
+      safety_margin: 0.05
+      barrier_angle: 1.0
+    state_estimation:
+      type: Bounded
+      range: 1.0
+      update_static_obstacles: true

@@ -5,11 +5,9 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "navground_learning"
 dependencies = [
-  "gymnasium==0.29.1",
-  "stable-baselines3==2.3.2",
-  "pettingzoo==1.24.3",
-  "SuperSuit==3.9.3",
-  "navground==0.3.0"
+  "gymnasium>=1.0.0",
+  "navground>=0.3.2",
+  "pettingzoo>=1.24.3",
 ]
 
 requires-python = ">=3.10"
@@ -22,18 +20,40 @@ maintainers = [
 description = "A Python package that interfaces navground with gymnasium to learn navigating using IL and RL."
 readme = "README.md"
 license = {file = "LICENSE"}
-keywords = [""]
+keywords = ["navigation", "navground", "gymnasium", "pettingzoo", 
+            "imitation-learning", "reinforcement-learning"]
 classifiers = [
   "Development Status :: 4 - Beta",
-  "Programming Language :: Python"
+  "Programming Language :: Python ::3",
+  "Intended Audience :: Science/Research",
+  "Intended Audience :: Education",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Typing :: Typed"
 ]
 dynamic = ["version"]
 
 [project.optional-dependencies]
-all = [
-  'navground[all]'
+rl = [
+  "stable-baselines3>=2.4.0",
+  "SuperSuit>=3.9.3",
 ]
-
+il = [
+  "imitation>=1.0.0",
+  "SuperSuit>=3.9.3",
+]
+inference = [
+  'onnxruntime>=1.20.0'
+]
+all = [
+  "navground[all]",
+  "pettingzoo>=1.24.3",
+  "SuperSuit>=3.9.3",
+  "stable-baselines3>=2.4.0",
+  "imitation>=1.0.0",
+  "onnxruntime",
+  "torch>=2.4",
+  "tqdm"
+]
 [project.urls]
 Homepage = "https://github.com/idsia-robotics/navground_learning"
 Documentation = "https://idsia-robotics.github.io/navground_learning"
@@ -45,6 +65,7 @@ Changelog = "https://github.com/idsia-robotics/navground_learning/blob/main/CHAN
 
 [tool.setuptools.packages.find]
 where = ["."]
+include = ["navground.learning"]
 
 [tool.distutils.bdist_wheel]
 universal = true
@@ -59,4 +80,6 @@ policy = "navground_learning.behaviors.policy:PolicyBehavior"
 forward = "navground_learning.scenarios.forward:ForwardScenario"
 corridor_with_obstacle = "navground_learning.scenarios.corridor_with_obstacle:CorridorWithObstacle"
 
-
+[tool.mypy]
+implicit_reexport = true
+ignore_missing_imports = true
