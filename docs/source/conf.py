@@ -92,6 +92,7 @@ reftarget_aliases['py'] = {
     'IndicesLike': 'navground.learning.indices.IndicesLike',
     'Indices': 'navground.learning.indices.Indices',
     'AnyPolicy': 'navground.learning.il.AnyPolicy',
+    'rollout.AnyPolicy': 'navground.learning.il.AnyPolicy',
     'PolicyCallableWithInfo': 'navground.learning.il.PolicyCallable',
     'PolicyCallableWithInfo': 'navground.learning.il.PolicyCallableWithInfo',
     'navground.learning.ObservationConfig': 'navground.learning.config.ObservationConfig',
@@ -140,7 +141,8 @@ _types = ['PathLike', 'AnyPolicyPredictor', 'Array', 'Action', 'Observation',
           "PolicyCallableWithInfo", 'Bounds', 'T',
           'navground.learning.indices.T', 'BaseParallelEnv', 'BaseEnv',
           'Reduction', 'AnyPolicy', 'PolicyCallable',
-          'gymnasium.core.ObsType', 'gymnasium.core.ActType'
+          'gymnasium.core.ObsType', 'gymnasium.core.ActType',
+          'rollout.AnyPolicy'
           ]
 _attrs = ['numpy.float64', 'numpy.float32', 'np.float32', 'np.float64']
 _data = ["numpy.typing.NDArray", "np.typing.NDArray"]

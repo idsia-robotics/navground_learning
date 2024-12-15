@@ -13,6 +13,7 @@ Welcome to navground_learning's documentation!
    introduction
    installation
    tutorials/index
+   guides/index
    reference/index
 
 Indices and tables
