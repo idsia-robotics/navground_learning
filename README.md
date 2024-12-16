@@ -16,8 +16,6 @@ The package provides configurable single-agent [Gymnasium](https://gymnasium.far
 
 ## Installation
 
-[Build from source](https://idsia-robotics.github.io/navground_learning/installation.html) or install pre-build wheels from pip
-
 ```
 pip install navground_learning[all]
 ```
