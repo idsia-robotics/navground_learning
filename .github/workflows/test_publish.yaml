@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: testpypi
-      url: https://test.pypi.org/p/navground_learning
+      url: https://test.pypi.org/p/navground-learning
     permissions:
       id-token: write  # IMPORTANT: mandatory for trusted publishing
     steps:
