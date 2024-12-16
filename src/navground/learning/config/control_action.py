@@ -17,7 +17,7 @@ from .base import ActionConfig, ConfigWithKinematic, DataclassConfig
 class ControlActionConfig(DataclassConfig,
                           ConfigWithKinematic,
                           ActionConfig,
-                          name="Control"):
+                          register_name="Control"):
     """
     Configuration of the conversion between control actions
     and control commands. Actions are either command accelerations

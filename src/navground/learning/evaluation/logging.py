@@ -10,8 +10,6 @@ import numpy as np
 import yaml
 
 from navground import sim
-from navground.sim.pyplot_helpers import plot_runs
-from navground.sim.ui.video import make_video_from_run
 
 from ..config import GroupConfig
 from ..env import BaseEnv
@@ -196,6 +194,7 @@ class EvalLog:
             return
         if self.plot_config.number > 0:
             from stable_baselines3.common.logger import Figure
+            from navground.sim.pyplot_helpers import plot_runs
 
             runs = list(self.eval_exp.runs.values())[:self.plot_config.number]
             fig = plot_runs(runs,
@@ -211,6 +210,7 @@ class EvalLog:
         if self.video_config.number > 0:
             import torch as th
             from stable_baselines3.common.logger import Video
+            from navground.sim.ui.video import make_video_from_run
 
             for i, run in islice(self.eval_exp.runs.items(),
                                  self.video_config.number):

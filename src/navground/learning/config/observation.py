@@ -19,7 +19,7 @@ from .base import ConfigWithKinematic, DataclassConfig, ObservationConfig
 class DefaultObservationConfig(DataclassConfig,
                                ConfigWithKinematic,
                                ObservationConfig,
-                               name='Default'):
+                               register_name="Default"):
     """
     This class configures which information from the behavior state to
     include in the observations.

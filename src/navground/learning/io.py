@@ -2,7 +2,21 @@ from __future__ import annotations
 
 import pathlib as pl
 import warnings
-from contextlib import chdir
+try:
+    from contextlib import chdir  # Python>=3.11
+except ImportError:
+    import os
+    import contextlib
+
+    @contextlib.contextmanager  # type: ignore[no-redef]
+    def chdir(path: os.PathLike):
+        _old = os.getcwd()
+        os.chdir(os.path.abspath(path))
+        try:
+            yield
+        finally:
+            os.chdir(_old)
+
 from typing import TYPE_CHECKING, cast
 
 import yaml

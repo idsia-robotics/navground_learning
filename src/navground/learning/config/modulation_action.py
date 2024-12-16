@@ -65,7 +65,7 @@ def param_space(params: dict[str, dict[str, Any]],
 
 
 @dc.dataclass(repr=False)
-class ModulationActionConfig(DataclassConfig, ActionConfig, name='Modulation'):
+class ModulationActionConfig(DataclassConfig, ActionConfig, register_name="Modulation"):
     """
     Configuration of the conversion between modulation actions
     and control commands.

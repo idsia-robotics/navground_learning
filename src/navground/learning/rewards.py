@@ -18,7 +18,7 @@ from navground import core, sim
 from .types import Reward
 
 
-class NullReward(Reward, name="Zero"):
+class NullReward(Reward, register_name="Zero"):
     """
         A dummy reward that returns always zero
     """
@@ -37,7 +37,7 @@ class NullReward(Reward, name="Zero"):
         return 0.0
 
 
-class EfficacyReward(Reward, name="Efficacy"):
+class EfficacyReward(Reward, register_name="Efficacy"):
     """
         A reward that returns the agent's
         :py:attr:`navground.core.Behavior.efficacy`
@@ -52,7 +52,7 @@ class EfficacyReward(Reward, name="Efficacy"):
 
 
 @dc.dataclass
-class SocialReward(Reward, name="Social"):
+class SocialReward(Reward, register_name="Social"):
     """
     Reward function for social navigation, inspired by [TODO add citation]
 

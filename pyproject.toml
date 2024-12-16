@@ -42,7 +42,8 @@ il = [
   "SuperSuit>=3.9.3",
 ]
 inference = [
-  'onnxruntime>=1.20.0'
+  'onnxruntime>=1.20.0',
+  'onnx'
 ]
 all = [
   "navground[all]",
@@ -52,6 +53,7 @@ all = [
   "imitation>=1.0.0",
   "onnxruntime",
   "torch>=2.4",
+  "onnx",
   "tqdm"
 ]
 [project.urls]
@@ -64,8 +66,7 @@ Changelog = "https://github.com/idsia-robotics/navground_learning/blob/main/CHAN
 [project.scripts]
 
 [tool.setuptools.packages.find]
-where = ["."]
-include = ["navground.learning"]
+where = ["src"]
 
 [tool.distutils.bdist_wheel]
 universal = true

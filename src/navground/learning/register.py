@@ -37,5 +37,6 @@ class Registrable:
                 return subcls.make_from_dict(vs)
         raise ValueError(f"{cls.__name__}: type {value['type']} not registered")
 
-    def __init_subclass__(cls, name: str = '') -> None:
-        cls._type = name
+    # Renamed to `register_name` because `name` conflicts with Python3.10 ABC
+    def __init_subclass__(cls, register_name: str = '') -> None:
+        cls._type = register_name

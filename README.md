@@ -22,19 +22,35 @@ The package provides configurable single-agent [Gymnasium](https://gymnasium.far
 pip install navground_learning[all]
 ```
 
+We support Python>=3.10. Users should prefer Python<=3.12 because important third-party packages like Stable-BaseLine3 or PyTorch do not support Python3.13 yet.
+
 ## Example
+
+Note that to run the example, you need to install the `rl` and `inference` optional dependecies:
+
+```
+pip install navground_learning[rl,inference]
+```
+
+which are installed if you installed `navground_learning[all]`.
+
+
+The example instantiate the environment of [one of the tutorials](https://idsia-robotics.github.io/navground_learning/tutorials/corridor_with_obstacle.html), in which it trains a policy using `SAC`.
+Then, it export the policy as an `ONNX`, which it uses to run a navground experiment, recording the trajectories to an HDF5 file.
 
 ```python
 from navground.learning import evaluation, io
 from navground.learning.examples import corridor_with_obstacle
 from stable_baselines3 import SAC
 
-# Train using Gymnasium + Stable-Baseline3
+# Creates a Gymnasium environment 
 env = corridor_with_obstacle.get_env()
-model = SAC("MlpPolicy", env).learn(total_timesteps=100)
+# Train using Stable-Baseline3
+model = SAC("MlpPolicy", env).learn(total_timesteps=1_000)
+# Export the model to ONNX
 io.export_behavior(model, "model")
 
-# Evaluate using navground
+# Evaluate the policy with a navground experiment
 exp = evaluation.make_experiment_with_env(env, policy="model/policy.onnx")
 exp.number_of_runs = 100
 exp.record_config.pose = True
@@ -44,7 +60,7 @@ exp.run()
 ## Documentation
 
 The [project documentation](https://idsia-robotics.github.io/navground_learning) in addition to the API reference, includes 
-several [tutorials](https://idsia-robotics.github.io/navground_learning) of Machine-Learning policies in navigation, ranging from very basics to complex multi-agent scenarios. 
+several [tutorials](https://idsia-robotics.github.io/navground_learning/tutorials) of Machine-Learning policies in navigation, ranging from very basics to complex multi-agent scenarios. 
 
 ## License and copyright
 

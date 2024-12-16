@@ -5,7 +5,7 @@ from navground import core
 from collections.abc import Collection
 
 
-class SelectionBehavior(core.Behavior, name="Selection"):
+class SelectionBehavior(core.Behavior, register_name="Selection"):
 
     def __init__(self,
                  kinematics: core.Kinematics | None = None,
