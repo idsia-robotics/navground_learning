@@ -93,7 +93,8 @@ def export_behavior(
     venv = model.env
     if venv:
         value = venv.get_attr("asdict", [0])[0]
-        env: NavgroundBaseEnv | None = NavgroundBaseEnv.from_dict(value)
+        env: BaseEnv | BaseParallelEnv | None = cast(
+            BaseEnv | BaseParallelEnv, NavgroundBaseEnv.from_dict(value))
     else:
         env = None
     export_policy_as_behavior(path=path, policy=model.policy, env=env)
@@ -101,8 +102,7 @@ def export_behavior(
 
 def export_policy_as_behavior(path: PathLike,
                               policy: BasePolicy | None = None,
-                              env: BaseEnv | BaseParallelEnv | NavgroundBaseEnv
-                              | None = None,
+                              env: BaseEnv | BaseParallelEnv | None = None,
                               index: int | None = None) -> None:
     """
     Export a policy (using :py:func:`navground.learning.onnx.export`)
@@ -147,7 +147,7 @@ def load_behavior(
 ) -> tuple[PolicyBehavior | None, sim.StateEstimation | None]:
     """
     Load behavior and sensor previously saved in a directory
-    using :py:func:`save_as_behavior`.
+    using :py:func:`export_policy_as_behavior`.
 
     :param      path:  The directory path
 

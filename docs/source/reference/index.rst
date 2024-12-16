@@ -21,4 +21,5 @@ Reference
    io
    onnx
    navground
+   examples
 

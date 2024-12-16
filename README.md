@@ -26,11 +26,11 @@ pip install navground_learning[all]
 
 ```python
 from navground.learning import evaluation, io
-from navground.learning.examples import corridor
+from navground.learning.examples import corridor_with_obstacle
 from stable_baselines3 import SAC
 
 # Train using Gymnasium + Stable-Baseline3
-env = corridor.get_env()
+env = corridor_with_obstacle.get_env()
 model = SAC("MlpPolicy", env).learn(total_timesteps=100)
 io.export_behavior(model, "model")
 

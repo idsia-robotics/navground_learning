@@ -133,7 +133,8 @@ reftarget_aliases['py'] = {
     "types.TrajectoryWithRew": "imitation.data.types.TrajectoryWithRew",
     'NavgroundBaseEnv': 'navground.learning.internal.base_env.NavgroundBaseEnv',
     'gymnasium.core.ActType': 'navground.learning.types.Action',
-    'gymnasium.core.ObsType': 'navground.learning.types.Observation'
+    'gymnasium.core.ObsType': 'navground.learning.types.Observation',
+    'BaseAlgorithm': 'stable_baselines3.common.base_class.BaseAlgorithm'
 }
 
 _types = ['PathLike', 'AnyPolicyPredictor', 'Array', 'Action', 'Observation',

@@ -12,6 +12,19 @@ def get_env(flat: bool = True,
             use_acceleration_action: bool = True,
             multi_agent: bool = False,
             **kwargs: Any) -> BaseEnv | BaseParallelEnv:
+    """
+    Creates the an environment where 20 agents travel back and forth
+    between way-points, crossing in the middle.
+
+    :param flat: Whether the observation space is flat
+    :param use_acceleration_action: Whether actions are acceleration or velocities
+    :param multi_agent: Whether to expose all agents or just one.
+    :param kwargs: Arguments passed to the environment constructor
+
+    :returns: A Parallel PettingZoo environment if `multi_agent` is set,
+        else a Gymnasium environment.
+
+    """
 
     scenario = sim.load_scenario("""
 type: Cross
