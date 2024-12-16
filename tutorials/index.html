@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Tutorials &#8212; navground_learning 0.0.3 documentation</title>
+    <title>Tutorials &#8212; navground_learning 0.1.0 documentation</title>
   
   
   
@@ -41,7 +41,7 @@
 
     <script src="../_static/jquery.js?v=5d32c60e"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../_static/documentation_options.js?v=9284a570"></script>
+    <script src="../_static/documentation_options.js?v=9f0261fb"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
@@ -51,7 +51,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/index';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Navground-Gymnasium integration" href="Gym.html" />
+    <link rel="next" title="Basics" href="basics/index.html" />
     <link rel="prev" title="Installation" href="../installation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -130,7 +130,7 @@
   
   
   
-    <p class="title logo__title">navground_learning 0.0.3 documentation</p>
+    <p class="title logo__title">navground_learning 0.1.0 documentation</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -147,18 +147,52 @@
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Tutorials</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="Gym.html">Navground-Gymnasium integration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="PettingZoo.html">Navground-PettingZoo integration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="IL.html">Train a policy using Imitation Learning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="IL-DAgger.html">Train a policy using Imitation Learning part 2: DAgger</a></li>
-<li class="toctree-l2"><a class="reference internal" href="RL.html">Train a policy using RL</a></li>
-<li class="toctree-l2"><a class="reference internal" href="RL-MA.html">Train a policy using RL, part 2: multi-agent environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CorridorScenario.html">Navigate along a corridor with one obstacle: scenario</a></li>
-<li class="toctree-l2"><a class="reference internal" href="LearningCorridor.html">Navigate along a corridor with one obstacle: learning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CrossingWithDifferentSpeeds.html">Crossings with different speeds</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="basics/index.html">Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="basics/Gymnasium.html">Gymnasium Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basics/PettingZoo.html">Navground-PettingZoo integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basics/Behavior.html">Using a ML policy in Navground</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="empty/empty.html">Empty environment</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="corridor_with_obstacle/index.html">Corridor with obstacle</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="corridor_with_obstacle/Scenario.html">Scenario</a></li>
+<li class="toctree-l3"><a class="reference internal" href="corridor_with_obstacle/Learning.html">Learning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="crossing/index.html">Crossing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="crossing/Training-SA.html">Training one agent among many agents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="crossing/Analysis-SA.html">Performance of policies trained in single-agent environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="crossing/Training-MA.html">Training agents among peers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="crossing/Analysis-MA.html">Performance of policies trained in multi-agent environment</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="periodic_crossing/index.html">Periodic Crossing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="periodic_crossing/SameSpeed.html">Uniform speeds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="periodic_crossing/DifferentSpeed.html">Different speeds</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../guides/index.html">Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guides/extend.html">How to extend</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/index.html">Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/types.html">Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/indices.html">Indices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/config.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/rewards.html">Rewards functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/env.html">Single-agent Gymnasium Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/parallel_env.html">Multi-agent Pettingzoo Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/policies.html">Policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/il.html">Imitation Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/evaluation.html">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/io.html">Saving and Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/onnx.html">Onnx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/navground.html">Navground Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/examples.html">Examples</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -303,54 +337,96 @@
                   
   <section id="tutorials">
 <h1>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading">#</a></h1>
+<p>In the tutorials, we first look at the Gymnasium and PettingZoo environments that integrate navground. Then, we use them to train navigation policies in different scenarios.</p>
+<p>Our goal here is not to train the best possible policies or to perform a rigorous comparison between algorithms. In fact, we do not optimize hyper-parameters. Instead we want to show how <cite>navground.learning</cite> can be used to learn navigation policies in increasingly complex scenarios.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Gym.html">Navground-Gymnasium integration</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Gym.html#Rendering">Rendering</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Gym.html#Vectorized-environments">Vectorized environments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Gym.html#Using-a-policy-in-Navground">Using a policy in Navground</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics/index.html">Basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="basics/Gymnasium.html">Gymnasium Environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="basics/Gymnasium.html#Navground-policy">Navground policy</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="PettingZoo.html">Navground-PettingZoo integration</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="PettingZoo.html#A-single-group">A single group</a></li>
-<li class="toctree-l2"><a class="reference internal" href="PettingZoo.html#Two-groups">Two groups</a></li>
-<li class="toctree-l2"><a class="reference internal" href="PettingZoo.html#Convert-to-a-Gymnasium-Env">Convert to a Gymnasium Env</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics/PettingZoo.html">Navground-PettingZoo integration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="basics/PettingZoo.html#A-single-group">A single group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basics/PettingZoo.html#Two-groups">Two groups</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basics/PettingZoo.html#Convert-to-a-Gymnasium-Env">Convert to a Gymnasium Env</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basics/PettingZoo.html#Convert-from-a-Gymnasium-Env">Convert from a Gymnasium Env</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basics/PettingZoo.html#Saving-and-loading">Saving and loading</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="IL.html">Train a policy using Imitation Learning</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="IL.html#Imitation-learning">Imitation learning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="IL.html#Testing-in-navground">Testing in navground</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics/Behavior.html">Using a ML policy in Navground</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="IL-DAgger.html">Train a policy using Imitation Learning part 2: DAgger</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="IL-DAgger.html#Training">Training</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="IL-DAgger.html#imitation-learning-with-BC">imitation learning with BC</a></li>
-<li class="toctree-l3"><a class="reference internal" href="IL-DAgger.html#imitation-learning-with-DAgger-in-single-agent-environment">imitation learning with DAgger in single-agent environment</a></li>
-<li class="toctree-l3"><a class="reference internal" href="IL-DAgger.html#imitation-learning-with-DAgger-in-multi-agent-environment">imitation learning with DAgger in multi-agent environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="empty/empty.html">Empty environment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="empty/empty.html#Defining-a-scenario">Defining a scenario</a></li>
+<li class="toctree-l2"><a class="reference internal" href="empty/empty.html#Creating-an-enviroment">Creating an enviroment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="empty/empty.html#Training-policies">Training policies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="empty/empty.html#Imitation-Learning">Imitation Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="empty/empty.html#Reinforcement-Learning">Reinforcement Learning</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="IL-DAgger.html#Analysis">Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="empty/empty.html#Evaluating-the-policies">Evaluating the policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="empty/empty.html#Exporting-the-trained-policy">Exporting the trained policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="empty/empty.html#Using-the-policies-in-navground">Using the policies in navground</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="RL.html">Train a policy using RL</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="RL.html#RL-learning">RL learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="corridor_with_obstacle/index.html">Corridor with obstacle</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="corridor_with_obstacle/Scenario.html">Scenario</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="corridor_with_obstacle/Scenario.html#Sensor">Sensor</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="RL-MA.html">Train a policy using RL, part 2: multi-agent environment</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="RL-MA.html#Multi-agent-RL-learning">Multi-agent RL learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="corridor_with_obstacle/Learning.html">Learning</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="corridor_with_obstacle/Learning.html#Imitation-Learning-with-Behavior-Cloning">Imitation Learning with Behavior Cloning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="corridor_with_obstacle/Learning.html#Imitation-learning-with-DAgger">Imitation learning with DAgger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="corridor_with_obstacle/Learning.html#Reinforcement-learning-with-SAC">Reinforcement learning with SAC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="corridor_with_obstacle/Learning.html#Comparision-with-HL">Comparision with HL</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="CorridorScenario.html">Navigate along a corridor with one obstacle: scenario</a></li>
-<li class="toctree-l1"><a class="reference internal" href="LearningCorridor.html">Navigate along a corridor with one obstacle: learning</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="LearningCorridor.html#Imitation-learning-with-Behavior-Cloning">Imitation learning with Behavior Cloning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="LearningCorridor.html#Imitation-learning-with-DAgger">Imitation learning with DAgger</a></li>
-<li class="toctree-l2"><a class="reference internal" href="LearningCorridor.html#Reinforcement-learning-with-SAC">Reinforcement learning with SAC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="LearningCorridor.html#Comparision-with-HL">Comparision with HL</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="CrossingWithDifferentSpeeds.html">Crossings with different speeds</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="CrossingWithDifferentSpeeds.html#Uniform-target-speed">Uniform target speed</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CrossingWithDifferentSpeeds.html#Individual-target-speed">Individual target speed</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crossing/index.html">Crossing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="crossing/Training-SA.html">Training one agent among many agents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="crossing/Training-SA.html#Scenario">Scenario</a></li>
+<li class="toctree-l3"><a class="reference internal" href="crossing/Training-SA.html#Environment">Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="crossing/Training-SA.html#Human-like-behavior">Human-like behavior</a></li>
+<li class="toctree-l3"><a class="reference internal" href="crossing/Training-SA.html#Training">Training</a></li>
+<li class="toctree-l3"><a class="reference internal" href="crossing/Training-SA.html#Summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="crossing/Analysis-SA.html">Performance of policies trained in single-agent environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="crossing/Analysis-SA.html#One-agent-following-the-policy">One agent following the policy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="crossing/Analysis-SA.html#More-agents-following-the-policy">More agents following the policy</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="crossing/Training-MA.html">Training agents among peers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="crossing/Training-MA.html#Environment">Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="crossing/Training-MA.html#Pre-trained-SA-policies">Pre-trained SA policies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="crossing/Training-MA.html#Training">Training</a></li>
+<li class="toctree-l3"><a class="reference internal" href="crossing/Training-MA.html#Summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="crossing/Analysis-MA.html">Performance of policies trained in multi-agent environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="crossing/Analysis-MA.html#Video">Video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="crossing/Analysis-MA.html#Reward">Reward</a></li>
+<li class="toctree-l3"><a class="reference internal" href="crossing/Analysis-MA.html#Final-video">Final video</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="periodic_crossing/index.html">Periodic Crossing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="periodic_crossing/SameSpeed.html">Uniform speeds</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="periodic_crossing/SameSpeed.html#Scenario">Scenario</a></li>
+<li class="toctree-l3"><a class="reference internal" href="periodic_crossing/SameSpeed.html#Environment">Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="periodic_crossing/SameSpeed.html#Training">Training</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="periodic_crossing/DifferentSpeed.html">Different speeds</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="periodic_crossing/DifferentSpeed.html#Scenario">Scenario</a></li>
+<li class="toctree-l3"><a class="reference internal" href="periodic_crossing/DifferentSpeed.html#Environment">Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="periodic_crossing/DifferentSpeed.html#Training">Training</a></li>
+<li class="toctree-l3"><a class="reference internal" href="periodic_crossing/DifferentSpeed.html#Varying-target-speed-at-runtime">Varying target speed at runtime</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -378,11 +454,11 @@
       </div>
     </a>
     <a class="right-next"
-       href="Gym.html"
+       href="basics/index.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Navground-Gymnasium integration</p>
+        <p class="prev-next-title">Basics</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

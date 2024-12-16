@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Introduction &#8212; navground_learning 0.0.3 documentation</title>
+    <title>Introduction &#8212; navground_learning 0.1.0 documentation</title>
   
   
   
@@ -41,7 +41,7 @@
 
     <script src="_static/jquery.js?v=5d32c60e"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="_static/documentation_options.js?v=9284a570"></script>
+    <script src="_static/documentation_options.js?v=9f0261fb"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
@@ -128,7 +128,7 @@
   
   
   
-    <p class="title logo__title">navground_learning 0.0.3 documentation</p>
+    <p class="title logo__title">navground_learning 0.1.0 documentation</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -145,18 +145,52 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="tutorials/index.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/Gym.html">Navground-Gymnasium integration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/PettingZoo.html">Navground-PettingZoo integration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/IL.html">Train a policy using Imitation Learning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/IL-DAgger.html">Train a policy using Imitation Learning part 2: DAgger</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/RL.html">Train a policy using RL</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/RL-MA.html">Train a policy using RL, part 2: multi-agent environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/CorridorScenario.html">Navigate along a corridor with one obstacle: scenario</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/LearningCorridor.html">Navigate along a corridor with one obstacle: learning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/CrossingWithDifferentSpeeds.html">Crossings with different speeds</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tutorials/basics/index.html">Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/basics/Gymnasium.html">Gymnasium Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/basics/PettingZoo.html">Navground-PettingZoo integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/basics/Behavior.html">Using a ML policy in Navground</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="reference.html">Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/empty/empty.html">Empty environment</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tutorials/corridor_with_obstacle/index.html">Corridor with obstacle</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/corridor_with_obstacle/Scenario.html">Scenario</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/corridor_with_obstacle/Learning.html">Learning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tutorials/crossing/index.html">Crossing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/crossing/Training-SA.html">Training one agent among many agents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/crossing/Analysis-SA.html">Performance of policies trained in single-agent environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/crossing/Training-MA.html">Training agents among peers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/crossing/Analysis-MA.html">Performance of policies trained in multi-agent environment</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tutorials/periodic_crossing/index.html">Periodic Crossing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/periodic_crossing/SameSpeed.html">Uniform speeds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/periodic_crossing/DifferentSpeed.html">Different speeds</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="guides/index.html">Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="guides/extend.html">How to extend</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="reference/index.html">Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/types.html">Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/indices.html">Indices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/config.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/rewards.html">Rewards functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/env.html">Single-agent Gymnasium Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/parallel_env.html">Multi-agent Pettingzoo Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/policies.html">Policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/il.html">Imitation Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/evaluation.html">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/io.html">Saving and Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/onnx.html">Onnx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/navground.html">Navground Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/examples.html">Examples</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -305,10 +339,14 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pettingzoo-navground-environment">PettingZoo Navground Environment</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-ml-policies-in-navground">Use ML policies in navground</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-ml-policies-in-navground">Train ML policies in navground</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imitation-learning">Imitation Learning</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reinforcement-learning">Reinforcement Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-multi-agent-learning">Parallel Multi-agent Learning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-ml-policies-in-navground">Use ML policies in navground</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgement-and-disclaimer">Acknowledgement and disclaimer</a></li>
@@ -418,10 +456,8 @@ a vectorized Gymnasium environment that concatenate all the actions, observation
 <p>The API is slightly simpler</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">navground</span> <span class="k">as</span> <span class="nn">sim</span>
 
-<span class="n">world</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">World</span><span class="p">()</span>
 <span class="n">scenario</span> <span class="o">=</span> <span class="n">MyScenario</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="n">scenario</span><span class="o">.</span><span class="n">init_world</span><span class="p">(</span><span class="n">world</span><span class="p">)</span>
-
+<span class="n">world</span> <span class="o">=</span> <span class="n">scenario</span><span class="o">.</span><span class="n">make_world</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
     <span class="n">world</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">time_step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 </pre></div>
@@ -436,94 +472,46 @@ Therefore, we can build a custom navigation environment for machine learning, wh
 </section>
 <section id="navground-gymnasium-environment">
 <h3>Navground Gymnasium Environment<a class="headerlink" href="#navground-gymnasium-environment" title="Link to this heading">#</a></h3>
-<p><a class="reference internal" href="reference.html#navground_learning.env.NavgroundEnv" title="navground_learning.env.NavgroundEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground_learning.env.NavgroundEnv</span></code></a> wraps a <a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/scenarios/scenario.html#navground.sim.Scenario" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground.sim.Scenario</span></code></a> in an <a class="reference external" href="https://gymnasium.farama.org/api/env/#gymnasium.Env" title="(in Gymnasium)"><code class="xref py py-class docutils literal notranslate"><span class="pre">gymnasium.Env</span></code></a> that conforms to the standard API expected by gymnasium, with actions and observations linked to a <em>single</em> navground agent. In particular (with some simplifications):</p>
+<p><a class="reference internal" href="reference/env.html#navground.learning.env.NavgroundEnv" title="navground.learning.env.NavgroundEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">env.NavgroundEnv</span></code></a> wraps a <a class="reference external" href="https://idsia-robotics.github.io/navground/reference/sim/python/scenarios/scenario.html#navground.sim.Scenario" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground.sim.Scenario</span></code></a> in an <a class="reference external" href="https://gymnasium.farama.org/api/env/#gymnasium.Env" title="(in Gymnasium)"><code class="xref py py-class docutils literal notranslate"><span class="pre">gymnasium.Env</span></code></a> that conforms to the standard API expected by gymnasium, with actions and observations linked to a <em>single</em> navground agent. In particular (with some simplifications):</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">NavgroundEnv</span><span class="p">(</span><span class="n">scenario</span><span class="p">:</span> <span class="n">sim</span><span class="o">.</span><span class="n">Scenario</span><span class="p">,</span>
-             <span class="n">action_config</span><span class="p">:</span> <span class="n">ActionConfig</span> <span class="o">=</span> <span class="n">ActionConfig</span><span class="p">(),</span>
-             <span class="n">observation_config</span><span class="p">:</span> <span class="n">ObservationConfig</span> <span class="o">=</span> <span class="n">ObservationConfig</span><span class="p">(),</span>
+             <span class="n">action_config</span><span class="p">:</span> <span class="n">ActionConfig</span><span class="p">,</span>
+             <span class="n">observation_config</span><span class="p">:</span> <span class="n">ObservationConfig</span><span class="p">,</span>
              <span class="n">sensor</span><span class="p">:</span> <span class="n">sim</span><span class="o">.</span><span class="n">Sensor</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>instantiates a gymnasium environment whose worlds will be spawned using a navground scenario. If specified, the agent will use a sensor to generate observations, instead of its predefined state estimation. The action and observation spaces of the agent can be customized, for instance whether to include the distance to the target, or to control the agent orientation.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">NavgroundEnv</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">options</span> <span class="p">:</span> <span class="n">Dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">NavgroundEnv</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Initializes a navground world from the navground scenario using a random seed and selects one of navground agents.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">NavgroundEnv</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">NavgroundEnv</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">typing</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>Passes the action to the selected navground agent, updates the navground world and return the selected navground agent’s observations and reward.</p>
 <p>By specifying</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="reference.html#navground_learning.ObservationConfig" title="navground_learning.ObservationConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground_learning.ObservationConfig</span></code></a>, we control how to
-convert a <a class="reference external" href="https://idsia-robotics.github.io/navground/reference/core/python/state/sensing.html#navground.core.SensingState" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground.core.SensingState</span></code></a> to gymnasium observations</p></li>
-<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">navground_learning.ActionConfig</span></code>, we control how to
+<li><p><a class="reference internal" href="reference/config.html#navground.learning.config.ObservationConfig" title="navground.learning.config.ObservationConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">ObservationConfig</span></code></a>, we control how to
+convert a <a class="reference external" href="https://idsia-robotics.github.io/navground/reference/core/python/state/sensing.html#navground.core.SensingState" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground.core.SensingState</span></code></a> to gymnasium observations. As of now, as single concrete class is implemented:</p>
+<ul>
+<li><p><a class="reference internal" href="reference/config.html#navground.learning.config.DefaultObservationConfig" title="navground.learning.config.DefaultObservationConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">DefaultObservationConfig</span></code></a> that configures which parts of the ego-state and target information to include in the observations.</p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="reference/config.html#navground.learning.config.ActionConfig" title="navground.learning.config.ActionConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActionConfig</span></code></a>, we control how to
 convert gymnasium actions to <a class="reference external" href="https://idsia-robotics.github.io/navground/reference/core/python/common.html#navground.core.Twist2" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground.core.Twist2</span></code></a> to be actuated by a  <a class="reference external" href="https://idsia-robotics.github.io/navground/reference/core/python/behaviors/behavior.html#navground.core.Behavior" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground.core.Behavior</span></code></a>, with different subclasses:</p>
 <ul>
-<li><p><a class="reference internal" href="reference.html#navground_learning.ControlActionConfig" title="navground_learning.ControlActionConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground_learning.ControlActionConfig</span></code></a> where the policy outputs a control command</p></li>
-<li><p><a class="reference internal" href="reference.html#navground_learning.ModulationActionConfig" title="navground_learning.ModulationActionConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground_learning.ModulationActionConfig</span></code></a>  where the policy outputs parameters of an underlying deterministic navigation behavior.</p></li>
+<li><p><a class="reference internal" href="reference/config.html#navground.learning.config.ControlActionConfig" title="navground.learning.config.ControlActionConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">ControlActionConfig</span></code></a> where the policy outputs a control command</p></li>
+<li><p><a class="reference internal" href="reference/config.html#navground.learning.config.ModulationActionConfig" title="navground.learning.config.ModulationActionConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModulationActionConfig</span></code></a> where the policy outputs parameters of an underlying deterministic navigation behavior.</p></li>
 </ul>
 </li>
 </ul>
 </section>
 <section id="pettingzoo-navground-environment">
 <h3>PettingZoo Navground Environment<a class="headerlink" href="#pettingzoo-navground-environment" title="Link to this heading">#</a></h3>
-<p>Similarly, <code class="xref py py-class docutils literal notranslate"><span class="pre">navground_learning.env.pz.MultiAgentNavgroundEnv</span></code> provides a environment for which actions and observations are linked to a <em>multiple</em> navground agents.</p>
-<p><a class="reference internal" href="reference.html#navground_learning.env.pz.parallel_env" title="navground_learning.env.pz.parallel_env"><code class="xref py py-func docutils literal notranslate"><span class="pre">navground_learning.env.pz.parallel_env()</span></code></a> instantiate an environment where different agents may use different configurations (such as action spaces, rewards, …), while
-<a class="reference internal" href="reference.html#navground_learning.env.pz.shared_parallel_env" title="navground_learning.env.pz.shared_parallel_env"><code class="xref py py-func docutils literal notranslate"><span class="pre">navground_learning.env.pz.shared_parallel_env()</span></code></a> instantiate an environment where all specified agents share the same configuration.</p>
-<p>The rest of the functionality is very similar to the Gymnasium Environment (and in fact, most of it is implemented in the same base class <code class="xref py py-class docutils literal notranslate"><span class="pre">navground_learning.env.NavgroundBaseEnv</span></code>), but conform to the PettingZoo API instead.</p>
+<p>Similarly, <a class="reference internal" href="reference/parallel_env.html#navground.learning.parallel_env.MultiAgentNavgroundEnv" title="navground.learning.parallel_env.MultiAgentNavgroundEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">parallel_env.MultiAgentNavgroundEnv</span></code></a> provides a environment for which actions and observations are linked to a <em>multiple</em> navground agents.</p>
+<p><a class="reference internal" href="reference/parallel_env.html#navground.learning.parallel_env.parallel_env" title="navground.learning.parallel_env.parallel_env"><code class="xref py py-func docutils literal notranslate"><span class="pre">parallel_env.parallel_env()</span></code></a> instantiate an environment where different agents may use different configurations (such as action spaces, rewards, …), while
+<a class="reference internal" href="reference/parallel_env.html#navground.learning.parallel_env.shared_parallel_env" title="navground.learning.parallel_env.shared_parallel_env"><code class="xref py py-func docutils literal notranslate"><span class="pre">parallel_env.shared_parallel_env()</span></code></a> instantiate an environment where all specified agents share the same configuration.</p>
+<p>The rest of the functionality is very similar to the Gymnasium Environment (and in fact, they share the same base class), but conform to the PettingZoo API instead.</p>
 </section>
-</section>
-<section id="use-ml-policies-in-navground">
-<h2>Use ML policies in navground<a class="headerlink" href="#use-ml-policies-in-navground" title="Link to this heading">#</a></h2>
-<p>Once we have trained a policy in the environments,
-the class <a class="reference internal" href="reference.html#navground_learning.behaviors.PolicyBehavior" title="navground_learning.behaviors.PolicyBehavior"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground_learning.behaviors.PolicyBehavior</span></code></a>
-integrates it in navground. For instance, we can exchange the original behavior of an agent to use a policy instead:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">navground</span> <span class="k">as</span> <span class="nn">sim</span>
-<span class="kn">import</span> <span class="nn">gymnasium</span> <span class="k">as</span> <span class="nn">gym</span>
-<span class="kn">from</span> <span class="nn">navground_learning.behaviors</span> <span class="kn">import</span> <span class="n">PolicyBehavior</span>
-
-<span class="n">scenario</span> <span class="o">=</span> <span class="n">MyScenario</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="n">my_sensor</span> <span class="o">=</span> <span class="n">MySensor</span><span class="p">(</span><span class="o">....</span><span class="p">)</span>
-<span class="n">action_config</span> <span class="o">=</span> <span class="n">ActionConfig</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="n">observation_config</span> <span class="o">=</span> <span class="n">ObservationConfig</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s2">&quot;navground&quot;</span><span class="p">,</span> <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span> <span class="n">sensor</span><span class="o">=</span><span class="n">my_sensor</span><span class="p">,</span>
-               <span class="n">action_config</span><span class="o">=</span><span class="n">action_config</span><span class="p">,</span> <span class="n">observation_config</span><span class="o">=</span><span class="n">observation_config</span><span class="p">)</span>
-
-<span class="c1"># train a policy using the scenario and sensor</span>
-<span class="c1"># ...</span>
-<span class="c1"># evaluate the policy</span>
-
-<span class="n">world</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">World</span><span class="p">()</span>
-<span class="n">scenario</span><span class="o">.</span><span class="n">init_world</span><span class="p">(</span><span class="n">world</span><span class="p">)</span>
-
-<span class="c1"># set the first agent to use the policy and the sensor,</span>
-<span class="c1"># instead of the original behavior and state estimation</span>
-
-<span class="n">world</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">behavior</span> <span class="o">=</span> <span class="n">PolicyBehavior</span><span class="o">.</span><span class="n">clone_behavior</span><span class="p">(</span>
-   <span class="n">agent</span><span class="o">.</span><span class="n">behavior</span><span class="p">,</span> <span class="n">policy</span><span class="o">=</span><span class="n">my_trained_policy</span><span class="p">,</span>
-   <span class="n">action_config</span><span class="o">=</span><span class="n">action_config</span><span class="p">,</span> <span class="n">observation_config</span><span class="o">=</span><span class="n">observation_config</span><span class="p">)</span>
-<span class="n">world</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">state_estimation</span> <span class="o">=</span> <span class="n">my_sensor</span>
-
-<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
-    <span class="n">world</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">time_step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>or we can directly configure the scenario (for instance in YAML) so that some agents uses this policy:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">navground</span> <span class="k">as</span> <span class="nn">sim</span>
-<span class="kn">from</span> <span class="nn">navground_learning.behaviors</span> <span class="kn">import</span> <span class="n">PolicyBehavior</span>
-
-<span class="n">world</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">World</span><span class="p">()</span>
-<span class="n">scenario</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">load_scenario</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="n">scenario</span><span class="o">.</span><span class="n">init_world</span><span class="p">(</span><span class="n">world</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
-   <span class="n">world</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">time_step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>By using <a class="reference internal" href="reference.html#navground_learning.behaviors.PolicyBehavior" title="navground_learning.behaviors.PolicyBehavior"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground_learning.behaviors.PolicyBehavior</span></code></a>, we don’t need to run the gymnasium environment anymore to perform validation simulation but can instead use the many tools available in navground. Nonetheless, we can use gymnasium for validation too, if we prefer.</p>
-</div>
 </section>
 <section id="train-ml-policies-in-navground">
 <h2>Train ML policies in navground<a class="headerlink" href="#train-ml-policies-in-navground" title="Link to this heading">#</a></h2>
@@ -538,27 +526,24 @@ one of the navigation behaviors implemented in navground, using any of the avail
 <p>We include helper classes that wraps the Python package <a class="reference external" href="https://imitation.readthedocs.io/en/latest/">imitation</a> by the Center for Human-Compatible AI
 to offer simplified interface, yet nothing prevent to use the original API.</p>
 <p>To learn to imitate a behavior, we can run</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">navground</span> <span class="k">as</span> <span class="nn">sim</span>
-<span class="kn">import</span> <span class="nn">gymnasium</span> <span class="k">as</span> <span class="nn">gym</span>
-<span class="kn">from</span> <span class="nn">navground_learning</span> <span class="kn">import</span> <span class="n">il</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gymnasium</span> <span class="k">as</span> <span class="nn">gym</span>
+<span class="kn">import</span> <span class="nn">navground.learning.env</span>
+<span class="kn">from</span> <span class="nn">navground.learning.il</span> <span class="kn">import</span> <span class="n">BC</span><span class="p">,</span> <span class="n">DAgger</span>
 
-<span class="n">scenario</span> <span class="o">=</span> <span class="n">MyScenario</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="n">sensor</span> <span class="o">=</span> <span class="n">MySensor</span><span class="p">(</span><span class="o">....</span><span class="p">)</span>
-<span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s2">&quot;navground&quot;</span><span class="p">,</span> <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span> <span class="n">sensor</span><span class="o">=</span><span class="n">sensor</span><span class="p">,</span> <span class="n">max_episode_steps</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s2">&quot;navground&quot;</span><span class="p">,</span> <span class="n">scenario</span><span class="o">=...</span><span class="p">,</span> <span class="n">sensor</span><span class="o">=...</span><span class="p">,</span>
+               <span class="n">observation_config</span><span class="o">=...</span><span class="p">,</span> <span class="n">action_config</span><span class="o">=...</span><span class="p">,</span>
+               <span class="n">max_episode_steps</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 
 <span class="c1"># Behavior cloning</span>
-<span class="n">trainer</span> <span class="o">=</span> <span class="n">il</span><span class="o">.</span><span class="n">bc</span><span class="o">.</span><span class="n">Trainer</span><span class="p">(</span><span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">,</span> <span class="n">runs</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">n_epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">bc</span> <span class="o">=</span> <span class="n">BC</span><span class="p">(</span><span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">,</span> <span class="n">runs</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">bc</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="n">n_epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">bc</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;BC&quot;</span><span class="p">)</span>
 
 <span class="c1"># DAgger</span>
-<span class="c1"># trainer = il.dagger.Trainer(env=env)</span>
-<span class="c1"># trainer.train(n_epochs=1)</span>
-
-<span class="n">trainer</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;results&quot;</span><span class="p">)</span>
-<span class="n">behavior</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">make_behavior</span><span class="p">()</span>
-
-<span class="c1"># use the behavior in navground</span>
-<span class="c1"># ...</span>
+<span class="n">dagger</span> <span class="o">=</span> <span class="n">DAgger</span><span class="p">(</span><span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">)</span>
+<span class="n">dagger</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="n">total_timesteps</span><span class="o">=</span><span class="mi">10_000</span><span class="p">,</span>
+             <span class="n">rollout_round_min_timesteps</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">dagger</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;DAgger&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -566,17 +551,116 @@ to offer simplified interface, yet nothing prevent to use the original API.</p>
 <h3>Reinforcement Learning<a class="headerlink" href="#reinforcement-learning" title="Link to this heading">#</a></h3>
 <p>Using the navground-gymnasium environment, we can train a policy to navigate among other agents controlled by navground, for instance using the RL algorithm implemented in <a class="reference external" href="https://stable-baselines3.readthedocs.io/">Stable-Baselines3</a> by
 DLR-RM.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">navground</span> <span class="k">as</span> <span class="nn">sim</span>
-<span class="kn">import</span> <span class="nn">gymnasium</span> <span class="k">as</span> <span class="nn">gym</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gymnasium</span> <span class="k">as</span> <span class="nn">gym</span>
+<span class="kn">import</span> <span class="nn">navground.learning.env</span>
 <span class="kn">from</span> <span class="nn">stable_baselines3</span> <span class="kn">import</span> <span class="n">SAC</span>
 
-<span class="n">scenario</span> <span class="o">=</span> <span class="n">MyScenario</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="n">sensor</span> <span class="o">=</span> <span class="n">MySensor</span><span class="p">(</span><span class="o">....</span><span class="p">)</span>
-<span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s2">&quot;navground&quot;</span><span class="p">,</span> <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span> <span class="n">sensor</span><span class="o">=</span><span class="n">sensor</span><span class="p">,</span> <span class="n">max_episode_steps</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-
-<span class="n">model</span> <span class="o">=</span> <span class="n">SAC</span><span class="p">(</span><span class="s2">&quot;MlpPolicy&quot;</span><span class="p">,</span> <span class="n">env</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="n">total_timesteps</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span> <span class="n">progress_bar</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s2">&quot;navground&quot;</span><span class="p">,</span> <span class="n">scenario</span><span class="o">=...</span><span class="p">,</span> <span class="n">sensor</span><span class="o">=...</span><span class="p">,</span>
+               <span class="n">observation_config</span><span class="o">=...</span><span class="p">,</span> <span class="n">action_config</span><span class="o">=...</span><span class="p">,</span>
+               <span class="n">max_episode_steps</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">sac</span> <span class="o">=</span> <span class="n">SAC</span><span class="p">(</span><span class="s2">&quot;MlpPolicy&quot;</span><span class="p">,</span> <span class="n">env</span><span class="p">)</span>
+<span class="n">sac</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="n">total_timesteps</span><span class="o">=</span><span class="mi">10_000</span><span class="p">)</span>
+<span class="n">sac</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;SAC&quot;</span><span class="p">)</span>
 </pre></div>
+</div>
+</section>
+<section id="parallel-multi-agent-learning">
+<h3>Parallel Multi-agent Learning<a class="headerlink" href="#parallel-multi-agent-learning" title="Link to this heading">#</a></h3>
+<p>Using the multi-agent navground-gymnasium environment, we can train a policy in parallel for all agents in the environment, that is, the agents
+learn to navigate among peers that are learning the <em>same</em> policy.
+We instantiate the parallel environment using <a class="reference internal" href="reference/parallel_env.html#navground.learning.parallel_env.shared_parallel_env" title="navground.learning.parallel_env.shared_parallel_env"><code class="xref py py-func docutils literal notranslate"><span class="pre">parallel_env.shared_parallel_env()</span></code></a>, and transform it to a Stable-Baseline compatible (sigle-agent) vectorized environment using <a class="reference internal" href="reference/parallel_env.html#navground.learning.parallel_env.make_vec_from_penv" title="navground.learning.parallel_env.make_vec_from_penv"><code class="xref py py-func docutils literal notranslate"><span class="pre">parallel_env.make_vec_from_penv()</span></code></a>. While learning, from the view-point of the <code class="docutils literal notranslate"><span class="pre">SAC</span></code> algorithm, rollouts will generate by a single agent in <code class="docutils literal notranslate"><span class="pre">n</span></code> environments that compose <code class="docutils literal notranslate"><span class="pre">venv</span></code>, while in reality they will be generate in a single <code class="docutils literal notranslate"><span class="pre">penv</span></code> by <code class="docutils literal notranslate"><span class="pre">n</span></code> agents.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gymnasium</span> <span class="k">as</span> <span class="nn">gym</span>
+<span class="kn">from</span> <span class="nn">navground.learning.parallel_env</span> <span class="kn">import</span> <span class="n">make_vec_from_penv</span><span class="p">,</span> <span class="n">shared_parallel_env</span>
+<span class="kn">from</span> <span class="nn">stable_baselines3</span> <span class="kn">import</span> <span class="n">SAC</span>
+
+<span class="n">penv</span> <span class="o">=</span> <span class="n">shared_parallel_env</span><span class="p">(</span><span class="n">scenario</span><span class="o">=...</span><span class="p">,</span> <span class="n">sensor</span><span class="o">=...</span><span class="p">,</span>
+                           <span class="n">observation_config</span><span class="o">=...</span><span class="p">,</span> <span class="n">action_config</span><span class="o">=...</span><span class="p">,</span>
+                           <span class="n">max_episode_steps</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">venv</span> <span class="o">=</span> <span class="n">make_vec_from_penv</span><span class="p">(</span><span class="n">penv</span><span class="p">)</span>
+<span class="n">psac</span> <span class="o">=</span> <span class="n">SAC</span><span class="p">(</span><span class="s2">&quot;MlpPolicy&quot;</span><span class="p">,</span> <span class="n">venv</span><span class="p">)</span>
+<span class="n">psac_ma</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="n">total_timesteps</span><span class="o">=</span><span class="mi">10_000</span><span class="p">)</span>
+<span class="n">psac</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;PSAC&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="evaluation">
+<h2>Evaluation<a class="headerlink" href="#evaluation" title="Link to this heading">#</a></h2>
+<p>Once trained, we can evaluate the policies with common tools, such as
+<a class="reference external" href="https://stable-baselines3.readthedocs.io/en/master/common/evaluation.html#stable_baselines3.common.evaluation.evaluate_policy" title="(in Stable Baselines3 vmaster (2.5.0a0 ))"><code class="xref py py-func docutils literal notranslate"><span class="pre">stable_baselines3.common.evaluation.evaluate_policy()</span></code></a> and its extensions in <a class="reference internal" href="reference/evaluation.html#module-navground.learning.evaluation" title="navground.learning.evaluation"><code class="xref py py-mod docutils literal notranslate"><span class="pre">evaluation</span></code></a> that supports parallel environments with groups using different policies.</p>
+<section id="use-ml-policies-in-navground">
+<h3>Use ML policies in navground<a class="headerlink" href="#use-ml-policies-in-navground" title="Link to this heading">#</a></h3>
+<p>Evaluation can also be performed using the tools available in navground,
+which are specifically designed to support large experiments with many runs and agents, distributing the work over multiple processor if desired.</p>
+<p>Once we have trained a policy (and possibly exported it to onnx using <a class="reference internal" href="reference/onnx.html#navground.learning.onnx.export" title="navground.learning.onnx.export"><code class="xref py py-func docutils literal notranslate"><span class="pre">onnx.export()</span></code></a>), <a class="reference internal" href="reference/navground.html#navground.learning.behaviors.PolicyBehavior" title="navground.learning.behaviors.PolicyBehavior"><code class="xref py py-class docutils literal notranslate"><span class="pre">behaviors.PolicyBehavior</span></code></a> executes it as a navigation behavior in navground. As a basic example, we can load it and assign it to some of the agents in the simulation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">navground</span> <span class="k">as</span> <span class="nn">sim</span>
+<span class="kn">import</span> <span class="nn">gymnasium</span> <span class="k">as</span> <span class="nn">gym</span>
+<span class="kn">from</span> <span class="nn">navground.learning.behaviors</span> <span class="kn">import</span> <span class="n">PolicyBehavior</span>
+
+<span class="c1"># we load the same scenario and sensor used to train the policy</span>
+<span class="n">scenario</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">Scenario</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">sensor</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">Sensor</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">world</span> <span class="o">=</span> <span class="n">scenario</span><span class="o">.</span><span class="n">make_world</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># and configure the first five agents to use the policy</span>
+<span class="c1"># instead of the original behavior</span>
+<span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">world</span><span class="o">.</span><span class="n">agents</span><span class="p">[:</span><span class="mi">5</span><span class="p">]:</span>
+   <span class="n">agent</span><span class="o">.</span><span class="n">behavior</span> <span class="o">=</span> <span class="n">PolicyBehavior</span><span class="o">.</span><span class="n">clone_behavior</span><span class="p">(</span>
+      <span class="n">agent</span><span class="o">.</span><span class="n">behavior</span><span class="p">,</span> <span class="n">policy</span><span class="o">=</span><span class="s1">&#39;policy.onnx&#39;</span><span class="p">,</span>
+      <span class="n">action_config</span><span class="o">=...</span><span class="p">,</span> <span class="n">observation_config</span><span class="o">=...</span><span class="p">)</span>
+   <span class="n">agent</span><span class="o">.</span><span class="n">state_estimation</span> <span class="o">=</span> <span class="n">sensor</span>
+
+<span class="n">world</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">time_step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In practice, we do not need to perform the configuration manually. Instead, we can load it from a YAML file (exported e.g. using <a class="reference internal" href="reference/io.html#navground.learning.io.export_policy_as_behavior" title="navground.learning.io.export_policy_as_behavior"><code class="xref py py-func docutils literal notranslate"><span class="pre">io.export_policy_as_behavior()</span></code></a>), like common in navground:</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">scenario.yaml</span><a class="headerlink" href="#id5" title="Link to this code">#</a></div>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">groups</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">    </span><span class="nt">behavior</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PolicyBehavior</span>
+<span class="w">      </span><span class="nt">policy_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">policy.onnx</span>
+<span class="w">      </span><span class="c1"># action and observation config</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="w">    </span><span class="nt">state_estimation</span><span class="p">:</span>
+<span class="w">      </span><span class="c1"># sensor config</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="w">    </span><span class="c1"># remaining of the agents config</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+</pre></div>
+</div>
+</div>
+<p>When loaded, the 5 agents in this group will use the policy to navigate</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">navground</span> <span class="k">as</span> <span class="nn">sim</span>
+
+<span class="c1"># loads the navground.learning components such as PolicyBehavior</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">load_plugins</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;scenario.yaml&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+   <span class="n">scenario</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">Scenario</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+<span class="n">world</span> <span class="o">=</span> <span class="n">scenario</span><span class="o">.</span><span class="n">make_world</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">world</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">time_step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>or we could embed it in an experiment to record trajectories and performance metrics:</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">experiment.yaml</span><a class="headerlink" href="#id6" title="Link to this code">#</a></div>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="nt">runs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w"> </span><span class="nt">time_step</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span>
+<span class="w"> </span><span class="nt">steps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10000</span>
+<span class="w"> </span><span class="nt">record_pose</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w"> </span><span class="nt">record_efficacy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w"> </span><span class="nt">scenario</span><span class="p">:</span>
+<span class="w">     </span><span class="nt">groups</span><span class="p">:</span>
+<span class="w">       </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">         </span><span class="nt">behavior</span><span class="p">:</span>
+<span class="w">           </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PolicyBehavior</span>
+<span class="w">           </span><span class="nt">policy_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">policy.onnx</span>
+<span class="w">         </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+</pre></div>
+</div>
 </div>
 </section>
 </section>
@@ -643,10 +727,14 @@ DLR-RM.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pettingzoo-navground-environment">PettingZoo Navground Environment</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-ml-policies-in-navground">Use ML policies in navground</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-ml-policies-in-navground">Train ML policies in navground</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imitation-learning">Imitation Learning</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reinforcement-learning">Reinforcement Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-multi-agent-learning">Parallel Multi-agent Learning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-ml-policies-in-navground">Use ML policies in navground</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgement-and-disclaimer">Acknowledgement and disclaimer</a></li>
