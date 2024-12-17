@@ -2,22 +2,23 @@ from __future__ import annotations
 
 import pathlib as pl
 import warnings
+from collections.abc import Iterator
+from typing import TYPE_CHECKING, cast
+
 try:
     from contextlib import chdir  # Python>=3.11
 except ImportError:
-    import os
     import contextlib
+    import os
 
     @contextlib.contextmanager  # type: ignore[no-redef]
-    def chdir(path: os.PathLike):
+    def chdir(path: os.PathLike[str]) -> Iterator[None]:
         _old = os.getcwd()
         os.chdir(os.path.abspath(path))
         try:
             yield
         finally:
             os.chdir(_old)
-
-from typing import TYPE_CHECKING, cast
 
 import yaml
 from navground import core, sim
@@ -32,8 +33,9 @@ from .parallel_env import BaseParallelEnv, MultiAgentNavgroundEnv
 from .types import PathLike
 
 if TYPE_CHECKING:
-    from stable_baselines3.common.policies import BasePolicy
     from stable_baselines3.common.base_class import BaseAlgorithm
+    from stable_baselines3.common.policies import BasePolicy
+
     from .il import BaseILAlgorithm
 
 
