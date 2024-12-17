@@ -106,7 +106,6 @@ class NavgroundEnv(NavgroundBaseEnv, BaseEnv):
                  stuck_timeout: float = 1,
                  color: str = '',
                  tag: str = '') -> None:
-
         if reward is None:
             reward = NullReward()
         self.agent_index = agent_index
@@ -129,21 +128,25 @@ class NavgroundEnv(NavgroundBaseEnv, BaseEnv):
             render_kwargs=render_kwargs,
             realtime_factor=realtime_factor,
             stuck_timeout=stuck_timeout)
-        if scenario is not None:
-            agent = self._possible_agents[agent_index]
+
+    def _init(self) -> None:
+        super()._init()
+        if self.scenario is not None:
+            agent = self._possible_agents[self.agent_index]
             with warnings.catch_warnings(record=True) as ws:
                 warnings.simplefilter("always")
                 configured = agent.is_configured(warn=True)
             if configured:
-                self.observation_space = self._observation_space[agent_index]
-                self.action_space = self._action_space[agent_index]
+                self.observation_space = self._observation_space[
+                    self.agent_index]
+                self.action_space = self._action_space[self.agent_index]
             else:
                 msgs = ', '.join([str(w.message) for w in ws])
                 warnings.warn(
-                    f"Configuration of agent at {agent_index} is not complete. "
-                    "Check that the scenario spawns the agent "
-                    "and that the action and observation configs have "
-                    f"the required information: {msgs}",
+                    f"Configuration of agent at {self.agent_index} "
+                    "is not complete. Check that the scenario spawns "
+                    "the agent and that the action and observation "
+                    f"configs have the required information: {msgs}",
                     stacklevel=0)
                 self.observation_space = gym.spaces.Box(0, 1)
                 self.action_space = gym.spaces.Box(0, 1)
@@ -175,20 +178,6 @@ class NavgroundEnv(NavgroundBaseEnv, BaseEnv):
         :returns:   The policy.
         """
         return self.get_policy(self.agent_index)
-
-    # @property
-    # def asdict(self) -> dict[str, Any]:
-    #     """
-    #     The JSON-able representation of the environment
-
-    #     :returns:   A JSON-able dict
-    #     """
-    #     rs: dict[str, Any] = NavgroundBaseEnv.asdict.fget(self)  # type: ignore
-    #     group = rs.pop('groups')[0]
-    #     value = group.pop('indices')
-    #     rs['agent_index'] = Indices.from_dict(value).lowest
-    #     rs.update(group)
-    #     return rs
 
     def reset(
         self,
