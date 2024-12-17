@@ -40,7 +40,11 @@ class OnnxPolicy:
     def __init__(self, path: PathLike):
         import onnxruntime as ort  # type: ignore[import-untyped]
 
-        self.ort_sess = ort.InferenceSession(path)
+        options = ort.SessionOptions()
+        options.intra_op_num_threads = 1
+        options.execution_mode = ort.ExecutionMode.ORT_SEQUENTIAL
+        options.graph_optimization_level = ort.GraphOptimization.ORT_ENABLE_ALL
+        self.ort_sess = ort.InferenceSession(path, options)
         self.input_dims = [len(x.shape) for x in self.ort_sess.get_inputs()]
         xs = self.ort_sess.get_inputs()
         ys = self.ort_sess.get_outputs()
@@ -51,7 +55,7 @@ class OnnxPolicy:
             self._observation_space = gym.spaces.Dict(
                 {x.name: space_for_onnx_tensor(x)
                  for x in xs})
-        # TODO(Jerome): why can it have more outputs?
+        # TODO(Jerome): why can it have more than one output?
         # assert len(ys) == 1, ys
         self._action_space = space_for_onnx_tensor(ys[0])
 
