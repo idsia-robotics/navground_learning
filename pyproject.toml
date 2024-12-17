@@ -76,10 +76,10 @@ enabled = true
 # dirty_template = "{tag}-{ccount}+{branch}"
 
 [project.entry-points.navground_behaviors]
-policy = "navground_learning.behaviors.policy:PolicyBehavior"
+policy = "navground.learning.behaviors.policy:PolicyBehavior"
 [project.entry-points.navground_scenarios]
-forward = "navground_learning.scenarios.forward:ForwardScenario"
-corridor_with_obstacle = "navground_learning.scenarios.corridor_with_obstacle:CorridorWithObstacle"
+forward = "navground.learning.scenarios.forward:ForwardScenario"
+corridor_with_obstacle = "navground.learning.scenarios.corridor_with_obstacle:CorridorWithObstacle"
 
 [tool.mypy]
 implicit_reexport = true
