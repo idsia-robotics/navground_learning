@@ -19,7 +19,7 @@ BoxType = type[np.floating[Any]] | type[np.integer[Any]]
 
 
 @dc.dataclass(repr=False)
-class Config:
+class DataclassConfig:
     dtype: str = ''
     """The data type"""
 
@@ -45,9 +45,16 @@ class Config:
                                  for name, value in nodef_f_vals)
         return f"{self.__class__.__name__}({nodef_f_repr})"
 
+    def get_dict(self) -> dict[str, Any]:
+        return dc.asdict(self)
 
-@dc.dataclass
-class ConfigWithKinematic(Config):
+    @classmethod
+    def make_from_dict(cls, value: Mapping[str, Any]) -> Any:
+        return cls(**value)
+
+
+@dc.dataclass(repr=False)
+class ConfigWithKinematic(DataclassConfig):
     max_speed: float = np.inf
     """The maximal speed of the agent"""
     max_angular_speed: float = np.inf
@@ -65,17 +72,6 @@ class ConfigWithKinematic(Config):
             self.max_angular_speed = kinematics.max_angular_speed
         if self.dof is None:
             self.dof = kinematics.dof()
-
-
-@dc.dataclass
-class DataclassConfig:
-
-    def get_dict(self) -> dict[str, Any]:
-        return dc.asdict(self)
-
-    @classmethod
-    def make_from_dict(cls, value: Mapping[str, Any]) -> Any:
-        return cls(**value)
 
 
 class ObservationConfig(abc.ABC, Registrable):

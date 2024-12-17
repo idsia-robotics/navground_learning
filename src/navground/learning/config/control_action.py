@@ -10,12 +10,11 @@ from navground import core
 from navground.core import FloatType
 
 from ..types import Array
-from .base import ActionConfig, ConfigWithKinematic, DataclassConfig
+from .base import ActionConfig, ConfigWithKinematic
 
 
 @dc.dataclass(repr=False)
-class ControlActionConfig(DataclassConfig,
-                          ConfigWithKinematic,
+class ControlActionConfig(ConfigWithKinematic,
                           ActionConfig,
                           register_name="Control"):
     """

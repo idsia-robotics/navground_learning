@@ -12,12 +12,11 @@ from navground import core
 from navground.core import FloatType
 
 from ..types import Array, Observation
-from .base import ConfigWithKinematic, DataclassConfig, ObservationConfig
+from .base import ConfigWithKinematic, ObservationConfig
 
 
 @dc.dataclass(repr=False)
-class DefaultObservationConfig(DataclassConfig,
-                               ConfigWithKinematic,
+class DefaultObservationConfig(ConfigWithKinematic,
                                ObservationConfig,
                                register_name="Default"):
     """
