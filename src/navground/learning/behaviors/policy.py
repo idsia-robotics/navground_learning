@@ -146,7 +146,7 @@ class PolicyBehavior(core.Behavior, name="Policy"):
 
     @property
     @core.register(
-        True, "Whether to include the target distance in the observations")
+        False, "Whether to include the target distance in the observations")
     def include_target_distance(self) -> bool:
         """
         See :py:attr:`.DefaultObservationConfig.include_target_distance`
@@ -159,7 +159,7 @@ class PolicyBehavior(core.Behavior, name="Policy"):
 
     @property
     @core.register(
-        True,
+        False,
         "Whether to include the target distance validity in the observations")
     def include_target_distance_validity(self) -> bool:
         """
@@ -186,7 +186,7 @@ class PolicyBehavior(core.Behavior, name="Policy"):
 
     @property
     @core.register(
-        True,
+        False,
         "Whether to include the target direction validity in the observations")
     def include_target_direction_validity(self) -> bool:
         """
@@ -238,6 +238,20 @@ class PolicyBehavior(core.Behavior, name="Policy"):
         self._observation_config.include_velocity = value
 
     @property
+    @core.register(
+        False,
+        "Whether to include the current angular speed in the observations")
+    def include_angular_speed(self) -> bool:
+        """
+        See :py:attr:`.DefaultObservationConfig.include_angular_speed`
+        """
+        return self._observation_config.include_angular_speed
+
+    @include_angular_speed.setter
+    def include_angular_speed(self, value: bool) -> None:
+        self._observation_config.include_angular_speed = value
+
+    @property
     @core.register(False,
                    "Whether to include the own radius in the observations")
     def include_radius(self) -> bool:
@@ -263,7 +277,7 @@ class PolicyBehavior(core.Behavior, name="Policy"):
         self._observation_config.flat = value
 
     @property
-    @core.register(False, "Length of the queue")
+    @core.register(1, "Length of the queue")
     def history(self) -> int:
         """
         See :py:attr:`.DefaultObservationConfig.history`
