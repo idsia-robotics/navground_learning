@@ -1,5 +1,5 @@
 from __future__ import annotations
-
+import warnings
 import pathlib
 from typing import cast
 try:
@@ -34,6 +34,7 @@ class PolicyBehavior(core.Behavior, name="Policy"):
     - :py:attr:`include_target_speed` (bool)
     - :py:attr:`include_target_angular_speed` (bool)
     - :py:attr:`include_velocity` (bool)
+    - :py:attr:`include_angular_speed` (bool)
     - :py:attr:`include_radius` (bool)
     - :py:attr:`use_wheels` (bool)
     - :py:attr:`use_acceleration_action` (bool)
@@ -46,7 +47,9 @@ class PolicyBehavior(core.Behavior, name="Policy"):
     :param kinematics: The agent kinematics
     :param radius: The agent radius
     :param policy: The policy
-    :param config: How to use the policy (default if not specified)
+    :param action_config: Configures which actions the policy generates
+    :param observation_config: Configures which observations the policy consumes
+    :param deterministic: Whether the policy evaluation is deterministic
     """
 
     _policies: dict[pathlib.Path, AnyPolicyPredictor] = {}
@@ -80,6 +83,13 @@ class PolicyBehavior(core.Behavior, name="Policy"):
     @classmethod
     def reset_cache(cls) -> None:
         cls._policies.clear()
+
+    def init_policy(self) -> None:
+        """
+        Loads the policy from :py:attr:`policy_path` if not already done.
+        """
+        if not self._policy and self._policy_path:
+            self._policy = PolicyBehavior.load_policy(self._policy_path)
 
     @classmethod
     def load_policy(cls, path: str | pathlib.Path) -> AnyPolicyPredictor:
@@ -124,25 +134,26 @@ class PolicyBehavior(core.Behavior, name="Policy"):
         """
         if not self._policy_path:
             return ''
-        # return str(self._policy_path.relative_to(pathlib.Path.cwd()))
-        return str(self._policy_path)
+        return str(self._policy_path.relative_to(pathlib.Path.cwd(), walk_up=True))
+        # return str(self._policy_path)
 
     @policy_path.setter
     def policy_path(self, value: PathLike) -> None:
-        self.set_policy_path(value)
+        self.set_policy_path(value, load_policy=False)
 
     def set_policy_path(self,
                         value: PathLike,
-                        load_policy: bool = True) -> None:
-        value = pathlib.Path(value)
+                        load_policy: bool = False) -> None:
+        value = pathlib.Path(value).absolute()
         try:
             if self._policy_path and self._policy_path.samefile(value):
                 return
         except FileNotFoundError:
             return
         self._policy_path = value
+        self._policy = None
         if load_policy:
-            self._policy = PolicyBehavior.load_policy(value)
+            self.init_policy()
 
     @property
     @core.register(
@@ -366,12 +377,15 @@ class PolicyBehavior(core.Behavior, name="Policy"):
         return self._state
 
     def compute_cmd_internal(self, time_step: float) -> core.Twist2:
-        if self._policy is None:
-            return core.Twist2((0, 0), 0, frame=core.Frame.relative)
         if not self._gym_agent:
             self._gym_agent = GymAgent(observation=self._observation_config,
                                        action=self._action_config,
                                        behavior=self)
+        if not self._policy:
+            self.init_policy()
+            if not self._policy:
+                warnings.warn("Policy not set", stacklevel=1)
+                return core.Twist2((0, 0), 0, frame=core.Frame.relative)
         obs = self._gym_agent.update_observation()
         act, _ = self._policy.predict(obs, deterministic=self.deterministic)
         cmd = self._gym_agent.get_cmd_from_action(act, time_step)
@@ -405,7 +419,7 @@ class PolicyBehavior(core.Behavior, name="Policy"):
                  observation_config=observation_config,
                  deterministic=deterministic)
         if policy_path:
-            pb.set_policy_path(policy_path)
+            pb.set_policy_path(policy_path, load_policy=True)
         pb.set_state_from(behavior)
         return pb
 
