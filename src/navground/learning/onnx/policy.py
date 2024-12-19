@@ -43,7 +43,7 @@ class OnnxPolicy:
         options = ort.SessionOptions()
         options.intra_op_num_threads = 1
         options.execution_mode = ort.ExecutionMode.ORT_SEQUENTIAL
-        options.graph_optimization_level = ort.GraphOptimization.ORT_ENABLE_ALL
+        options.graph_optimization_level = ort.GraphOptimizationLevel.ORT_ENABLE_ALL
         self.ort_sess = ort.InferenceSession(path, options)
         self.input_dims = [len(x.shape) for x in self.ort_sess.get_inputs()]
         xs = self.ort_sess.get_inputs()
