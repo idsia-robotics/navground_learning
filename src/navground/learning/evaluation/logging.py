@@ -348,4 +348,4 @@ def _config_il(model: BaseILAlgorithm, log: EvalLog) -> None:
         log.evaluate(global_step=logger._tensorboard_step)
         _log_batch(batch_num, batch_size, num_samples_so_far, *args, **kwargs)
 
-    bc_logger.log_batch = MethodType(log_batch, bc_logger)  # type: ignore
+    bc_logger.log_batch = MethodType(log_batch, bc_logger)

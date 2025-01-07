@@ -38,7 +38,7 @@ def evaluate_policy(
 
     if not isinstance(env, VecEnv):
         env = DummyVecEnv([
-            lambda: env  # type: ignore[list-item, return-value]
+            lambda: env
         ])
 
     is_monitor_wrapped = is_vecenv_wrapped(

@@ -19,7 +19,7 @@ def setup_tqdm() -> None:
     except ImportError:
         pass
     try:
-        import imitation.algorithms.bc  # type: ignore[import-untyped]
+        import imitation.algorithms.bc
 
         imitation.algorithms.bc.tqdm = tqdm.auto  # type: ignore[attr-defined]
     except ImportError:

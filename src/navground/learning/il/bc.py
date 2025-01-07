@@ -67,7 +67,7 @@ class BC(BaseILAlgorithm):
 
         # TODO(Jerome): monkey patching for now
         # In the future, better to subclass BC.
-        imitation.data.rollout.generate_trajectories = rollout.generate_trajectories  # type: ignore[attr-defined]
+        imitation.data.rollout.generate_trajectories = rollout.generate_trajectories
 
         super().__init__(env=env,
                          seed=seed,

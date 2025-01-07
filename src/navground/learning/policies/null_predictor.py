@@ -35,7 +35,7 @@ class NullPredictor:
             return np.zeros(shape=self.action_space.shape,
                             dtype=self.action_space.dtype)
         return np.zeros(
-            shape=(number, *self.action_space.shape),  # type: ignore[misc]
+            shape=(number, *self.action_space.shape),
             dtype=self.action_space.dtype)
 
     def predict(self,
