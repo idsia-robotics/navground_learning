@@ -92,7 +92,7 @@ def save_env(
 def load_env(path: PathLike) -> MultiAgentNavgroundEnv | NavgroundEnv:
     with open(path) as f:
         data = yaml.safe_load(f.read())
-    return cast(MultiAgentNavgroundEnv | NavgroundEnv,
+    return cast("MultiAgentNavgroundEnv | NavgroundEnv",
                 NavgroundBaseEnv.from_dict(data))
 
 
@@ -110,7 +110,7 @@ def export_behavior(
     if venv:
         value = venv.get_attr("asdict", [0])[0]
         env: BaseEnv | BaseParallelEnv | None = cast(
-            BaseEnv | BaseParallelEnv, NavgroundBaseEnv.from_dict(value))
+            "BaseEnv | BaseParallelEnv", NavgroundBaseEnv.from_dict(value))
     else:
         env = None
     export_policy_as_behavior(path=path, policy=model.policy, env=env)

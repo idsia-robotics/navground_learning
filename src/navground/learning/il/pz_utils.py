@@ -28,7 +28,6 @@ def make_vec_from_penv(env: ParallelEnv[int, Observation, Action],
     :returns:   The vectorized environment.
     """
     import supersuit  # type: ignore[import-untyped]
-    from stable_baselines3.common.vec_env import VecEnv
 
     from .parallel_rollout_wrapper import RolloutInfoWrapper
 
@@ -38,4 +37,4 @@ def make_vec_from_penv(env: ParallelEnv[int, Observation, Action],
                                         num_envs,
                                         num_cpus=processes,
                                         base_class="stable_baselines3")
-    return cast(VecEnv, venv)
+    return cast("VecEnv", venv)

@@ -125,7 +125,7 @@ class SocialReward(Reward, register_name="Social"):
         if self._max_social_margin > 0 and self.alpha != 0:
             ns = world.get_neighbors(agent, self._max_social_margin)
             for n in ns:
-                distance = cast(float,
+                distance = cast("float",
                                 np.linalg.norm(n.position - agent.position))
                 margin = self._social_margin.get(n.id, distance)
                 if margin > distance:

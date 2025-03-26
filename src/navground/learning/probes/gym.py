@@ -2,8 +2,7 @@ from __future__ import annotations
 
 import functools
 from collections.abc import Callable, Collection
-from typing import cast
-
+from typing import TYPE_CHECKING, cast
 
 from navground import sim
 
@@ -12,6 +11,9 @@ from ..env import BaseEnv
 from ..internal.base_env import NavgroundBaseEnv
 from ..internal.group import create_agents_in_groups
 from ..parallel_env import BaseParallelEnv
+
+if TYPE_CHECKING:
+    from imitation.data.types import DictObs
 
 
 # TODO(Jerome): check that it works with flat observations
@@ -64,12 +66,12 @@ class GymProbe(sim.Probe):
                 })
 
     def finalize(self, run: sim.ExperimentalRun) -> None:
-        from imitation.data.types import DictObs
 
         for agent_index, ta in self._tas.items():
             ts = ta.finish_trajectory(None, False)
             for key, data in cast(
-                    DictObs, ts.obs).items():  # type: ignore[no-untyped-call]
+                    'DictObs',
+                    ts.obs).items():  # type: ignore[no-untyped-call]
                 run.add_record(f"observations/{agent_index}/{key}", data)
             run.add_record(f"actions/{agent_index}", ts.acts)
             run.add_record(f"rewards/{agent_index}", ts.rews)
@@ -85,7 +87,8 @@ class GymProbe(sim.Probe):
                 self._tas[i].add_step({'obs': maybe_wrap_in_dictobs(obs)})
 
     @classmethod
-    def with_env(cls, env: BaseEnv | BaseParallelEnv) -> Callable[[], GymProbe]:
+    def with_env(cls,
+                 env: BaseEnv | BaseParallelEnv) -> Callable[[], GymProbe]:
         """
         Creates a probe factory to record all actions and observations
         in an environment

@@ -97,7 +97,7 @@ class OnnxPolicy:
         action = self.ort_sess.run(None, observation)[0]
         if not vectorized:
             action = action[0]
-        return cast(Action, action), None
+        return cast("Action", action), None
 
     @property
     def observation_space(self) -> gym.spaces.Box | gym.spaces.Dict:

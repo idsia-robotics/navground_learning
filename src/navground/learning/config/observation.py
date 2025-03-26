@@ -234,7 +234,7 @@ class DefaultObservationConfig(ConfigWithKinematic,
         self._rescale(rs)
         if not self.should_flatten_observations:
             return rs
-        vs = cast(Array, gym.spaces.flatten(self._item_space, rs))
+        vs = cast("Array", gym.spaces.flatten(self._item_space, rs))
         if self._dtype:
             vs = vs.astype(self._dtype)
         return vs
@@ -251,7 +251,7 @@ class DefaultObservationConfig(ConfigWithKinematic,
     def space(self) -> gym.Space[Any]:
         if self.should_flatten_observations:
             flat_space: gym.spaces.Box = cast(
-                gym.spaces.Box, gym.spaces.flatten_space(self._item_space))
+                "gym.spaces.Box", gym.spaces.flatten_space(self._item_space))
             if self._dtype:
                 flat_space.dtype = self._dtype
             if self.history > 1:

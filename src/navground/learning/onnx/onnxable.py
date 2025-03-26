@@ -16,7 +16,7 @@ class OnnxablePolicy(th.nn.Module):
         self.policy = policy
 
     def forward(self, observation: th.Tensor) -> th.Tensor:
-        return cast(th.Tensor, self.policy(observation, deterministic=True))
+        return cast("th.Tensor", self.policy(observation, deterministic=True))
 
 
 class OnnxablePolicyWithMultiInput(th.nn.Module):
@@ -28,4 +28,4 @@ class OnnxablePolicyWithMultiInput(th.nn.Module):
 
     def forward(self, *observations: th.Tensor) -> th.Tensor:
         obs = dict(zip(self.keys, list(observations), strict=True))
-        return cast(th.Tensor, self.policy(obs, deterministic=True))
+        return cast("th.Tensor", self.policy(obs, deterministic=True))

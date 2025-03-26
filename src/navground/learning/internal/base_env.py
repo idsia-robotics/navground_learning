@@ -161,11 +161,11 @@ class NavgroundBaseEnv:
                     self.max_number_of_agents).items() if agent.gym is not None
             }
         self._observation_space = {
-            i: cast(GymAgent, agent.gym).observation_space
+            i: cast("GymAgent", agent.gym).observation_space
             for i, agent in self._possible_agents.items()
         }
         self._action_space = {
-            i: cast(GymAgent, agent.gym).action_space
+            i: cast("GymAgent", agent.gym).action_space
             for i, agent in self._possible_agents.items()
         }
         if self.render_mode == "human" and not self._loop:

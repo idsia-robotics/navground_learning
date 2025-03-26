@@ -159,10 +159,10 @@ def policy_to_callable(
                 episode_starts: np.typing.NDArray[np.bool] | None,
                 infos: list[dict[str, Array]] | None = None
             ) -> tuple[Array, tuple[Array, ...] | None]:
-                return cast(rollout_without_info.PolicyCallable,
+                return cast("rollout_without_info.PolicyCallable",
                             policy)(observations, states, episode_starts)
         else:
-            get_actions = cast(PolicyCallableWithInfo, policy)
+            get_actions = cast("PolicyCallableWithInfo", policy)
     else:
         raise TypeError(
             "Policy must be None, a stable-baselines policy or algorithm, "

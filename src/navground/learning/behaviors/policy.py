@@ -424,7 +424,7 @@ class PolicyBehavior(core.Behavior, name="Policy"):
             policy = None
         except TypeError:
             policy_path = ''
-        pb = cls(policy=cast(AnyPolicyPredictor | None, policy),
+        pb = cls(policy=cast("AnyPolicyPredictor | None", policy),
                  action_config=action_config,
                  observation_config=observation_config,
                  deterministic=deterministic,

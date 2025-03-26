@@ -134,7 +134,7 @@ class ModulationActionConfig(DataclassConfig, ActionConfig, register_name="Modul
             k: self.normalize(k, getattr(behavior, k))
             for k in self.param_space
         }
-        return cast(Array, gym.spaces.flatten(self.param_space, params))
+        return cast('Array', gym.spaces.flatten(self.param_space, params))
 
     def configure(self, behavior: core.Behavior) -> None:
         pass

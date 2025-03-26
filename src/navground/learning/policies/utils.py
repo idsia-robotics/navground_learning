@@ -12,7 +12,7 @@ def get_number_of_batches_in_array(value: Array, space: gym.spaces.Box) -> int:
     if len(value.shape) == len(space.shape):
         return 0
     if len(value.shape) == len(space.shape) + 1:
-        return cast(int, value.shape[0])
+        return cast("int", value.shape[0])
     raise ValueError(f"Invalid shape {value.shape} for space {space}")
 
 
@@ -20,7 +20,7 @@ def get_number_of_batches_in_dict(value: dict[str, Array],
                                   space: gym.spaces.Dict) -> int:
     keys = set(space)
     batches = [
-        get_number_of_batches_in_array(v, cast(gym.spaces.Box, space[k]))
+        get_number_of_batches_in_array(v, cast("gym.spaces.Box", space[k]))
         for k, v in value.items()
         if k in keys and isinstance(space[k], gym.spaces.Box)
     ]

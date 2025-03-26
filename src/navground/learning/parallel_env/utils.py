@@ -32,7 +32,6 @@ def make_vec_from_penv(env: BaseParallelEnv,
                 single agent environments.
     """
     import supersuit  # type: ignore[import-untyped]
-    from stable_baselines3.common.vec_env import VecEnv
 
     # penv = supersuit.pettingzoo_env_to_vec_env_v1(env)
     penv = supersuit.vector.MarkovVectorEnv(env, black_death=black_death)
@@ -40,4 +39,4 @@ def make_vec_from_penv(env: BaseParallelEnv,
                                         num_envs,
                                         num_cpus=processes,
                                         base_class="stable_baselines3")
-    return cast(VecEnv, penv)
+    return cast("VecEnv", penv)

@@ -34,7 +34,7 @@ def get_sensor_as_dict(
         return sensor
     if isinstance(sensor, sim.Sensor):
         sensor = sim.dump(sensor)
-    return cast(dict[str, Any], yaml.safe_load(sensor))
+    return cast("dict[str, Any]", yaml.safe_load(sensor))
 
 
 @dc.dataclass
@@ -136,7 +136,7 @@ class GroupConfig:
             k: value[k]
             for k in ('color', 'tag', 'deterministic', 'sensor') if k in value
         }
-        kwargs.update((k, cast(JSONAble, item_cls).from_dict(value[k]))
+        kwargs.update((k, cast("JSONAble", item_cls).from_dict(value[k]))
                       for k, item_cls in loadables.items() if k in value)
         return GroupConfig(**kwargs)
 

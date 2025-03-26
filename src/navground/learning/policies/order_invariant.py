@@ -87,13 +87,13 @@ class OrderInvariantCombinedExtractor(BaseFeaturesExtractor):
                 extractors[key] = nn.Flatten()
                 if key in order_invariant_keys:
                     order_invariant_lens.add(
-                        cast(gym.spaces.Box, subspace).shape[0])
+                        cast("gym.spaces.Box", subspace).shape[0])
                     order_invariant_size += get_flattened_obs_dim(subspace)
                 elif key in replicated_keys:
                     replicated_size += get_flattened_obs_dim(subspace)
                 elif key == filter_key:
                     order_invariant_lens.add(
-                        cast(gym.spaces.Box, subspace).shape[0])
+                        cast("gym.spaces.Box", subspace).shape[0])
                 elif key not in removed_keys:
                     total_concat_size += get_flattened_obs_dim(subspace)
 
@@ -245,7 +245,7 @@ class OrderInvariantFlattenExtractor(BaseFeaturesExtractor):
             if mask is not None and not self.use_masked_tensors:
                 oi = oi[mask]
                 if has_same_number:
-                    number = cast(int, numbers[0].item())
+                    number = cast("int", numbers[0].item())
                     if number > 0:
                         oi = oi.reshape(*shape[:-1], number, -1)
 
@@ -347,10 +347,10 @@ def make_order_invariant_flatten_extractor(
     """
 
     ns = set(
-        cast(gym.spaces.Box, dict_space[k]).shape[0]
+        cast("gym.spaces.Box", dict_space[k]).shape[0]
         for k in order_invariant_keys)
     if filter_key and filter_key in dict_space:
-        ns.add(cast(gym.spaces.Box, dict_space[filter_key]).shape[0])
+        ns.add(cast("gym.spaces.Box", dict_space[filter_key]).shape[0])
     assert len(ns) == 1
     number = list(ns)[0]
     indices = {}

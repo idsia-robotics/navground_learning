@@ -68,4 +68,4 @@ class RewardProbe(sim.RecordProbe):
             :py:meth:`navground.sim.Experiment.add_record_probe`.
         """
         probe = functools.partial(cls, reward=reward)
-        return cast(Callable[[sim.Dataset], 'RewardProbe'], probe)
+        return cast('Callable[[sim.Dataset], RewardProbe]', probe)

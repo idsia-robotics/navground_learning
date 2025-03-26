@@ -53,7 +53,7 @@ class PolicyModulation(core.BehaviorModulation):
                                       behavior=behavior)
         obs = self.gym_agent.update_observation()
         act, _ = self.policy.predict(obs, deterministic=self.deterministic)
-        ac = cast(ModulationActionConfig, self.gym_agent.action_config)
+        ac = cast("ModulationActionConfig", self.gym_agent.action_config)
         params = ac.get_params_from_action(act)
         for k, v in params.items():
             self._old_params[k] = getattr(behavior, k)
