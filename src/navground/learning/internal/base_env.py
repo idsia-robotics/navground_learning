@@ -59,7 +59,9 @@ class NavgroundBaseEnv:
 
     :param max_duration: If positive, it will signal a truncation after this simulated time.
 
-    :param terminate_outside_bounds: Whether to terminate when an agent exit the bounds
+    :param terminate_if_idle: Whether to terminate when an agent is idle
+
+    :param truncate_outside_bounds: Whether to truncate when an agent exit the bounds
 
     :param bounds: The area to render and a fence for truncating processes when agents exit it.
 
@@ -74,6 +76,12 @@ class NavgroundBaseEnv:
 
     :param realtime_factor: a realtime factor for `render_mode="human"`: larger values
                             speed up the simulation.
+
+    :param wait: Whether to signal termination/truncation only when
+                 all agents have terminated/truncated.
+
+    :param truncate_fast: Whether to signal truncation for all agents
+                          as soon as one agent truncates.
     """
 
     metadata = {"render_modes": ["human", "rgb_array"], 'render_fps': 30}
@@ -86,24 +94,30 @@ class NavgroundBaseEnv:
                  max_number_of_agents: int | None = None,
                  time_step: float = 0.1,
                  max_duration: float = -1.0,
+                 terminate_if_idle: bool = True,
                  bounds: Bounds | None = None,
-                 terminate_outside_bounds: bool = False,
+                 truncate_outside_bounds: bool = False,
                  render_mode: str | None = None,
                  render_kwargs: Mapping[str, Any] = {},
                  realtime_factor: float = 1.0,
-                 stuck_timeout: float = 1) -> None:
+                 stuck_timeout: float = -1,
+                 wait: bool = False,
+                 truncate_fast: bool = False) -> None:
 
         assert render_mode is None or render_mode in self.metadata[
             "render_modes"]  # type: ignore
         self.groups_config = groups
         self.time_step = time_step
         self.max_duration = max_duration
+        self.terminate_if_idle = terminate_if_idle
         self.bounds = bounds
-        self.terminate_outside_bounds = terminate_outside_bounds
+        self.truncate_outside_bounds = truncate_outside_bounds
         self.render_mode = render_mode
         self.render_kwargs = render_kwargs
         self.realtime_factor = realtime_factor
         self.stuck_timeout = stuck_timeout
+        self.wait = wait
+        self.truncate_fast = truncate_fast
         self._scenario: sim.Scenario | None = make_scenario(scenario)
         self.max_number_of_agents = max_number_of_agents
         self._spec: dict[str, Any]
@@ -111,25 +125,30 @@ class NavgroundBaseEnv:
         self._init()
 
     def _init_spec(
-        self, scenario: sim.Scenario | str | dict[str, Any] | None
-    ) -> None:
+            self,
+            scenario: sim.Scenario | str | dict[str, Any] | None) -> None:
         self._spec = {
             'max_number_of_agents': self.max_number_of_agents,
             'groups': self.groups_config,
             'scenario': scenario,
             'time_step': self.time_step,
+            'terminate_if_idle': self.terminate_if_idle,
             'bounds': self.bounds,
             'max_duration': self.max_duration,
-            'terminate_outside_bounds': self.terminate_outside_bounds,
+            'truncate_outside_bounds': self.truncate_outside_bounds,
             'render_mode': self.render_mode,
             'render_kwargs': self.render_kwargs,
             'realtime_factor': self.realtime_factor,
-            'stuck_timeout': self.stuck_timeout
+            'stuck_timeout': self.stuck_timeout,
+            'wait': self.wait,
+            'truncate_fast': self.truncate_fast
         }
 
     def _init(self) -> None:
         self._world: sim.World | None = None
         self._agents: dict[int, Agent] = {}
+        self._termination: dict[int, bool] = {}
+        self._truncation: dict[int, bool] = {}
         self._loop: asyncio.AbstractEventLoop | None = None
         if self._scenario is None:
             self._possible_agents: dict[int, Agent] = {}
@@ -138,8 +157,8 @@ class NavgroundBaseEnv:
             self._possible_agents = {
                 i: agent
                 for i, agent in create_agents_in_groups(
-                    world, self.groups_config, self.max_number_of_agents).items()
-                if agent.gym is not None
+                    world, self.groups_config,
+                    self.max_number_of_agents).items() if agent.gym is not None
             }
         self._observation_space = {
             i: cast(GymAgent, agent.gym).observation_space
@@ -154,8 +173,7 @@ class NavgroundBaseEnv:
 
             from navground.sim.ui import WebUI
 
-            self._loop = asyncio.get_event_loop(
-            )
+            self._loop = asyncio.get_event_loop()
             self._rt_clock: SyncClock | None = SyncClock(
                 self.time_step, factor=self.realtime_factor)
             self._ui: WebUI | None = WebUI(port=8002)
@@ -185,6 +203,8 @@ class NavgroundBaseEnv:
                 gym_agent = self._agents[i].gym
                 if gym_agent:
                     gym_agent.init(ng_agent.behavior, self._agents[i].state)
+        self._termination = {i: False for i in self._agents}
+        self._truncation = {i: False for i in self._agents}
 
     @property
     def init_args(self) -> dict[str, Any]:
@@ -206,11 +226,14 @@ class NavgroundBaseEnv:
             'groups': [g.asdict for g in self.groups_config],
             'time_step': self.time_step,
             'max_duration': self.max_duration,
-            'terminate_outside_bounds': self.terminate_outside_bounds,
+            'terminate_if_idle': self.terminate_if_idle,
+            'truncate_outside_bounds': self.truncate_outside_bounds,
             'render_mode': self.render_mode,
             'render_kwargs': self.render_kwargs,
             'realtime_factor': self.realtime_factor,
-            'stuck_timeout': self.stuck_timeout
+            'stuck_timeout': self.stuck_timeout,
+            'wait': self.wait,
+            'truncate_fast': self.truncate_fast
         }
         if self._scenario:
             rs['scenario'] = yaml.safe_load(sim.dump(self._scenario))
@@ -238,12 +261,15 @@ class NavgroundBaseEnv:
         ]
         env.time_step = value.get('time_step', 0.1)
         env.max_duration = value.get('max_duration', -1)
-        env.terminate_outside_bounds = value.get('terminate_outside_bounds',
-                                                 False)
+        env.terminate_if_idle = value.get('terminate_if_idle', True)
+        env.truncate_outside_bounds = value.get('truncate_outside_bounds',
+                                                False)
         env.render_mode = value.get('render_mode')
         env.render_kwargs = value.get('render_kwargs', {})
         env.realtime_factor = value.get('realtime_factor', 1)
-        env.stuck_timeout = value.get('stuck_timeout', 1)
+        env.stuck_timeout = value.get('stuck_timeout', -1)
+        env.wait = value.get('wait', False)
+        env.truncate_fast = value.get('truncate_fast', False)
         if 'scenario' in value:
             env._scenario = sim.load_scenario(yaml.safe_dump(
                 value['scenario']))
@@ -296,7 +322,7 @@ class NavgroundBaseEnv:
         assert self._world is not None
         try:
             for index, action in actions.items():
-                if index in self._agents:
+                if self.agent_is_active(index):
                     agent = self._agents[index]
                     if agent.navground and agent.gym:
                         cmd = agent.gym.get_cmd_from_action(
@@ -312,15 +338,18 @@ class NavgroundBaseEnv:
         if self.render_mode == "human" and self._ui and self._rt_clock and self._loop:
             self._loop.run_until_complete(self._ui.update(self._world))
             self._rt_clock.tick()
+        self.update_termination()
+        self.update_truncation()
         return (self.get_observations(), self.get_rewards(),
-                self.has_terminated(), self.should_be_truncated(),
+                self.get_termination(), self.get_truncation(),
                 self.get_infos())
 
     def get_rewards(self) -> dict[int, float]:
         if self._world:
             return {
-                index: agent.reward(agent.navground, self._world,
-                                    self.time_step)
+                index:
+                agent.reward(agent.navground, self._world, self.time_step)
+                if self.agent_is_active(index) else 0
                 for index, agent in self._agents.items()
                 if agent.navground and agent.reward
             }
@@ -348,24 +377,55 @@ class NavgroundBaseEnv:
             for index, agent in self._agents.items() if agent.gym
         }
 
-    def has_terminated(self) -> dict[int, bool]:
-        if self._world:
-            should_terminate = self._world.should_terminate()
-        else:
-            should_terminate = False
+    def agent_is_active(self, index: int) -> bool:
+        return not self._termination.get(index, False) and not self._truncation.get(
+            index, False)
+
+    def update_termination(self) -> None:
+        if not self._world:
+            return
+        if self._world.should_terminate():
+            self._termination = {i: True for i in self._agents}
+            return
+        time = self._world.time
+        for index, agent in self._agents.items():
+            if not self._termination[index]:
+                if agent.navground:
+                    if self.terminate_if_idle and agent.navground.idle:
+                        self._termination[index] = True
+                        continue
+                    if self.stuck_timeout > 0 and agent.navground.has_been_stuck_since(
+                            time - self.stuck_timeout):
+                        self._termination[index] = True
+                        continue
+
+    def get_truncation(self) -> dict[int, bool]:
+        if self.wait and not all(self._truncation.values()):
+            return {i: False for i in self._truncation}
+        if self.truncate_fast and any(self._truncation.values()):
+            return {i: True for i in self._truncation}
+        return self._truncation
+
+    def get_termination(self) -> dict[int, bool]:
+        if self.wait and not all(self._termination.values()):
+            return {i: False for i in self._termination}
+        return self._termination
+
+    def update_truncation(self):
+        if self._world and self.max_duration > 0 and self.max_duration <= self._world.time:
+            self._truncation = {i: True for i in self._agents}
+            return
         out = self.should_check_if_outside_bounds
-        return {
-            index:
-            (should_terminate or agent.navground.idle
-             or (self.stuck_timeout > 0
-                 and agent.navground.has_been_stuck_since(self.stuck_timeout))
-             or (out and self.is_outside_bounds(agent.navground.position)))
-            for index, agent in self._agents.items() if agent.navground
-        }
+        for index, agent in self._agents.items():
+            if self._termination[index] or self._truncation[index]:
+                continue
+            if agent.navground:
+                if out and self.is_outside_bounds(agent.navground.position):
+                    self._truncation[index] = True
 
     @property
     def should_check_if_outside_bounds(self) -> bool:
-        return self.terminate_outside_bounds and self.bounds is not None
+        return self.truncate_outside_bounds and self.bounds is not None
 
     def is_outside_bounds(self, position: core.Vector2) -> bool:
         if self.bounds is not None:
@@ -373,15 +433,13 @@ class NavgroundBaseEnv:
                 position > self.bounds[1])
         return True
 
-    def should_be_truncated(self) -> dict[int, bool]:
-        value = (self._world is not None and self.max_duration > 0
-                 and self.max_duration <= self._world.time)
-        return {index: value for index in self._agents}
-
     def get_infos(self) -> dict[int, dict[str, Action]]:
         return {
             index: {
-                self.action_key: agent.gym.get_action(self.time_step)
+                self.action_key:
+                agent.gym.get_action(self.time_step)
+                if not self.agent_is_active(index) else np.zeros_like(
+                    self._action_space[index].low)
             }
             for index, agent in self._agents.items() if agent.gym
         }

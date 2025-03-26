@@ -96,12 +96,15 @@ def parallel_env(scenario: sim.Scenario | str | dict[str, Any] | None = None,
                  max_number_of_agents: int | None = None,
                  time_step: float = 0.1,
                  max_duration: float = -1.0,
+                 terminate_if_idle: bool = True,
                  bounds: Bounds | None = None,
-                 terminate_outside_bounds: bool = False,
+                 truncate_outside_bounds: bool = False,
                  render_mode: str | None = None,
                  render_kwargs: Mapping[str, Any] = {},
                  realtime_factor: float = 1.0,
-                 stuck_timeout: float = 1) -> MultiAgentNavgroundEnv:
+                 stuck_timeout: float = -1,
+                 wait: bool = False,
+                 truncate_fast: bool = False) -> MultiAgentNavgroundEnv:
     """
     Create a multi-agent PettingZoo environment that uses
     a :py:class:`navground.sim.Scenario` to
@@ -135,7 +138,9 @@ def parallel_env(scenario: sim.Scenario | str | dict[str, Any] | None = None,
 
     :param max_duration: If positive, it will signal a truncation after this simulated time.
 
-    :param terminate_outside_bounds: Whether to terminate when an agent exit the bounds
+    :param terminate_if_idle: Whether to terminate when an agent is idle
+
+    :param truncate_outside_bounds: Whether to truncate when an agent exit the bounds
 
     :param bounds: The area to render and a fence for truncating processes when agents exit it.
 
@@ -160,12 +165,15 @@ def parallel_env(scenario: sim.Scenario | str | dict[str, Any] | None = None,
         scenario=scenario,
         time_step=time_step,
         max_duration=max_duration,
+        terminate_if_idle=terminate_if_idle,
         bounds=bounds,
-        terminate_outside_bounds=terminate_outside_bounds,
+        truncate_outside_bounds=truncate_outside_bounds,
         render_mode=render_mode,
         render_kwargs=render_kwargs,
         realtime_factor=realtime_factor,
-        stuck_timeout=stuck_timeout)
+        stuck_timeout=stuck_timeout,
+        wait=wait,
+        truncate_fast=truncate_fast)
 
 
 def shared_parallel_env(
@@ -178,14 +186,17 @@ def shared_parallel_env(
         reward: Reward | None = None,
         time_step: float = 0.1,
         max_duration: float = -1.0,
+        terminate_if_idle: bool = True,
         bounds: Bounds | None = None,
-        terminate_outside_bounds: bool = False,
+        truncate_outside_bounds: bool = False,
         render_mode: str | None = None,
         render_kwargs: Mapping[str, Any] = {},
         realtime_factor: float = 1.0,
-        stuck_timeout: float = 1,
+        stuck_timeout: float = -1,
         color: str = '',
-        tag: str = '') -> MultiAgentNavgroundEnv:
+        tag: str = '',
+        wait: bool = False,
+        truncate_fast: bool = False) -> MultiAgentNavgroundEnv:
     """
     Create a multi-agent PettingZoo environment that uses
     a :py:class:`navground.sim.Scenario` to
@@ -230,7 +241,9 @@ def shared_parallel_env(
 
     :param max_duration: If positive, it will signal a truncation after this simulated time.
 
-    :param terminate_outside_bounds: Whether to terminate when an agent exit the bounds
+    :param terminate_if_idle: Whether to terminate when an agent is idle
+
+    :param truncate_outside_bounds: Whether to truncate when an agent exit the bounds
 
     :param bounds: The area to render and a fence for truncating processes when agents exit it.
 
@@ -268,12 +281,15 @@ def shared_parallel_env(
         scenario=scenario,
         time_step=time_step,
         max_duration=max_duration,
+        terminate_if_idle=terminate_if_idle,
         bounds=bounds,
-        terminate_outside_bounds=terminate_outside_bounds,
+        truncate_outside_bounds=truncate_outside_bounds,
         render_mode=render_mode,
         render_kwargs=render_kwargs,
         realtime_factor=realtime_factor,
-        stuck_timeout=stuck_timeout)
+        stuck_timeout=stuck_timeout,
+        wait=wait,
+        truncate_fast=truncate_fast)
 
 
 def make_shared_parallel_env_with_env(
