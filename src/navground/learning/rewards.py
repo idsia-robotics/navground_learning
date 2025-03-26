@@ -47,7 +47,7 @@ class EfficacyReward(Reward, register_name="Efficacy"):
     def __call__(self, agent: sim.Agent, world: sim.World,
                  time_step: float) -> float:
         if agent.behavior:
-            return agent.behavior.efficacy
+            return min(agent.behavior.efficacy, 1) - 1
         return 0
 
 
@@ -122,7 +122,7 @@ class SocialReward(Reward, register_name="Social"):
                 r = -self.beta * sv / max_violation
         else:
             r = 0
-        if self._max_social_margin > 0:
+        if self._max_social_margin > 0 and self.alpha != 0:
             ns = world.get_neighbors(agent, self._max_social_margin)
             for n in ns:
                 distance = cast(float,
