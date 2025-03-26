@@ -73,6 +73,7 @@ universal = true
 
 [tool.setuptools-git-versioning]
 enabled = true
+starting_version = "0.1.1"
 # dirty_template = "{tag}-{ccount}+{branch}"
 
 [project.entry-points.navground_behaviors]
