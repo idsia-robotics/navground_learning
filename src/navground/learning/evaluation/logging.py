@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Callable
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from itertools import islice
 from types import MethodType
 from typing import TYPE_CHECKING, Any
@@ -15,6 +15,7 @@ from ..config import GroupConfig
 from ..env import BaseEnv
 from ..types import AnyPolicyPredictor
 from .experiment import make_experiment_with_env
+from pettingzoo.utils.env import ParallelEnv
 
 if TYPE_CHECKING:
     from imitation.algorithms.bc import BCLogger
@@ -25,6 +26,7 @@ if TYPE_CHECKING:
     from torch.utils.tensorboard.writer import SummaryWriter
 
     from ..il.base import BaseILAlgorithm
+    from ..parallel_env import BaseParallelEnv
 
 
 def log_yaml(writer: SummaryWriter, name: str, data: dict[str, Any]) -> None:
@@ -33,23 +35,29 @@ def log_yaml(writer: SummaryWriter, name: str, data: dict[str, Any]) -> None:
     writer.flush()  # type: ignore[no-untyped-call]
 
 
-def log_env(writer: SummaryWriter, env: BaseEnv | VecEnv) -> None:
+def log_env(writer: SummaryWriter,
+            env: BaseEnv | VecEnv | BaseParallelEnv) -> None:
     from stable_baselines3.common.vec_env import VecEnv
 
     if isinstance(env, VecEnv):
         value = env.get_attr("asdict", [0])[0]
+    elif isinstance(env, ParallelEnv):
+        value = env.asdict  # type: ignore
     else:
         value = env.get_wrapper_attr("asdict")
     log_yaml(writer, "environment", value)
 
 
 def log_graph(writer: SummaryWriter,
-              env: BaseEnv | VecEnv,
+              env: BaseEnv | VecEnv | BaseParallelEnv,
               policy: Any,
               index: int = 0) -> None:
     import torch as th
 
-    obs = env.observation_space.sample()
+    if isinstance(env, ParallelEnv):
+        obs = env.observation_space(0).sample()
+    else:
+        obs = env.observation_space.sample()
     if isinstance(obs, dict):
         x: th.Tensor | dict[str, th.Tensor] = {
             k: th.from_numpy(v[np.newaxis, :])
@@ -102,6 +110,10 @@ class TrajectoryPlotConfig:
     """time steps interval at which to draw the agent in the plots"""
     width: float = 10.0
     """total width of the plots"""
+    world_kwargs: dict[str, Any] = field(default_factory=dict)
+    """The world kwargs passed to :py:func:navground.sim.pyplot_helpers.plot_runs"""
+    hide_axes: bool = True
+    """whether to hide the axis"""
 
 
 def record_values(logger: Logger, key: str,
@@ -124,7 +136,11 @@ class EvalLog:
                  reward: bool = True,
                  collisions: bool = True,
                  efficacy: bool = True,
-                 safety_violation: bool = True):
+                 safety_violation: bool = True,
+                 duration: bool = False,
+                 processes: int = 1,
+                 use_multiprocess: bool = False,
+                 use_onnx: bool = True):
         self.plot_config = plot_config
         self.video_config = video_config
         self.episodes = episodes
@@ -135,6 +151,10 @@ class EvalLog:
         self.record_safety_violation = safety_violation
         self.record_efficacy = efficacy
         self.record_reward = reward
+        self.record_duration = duration
+        self.processes = processes
+        self.use_multiprocess = use_multiprocess
+        self.use_onnx = use_onnx or self.processes > 1
 
     @property
     def record_pose(self) -> bool:
@@ -145,8 +165,8 @@ class EvalLog:
         return max(0, self.plot_config.number, self.video_config.number,
                    self.episodes)
 
-    def init(self, env: BaseEnv | VecEnv, policy: AnyPolicyPredictor,
-             logger: Logger) -> None:
+    def init(self, env: BaseEnv | VecEnv | BaseParallelEnv,
+             policy: AnyPolicyPredictor, logger: Logger) -> None:
         self._init_logger(logger)
         self._init_eval_exp(env=env, policy=policy)
         if self.tb_writer:
@@ -173,8 +193,15 @@ class EvalLog:
         ]
         self.tb_writer = formats[0].writer if formats else None
 
-    def _init_eval_exp(self, env: BaseEnv | VecEnv, policy: AnyPolicyPredictor) -> None:
-        group = GroupConfig(policy=policy, color=self.video_config.color)
+    def _init_eval_exp(self, env: BaseEnv | VecEnv | BaseParallelEnv,
+                       policy: AnyPolicyPredictor) -> None:
+        if self.use_onnx:
+            _policy = "_policy.onnx"
+            self._policy = policy
+        else:
+            _policy = policy
+
+        group = GroupConfig(policy=_policy, color=self.video_config.color)
         exp = make_experiment_with_env(env=env,
                                        groups=[group],
                                        record_reward=self.record_reward)
@@ -184,16 +211,28 @@ class EvalLog:
         self.eval_exp.record_config.collisions = self.record_collisions
         self.eval_exp.record_config.efficacy = self.record_efficacy
         self.eval_exp.record_config.safety_violation = self.record_safety_violation
+        if self.plot_config.number > 0 or self.video_config.number > 0:
+            self.eval_exp.record_config.world = True
         # self.eval_exp.record_config.deadlocks = True
 
     def evaluate(self, global_step: int) -> None:
         if self.eval_exp.number_of_runs:
+            if self.use_onnx:
+                from ..onnx import export
+                export(self._policy, "_policy.onnx")
+
             self.eval_exp.remove_all_runs()
-            self.eval_exp.run()
+            if self.processes > 1:
+                self.eval_exp.run_mp(number_of_processes=self.processes,
+                                     keep=True,
+                                     use_multiprocess=self.use_multiprocess)
+            else:
+                self.eval_exp.run()
         else:
             return
         if self.plot_config.number > 0:
             from stable_baselines3.common.logger import Figure
+
             from navground.sim.pyplot_helpers import plot_runs
 
             runs = list(self.eval_exp.runs.values())[:self.plot_config.number]
@@ -202,14 +241,17 @@ class EvalLog:
                             step=self.plot_config.step,
                             with_agent=True,
                             with_world=True,
-                            color=lambda a: self.plot_config.color,
-                            width=self.plot_config.width)
+                            color=self.plot_config.color,
+                            width=self.plot_config.width,
+                            world_kwargs=self.plot_config.world_kwargs,
+                            hide_axes=self.plot_config.hide_axes)
             self.logger.record("eval/figure",
                                Figure(fig, close=True),
                                exclude=("stdout", "log", "json", "csv"))
         if self.video_config.number > 0:
             import torch as th
             from stable_baselines3.common.logger import Video
+
             from navground.sim.ui.video import make_video_from_run
 
             for i, run in islice(self.eval_exp.runs.items(),
@@ -228,7 +270,7 @@ class EvalLog:
                                          fps=self.video_config.fps),
                                    exclude=("stdout", "log", "json", "csv"))
         rewards = np.array([
-            np.sum(run.get_record("reward"))
+            np.sum(run.get_record("reward"), axis=0)
             for run in self.eval_exp.runs.values()
         ])
         record_values(self.logger, "reward", rewards)
@@ -239,25 +281,31 @@ class EvalLog:
                 global_step=global_step)
         if self.record_safety_violation:
             sv = np.array([
-                np.sum(run.safety_violations)
+                np.sum(run.safety_violations, axis=0)
                 for run in self.eval_exp.runs.values()
             ])
             record_values(self.logger, "safety_violations", sv)
         if self.record_efficacy:
-            efficacy = np.asarray(
-                [np.mean(run.efficacy) for run in self.eval_exp.runs.values()])
+            efficacy = np.asarray([
+                np.mean(run.efficacy, axis=0)
+                for run in self.eval_exp.runs.values()
+            ])
             record_values(self.logger, "efficacy", efficacy)
         if self.record_collisions:
             collisions = np.asarray(
                 [len(run.collisions) for run in self.eval_exp.runs.values()])
             record_values(self.logger, "collisions", collisions)
+        if self.record_duration:
+            duration = np.asarray(
+                [run.final_sim_time for run in self.eval_exp.runs.values()])
+            record_values(self.logger, "duration", duration)
         # deadlocks = np.asarray(
         #     [sum(run.deadlocks >= 0) for run in self.eval_exp.runs.values()])
         # record_values(self.logger, "deadlocks", deadlocks)
 
 
 def config_eval_log(model: OffPolicyAlgorithm | BaseILAlgorithm,
-                    env: BaseEnv | VecEnv | None = None,
+                    env: BaseEnv | VecEnv | BaseParallelEnv | None = None,
                     video_config: VideoConfig = VideoConfig(),
                     plot_config: TrajectoryPlotConfig = TrajectoryPlotConfig(),
                     episodes: int = 100,
@@ -267,7 +315,11 @@ def config_eval_log(model: OffPolicyAlgorithm | BaseILAlgorithm,
                     reward: bool = True,
                     collisions: bool = True,
                     efficacy: bool = True,
-                    safety_violation: bool = True) -> None:
+                    safety_violation: bool = True,
+                    duration: bool = False,
+                    processes: int = 1,
+                    use_multiprocess: bool = False,
+                    use_onnx: bool = True) -> None:
     """
     Configure the model logger to log additional data:
 
@@ -287,9 +339,13 @@ def config_eval_log(model: OffPolicyAlgorithm | BaseILAlgorithm,
     :param      hparams:           The hparams
     :param      data:              The data
     :param      log_graph:         The log graph
-    :param      collisions:        The collisions
-    :param      efficacy:          The efficacy
-    :param      safety_violation:  The safety violation
+    :param      collisions:        Whether to record episodes' collisions
+    :param      efficacy:          Whether to record episodes' efficacy
+    :param      safety_violation:  Whether to record episodes' safety violation
+    :param      duration:          Whether to record episodes' duration
+    :param      processes:         Number of processes to use
+    :param      use_multiprocess:  Whether to use `multiprocess` instead of `multiprocessing`
+    :param      use_onnx:          Whether to use onnx for inference
     """
     from stable_baselines3.common.off_policy_algorithm import \
         OffPolicyAlgorithm
@@ -306,7 +362,11 @@ def config_eval_log(model: OffPolicyAlgorithm | BaseILAlgorithm,
                   reward=reward,
                   collisions=collisions,
                   efficacy=efficacy,
-                  safety_violation=safety_violation)
+                  safety_violation=safety_violation,
+                  duration=duration,
+                  processes=processes,
+                  use_multiprocess=use_multiprocess,
+                  use_onnx=use_onnx)
     if isinstance(model, OffPolicyAlgorithm):
         logger = model.logger
     else:
