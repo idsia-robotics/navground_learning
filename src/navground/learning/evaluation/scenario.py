@@ -25,7 +25,8 @@ def set_policy_behavior(world: sim.World,
                         action_config: ControlActionConfig,
                         observation_config: DefaultObservationConfig,
                         sensor: sim.Sensor | None = None,
-                        deterministic: bool = True) -> set[int]:
+                        deterministic: bool = True,
+                        pre=None) -> set[int]:
     indices = Indices(indices)
     all_indices = indices.as_set(len(world.agents))
     for i in all_indices:
@@ -36,7 +37,8 @@ def set_policy_behavior(world: sim.World,
                 policy=policy,
                 action_config=action_config,
                 observation_config=observation_config,
-                deterministic=deterministic)
+                deterministic=deterministic,
+                pre=pre)
             if sensor:
                 agent.state_estimation = sensor
         else:
@@ -125,11 +127,13 @@ class InitPolicyBehavior:
                  groups: Collection[GroupConfig] = tuple(),
                  bounds: Bounds | None = None,
                  terminate_outside_bounds: bool = True,
-                 deterministic: bool = True) -> None:
+                 deterministic: bool = True,
+                 pre=None) -> None:
         self.groups = groups
         self.bounds = bounds
         self.terminate_outside_bounds = terminate_outside_bounds
         self.deterministic = deterministic
+        self.pre = pre
 
     def __call__(self, world: sim.World, seed: int | None = None) -> None:
         """
@@ -151,7 +155,8 @@ class InitPolicyBehavior:
                     sensor=group.get_sensor(),
                     policy=group.policy,
                     indices=group.indices,
-                    deterministic=self.deterministic)
+                    deterministic=self.deterministic,
+                    pre=self.pre)
                 agent_indices |= group_indices
                 for i in group_indices:
                     if group.color:
@@ -169,7 +174,8 @@ class InitPolicyBehavior:
                  groups: Collection[GroupConfig] = tuple(),
                  bounds: Bounds | None = None,
                  terminate_outside_bounds: bool | None = None,
-                 deterministic: bool = True) -> InitPolicyBehavior:
+                 deterministic: bool = True,
+                 pre=None) -> InitPolicyBehavior:
         """
         Returns a scenario initializer using the configuration stored in
         an environment.
@@ -202,10 +208,10 @@ class InitPolicyBehavior:
             if not bounds:
                 bounds = env.unwrapped.bounds
             if terminate_outside_bounds is None:
-                terminate_outside_bounds = env.unwrapped.terminate_outside_bounds
+                terminate_outside_bounds = env.unwrapped.truncate_outside_bounds
             env_groups = env.unwrapped.groups_config
             possible_agents = env.unwrapped._possible_agents
         if terminate_outside_bounds is None:
             terminate_outside_bounds = False
         groups = merge_groups_configs(groups, env_groups, len(possible_agents))
-        return cls(groups, bounds, terminate_outside_bounds, deterministic)
+        return cls(groups, bounds, terminate_outside_bounds, deterministic, pre)

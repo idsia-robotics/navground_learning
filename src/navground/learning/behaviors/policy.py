@@ -1,7 +1,9 @@
 from __future__ import annotations
-import warnings
+
 import pathlib
+import warnings
 from typing import cast
+
 try:
     from typing import Self
 except ImportError:
@@ -14,7 +16,7 @@ from navground import core
 
 from ..config import ControlActionConfig, DefaultObservationConfig
 from ..internal.group import GymAgent
-from ..types import AnyPolicyPredictor, PathLike
+from ..types import AnyPolicyPredictor, ObservationTransform, PathLike
 
 
 class PolicyBehavior(core.Behavior, name="Policy"):
@@ -50,10 +52,11 @@ class PolicyBehavior(core.Behavior, name="Policy"):
     :param action_config: Configures which actions the policy generates
     :param observation_config: Configures which observations the policy consumes
     :param deterministic: Whether the policy evaluation is deterministic
+    :param pre: Optional input (observations) transformation
     """
 
     _policies: dict[pathlib.Path, AnyPolicyPredictor] = {}
-    _cache_is_enabled: bool = True
+    _cache_is_enabled: bool = False
 
     def __init__(self,
                  kinematics: core.Kinematics | None = None,
@@ -62,7 +65,8 @@ class PolicyBehavior(core.Behavior, name="Policy"):
                  action_config: ControlActionConfig = ControlActionConfig(),
                  observation_config:
                  DefaultObservationConfig = DefaultObservationConfig(),
-                 deterministic: bool = False):
+                 deterministic: bool = False,
+                 pre: ObservationTransform | None = None):
         super().__init__(kinematics, radius)
         self._state = core.SensingState()
         self._policy = policy
@@ -71,6 +75,7 @@ class PolicyBehavior(core.Behavior, name="Policy"):
         self._action_config = action_config
         self._observation_config = observation_config
         self._deterministic = deterministic
+        self._pre= pre
 
     @classmethod
     def enable_cache(cls, value: bool) -> None:
@@ -134,7 +139,8 @@ class PolicyBehavior(core.Behavior, name="Policy"):
         """
         if not self._policy_path:
             return ''
-        return str(self._policy_path.relative_to(pathlib.Path.cwd(), walk_up=True))
+        return str(
+            self._policy_path.relative_to(pathlib.Path.cwd(), walk_up=True))
         # return str(self._policy_path)
 
     @policy_path.setter
@@ -387,6 +393,8 @@ class PolicyBehavior(core.Behavior, name="Policy"):
                 warnings.warn("Policy not set", stacklevel=1)
                 return core.Twist2((0, 0), 0, frame=core.Frame.relative)
         obs = self._gym_agent.update_observation()
+        if self._pre:
+            obs = self._pre(obs)
         act, _ = self._policy.predict(obs, deterministic=self.deterministic)
         cmd = self._gym_agent.get_cmd_from_action(act, time_step)
         return self.feasible_twist(cmd)
@@ -397,7 +405,8 @@ class PolicyBehavior(core.Behavior, name="Policy"):
                        policy: AnyPolicyPredictor | PathLike | None,
                        action_config: ControlActionConfig,
                        observation_config: DefaultObservationConfig,
-                       deterministic: bool = False) -> Self:
+                       deterministic: bool = False,
+                       pre: ObservationTransform | None = None) -> Self:
         """
         Configure a new policy behavior from a behavior.
 
@@ -405,6 +414,7 @@ class PolicyBehavior(core.Behavior, name="Policy"):
         :param      policy:           The policy
         :param      config:           The configuration
         :param      deterministic:    Whether or not to output deterministic actions
+        :param pre: Optional input (observations) transformation
 
         :returns:   The configured policy behavior
         """
@@ -417,7 +427,8 @@ class PolicyBehavior(core.Behavior, name="Policy"):
         pb = cls(policy=cast(AnyPolicyPredictor | None, policy),
                  action_config=action_config,
                  observation_config=observation_config,
-                 deterministic=deterministic)
+                 deterministic=deterministic,
+                 pre=pre)
         if policy_path:
             pb.set_policy_path(policy_path, load_policy=True)
         pb.set_state_from(behavior)

@@ -29,6 +29,8 @@ PathLike: TypeAlias = os.PathLike[str] | str
 
 Bounds: TypeAlias = tuple[np.typing.NDArray[np.floating[Any]], np.typing.NDArray[np.floating[Any]]]
 
+ObservationTransform: TypeAlias = Callable[[Observation], Observation]
+
 
 class JSONAble(Protocol):
 
