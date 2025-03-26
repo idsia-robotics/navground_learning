@@ -10,7 +10,8 @@ if TYPE_CHECKING:
 
 def make_vec_from_penv(env: BaseParallelEnv,
                        num_envs: int = 1,
-                       processes: int = 1) -> VecEnv:
+                       processes: int = 1,
+                       black_death: bool = False) -> VecEnv:
     """
     Converts a :py:class:`PettingZoo  Parallel environment
     <pettingzoo.utils.env.ParallelEnv>`
@@ -33,10 +34,10 @@ def make_vec_from_penv(env: BaseParallelEnv,
     import supersuit  # type: ignore[import-untyped]
     from stable_baselines3.common.vec_env import VecEnv
 
-    penv = supersuit.pettingzoo_env_to_vec_env_v1(env)
+    # penv = supersuit.pettingzoo_env_to_vec_env_v1(env)
+    penv = supersuit.vector.MarkovVectorEnv(env, black_death=black_death)
     penv = supersuit.concat_vec_envs_v1(penv,
                                         num_envs,
                                         num_cpus=processes,
                                         base_class="stable_baselines3")
     return cast(VecEnv, penv)
-
