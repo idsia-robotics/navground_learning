@@ -57,7 +57,7 @@ def make_experiment(scenario: sim.Scenario,
     if not groups:
         groups = [GroupConfig(policy=policy)]
     if groups:
-        experiment.scenario = copy.copy(scenario)
+        experiment.scenario = copy.deepcopy(scenario)
         init = InitPolicyBehavior(
             groups=groups,
             bounds=bounds,
@@ -77,7 +77,8 @@ def make_experiment_with_env(env: BaseEnv | BaseParallelEnv | VecEnv,
                              policy: AnyPolicyPredictor | PathLike = '',
                              reward: Reward | None = None,
                              record_reward: bool = True,
-                             deterministic: bool = True) -> sim.Experiment:
+                             deterministic: bool = True,
+                             pre = None) -> sim.Experiment:
     """
     Similar to :py:func:`make_experiment` but using the configuration stored in
     an environment:
@@ -121,12 +122,13 @@ def make_experiment_with_env(env: BaseEnv | BaseParallelEnv | VecEnv,
 
     experiment = sim.Experiment()
     if scenario:
-        experiment.scenario = copy.copy(scenario)
+        experiment.scenario = copy.deepcopy(scenario)
     if max_duration > 0:
         experiment.steps = int(max_duration / time_step)
     init = InitPolicyBehavior.with_env(env=env,
                                        groups=groups,
-                                       deterministic=deterministic)
+                                       deterministic=deterministic,
+                                       pre=pre)
     experiment.scenario.add_init(init)
     groups = merge_groups_configs(groups, env_groups, len(possible_agents))
     if record_reward:

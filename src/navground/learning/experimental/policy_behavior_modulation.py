@@ -134,7 +134,7 @@ def make_experiment_with_env(
 ) -> sim.Experiment:
     exp = sim.Experiment()
     if env._scenario:
-        exp.scenario = copy.copy(env._scenario)
+        exp.scenario = copy.deepcopy(env._scenario)
     else:
         raise ValueError("No scenario")
     if policy:
