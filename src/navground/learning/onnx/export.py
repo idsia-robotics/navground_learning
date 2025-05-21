@@ -1,17 +1,12 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
-
 import gymnasium as gym
 import numpy as np
 
-from ..types import PathLike
-
-if TYPE_CHECKING:
-    from stable_baselines3.common.policies import BasePolicy
+from ..types import PathLike, PyTorchPolicy
 
 
-def export(policy: BasePolicy,
+def export(policy: PyTorchPolicy,
            path: PathLike,
            dynamic_batch_size: bool = True) -> None:
     """

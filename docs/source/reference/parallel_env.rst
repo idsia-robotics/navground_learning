@@ -24,6 +24,8 @@ Multi-agent Pettingzoo Environment
 
 .. autofunction:: make_shared_parallel_env_with_env
 
+.. autoclass:: JointEnv
+
 
 
 

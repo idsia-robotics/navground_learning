@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from collections.abc import Sequence, Mapping
+import functools
+from collections.abc import Iterable, Mapping, Sequence
 from enum import IntEnum
 from operator import itemgetter
 from typing import Any, Literal, TypeAlias, TypeVar, cast
@@ -211,6 +212,24 @@ class Indices:
         step = s.step or 1
         stop = s.stop or (start + step)
         return (stop - start) * step > 0
+
+
+def join_indices(values: Iterable[Indices], length: int) -> Indices:
+    """
+    Returns the union indices
+
+    :param      values:  The values
+    :param      length:  The maximal length of the sequences, used to evaluate slices.
+
+
+    :returns:   Indices containing all the indices in values.
+    """
+    vs: list[set[int]] = [indices.as_set(length) for indices in values]
+    if vs:
+        iss: set[int] = functools.reduce(lambda x, y: x | y, vs)
+    else:
+        iss = set()
+    return Indices(iss)
 
 
 IndicesLike: TypeAlias = Indices | slice | list[int] | tuple[int] | set[int] | Literal[

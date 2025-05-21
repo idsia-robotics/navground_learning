@@ -1,0 +1,39 @@
+type: Policy
+deterministic: false
+fix_orientation: false
+flat: false
+history: 1
+include_angular_speed: true
+include_radius: false
+include_target_angular_speed: false
+include_target_direction: true
+include_target_direction_validity: false
+include_target_distance: true
+include_target_distance_validity: false
+include_target_speed: false
+include_velocity: true
+max_acceleration: 1
+max_angular_acceleration: 10
+policy_path: policy.onnx
+use_acceleration_action: true
+use_wheels: false
+optimal_speed: 1
+optimal_angular_speed: 2
+rotation_tau: 0.5
+safety_margin: 0
+horizon: 5
+path_look_ahead: 1
+path_tau: 0.5
+radius: 0.5
+heading: velocity
+kinematics:
+  type: 2WDiff
+  max_backward_speed: 1
+  max_forward_speed: 1
+  wheel_axis: 1
+  max_speed: 1
+  max_angular_speed: .inf
+social_margin:
+  modulation:
+    type: constant
+  default: 0

@@ -1,8 +1,8 @@
 from __future__ import annotations
 
+import warnings
 from collections.abc import Mapping
 from typing import Any, TypeAlias
-import warnings
 
 import gymnasium as gym
 from gymnasium.envs.registration import register
@@ -14,7 +14,8 @@ from ..indices import Indices
 from ..internal.base_env import NavgroundBaseEnv
 from ..policies.info_predictor import InfoPolicy
 from ..rewards import NullReward
-from ..types import Action, Bounds, Observation, Reward
+from ..types import (Action, Bounds, Observation, Reward, SensorLike,
+                     SensorSequenceLike, TerminationCondition)
 
 BaseEnv: TypeAlias = gym.Env[Observation, Action]
 
@@ -46,12 +47,15 @@ class NavgroundEnv(NavgroundBaseEnv, BaseEnv):
     :param agent_index: The world index of the selected agent,
                         must be smaller than the number of agents.
 
-    :param sensor: A sensor to produce observations for the selected agents.
-                   If a :py:class:`str`, it will be interpreted as the YAML
-                   representation of a sensor.
-                   If a :py:class:`dict`, it will be dumped to YAML and
-                   then treated as a :py:class:`str`.
-                   If None, it will use the agents' own state estimation, if a sensor.
+    :param sensor: An optional sensor that will be added to :py:obj:`sensors`.
+
+    :param sensors: A sequence of sensor to generate observations for the agents
+                    or its YAML representation. If
+                    Items of class :py:class:`str` will be interpreted as the YAML
+                    representation of a sensor.
+                    Items of class :py:class:`dict` will be dumped to YAML and
+                    then treated as a :py:class:`str`.
+                    If empty, it will use the agents' own sensors.
 
     :param action: The configuration of the action space to use.
 
@@ -81,11 +85,28 @@ class NavgroundEnv(NavgroundBaseEnv, BaseEnv):
     :param realtime_factor: a realtime factor for `render_mode="human"`: larger values
                             speed up the simulation.
 
-    :param stuck_timeout: The time to wait before considering an agent stuck.
+    :param stuck_timeout: The time to wait before considering an agent stuck and terminate it.
 
     :param color: An optional color of the agent (only used for displaying)
 
     :param tag: An optional tag to be added to the agent (only used as metadata)
+
+    :param terminate_on_success: Whether to terminate the episode on success.
+
+    :param terminate_on_failure: Whether to terminate the episode on failure.
+
+    :param success_condition: An optional success criteria
+
+    :param failure_condition: An optional failure criteria
+
+    :param include_action: Whether to include field "navground_action" in the info
+
+    :param include_success: Whether to include field "is_success" in the info
+
+    :param init_success: The default value of success (valid until a termination condition is met)
+
+    :param intermediate_success: Whether to include "is_success" in the info at intermediate
+                                 steps (vs only at termination).
     """
 
     metadata = {"render_modes": ["human", "rgb_array"], 'render_fps': 30}
@@ -94,7 +115,8 @@ class NavgroundEnv(NavgroundBaseEnv, BaseEnv):
     def __init__(self,
                  scenario: sim.Scenario | str | dict[str, Any] | None = None,
                  agent_index: int = 0,
-                 sensor: sim.Sensor | str | dict[str, Any] | None = None,
+                 sensor: SensorLike | None = None,
+                 sensors: SensorSequenceLike = tuple(),
                  action: ActionConfig = ControlActionConfig(),
                  observation: ObservationConfig = DefaultObservationConfig(),
                  reward: Reward | None = None,
@@ -108,17 +130,30 @@ class NavgroundEnv(NavgroundBaseEnv, BaseEnv):
                  realtime_factor: float = 1.0,
                  stuck_timeout: float = -1,
                  color: str = '',
-                 tag: str = '') -> None:
+                 tag: str = '',
+                 terminate_on_success: bool = True,
+                 terminate_on_failure: bool = True,
+                 success_condition: TerminationCondition | None = None,
+                 failure_condition: TerminationCondition | None = None,
+                 include_action: bool = True,
+                 include_success: bool = True,
+                 init_success: bool | None = None,
+                 intermediate_success: bool = False) -> None:
         if reward is None:
             reward = NullReward()
         self.agent_index = agent_index
         group = GroupConfig(indices=Indices({agent_index}),
                             sensor=sensor,
+                            sensors=sensors,
                             reward=reward,
                             action=action,
                             observation=observation,
                             color=color,
-                            tag=tag)
+                            tag=tag,
+                            terminate_on_success=terminate_on_success,
+                            terminate_on_failure=terminate_on_failure,
+                            success_condition=success_condition,
+                            failure_condition=failure_condition)
         NavgroundBaseEnv.__init__(
             self,
             groups=[group],
@@ -131,7 +166,11 @@ class NavgroundEnv(NavgroundBaseEnv, BaseEnv):
             render_mode=render_mode,
             render_kwargs=render_kwargs,
             realtime_factor=realtime_factor,
-            stuck_timeout=stuck_timeout)
+            stuck_timeout=stuck_timeout,
+            include_action=include_action,
+            include_success=include_success,
+            init_success=init_success,
+            intermediate_success=intermediate_success)
 
     def _init(self) -> None:
         super()._init()
@@ -158,8 +197,6 @@ class NavgroundEnv(NavgroundBaseEnv, BaseEnv):
         else:
             self.observation_space = gym.spaces.Box(0, 1)
             self.action_space = gym.spaces.Box(0, 1)
-            self.action_config = None
-            self.observation_config = None
             self.reward = None
 
     def _init_spec(
@@ -172,7 +209,8 @@ class NavgroundEnv(NavgroundBaseEnv, BaseEnv):
         self._spec['reward'] = group.reward
         self._spec['action'] = group.action
         self._spec['observation'] = group.observation
-        self._spec['sensor'] = group.sensor
+        self._spec['sensors'] = group.sensors
+        self._spec['sensor'] = None
 
     @property
     def policy(self) -> InfoPolicy:

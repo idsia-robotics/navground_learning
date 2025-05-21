@@ -48,3 +48,15 @@ Logging
 .. autofunction:: config_eval_log
 
 
+Video
+=====
+
+.. autofunction:: display_run_video
+
+.. autofunction:: record_run_video
+
+.. autofunction:: display_episode_video
+
+.. autofunction:: record_episode_video
+
+

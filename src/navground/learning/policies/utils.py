@@ -30,7 +30,7 @@ def get_number_of_batches_in_dict(value: dict[str, Array],
 
 
 def get_number_of_batches(value: Array | dict[str, Array],
-                          space: gym.spaces.Space[Any]) -> int:
+                          space: gym.Space[Any]) -> int:
     if isinstance(space, gym.spaces.Dict):
         if isinstance(value, dict):
             return get_number_of_batches_in_dict(value, space)

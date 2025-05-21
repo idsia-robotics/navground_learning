@@ -145,7 +145,7 @@ class OrderInvariantCombinedExtractor(BaseFeaturesExtractor):
                 for reduction in self.reductions:
                     r = reduction(z, 1, False)
                     if reduction in (th.max, th.min):
-                        r = r.values
+                        r = r.values  # type: ignore
                     encoded_tensor_list.append(r)
             else:
                 encoded_tensor_list.append(th.zeros(1, self.net_out_dim))

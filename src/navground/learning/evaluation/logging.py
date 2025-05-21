@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import pathlib
 from collections.abc import Callable
 from dataclasses import dataclass, field
 from itertools import islice
@@ -8,20 +9,21 @@ from typing import TYPE_CHECKING, Any
 
 import numpy as np
 import yaml
+from pettingzoo.utils.env import ParallelEnv
 
 from navground import sim
 
 from ..config import GroupConfig
 from ..env import BaseEnv
-from ..types import AnyPolicyPredictor
+from ..types import AnyPolicyPredictor, PathLike
 from .experiment import make_experiment_with_env
-from pettingzoo.utils.env import ParallelEnv
 
 if TYPE_CHECKING:
     from imitation.algorithms.bc import BCLogger
     from stable_baselines3.common.logger import Logger, TensorBoardOutputFormat
     from stable_baselines3.common.off_policy_algorithm import \
         OffPolicyAlgorithm
+    from stable_baselines3.common.policies import BasePolicy
     from stable_baselines3.common.vec_env import VecEnv
     from torch.utils.tensorboard.writer import SummaryWriter
 
@@ -93,6 +95,12 @@ class VideoConfig:
     """real-time factor for the videos"""
     color: str = ''
     """color of the agents that are learning"""
+    tensorboard: bool = True
+    """whether to add to the tensorboard log"""
+    file: bool = True
+    """whether to add to save to a file"""
+    format: str = "mp4"
+    """video file format"""
 
 
 @dataclass
@@ -114,6 +122,10 @@ class TrajectoryPlotConfig:
     """The world kwargs passed to :py:func:navground.sim.pyplot_helpers.plot_runs"""
     hide_axes: bool = True
     """whether to hide the axis"""
+    tensorboard: bool = True
+    """whether to add to the tensorboard log"""
+    file: bool = True
+    """whether to add to save to a file"""
 
 
 def record_values(logger: Logger, key: str,
@@ -140,7 +152,9 @@ class EvalLog:
                  duration: bool = False,
                  processes: int = 1,
                  use_multiprocess: bool = False,
-                 use_onnx: bool = True):
+                 use_onnx: bool = True,
+                 grouped: bool = False,
+                 every: int = 1):
         self.plot_config = plot_config
         self.video_config = video_config
         self.episodes = episodes
@@ -155,6 +169,9 @@ class EvalLog:
         self.processes = processes
         self.use_multiprocess = use_multiprocess
         self.use_onnx = use_onnx or self.processes > 1
+        self.grouped = grouped
+        self.every = every
+        self._count = 0
 
     @property
     def record_pose(self) -> bool:
@@ -165,8 +182,8 @@ class EvalLog:
         return max(0, self.plot_config.number, self.video_config.number,
                    self.episodes)
 
-    def init(self, env: BaseEnv | VecEnv | BaseParallelEnv,
-             policy: AnyPolicyPredictor, logger: Logger) -> None:
+    def init(self, env: BaseEnv | VecEnv | BaseParallelEnv, policy: BasePolicy,
+             logger: Logger) -> None:
         self._init_logger(logger)
         self._init_eval_exp(env=env, policy=policy)
         if self.tb_writer:
@@ -194,9 +211,9 @@ class EvalLog:
         self.tb_writer = formats[0].writer if formats else None
 
     def _init_eval_exp(self, env: BaseEnv | VecEnv | BaseParallelEnv,
-                       policy: AnyPolicyPredictor) -> None:
+                       policy: BasePolicy) -> None:
         if self.use_onnx:
-            _policy = "_policy.onnx"
+            _policy: AnyPolicyPredictor | PathLike = "_policy.onnx"
             self._policy = policy
         else:
             _policy = policy
@@ -204,7 +221,8 @@ class EvalLog:
         group = GroupConfig(policy=_policy, color=self.video_config.color)
         exp = make_experiment_with_env(env=env,
                                        groups=[group],
-                                       record_reward=self.record_reward)
+                                       record_reward=self.record_reward,
+                                       grouped=self.grouped)
         self.eval_exp = exp
         self.eval_exp.number_of_runs = self.number_of_runs
         self.eval_exp.record_config.pose = self.record_pose
@@ -215,7 +233,28 @@ class EvalLog:
             self.eval_exp.record_config.world = True
         # self.eval_exp.record_config.deadlocks = True
 
+    @property
+    def video_directory(self) -> pathlib.Path:
+        d = self.logger.get_dir()
+        if d is None:
+            raise ValueError("Logging directory not set")
+        path = pathlib.Path(d) / "videos"
+        path.mkdir(exist_ok=True)
+        return path
+
+    @property
+    def plot_directory(self) -> pathlib.Path:
+        d = self.logger.get_dir()
+        if d is None:
+            raise ValueError("Logging directory not set")
+        path = pathlib.Path(d) / "figures"
+        path.mkdir(exist_ok=True)
+        return path
+
     def evaluate(self, global_step: int) -> None:
+        self._count += 1
+        if self._count % self.every:
+            return
         if self.eval_exp.number_of_runs:
             if self.use_onnx:
                 from ..onnx import export
@@ -231,6 +270,7 @@ class EvalLog:
         else:
             return
         if self.plot_config.number > 0:
+            from matplotlib import pyplot as plt
             from stable_baselines3.common.logger import Figure
 
             from navground.sim.pyplot_helpers import plot_runs
@@ -245,14 +285,21 @@ class EvalLog:
                             width=self.plot_config.width,
                             world_kwargs=self.plot_config.world_kwargs,
                             hide_axes=self.plot_config.hide_axes)
-            self.logger.record("eval/figure",
-                               Figure(fig, close=True),
-                               exclude=("stdout", "log", "json", "csv"))
+            if self.plot_config.tensorboard:
+                self.logger.record("eval/figure",
+                                   Figure(fig, close=True),
+                                   exclude=("stdout", "log", "json", "csv"))
+            if self.plot_config.file:
+                path = self.plot_directory / f"figure_{global_step}.pdf"
+                plt.savefig(str(path))
+            plt.close()
+
         if self.video_config.number > 0:
             import torch as th
             from stable_baselines3.common.logger import Video
 
-            from navground.sim.ui.video import make_video_from_run
+            from navground.sim.ui.video import (MOVIEPY_VERSION,
+                                                make_video_from_run)
 
             for i, run in islice(self.eval_exp.runs.items(),
                                  self.video_config.number):
@@ -265,10 +312,36 @@ class EvalLog:
                 frames = frames.transpose(0, 3, 1, 2)
                 # to (1=B, T, C, H, W)
                 frames = np.expand_dims(frames, axis=0)
-                self.logger.record(f"eval/video_{i}",
-                                   Video(th.from_numpy(frames),
-                                         fps=self.video_config.fps),
-                                   exclude=("stdout", "log", "json", "csv"))
+                if self.video_config.tensorboard:
+                    self.logger.record(f"eval/video_{i}",
+                                       Video(th.from_numpy(frames),
+                                             fps=self.video_config.fps),
+                                       exclude=("stdout", "log", "json",
+                                                "csv"))
+                if self.video_config.file:
+                    path = (
+                        self.video_directory /
+                        f"video_{global_step}_{i}.{self.video_config.format}")
+                    if path.suffix.lower() == ".gif":
+                        video.write_gif(str(path), fps=self.video_config.fps)
+                    else:
+                        kwargs = {'audio': False, 'logger': None}
+                        if MOVIEPY_VERSION == 1:
+                            kwargs['verbose'] = False
+                        video.write_videofile(str(path),
+                                              fps=self.video_config.fps,
+                                              **kwargs)
+
+        steps = [run.recorded_steps for run in self.eval_exp.runs.values()]
+        record_values(self.logger, "steps", np.asarray(steps))
+
+        success = [
+            np.mean(np.asarray(run.get_record("success")) > 0)
+            for run in self.eval_exp.runs.values() if "success" in run.records
+        ]
+        if success:
+            record_values(self.logger, "success", np.asarray(success))
+
         rewards = np.array([
             np.sum(run.get_record("reward"), axis=0)
             for run in self.eval_exp.runs.values()
@@ -304,22 +377,25 @@ class EvalLog:
         # record_values(self.logger, "deadlocks", deadlocks)
 
 
-def config_eval_log(model: OffPolicyAlgorithm | BaseILAlgorithm,
-                    env: BaseEnv | VecEnv | BaseParallelEnv | None = None,
-                    video_config: VideoConfig = VideoConfig(),
-                    plot_config: TrajectoryPlotConfig = TrajectoryPlotConfig(),
-                    episodes: int = 100,
-                    hparams: dict[str, Any] = {},
-                    data: dict[str, Any] = {},
-                    log_graph: bool = False,
-                    reward: bool = True,
-                    collisions: bool = True,
-                    efficacy: bool = True,
-                    safety_violation: bool = True,
-                    duration: bool = False,
-                    processes: int = 1,
-                    use_multiprocess: bool = False,
-                    use_onnx: bool = True) -> None:
+def config_eval_log(
+        model: OffPolicyAlgorithm | BaseILAlgorithm,
+        env: BaseEnv | VecEnv | BaseParallelEnv | None = None,
+        video_config: VideoConfig = VideoConfig(),
+        plot_config: TrajectoryPlotConfig = TrajectoryPlotConfig(),
+        every: int = 1,
+        episodes: int = 100,
+        hparams: dict[str, Any] = {},
+        data: dict[str, Any] = {},
+        log_graph: bool = False,
+        reward: bool = True,
+        collisions: bool = True,
+        efficacy: bool = True,
+        safety_violation: bool = True,
+        duration: bool = False,
+        processes: int = 1,
+        use_multiprocess: bool = False,
+        use_onnx: bool = True,
+        grouped: bool = False) -> None:
     """
     Configure the model logger to log additional data:
 
@@ -344,8 +420,9 @@ def config_eval_log(model: OffPolicyAlgorithm | BaseILAlgorithm,
     :param      safety_violation:  Whether to record episodes' safety violation
     :param      duration:          Whether to record episodes' duration
     :param      processes:         Number of processes to use
-    :param      use_multiprocess:  Whether to use `multiprocess` instead of `multiprocessing`
+    :param      use_multiprocess:  Whether to use ``multiprocess`` instead of ``multiprocessing``
     :param      use_onnx:          Whether to use onnx for inference
+    :param      grouped:           Whether the policy is grouped.
     """
     from stable_baselines3.common.off_policy_algorithm import \
         OffPolicyAlgorithm
@@ -366,7 +443,9 @@ def config_eval_log(model: OffPolicyAlgorithm | BaseILAlgorithm,
                   duration=duration,
                   processes=processes,
                   use_multiprocess=use_multiprocess,
-                  use_onnx=use_onnx)
+                  use_onnx=use_onnx,
+                  grouped=grouped,
+                  every=every)
     if isinstance(model, OffPolicyAlgorithm):
         logger = model.logger
     else:
@@ -378,14 +457,21 @@ def config_eval_log(model: OffPolicyAlgorithm | BaseILAlgorithm,
         _config_il(model, log)
 
 
+# In SB2.6 _dump_logs has been renamed to dump_logs
 def _config_sb3(model: OffPolicyAlgorithm, log: EvalLog) -> None:
-    _dump_logs = model._dump_logs
+    _dump_logs = model.dump_logs
+    _excluded_save_params = model._excluded_save_params
 
     def dump_logs(model: OffPolicyAlgorithm) -> None:
         log.evaluate(global_step=model.num_timesteps)
         _dump_logs()
 
-    model._dump_logs = MethodType(dump_logs, model)  # type: ignore
+    def excluded_save_params(self) -> list[str]:
+        return _excluded_save_params() + ['dump_logs', '_excluded_save_params']
+
+    model.dump_logs = MethodType(dump_logs, model)  # type: ignore
+    model._excluded_save_params = MethodType(  # type: ignore[method-assign]
+        excluded_save_params, model)
 
 
 def _config_il(model: BaseILAlgorithm, log: EvalLog) -> None:

@@ -14,4 +14,6 @@ Indices
 .. autoclass:: Indices
    :members:
 
+.. autofunction:: join_indices
+
 

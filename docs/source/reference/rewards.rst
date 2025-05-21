@@ -12,6 +12,12 @@ Null
 .. autoclass:: NullReward
    :exclude-members: __new__
 
+Fixed
+===========
+
+.. autoclass:: FixedReward
+   :exclude-members: __new__
+
 Efficacy
 ========
 

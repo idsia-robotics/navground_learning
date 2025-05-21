@@ -14,11 +14,11 @@ from ..internal.group import GymAgent, create_agents_in_groups
 from ..probes import RewardProbe
 
 
-def update_state(sensor: sim.Sensor | None, world: sim.World,
+def update_state(sensors: list[sim.Sensor], world: sim.World,
                  agent: sim.Agent) -> Callable[[core.SensingState], None]:
 
     def f(state: core.SensingState) -> None:
-        if sensor:
+        for sensor in sensors:
             sensor.update(agent, world, state)
 
     return f
@@ -74,7 +74,7 @@ def add_modulation(groups: Collection[GroupConfig],
     def f(world: sim.World, seed: int | None = None) -> None:
         for group in groups:
             for agent in group.indices.sub_sequence(world.agents):
-                obs = update_state(group.get_sensor(), world, agent)
+                obs = update_state(group.get_sensors(), world, agent)
                 if group.action and isinstance(
                         group.action,
                         ModulationActionConfig) and group.observation:

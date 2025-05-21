@@ -2,8 +2,12 @@ from __future__ import annotations
 
 import inspect
 import os
-from collections.abc import Callable, Mapping
-from typing import Any, Protocol, TypeAlias
+from collections.abc import Callable, Mapping, Sequence
+from typing import TYPE_CHECKING, Any, Protocol, TypeAlias
+
+if TYPE_CHECKING:
+    import gymnasium as gym
+    import torch
 
 try:
     from typing import Self
@@ -27,9 +31,15 @@ EpisodeStart: TypeAlias = Array
 Info: TypeAlias = list[dict[str, Array]] | dict[str, Array]
 PathLike: TypeAlias = os.PathLike[str] | str
 
-Bounds: TypeAlias = tuple[np.typing.NDArray[np.floating[Any]], np.typing.NDArray[np.floating[Any]]]
+Bounds: TypeAlias = tuple[np.typing.NDArray[np.floating[Any]],
+                          np.typing.NDArray[np.floating[Any]]]
 
 ObservationTransform: TypeAlias = Callable[[Observation], Observation]
+
+SensorLike: TypeAlias = sim.Sensor | str | dict[str, Any]
+SensorSequenceLike: TypeAlias = Sequence[SensorLike] | str
+
+TerminationCondition = Callable[[sim.Agent, sim.World], bool]
 
 
 class JSONAble(Protocol):
@@ -82,6 +92,14 @@ class PolicyPredictor(Protocol):
     included here to be self-contained.
     """
 
+    @property
+    def action_space(self) -> gym.Space:
+        ...
+
+    @property
+    def observation_space(self) -> gym.Space:
+        ...
+
     def predict(self,
                 observation: Observation,
                 state: State | None = None,
@@ -108,6 +126,14 @@ class PolicyPredictorWithInfo(Protocol):
     Similar to :py:class:`PolicyPredictor` but :py:meth:`predict`
     accepts info dictionaries.
     """
+
+    @property
+    def action_space(self) -> gym.Space:
+        ...
+
+    @property
+    def observation_space(self) -> gym.Space:
+        ...
 
     def predict(self,
                 observation: Observation,
@@ -151,3 +177,31 @@ def accept_info(func: Callable[..., Any]) -> bool:
     """
     sig = inspect.signature(func)
     return 'info' in sig.parameters
+
+
+PyTorchObs: TypeAlias = 'torch.Tensor | dict[str, torch.Tensor]'
+
+
+class PyTorchPolicy(PolicyPredictor, Protocol):
+
+    def __call__(self,
+                 obs: PyTorchObs,
+                 deterministic: bool = False) -> torch.Tensor:
+        """
+        Evaluate the policy
+
+        :param      obs:            The observations
+        :param      deterministic:  Whether or not to return deterministic actions.
+        """
+        ...
+
+    def forward(self,
+                obs: PyTorchObs,
+                deterministic: bool = False) -> torch.Tensor:
+        """
+        Evaluate the policy
+
+        :param      obs:            The observations
+        :param      deterministic:  Whether or not to return deterministic actions.
+        """
+        ...

@@ -33,11 +33,12 @@ class OnnxPolicy:
     protocol. It loads an onnx model andd then calls
     :py:meth:`onnxruntime.InferenceSession.run` to perform inference.
 
-    :param      path:  The path
-    :type       path:  PathLike
+    :param  path:         The path
+    :param  action_space: The action_space (if not specified,
+                          it will be reconstructed from the onnx model)
     """
 
-    def __init__(self, path: PathLike):
+    def __init__(self, path: PathLike, action_space: gym.Space | None = None):
         import onnxruntime as ort  # type: ignore[import-untyped]
 
         options = ort.SessionOptions()
@@ -52,12 +53,15 @@ class OnnxPolicy:
             self._observation_space: gym.spaces.Box | gym.spaces.Dict = space_for_onnx_tensor(
                 xs[0])
         else:
-            self._observation_space = gym.spaces.Dict(
-                {x.name: space_for_onnx_tensor(x)
-                 for x in xs})
+            ds = [(x.name, space_for_onnx_tensor(x)) for x in xs]
+            self._observation_space = gym.spaces.Dict(ds)
+            self._keys: list[str] = [x.name for x in xs]
         # TODO(Jerome): why can it have more than one output?
         # assert len(ys) == 1, ys
-        self._action_space = space_for_onnx_tensor(ys[0])
+        if action_space is None:
+            self._action_space: gym.Space = space_for_onnx_tensor(ys[0])
+        else:
+            self._action_space = action_space
 
     # single obs -> single action, None
     # multiple obs -> multiple obs, None
@@ -87,8 +91,8 @@ class OnnxPolicy:
             observation = {"observation": observation}
         else:
             vectorized = all(
-                len(v.shape) == length for v, length in zip(
-                    observation.values(), self.input_dims, strict=True))
+                len(observation[key].shape) == length for key, length in zip(
+                    self._keys, self.input_dims, strict=True))
             if not vectorized:
                 observation = {
                     k: v[np.newaxis, :]
@@ -107,7 +111,7 @@ class OnnxPolicy:
         return self._observation_space
 
     @property
-    def action_space(self) -> gym.spaces.Box:
+    def action_space(self) -> gym.Space:
         """
         The action space
         """

@@ -119,7 +119,7 @@ def evaluate_policies(
         current_length = 0
         group_state: list[State | None] = [None for i in groups]
         done = False
-        dones: Array = np.ones((len(env.agents), ), dtype=np.bool)
+        dones: Array = np.ones((len(env.agents), ), dtype=np.bool_)
         obs_spaces = [
             env.observation_space(group[0]) if group else None
             for group in groups

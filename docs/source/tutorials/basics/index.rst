@@ -7,4 +7,5 @@ Basics
 
    Gymnasium
    PettingZoo
+   TorchRL
    Behavior

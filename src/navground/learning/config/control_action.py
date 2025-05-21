@@ -3,6 +3,7 @@ from __future__ import annotations
 import dataclasses as dc
 import math
 import warnings
+from typing import Any
 
 import gymnasium as gym
 import numpy as np
@@ -20,7 +21,11 @@ class ControlActionConfig(ConfigWithKinematic,
     """
     Configuration of the conversion between control actions
     and control commands. Actions are either command accelerations
-    or command velocities, depending on :py:attr:`use_acceleration_action`.
+    or command velocities, depending on :py:meth:`use_acceleration_action`.
+
+    :param dtype: The data type
+
+    :param dof: The number of degrees of freedom of the agent
 
     :param max_speed: The upper bound of the speed.
 
@@ -40,6 +45,8 @@ class ControlActionConfig(ConfigWithKinematic,
     :param fix_orientation: Whether to force the agent not to control orientation,
                             i.e., to not include the angular command in actions.
 
+    :param has_wheels: Whether the agent as wheels.
+                       If None, it will defer to the agent kinematics.
     """
     max_acceleration: float = np.inf
     """The maximal agent acceleration module; only relevant
@@ -77,13 +84,14 @@ class ControlActionConfig(ConfigWithKinematic,
                     stacklevel=1)
 
             return False
-        if self.fix_orientation and self.dof is None:
-            if warn:
-                warnings.warn(
-                    "Configured to keep orientation fixed but does not know the number of dof",
-                    stacklevel=1)
+        # CHANGED(15/4/2025)
+        # if self.fix_orientation and self.dof is None:
+        #     if warn:
+        #         warnings.warn(
+        #             "Configured to keep orientation fixed but does not know the number of dof",
+        #             stacklevel=1)
 
-            return False
+        #     return False
         if self.use_acceleration_action:
             if not math.isfinite(self.max_acceleration) or self.dof is None:
                 if warn:
@@ -126,23 +134,29 @@ class ControlActionConfig(ConfigWithKinematic,
 
     @property
     def should_fix_orientation(self) -> bool:
-        if self.dof is None:
-            raise ValueError("Set the DOF first")
-        return self.fix_orientation and self.dof > 2
+        # if self.dof is None:
+        #     raise ValueError("Set the DOF first")
+        # return self.fix_orientation and self.dof > 2
+        return self.fix_orientation
 
     @property
     def action_size(self) -> int:
+        """The number of control dimensions"""
         if self.should_use_wheels:
             if self.dof == 2:
                 return 2
             else:
                 return 4
-        if self.dof == 2 or self.fix_orientation:
-            return 2
-        return 3
+        assert self.dof is not None
+        if self.fix_orientation:
+            return self.dof - 1
+        return self.dof
+        # if self.dof == 2 or self.fix_orientation:
+        #     return 2
+        # return 3
 
     @property
-    def space(self) -> gym.spaces.Box:
+    def space(self) -> gym.Space[Any]:
         """
         The action space.
         """
@@ -157,7 +171,8 @@ class ControlActionConfig(ConfigWithKinematic,
 
     def _compute_value_from_action(self, action: Array, max_value: float,
                                    max_angular_value: float) -> core.Twist2:
-        if self.dof == 2 or not self.should_fix_orientation:
+        # if self.dof == 2 or not self.should_fix_orientation:
+        if not self.should_fix_orientation:
             angular_value = action[-1] * max_angular_value
         else:
             angular_value = 0
@@ -202,15 +217,22 @@ class ControlActionConfig(ConfigWithKinematic,
             v = value.velocity[:2] / max_value
         else:
             v = np.zeros(2, dtype=FloatType)
-        if max_angular_value:
-            w = value.angular_speed / max_angular_value
-        else:
-            w = 0
+        # CHANGED(16/4/2025)
         if self.dof == 2:
-            return np.array([v[0], w], FloatType)
-        elif self.should_fix_orientation:
-            return v
-        return np.array([*v, w], FloatType)
+            v = v[:1]
+        if max_angular_value and not self.should_fix_orientation:
+            w = value.angular_speed / max_angular_value
+            v = np.concatenate([v, [w]])
+        return v
+        # if max_angular_value:
+        #     w = value.angular_speed / max_angular_value
+        # else:
+        #     w = 0
+        # if self.dof == 2:
+        #     return np.array([v[0], w], FloatType)
+        # elif self.should_fix_orientation:
+        #     return v
+        # return np.array([*v, w], FloatType)
 
     def _action_from_wheels(self, values: Array, max_value: float) -> Array:
         if max_value:

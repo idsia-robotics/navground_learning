@@ -13,7 +13,7 @@ from sphinx.addnodes import pending_xref
 project = 'navground_learning'
 copyright = '2024, Jerome Guzzi et al. (IDSIA, USI-SUPSI)'
 author = 'Jerome Guzzi et al. (IDSIA, USI-SUPSI)'
-release = '0.1.1'
+release = '0.2.pre'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -28,7 +28,8 @@ extensions = [
 ]
 
 templates_path = ['_templates']
-exclude_patterns = ['Thumbs.db', '.DS_Store', '**.ipynb_checkpoints', 'tutorials/archive']
+exclude_patterns = ['Thumbs.db', '.DS_Store', '**.ipynb_checkpoints', 'tutorials/archive',
+                    'tutorials/antipodal', 'tutorials/corridor']
 
 # autodoc_typehints_format = 'short'
 # autodoc_member_order = 'groupwise'
@@ -42,6 +43,9 @@ autodoc_docstring_signature = True
 autodoc_typehints = "both"
 autodoc_typehints_format = 'short'
 autodoc_preserve_defaults = False
+autodoc_default_options = {
+    'show-inheritance': False
+}
 
 autodoc_type_aliases = {
     'Array': 'Array',
@@ -61,7 +65,7 @@ autodoc_type_aliases = {
 
 intersphinx_mapping = {
     'gymnasium': ('https://gymnasium.farama.org', None),
-    'navground': ('https://idsia-robotics.github.io/navground', None),
+    'navground': ('https://idsia-robotics.github.io/navground/latest', None),
     'pettingzoo': ('https://pettingzoo.farama.org', None),
     'python': ('https://docs.python.org/3', None),
     'numpy': ('https://numpy.org/doc/stable', None),
@@ -69,7 +73,10 @@ intersphinx_mapping = {
     'imitation': ('https://imitation.readthedocs.io/en/latest/', None),
     'stable_baselines3': ('https://stable-baselines3.readthedocs.io/en/master/', None),
     'onnxruntime': ('https://onnxruntime.ai/docs/api/python', None),
-    'torch': ('https://pytorch.org/docs/stable', None)
+    'torch': ('https://pytorch.org/docs/stable', None),
+    'benchmarl': ('https://benchmarl.readthedocs.io/en/latest', None),
+    'torchrl': ('https://docs.pytorch.org/rl/stable', None),
+    'pandas': ('https://pandas.pydata.org/docs/', None)
 }
 
 # -- Options for HTML output -------------------------------------------------

@@ -37,6 +37,25 @@ class NullReward(Reward, register_name="Zero"):
         return 0.0
 
 
+class FixedReward(Reward, register_name="Fixed"):
+    """
+        A const -1 reward to favor shorter runs.
+    """
+
+    def __call__(self, agent: sim.Agent, world: sim.World,
+                 time_step: float) -> float:
+        """
+        A const -1 reward.
+
+        :param      agent:      The agent
+        :param      world:      The world
+        :param      time_step:  The time step
+
+        :returns:   -1
+        """
+        return -1.0
+
+
 class EfficacyReward(Reward, register_name="Efficacy"):
     """
         A reward that returns the agent's
@@ -48,6 +67,45 @@ class EfficacyReward(Reward, register_name="Efficacy"):
                  time_step: float) -> float:
         if agent.behavior:
             return min(agent.behavior.efficacy, 1) - 1
+        return 0
+
+
+class TargetEfficacyReward(Reward, register_name="TargetEfficacy"):
+    """
+        A reward that sums the linear *and* angular efficacy and
+        penalize linear *and* angular speed once the agent has arrived.
+    """
+
+    def __call__(self, agent: sim.Agent, world: sim.World,
+                 time_step: float) -> float:
+        r: float = 0
+        b = agent.behavior
+        if b:
+            if b.get_target_direction() is not None:
+                r += min(b.efficacy, 1) - 1
+                if b.kinematics.dof() < 3:
+                    return r
+            else:
+                r -= abs(b.speed) / b.optimal_speed
+            d = b.get_target_angular_velocity()
+            if d:
+                r += min(b.angular_speed / d, 1) - 1
+            else:
+                r -= abs(b.angular_speed) / b.optimal_angular_speed
+        return r
+
+
+class TargetDistanceReward(Reward, register_name="TargetDistance"):
+    """
+        A reward that penalizes target distances
+
+    """
+
+    def __call__(self, agent: sim.Agent, world: sim.World,
+                 time_step: float) -> float:
+        if agent.behavior:
+            return -((agent.behavior.get_target_distance() or 0) +
+                     (agent.behavior.get_target_angular_distance() or 0))
         return 0
 
 

@@ -25,4 +25,30 @@ The single and multi-agent environments of :doc:`../tutorials/crossing/index`.
 
 .. autofunction:: get_env
 
+Pad
+===
+
+.. py:module:: navground.learning.examples.pad
+
+The single and multi-agent environments, the reward, and the sensors of :doc:`../tutorials/pad/index`.
+
+Environments
+------------
+
+.. autofunction:: get_env
+
+Reward
+------
+
+.. autoclass:: PadReward
+
+Sensors
+-------
+
+.. autofunction:: comm
+
+.. autofunction:: marker
+
+.. autofunction:: neighbor
+
 

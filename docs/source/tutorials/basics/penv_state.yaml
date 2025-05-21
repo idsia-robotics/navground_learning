@@ -1,0 +1,198 @@
+groups:
+- action:
+    dof: null
+    dtype: ''
+    fix_orientation: false
+    has_wheels: null
+    max_acceleration: .inf
+    max_angular_acceleration: .inf
+    max_angular_speed: .inf
+    max_speed: .inf
+    type: Control
+    use_acceleration_action: false
+    use_wheels: false
+  indices:
+    start: 0
+    step: 1
+    stop: 10
+    type: slice
+  observation:
+    dof: null
+    dtype: ''
+    flat: false
+    flat_values: false
+    history: 1
+    ignore_keys: []
+    include_angular_speed: false
+    include_radius: false
+    include_target_angular_speed: false
+    include_target_direction: true
+    include_target_direction_validity: false
+    include_target_distance: false
+    include_target_distance_validity: false
+    include_target_orientation: false
+    include_target_orientation_validity: false
+    include_target_speed: false
+    include_velocity: false
+    keys: null
+    max_angular_speed: .inf
+    max_radius: .inf
+    max_speed: .inf
+    max_target_distance: .inf
+    normalize: false
+    sort_keys: false
+    type: Default
+  reward:
+    alpha: 0.0
+    beta: 1.0
+    critical_safety_margin: 0.0
+    default_social_margin: 0.0
+    safety_margin: null
+    social_margins: {}
+    type: Social
+  sensors:
+  - include_valid: true
+    include_x: true
+    include_y: true
+    max_id: 0
+    max_radius: 0.100000001
+    max_speed: 0.119999997
+    name: neighbors
+    number: 5
+    range: 5
+    type: Discs
+    use_nearest_point: true
+  tag: first
+  terminate_on_failure: null
+  terminate_on_success: null
+- action:
+    dof: null
+    dtype: ''
+    fix_orientation: false
+    has_wheels: null
+    max_acceleration: 1.0
+    max_angular_acceleration: 10.0
+    max_angular_speed: .inf
+    max_speed: .inf
+    type: Control
+    use_acceleration_action: true
+    use_wheels: false
+  indices:
+    start: 10
+    step: 1
+    stop: 20
+    type: slice
+  observation:
+    dof: null
+    dtype: ''
+    flat: false
+    flat_values: false
+    history: 1
+    ignore_keys: []
+    include_angular_speed: false
+    include_radius: false
+    include_target_angular_speed: false
+    include_target_direction: true
+    include_target_direction_validity: false
+    include_target_distance: false
+    include_target_distance_validity: false
+    include_target_orientation: false
+    include_target_orientation_validity: false
+    include_target_speed: false
+    include_velocity: false
+    keys: null
+    max_angular_speed: .inf
+    max_radius: .inf
+    max_speed: .inf
+    max_target_distance: .inf
+    normalize: false
+    sort_keys: false
+    type: Default
+  reward:
+    alpha: 0.0
+    beta: 1.0
+    critical_safety_margin: 0.0
+    default_social_margin: 0.0
+    safety_margin: null
+    social_margins: {}
+    type: Social
+  sensors:
+  - error_bias: 0
+    error_std_dev: 0
+    field_of_view: 6.28318548
+    name: lidar
+    position:
+    - 0
+    - 0
+    range: 5
+    resolution: 100
+    start_angle: -3.14159274
+    type: Lidar
+  tag: second
+  terminate_on_failure: null
+  terminate_on_success: null
+include_action: true
+include_success: true
+init_success: null
+intermediate_success: false
+max_duration: 60.0
+realtime_factor: 1.0
+render_kwargs: {}
+render_mode: null
+scenario:
+  add_safety_to_agent_margin: true
+  agent_margin: 0.100000001
+  groups:
+  - behavior:
+      eta: 0.5
+      horizon: 5
+      optimal_speed: 0.119999997
+      safety_margin: 0.100000001
+      tau: 0.25
+      type: HL
+    color: gray
+    control_period: 0.100000001
+    kinematics:
+      max_speed: 0.119999997
+      type: 2WDiff
+      wheel_axis: 0.0939999968
+    number: 20
+    radius: 0.100000001
+    speed_tolerance: 0.0199999996
+    state_estimation:
+      range: 5
+      type: Bounded
+    type: thymio
+  obstacles: []
+  side: 4
+  target_margin: 0.100000001
+  tolerance: 0.5
+  type: Cross
+state:
+  dtype: ''
+  include_angular_speed: false
+  include_orientation: false
+  include_position: true
+  include_radius: false
+  include_target_angular_speed: false
+  include_target_direction: false
+  include_target_direction_validity: false
+  include_target_distance: false
+  include_target_distance_validity: false
+  include_target_orientation: false
+  include_target_orientation_validity: false
+  include_target_speed: false
+  include_velocity: false
+  include_x: true
+  include_y: true
+  max_radius: .inf
+  max_target_distance: .inf
+  type: Default
+  use_absolute_frame: true
+stuck_timeout: -1
+terminate_if_idle: true
+time_step: 0.1
+truncate_fast: false
+truncate_outside_bounds: false
+type: MultiAgentNavgroundEnv
+wait: false
