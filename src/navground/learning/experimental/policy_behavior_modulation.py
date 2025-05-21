@@ -14,11 +14,11 @@ from ..internal.group import GymAgent, create_agents_in_groups
 from ..probes import RewardProbe
 
 
-def update_state(sensor: sim.Sensor | None, world: sim.World,
+def update_state(sensors: list[sim.Sensor], world: sim.World,
                  agent: sim.Agent) -> Callable[[core.SensingState], None]:
 
     def f(state: core.SensingState) -> None:
-        if sensor:
+        for sensor in sensors:
             sensor.update(agent, world, state)
 
     return f
@@ -53,7 +53,7 @@ class PolicyModulation(core.BehaviorModulation):
                                       behavior=behavior)
         obs = self.gym_agent.update_observation()
         act, _ = self.policy.predict(obs, deterministic=self.deterministic)
-        ac = cast(ModulationActionConfig, self.gym_agent.action_config)
+        ac = cast("ModulationActionConfig", self.gym_agent.action_config)
         params = ac.get_params_from_action(act)
         for k, v in params.items():
             self._old_params[k] = getattr(behavior, k)
@@ -74,7 +74,7 @@ def add_modulation(groups: Collection[GroupConfig],
     def f(world: sim.World, seed: int | None = None) -> None:
         for group in groups:
             for agent in group.indices.sub_sequence(world.agents):
-                obs = update_state(group.get_sensor(), world, agent)
+                obs = update_state(group.get_sensors(), world, agent)
                 if group.action and isinstance(
                         group.action,
                         ModulationActionConfig) and group.observation:
@@ -134,7 +134,7 @@ def make_experiment_with_env(
 ) -> sim.Experiment:
     exp = sim.Experiment()
     if env._scenario:
-        exp.scenario = copy.copy(env._scenario)
+        exp.scenario = copy.deepcopy(env._scenario)
     else:
         raise ValueError("No scenario")
     if policy:

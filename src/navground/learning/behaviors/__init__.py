@@ -1,3 +1,3 @@
-from .policy import PolicyBehavior
+from .policy import PolicyBehavior, GroupedPolicyBehavior
 
-__all__ = ['PolicyBehavior']
+__all__ = ['PolicyBehavior', 'GroupedPolicyBehavior']

@@ -31,7 +31,7 @@ class TrajectoryAccumulator(rollout_without_info.TrajectoryAccumulator):
         acts: Array,
         obs: types.Observation | dict[str, Array],
         rews: np.typing.NDArray[np.floating[Any]],
-        dones: np.typing.NDArray[np.bool],
+        dones: np.typing.NDArray[np.bool_],
         infos: list[dict[str, Any]],
     ) -> list[types.TrajectoryWithRew]:
         trajs: list[types.TrajectoryWithRew] = []
@@ -87,7 +87,7 @@ PolicyCallableWithInfo: TypeAlias = Callable[
     [
         Array | dict[str, Array],  # observations
         tuple[Array, ...] | None,  # states
-        np.typing.NDArray[np.bool] | None,  # episode_starts
+        np.typing.NDArray[np.bool_] | None,  # episode_starts
         list[dict[str, Array]] | None  # (Jerome) added info
     ],
     tuple[Array, tuple[Array, ...] | None]  # actions, states
@@ -108,7 +108,7 @@ def policy_to_callable(
         def get_actions(
             observations: Array | dict[str, Array],
             states: tuple[Array, ...] | None,
-            episode_starts: np.typing.NDArray[np.bool] | None,
+            episode_starts: np.typing.NDArray[np.bool_] | None,
             infos: list[dict[str, Array]] | None = None
         ) -> tuple[Array, tuple[Array, ...] | None]:
             acts = [
@@ -125,7 +125,7 @@ def policy_to_callable(
         def get_actions(
             observations: Array | dict[str, Array],
             states: tuple[Array, ...] | None,
-            episode_starts: np.typing.NDArray[np.bool] | None,
+            episode_starts: np.typing.NDArray[np.bool_] | None,
             infos: list[dict[str, Array]] | None = None
         ) -> tuple[Array, tuple[Array, ...] | None]:
             assert isinstance(policy, (BaseAlgorithm, BasePolicy))
@@ -156,13 +156,13 @@ def policy_to_callable(
             def get_actions(
                 observations: Array | dict[str, Array],
                 states: tuple[Array, ...] | None,
-                episode_starts: np.typing.NDArray[np.bool] | None,
+                episode_starts: np.typing.NDArray[np.bool_] | None,
                 infos: list[dict[str, Array]] | None = None
             ) -> tuple[Array, tuple[Array, ...] | None]:
-                return cast(rollout_without_info.PolicyCallable,
+                return cast("rollout_without_info.PolicyCallable",
                             policy)(observations, states, episode_starts)
         else:
-            get_actions = cast(PolicyCallableWithInfo, policy)
+            get_actions = cast("PolicyCallableWithInfo", policy)
     else:
         raise TypeError(
             "Policy must be None, a stable-baselines policy or algorithm, "

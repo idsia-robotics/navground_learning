@@ -13,14 +13,16 @@ groups:
     use_wheels: false
   indices:
     start: 0
-    step: null
+    step: 1
     stop: 10
     type: slice
   observation:
     dof: null
     dtype: ''
     flat: false
+    flat_values: false
     history: 1
+    ignore_keys: []
     include_angular_speed: false
     include_radius: false
     include_target_angular_speed: false
@@ -28,12 +30,17 @@ groups:
     include_target_direction_validity: false
     include_target_distance: true
     include_target_distance_validity: false
+    include_target_orientation: false
+    include_target_orientation_validity: false
     include_target_speed: false
     include_velocity: false
+    keys: null
     max_angular_speed: .inf
     max_radius: .inf
     max_speed: .inf
     max_target_distance: .inf
+    normalize: false
+    sort_keys: false
     type: Default
   reward:
     alpha: 0.0
@@ -43,8 +50,25 @@ groups:
     safety_margin: null
     social_margins: {}
     type: Social
-  sensor: {}
-max_duration: -1.0
+  sensors:
+  - include_valid: true
+    include_x: true
+    include_y: true
+    max_id: 0
+    max_radius: 0.100000001
+    max_speed: 0.119999997
+    name: neighbors
+    number: 5
+    range: 5
+    type: Discs
+    use_nearest_point: true
+  terminate_on_failure: true
+  terminate_on_success: true
+include_action: true
+include_success: true
+init_success: null
+intermediate_success: false
+max_duration: 60.0
 realtime_factor: 1.0
 render_kwargs: {}
 render_mode: null
@@ -77,7 +101,10 @@ scenario:
   target_margin: 0.100000001
   tolerance: 0.5
   type: Cross
-stuck_timeout: 1
-terminate_outside_bounds: false
+stuck_timeout: -1
+terminate_if_idle: true
 time_step: 0.1
+truncate_fast: false
+truncate_outside_bounds: false
 type: MultiAgentNavgroundEnv
+wait: false

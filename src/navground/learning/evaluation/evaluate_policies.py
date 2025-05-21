@@ -119,7 +119,7 @@ def evaluate_policies(
         current_length = 0
         group_state: list[State | None] = [None for i in groups]
         done = False
-        dones: Array = np.ones((len(env.agents), ), dtype=np.bool)
+        dones: Array = np.ones((len(env.agents), ), dtype=np.bool_)
         obs_spaces = [
             env.observation_space(group[0]) if group else None
             for group in groups
@@ -143,9 +143,9 @@ def evaluate_policies(
                 group_obs = indices.sub_dict(observations)
                 if obs_keys:
                     obs: Observation = stack_obs_dict(
-                        cast(dict[Any, dict[str, Array]], group_obs), obs_keys)
+                        cast('dict[Any, dict[str, Array]]', group_obs), obs_keys)
                 else:
-                    obs = stack_dict(cast(dict[int, Array], group_obs))
+                    obs = stack_dict(cast('dict[int, Array]', group_obs))
                 episode_start = dones[group]
                 if use_info:
                     kwargs = {'info': list(indices.sub_dict(infos).values())}

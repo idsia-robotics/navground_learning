@@ -3,8 +3,9 @@ from __future__ import annotations
 import dataclasses as dc
 import math
 import warnings
-from collections.abc import Mapping
-from typing import Any, cast
+from collections.abc import Callable, Iterable, Mapping, Sequence
+from itertools import chain
+from typing import Any, TypeAlias, cast
 
 import gymnasium as gym
 import numpy as np
@@ -13,6 +14,26 @@ from navground.core import FloatType
 
 from ..types import Array, Observation
 from .base import ConfigWithKinematic, ObservationConfig
+
+RescaleFn: TypeAlias = Callable[[Array], Array]
+
+
+def flatten_dict_space(space: gym.spaces.Dict) -> gym.spaces.Dict:
+    return gym.spaces.Dict({
+        k: gym.spaces.flatten_space(v)
+        for k, v in space.items()
+    })
+
+
+def normalize(low: Array, high: Array, new_low: float,
+              new_high: float) -> RescaleFn:
+
+    scale = (new_high - new_low) / (high - low)
+
+    def f(x: Array) -> Array:
+        return (x - low) * scale + new_low
+
+    return f
 
 
 @dc.dataclass(repr=False)
@@ -58,13 +79,28 @@ class DefaultObservationConfig(ConfigWithKinematic,
 
     :param max_radius: The upper bound of own radius.
                        Only relevant if ``include_radius=True``.
+
+    :param normalize: Whether to normalize observations in [-1, 1]
+
+    :param ignore_keys: Which keys to ignore
+
+    :param sort_keys: Whether to sort the keys
+
+    :param keys: Which keys to select
+
     """
 
     flat: bool = False
     """Whether the observation space is flat"""
+    flat_values: bool = False
+    """Whether the flatten the spaces of a dict observation space"""
     history: int = 1
     """The size of observations queue.
        If larger than 1, recent observations will be first stacked and then flattened."""
+    include_target_orientation: bool = False
+    """TODO"""
+    include_target_orientation_validity: bool = False
+    """TODO"""
     include_target_distance: bool = False
     """Whether observations include the target direction."""
     include_target_distance_validity: bool = False
@@ -89,10 +125,19 @@ class DefaultObservationConfig(ConfigWithKinematic,
     max_radius: float = np.inf
     """The upper bound of own radius.
        Only relevant if :py:attr:`include_radius` is set."""
+    normalize: bool = False
+    """Whether to normalize observations in [-1, 1]"""
+    ignore_keys: list[str] = dc.field(default_factory=list)
+    """Which keys to ignore"""
+    sort_keys: bool = False
+    """Whether to sort the keys"""
+    keys: Sequence[str] | None = None
+    """Which keys to select"""
 
     def __post_init__(self) -> None:
         super().__post_init__()
         self._item_space: gym.spaces.Dict = gym.spaces.Dict()
+        self._rescale_fn: dict[str, RescaleFn] = {}
 
     def is_configured(self, warn: bool = False) -> bool:
         if not self._item_space:
@@ -135,6 +180,26 @@ class DefaultObservationConfig(ConfigWithKinematic,
             if not math.isfinite(self.max_radius):
                 self.max_radius = behavior.radius
         self._item_space = self._make_item_space(sensing_space)
+        self._init_rescaling(self._item_space)
+
+    def _init_rescaling(self, space: gym.spaces.Dict) -> None:
+        if self.normalize:
+            for key, value in space.items():
+                if not isinstance(value, gym.spaces.Box):
+                    continue
+                if np.issubdtype(value.dtype, np.floating):
+                    if np.all(value.low == -1) and np.all(value.high == 1):
+                        continue
+                    self._rescale_fn[key] = normalize(value.low, value.high,
+                                                      -1, 1)
+                    # dtype = cast('np.typing.NDArray[np.floating[Any]]',
+                    #              value.dtype)
+                    space[key] = gym.spaces.Box(low=-1,
+                                                high=1,
+                                                shape=value.shape,
+                                                dtype=FloatType)
+        else:
+            self._rescale_fn.clear()
 
     def _make_state_space(self) -> gym.spaces.Dict:
         ds: dict[str, gym.Space[Any]] = {}
@@ -149,8 +214,15 @@ class DefaultObservationConfig(ConfigWithKinematic,
         if self.include_target_distance:
             ds['ego_target_distance'] = gym.spaces.Box(
                 0, self.max_target_distance, (1, ), dtype=FloatType)
-            if self.include_target_direction_validity:
+            if self.include_target_distance_validity:
                 ds['ego_target_distance_valid'] = gym.spaces.Box(
+                    0, 1, (1, ), dtype=np.uint8)
+        if self.include_target_orientation:
+            ds['ego_target_orientation'] = gym.spaces.Box(-1,
+                                                          1, (2, ),
+                                                          dtype=FloatType)
+            if self.include_target_orientation_validity:
+                ds['ego_target_orientation_valid'] = gym.spaces.Box(
                     0, 1, (1, ), dtype=np.uint8)
         if self.include_velocity:
             if self.dof is None:
@@ -177,13 +249,26 @@ class DefaultObservationConfig(ConfigWithKinematic,
                 0, self.max_angular_speed, (1, ), dtype=FloatType)
         return gym.spaces.Dict(ds)
 
+    def _rescale(self, obs: dict[str, Array]) -> None:
+        for key, value in obs.items():
+            if key in self._rescale_fn:
+                obs[key] = self._rescale_fn[key](value)
+
     def get_observation(self, behavior: core.Behavior | None,
                         buffers: Mapping[str, core.Buffer]) -> Observation:
         rs = self._get_state_observations(behavior)
-        rs.update((k, b.data) for k, b in buffers.items())
+        if self.ignore_keys:
+            rs = {k: v for k, v in rs.items() if k not in self.ignore_keys}
+        if self.flat_values and not self.should_flatten_observations:
+            rs.update((k, b.data.flatten()) for k, b in buffers.items()
+                      if k not in self.ignore_keys)
+        else:
+            rs.update((k, b.data) for k, b in buffers.items()
+                      if k not in self.ignore_keys)
+        self._rescale(rs)
         if not self.should_flatten_observations:
             return rs
-        vs = cast(Array, gym.spaces.flatten(self._item_space, rs))
+        vs = cast("Array", gym.spaces.flatten(self._item_space, rs))
         if self._dtype:
             vs = vs.astype(self._dtype)
         return vs
@@ -194,13 +279,28 @@ class DefaultObservationConfig(ConfigWithKinematic,
 
     def _make_item_space(self,
                          sensing_space: gym.spaces.Dict) -> gym.spaces.Dict:
+        if self.flat_values and not self.should_flatten_observations:
+            sensing_space = flatten_dict_space(sensing_space)
+        if self.ignore_keys or self.sort_keys or self.keys is not None:
+            ks: Iterable[tuple[str, gym.spaces.Box]] = chain(
+                cast('Iterable[tuple[str, gym.spaces.Box]]',
+                     sensing_space.items()),
+                cast('Iterable[tuple[str, gym.spaces.Box]]',
+                     self._make_state_space().items()))
+            if self.sort_keys:
+                ks = sorted(ks)
+            if self.keys is not None:
+                rs = dict(ks)
+                ks = {k: rs[k] for k in self.keys if k in rs}.items()
+            return gym.spaces.Dict([(k, v) for k, v in ks
+                                    if k not in self.ignore_keys])
         return gym.spaces.Dict(**sensing_space, **self._make_state_space())
 
     @property
     def space(self) -> gym.Space[Any]:
         if self.should_flatten_observations:
             flat_space: gym.spaces.Box = cast(
-                gym.spaces.Box, gym.spaces.flatten_space(self._item_space))
+                "gym.spaces.Box", gym.spaces.flatten_space(self._item_space))
             if self._dtype:
                 flat_space.dtype = self._dtype
             if self.history > 1:
@@ -246,6 +346,18 @@ class DefaultObservationConfig(ConfigWithKinematic,
             if self.include_target_distance_validity:
                 value = 0 if distance is None else 1
                 rs['ego_target_distance_valid'] = np.array([value], np.uint8)
+        if self.include_target_orientation:
+            orientation = behavior.get_target_orientation(
+                frame=core.Frame.relative)
+            if orientation is not None:
+                u = core.unit(orientation)
+            else:
+                u = np.zeros(2, dtype=FloatType)
+            rs['ego_target_orientation'] = u
+            if self.include_target_orientation_validity:
+                value = 0 if orientation is None else 1
+                rs['ego_target_orientation_valid'] = np.array([value],
+                                                              np.uint8)
         if self.include_target_direction:
             e = behavior.get_target_direction(core.Frame.relative)
             rs['ego_target_direction'] = e if e is not None else np.zeros(

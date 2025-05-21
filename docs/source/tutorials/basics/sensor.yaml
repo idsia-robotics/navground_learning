@@ -3,3 +3,4 @@ number: 5
 range: 5.0
 max_speed: 0.12
 max_radius: 0.1
+name: neighbors

@@ -20,6 +20,7 @@ except ImportError:
         finally:
             os.chdir(_old)
 
+
 import yaml
 from navground import core, sim
 
@@ -64,12 +65,12 @@ def _get_policy_behavior(env: NavgroundBaseEnv,
     return None
 
 
-def _get_sensor(env: NavgroundBaseEnv,
-                index: int | None = None) -> sim.Sensor | None:
+def _get_sensors(env: NavgroundBaseEnv,
+                 index: int | None = None) -> list[sim.Sensor]:
     agent = _get_agent(env, index)
     if agent:
-        return agent.sensor
-    return None
+        return agent.sensors
+    return []
 
 
 def save_env(
@@ -92,7 +93,7 @@ def save_env(
 def load_env(path: PathLike) -> MultiAgentNavgroundEnv | NavgroundEnv:
     with open(path) as f:
         data = yaml.safe_load(f.read())
-    return cast(MultiAgentNavgroundEnv | NavgroundEnv,
+    return cast("MultiAgentNavgroundEnv | NavgroundEnv",
                 NavgroundBaseEnv.from_dict(data))
 
 
@@ -110,7 +111,7 @@ def export_behavior(
     if venv:
         value = venv.get_attr("asdict", [0])[0]
         env: BaseEnv | BaseParallelEnv | None = cast(
-            BaseEnv | BaseParallelEnv, NavgroundBaseEnv.from_dict(value))
+            "BaseEnv | BaseParallelEnv", NavgroundBaseEnv.from_dict(value))
     else:
         env = None
     export_policy_as_behavior(path=path, policy=model.policy, env=env)
@@ -151,16 +152,17 @@ def export_policy_as_behavior(path: PathLike,
             behavior.set_policy_path('policy.onnx', load_policy=False)
         with open(path / 'behavior.yaml', 'w') as f:
             f.write(behavior.dump())
-    sensor = _get_sensor(env, index=index)
-    if sensor:
+    sensors = _get_sensors(env, index=index)
+    sensors_as_dict = [yaml.safe_load(sensor.dump()) for sensor in sensors]
+    if sensors:
         with open(path / 'sensor.yaml', 'w') as f:
-            f.write(sensor.dump())
+            f.write(yaml.dump(sensors_as_dict))
     # TODO(Jerome): Maybe add a scenario
 
 
 def load_behavior(
-    path: PathLike
-) -> tuple[PolicyBehavior | None, sim.StateEstimation | None]:
+        path: PathLike
+) -> tuple[PolicyBehavior | None, list[sim.Sensor]]:
     """
     Load behavior and sensor previously saved in a directory
     using :py:func:`export_policy_as_behavior`.
@@ -171,12 +173,16 @@ def load_behavior(
     """
     path = pl.Path(path)
     behavior: PolicyBehavior | None = None
-    sensor: sim.StateEstimation | None = None
+    sensors: list[sim.Sensor] = []
     with chdir(path):
         with open('behavior.yaml') as f:
             b = core.Behavior.load(f.read())
             if isinstance(b, PolicyBehavior):
                 behavior = b
         with open('sensor.yaml') as f:
-            sensor = sim.StateEstimation.load(f.read())
-    return behavior, sensor
+            sensors_as_dict = yaml.safe_load(f.read())
+            sensors = [
+                se for se in (sim.Sensor.load(yaml.dump(d))
+                              for d in sensors_as_dict) if se
+            ]
+    return behavior, sensors

@@ -87,13 +87,13 @@ class OrderInvariantCombinedExtractor(BaseFeaturesExtractor):
                 extractors[key] = nn.Flatten()
                 if key in order_invariant_keys:
                     order_invariant_lens.add(
-                        cast(gym.spaces.Box, subspace).shape[0])
+                        cast("gym.spaces.Box", subspace).shape[0])
                     order_invariant_size += get_flattened_obs_dim(subspace)
                 elif key in replicated_keys:
                     replicated_size += get_flattened_obs_dim(subspace)
                 elif key == filter_key:
                     order_invariant_lens.add(
-                        cast(gym.spaces.Box, subspace).shape[0])
+                        cast("gym.spaces.Box", subspace).shape[0])
                 elif key not in removed_keys:
                     total_concat_size += get_flattened_obs_dim(subspace)
 
@@ -122,29 +122,34 @@ class OrderInvariantCombinedExtractor(BaseFeaturesExtractor):
 
     def forward(self, observations: dict[str, th.Tensor]) -> th.Tensor:
         encoded_tensor_list = []
+        bs = set([int(v.shape[0]) for k, v in observations.items()])
+        assert len(bs) == 1, bs
+        batches = next(iter(bs))
         for key, extractor in self.extractors.items():
             encoded_tensor_list.append(extractor(observations[key]))
         if self.order_invariant_extractors:
             oit = [
-                extractor(observations[key]).reshape(self._number, -1)
+                extractor(observations[key]).reshape(batches, self._number, -1)
                 for key, extractor in self.order_invariant_extractors.items()
             ]
             rt = [
-                extractor(observations[key]).repeat(self._number, 1)
+                extractor(observations[key]).repeat(batches, self._number, -1)
                 for key, extractor in self.replicated_extractors.items()
             ]
-            order_invariant_input = th.cat(oit + rt, dim=1)
+            order_invariant_input = th.cat(oit + rt, dim=-1)
             if self.filter_key:
                 mask = observations[self.filter_key].flatten() > 0
                 order_invariant_input = order_invariant_input[mask]
             z = self.nn(order_invariant_input)
             if len(z):
                 for reduction in self.reductions:
-                    r, *_ = reduction(z, 0, True)
-                    encoded_tensor_list.append(r.reshape(1, -1))
+                    r = reduction(z, 1, False)
+                    if reduction in (th.max, th.min):
+                        r = r.values  # type: ignore
+                    encoded_tensor_list.append(r)
             else:
                 encoded_tensor_list.append(th.zeros(1, self.net_out_dim))
-        return th.cat(encoded_tensor_list, dim=1)
+        return th.cat(encoded_tensor_list, dim=-1)
 
 
 class OrderInvariantFlattenExtractor(BaseFeaturesExtractor):
@@ -240,7 +245,7 @@ class OrderInvariantFlattenExtractor(BaseFeaturesExtractor):
             if mask is not None and not self.use_masked_tensors:
                 oi = oi[mask]
                 if has_same_number:
-                    number = cast(int, numbers[0].item())
+                    number = cast("int", numbers[0].item())
                     if number > 0:
                         oi = oi.reshape(*shape[:-1], number, -1)
 
@@ -342,10 +347,10 @@ def make_order_invariant_flatten_extractor(
     """
 
     ns = set(
-        cast(gym.spaces.Box, dict_space[k]).shape[0]
+        cast("gym.spaces.Box", dict_space[k]).shape[0]
         for k in order_invariant_keys)
     if filter_key and filter_key in dict_space:
-        ns.add(cast(gym.spaces.Box, dict_space[filter_key]).shape[0])
+        ns.add(cast("gym.spaces.Box", dict_space[filter_key]).shape[0])
     assert len(ns) == 1
     number = list(ns)[0]
     indices = {}

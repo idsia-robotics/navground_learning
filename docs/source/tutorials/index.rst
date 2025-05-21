@@ -11,10 +11,10 @@ Our goal here is not to train the best possible policies or to perform a rigorou
    :maxdepth: 3
 
    basics/index
-   empty/empty
+   empty/index
    corridor_with_obstacle/index
    crossing/index
    periodic_crossing/index
-
+   pad/index
 
 

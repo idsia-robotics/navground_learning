@@ -3,7 +3,7 @@ from __future__ import annotations
 import copy
 import dataclasses as dc
 import numbers
-from collections import deque
+from collections import deque, ChainMap
 from collections.abc import Collection, Mapping
 from typing import Any, Protocol
 import warnings
@@ -13,7 +13,7 @@ import numpy as np
 from navground import core, sim
 
 from ..config import GroupConfig
-from ..types import Array, Reward
+from ..types import Array, Reward, TerminationCondition
 
 
 class ActionProtocol(Protocol):
@@ -94,6 +94,10 @@ def get_relative_target_position(behavior: core.Behavior) -> core.Vector2:
 
 def get_space_for_sensor(sensor: sim.Sensor) -> gym.spaces.Dict:
     return make_composed_space(sensor.description)
+
+
+def get_space_for_sensors(sensors: list[sim.Sensor]) -> gym.spaces.Dict:
+    return make_composed_space(ChainMap(*[sensor.description for sensor in sensors]))
 
 
 def get_space_for_state(state: core.SensingState) -> gym.spaces.Dict:
@@ -194,20 +198,24 @@ class Agent:
     reward: Reward | None = None
     navground: sim.Agent | None = None
     state: core.SensingState | None = None
-    sensor: sim.Sensor | None = None
+    sensors: list[sim.Sensor] = dc.field(default_factory=list)
     policy: Any = None
+    terminate_on_success: bool = True
+    terminate_on_failure: bool = True
+    success_condition: TerminationCondition | None = None
+    failure_condition: TerminationCondition | None = None
 
-    def get_sensor(self) -> sim.Sensor | None:
-        if self.sensor:
-            return self.sensor
-        if self.navground and isinstance(self.navground.state_estimation,
-                                         sim.Sensor):
-            return self.navground.state_estimation
-        return None
+    def get_sensors(self) -> list[sim.Sensor]:
+        if self.sensors:
+            return self.sensors
+        if self.navground:
+            return [se for se in self.navground.state_estimations if isinstance(se, sim.Sensor)]
+        return []
 
     def update_state(self, world: sim.World) -> None:
-        if self.sensor and self.state and self.navground:
-            self.sensor.update(self.navground, world, self.state)
+        if self.sensors and self.state and self.navground:
+            for sensor in self.sensors:
+                sensor.update(self.navground, world, self.state)
 
     def is_configured(self, warn: bool = False) -> bool:
         if self.gym:
@@ -222,7 +230,7 @@ def create_agents_in_group(
         group: GroupConfig,
         max_number_of_agents: int | None = None) -> dict[int, Agent]:
     agents = {}
-    sensor = group.get_sensor()
+    sensors = group.get_sensors()
     world_agents = group.indices.sub_sequence(world.agents)
     if world_agents:
         representative_behavior = world_agents[0].behavior
@@ -235,9 +243,10 @@ def create_agents_in_group(
         number_of_agents = len(world.agents)
     indices = group.indices.as_set(number_of_agents)
     for i in indices:
-        if sensor:
+        if sensors:
             state = core.SensingState()
-            sensor.prepare_state(state)
+            for sensor in sensors:
+                sensor.prepare_state(state)
         else:
             state = None
         if i >= 0 and i < len(world.agents):
@@ -251,6 +260,7 @@ def create_agents_in_group(
                                  action=group.action,
                                  behavior=behavior,
                                  state=state)
+
         else:
             gym_agent = None
         if ng_agent and group.color:
@@ -258,11 +268,25 @@ def create_agents_in_group(
         if ng_agent and group.tag:
             ng_agent.add_tag(group.tag)
 
+        if group.terminate_on_success is not None:
+            terminate_on_success = group.terminate_on_success
+        else:
+            terminate_on_success = True
+
+        if group.terminate_on_failure is not None:
+            terminate_on_failure = group.terminate_on_failure
+        else:
+            terminate_on_failure = True
+
         agents[i] = Agent(state=state,
                           gym=gym_agent,
-                          sensor=sensor,
+                          sensors=sensors,
                           reward=group.reward,
-                          navground=ng_agent)
+                          navground=ng_agent,
+                          terminate_on_success=terminate_on_success,
+                          terminate_on_failure=terminate_on_failure,
+                          success_condition=group.success_condition,
+                          failure_condition=group.failure_condition)
         # TODO(Jerome):
         # Set policy
     return agents

@@ -52,7 +52,7 @@ def evaluate(
 
     if isinstance(env, ParallelEnv):
         # TODO(Jerome): make it general for heterogeneous envs
-        model = cast(MultiAgentNavgroundEnv,
+        model = cast("MultiAgentNavgroundEnv",
                      env).get_policy(env.possible_agents[0])
         models = [(indices, model)]
         result = evaluate_policies(
@@ -63,10 +63,10 @@ def evaluate(
             return_episode_rewards=return_episode_rewards,
             warn=warn)
         if not return_episode_rewards:
-            means, stds = cast(tuple[list[float], list[float]], result)
+            means, stds = cast("tuple[list[float], list[float]]", result)
             return means[0], stds[0]
         grs, ls, gns = cast(
-            tuple[list[list[float]], list[int], list[list[int]]], result)
+            "tuple[list[list[float]], list[int], list[list[int]]]", result)
         return [value / n for value, n in zip(grs[0], gns[0], strict=True)], ls
     if isinstance(env, VecEnv):
         model = env.get_attr("policy", [0])[0]

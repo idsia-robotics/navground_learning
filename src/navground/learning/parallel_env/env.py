@@ -3,16 +3,19 @@ from __future__ import annotations
 from collections.abc import Collection, Mapping
 from typing import TYPE_CHECKING, Any, TypeAlias
 
+import numpy as np
 from navground import sim
 from pettingzoo.utils.env import ParallelEnv
 
 from ..config import (ActionConfig, ControlActionConfig,
-                      DefaultObservationConfig, GroupConfig, ObservationConfig)
+                      DefaultObservationConfig, GroupConfig, ObservationConfig,
+                      StateConfig)
 from ..env import BaseEnv, NavgroundEnv
 from ..indices import Indices, IndicesLike
 from ..internal.base_env import NavgroundBaseEnv, ResetReturn, StepReturn
 from ..rewards import NullReward
-from ..types import Action, Bounds, Observation, Reward
+from ..types import (Action, Array, Bounds, Observation, Reward, SensorLike,
+                     SensorSequenceLike, TerminationCondition)
 
 if TYPE_CHECKING:
     import gymnasium as gym
@@ -90,18 +93,34 @@ class MultiAgentNavgroundEnv(NavgroundBaseEnv, BaseParallelEnv):
     def action_space(self, agent: int) -> gym.Space[Any]:
         return self._action_space[agent]
 
+    def state(self) -> Array:
+        vs = self.get_state()
+        if vs is None:
+            vs = np.empty((0, ), dtype=np.float32)
+        return vs
 
-def parallel_env(scenario: sim.Scenario | str | dict[str, Any] | None = None,
-                 groups: Collection[GroupConfig] = tuple(),
-                 max_number_of_agents: int | None = None,
-                 time_step: float = 0.1,
-                 max_duration: float = -1.0,
-                 bounds: Bounds | None = None,
-                 terminate_outside_bounds: bool = False,
-                 render_mode: str | None = None,
-                 render_kwargs: Mapping[str, Any] = {},
-                 realtime_factor: float = 1.0,
-                 stuck_timeout: float = 1) -> MultiAgentNavgroundEnv:
+
+def parallel_env(
+    scenario: sim.Scenario | str | dict[str, Any] | None = None,
+    groups: Collection[GroupConfig] = tuple(),
+    max_number_of_agents: int | None = None,
+    time_step: float = 0.1,
+    max_duration: float = -1.0,
+    terminate_if_idle: bool = True,
+    bounds: Bounds | None = None,
+    truncate_outside_bounds: bool = False,
+    render_mode: str | None = None,
+    render_kwargs: Mapping[str, Any] = {},
+    realtime_factor: float = 1.0,
+    stuck_timeout: float = -1,
+    wait: bool = False,
+    truncate_fast: bool = False,
+    state: StateConfig | None = None,
+    include_action: bool = True,
+    include_success: bool = True,
+    init_success: bool | None = None,
+    intermediate_success: bool = False,
+) -> MultiAgentNavgroundEnv:
     """
     Create a multi-agent PettingZoo environment that uses
     a :py:class:`navground.sim.Scenario` to
@@ -135,7 +154,9 @@ def parallel_env(scenario: sim.Scenario | str | dict[str, Any] | None = None,
 
     :param max_duration: If positive, it will signal a truncation after this simulated time.
 
-    :param terminate_outside_bounds: Whether to terminate when an agent exit the bounds
+    :param terminate_if_idle: Whether to terminate when an agent is idle
+
+    :param truncate_outside_bounds: Whether to truncate when an agent exit the bounds
 
     :param bounds: The area to render and a fence for truncating processes when agents exit it.
 
@@ -153,39 +174,78 @@ def parallel_env(scenario: sim.Scenario | str | dict[str, Any] | None = None,
 
     :param stuck_timeout: The time to wait before considering an agent stuck.
 
+    :param wait: Whether to signal termination/truncation only when
+                 all agents have terminated/truncated.
+
+    :param truncate_fast: Whether to signal truncation for all agents
+                          as soon as one agent truncates.
+
+    :param state: An optional global state configuration
+
+    :param include_action: Whether to include field "navground_action" in the info
+
+    :param include_success: Whether to include field "is_success" in the info
+
+    :param init_success: The default value of success (valid until a termination condition is met)
+
+    :param intermediate_success: Whether to include "is_success" in the info at intermediate
+                                 steps (vs only at termination).
+
     :returns:   The multi agent navground environment.
     """
     return MultiAgentNavgroundEnv(
         groups=groups,
         scenario=scenario,
+        max_number_of_agents=max_number_of_agents,
         time_step=time_step,
         max_duration=max_duration,
+        terminate_if_idle=terminate_if_idle,
         bounds=bounds,
-        terminate_outside_bounds=terminate_outside_bounds,
+        truncate_outside_bounds=truncate_outside_bounds,
         render_mode=render_mode,
         render_kwargs=render_kwargs,
         realtime_factor=realtime_factor,
-        stuck_timeout=stuck_timeout)
+        stuck_timeout=stuck_timeout,
+        wait=wait,
+        truncate_fast=truncate_fast,
+        include_action=include_action,
+        include_success=include_success,
+        init_success=init_success,
+        intermediate_success=intermediate_success,
+        state=state)
 
 
 def shared_parallel_env(
         scenario: sim.Scenario | str | dict[str, Any] | None = None,
         max_number_of_agents: int | None = None,
         indices: IndicesLike = Indices.all(),
-        sensor: sim.Sensor | str | dict[str, Any] | None = None,
+        sensor: SensorLike | None = None,
+        sensors: SensorSequenceLike = tuple(),
         action: ActionConfig = ControlActionConfig(),
         observation: ObservationConfig = DefaultObservationConfig(),
         reward: Reward | None = None,
         time_step: float = 0.1,
         max_duration: float = -1.0,
+        terminate_if_idle: bool = True,
         bounds: Bounds | None = None,
-        terminate_outside_bounds: bool = False,
+        truncate_outside_bounds: bool = False,
         render_mode: str | None = None,
         render_kwargs: Mapping[str, Any] = {},
         realtime_factor: float = 1.0,
-        stuck_timeout: float = 1,
+        stuck_timeout: float = -1,
         color: str = '',
-        tag: str = '') -> MultiAgentNavgroundEnv:
+        tag: str = '',
+        wait: bool = False,
+        truncate_fast: bool = False,
+        terminate_on_success: bool = True,
+        terminate_on_failure: bool = True,
+        success_condition: TerminationCondition | None = None,
+        failure_condition: TerminationCondition | None = None,
+        include_action: bool = True,
+        include_success: bool = True,
+        init_success: bool | None = None,
+        intermediate_success: bool = False,
+        state: StateConfig | None = None) -> MultiAgentNavgroundEnv:
     """
     Create a multi-agent PettingZoo environment that uses
     a :py:class:`navground.sim.Scenario` to
@@ -212,12 +272,15 @@ def shared_parallel_env(
     :param indices: The world indices of the agent to control.
                     All other agents are controlled solely by navground.
 
-    :param sensor: A sensor to produce observations for the selected agents.
-                   If a :py:class:`str`, it will be interpreted as the YAML
-                   representation of a sensor.
-                   If a :py:class:`dict`, it will be dumped to YAML and
-                   then treated as a :py:class:`str`.
-                   If None, it will use the agents' own state estimation, if a sensor.
+    :param sensor: An optional sensor that will be added to :py:obj:`sensors`.
+
+    :param sensors: A sequence of sensor to generate observations for the agents
+                    or its YAML representation. If
+                    Items of class :py:class:`str` will be interpreted as the YAML
+                    representation of a sensor.
+                    Items of class :py:class:`dict` will be dumped to YAML and
+                    then treated as a :py:class:`str`.
+                    If empty, it will use the agents' own sensors.
 
     :param action: The configuration of the action space to use.
 
@@ -230,7 +293,9 @@ def shared_parallel_env(
 
     :param max_duration: If positive, it will signal a truncation after this simulated time.
 
-    :param terminate_outside_bounds: Whether to terminate when an agent exit the bounds
+    :param terminate_if_idle: Whether to terminate when an agent is idle
+
+    :param truncate_outside_bounds: Whether to truncate when an agent exit the bounds
 
     :param bounds: The area to render and a fence for truncating processes when agents exit it.
 
@@ -252,28 +317,68 @@ def shared_parallel_env(
 
     :param tag: An optional tag to be added to the agents (only used as metadata)
 
+    :param wait: Whether to signal termination/truncation only when
+                 all agents have terminated/truncated.
+
+    :param truncate_fast: Whether to signal truncation for all agents
+                          as soon as one agent truncates.
+
+    :param state: An optional global state configuration
+
+    :param terminate_on_success: Whether to terminate the episode on success.
+
+    :param terminate_on_failure: Whether to terminate the episode on failure.
+
+    :param success_condition: An optional success criteria
+
+    :param failure_condition: An optional failure criteria
+
+    :param include_action: Whether to include field "navground_action" in the info
+
+    :param include_success: Whether to include field "is_success" in the info
+
+    :param init_success: The default value of success (valid until a termination condition is met)
+
+    :param intermediate_success: Whether to include "is_success" in the info at intermediate
+                                 steps (vs only at termination).
+
+
+
     :returns:   The multi agent navground environment.
     """
     if reward is None:
         reward = NullReward()
     group = GroupConfig(indices=Indices(indices),
                         sensor=sensor,
+                        sensors=sensors,
                         reward=reward,
                         action=action,
                         observation=observation,
                         color=color,
-                        tag=tag)
+                        tag=tag,
+                        terminate_on_success=terminate_on_success,
+                        terminate_on_failure=terminate_on_failure,
+                        success_condition=success_condition,
+                        failure_condition=failure_condition)
     return MultiAgentNavgroundEnv(
         groups=[group],
         scenario=scenario,
         time_step=time_step,
         max_duration=max_duration,
+        terminate_if_idle=terminate_if_idle,
         bounds=bounds,
-        terminate_outside_bounds=terminate_outside_bounds,
+        truncate_outside_bounds=truncate_outside_bounds,
         render_mode=render_mode,
         render_kwargs=render_kwargs,
         realtime_factor=realtime_factor,
-        stuck_timeout=stuck_timeout)
+        stuck_timeout=stuck_timeout,
+        wait=wait,
+        truncate_fast=truncate_fast,
+        include_action=include_action,
+        include_success=include_success,
+        init_success=init_success,
+        intermediate_success=intermediate_success,
+        state=state)
 
 
 def make_shared_parallel_env_with_env(
@@ -306,6 +411,7 @@ def make_shared_parallel_env_with_env(
     kwargs.pop('action')
     kwargs.pop('observation')
     kwargs.pop('sensor')
+    kwargs.pop('sensors')
     kwargs['max_number_of_agents'] = max_number_of_agents
     group = list(env.unwrapped.groups_config)[0]
     group.indices = Indices(indices)

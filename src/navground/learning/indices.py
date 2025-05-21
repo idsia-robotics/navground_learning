@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from collections.abc import Sequence, Mapping
+import functools
+from collections.abc import Iterable, Mapping, Sequence
 from enum import IntEnum
 from operator import itemgetter
 from typing import Any, Literal, TypeAlias, TypeVar, cast
@@ -88,15 +89,15 @@ class Indices:
         if self._type == Indices.Type.all:
             return xs
         if self._type == Indices.Type.set:
-            ys = cast(set[int], self._value) & set(range(0, len(xs)))
+            ys = cast("set[int]", self._value) & set(range(0, len(xs)))
             if ys:
                 z = itemgetter(*ys)(xs)
                 if len(ys) > 1:
-                    return cast(Sequence[T], z)
+                    return cast("Sequence[T]", z)
                 return type(xs)([z])  # type: ignore[call-arg]
 
             return type(xs)()
-        return xs[cast(slice, self._value)]
+        return xs[cast("slice", self._value)]
 
     def sub_dict(self, xs: dict[int, T]) -> dict[int, T]:
         """
@@ -120,10 +121,10 @@ class Indices:
         :returns:   the set of indices
         """
         if self._type == Indices.Type.set:
-            return cast(set[int], self._value)
+            return cast("set[int]", self._value)
         if self._type == Indices.Type.all:
             return set(range(0, length))
-        return set(range(*cast(slice, self._value).indices(length)))
+        return set(range(*cast("slice", self._value).indices(length)))
 
     @property
     def lowest(self) -> int | None:
@@ -136,9 +137,9 @@ class Indices:
             return 0
         if self._type == Indices.Type.set:
             if self._value:
-                return min(cast(set[int], self._value))
+                return min(cast("set[int]", self._value))
             return None
-        a, b, _ = cast(slice, self._value).indices(1)
+        a, b, _ = cast("slice", self._value).indices(1)
         if a < b:
             return a
         return None
@@ -153,11 +154,11 @@ class Indices:
         rs: dict[str, Any] = {}
         rs['type'] = self._type.name
         if self._type == Indices.Type.set:
-            rs['values'] = list(cast(set[int], self._value))
+            rs['values'] = list(cast("set[int]", self._value))
         elif self._type == Indices.Type.slice:
-            rs['start'] = cast(slice, self._value).start
-            rs['stop'] = cast(slice, self._value).stop
-            rs['step'] = cast(slice, self._value).step
+            rs['start'] = cast("slice", self._value).start
+            rs['stop'] = cast("slice", self._value).stop
+            rs['step'] = cast("slice", self._value).step
         return rs
 
     @classmethod
@@ -205,12 +206,30 @@ class Indices:
         if self._type == Indices.Type.all:
             return True
         if self._type == Indices.Type.set:
-            return bool(cast(set[int], self._value))
-        s = cast(slice, self._value)
+            return bool(cast("set[int]", self._value))
+        s = cast("slice", self._value)
         start = s.start or 0
         step = s.step or 1
         stop = s.stop or (start + step)
         return (stop - start) * step > 0
+
+
+def join_indices(values: Iterable[Indices], length: int) -> Indices:
+    """
+    Returns the union indices
+
+    :param      values:  The values
+    :param      length:  The maximal length of the sequences, used to evaluate slices.
+
+
+    :returns:   Indices containing all the indices in values.
+    """
+    vs: list[set[int]] = [indices.as_set(length) for indices in values]
+    if vs:
+        iss: set[int] = functools.reduce(lambda x, y: x | y, vs)
+    else:
+        iss = set()
+    return Indices(iss)
 
 
 IndicesLike: TypeAlias = Indices | slice | list[int] | tuple[int] | set[int] | Literal[

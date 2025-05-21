@@ -8,33 +8,47 @@ import yaml
 from navground import sim
 
 from ..indices import Indices
-from ..types import AnyPolicyPredictor, PathLike, Reward, JSONAble
+from ..types import (AnyPolicyPredictor, JSONAble, PathLike, Reward,
+                     SensorLike, SensorSequenceLike, TerminationCondition)
 from .base import ActionConfig, ObservationConfig
 
 
-def make_sensor(
-        value: sim.Sensor | str | dict[str, Any] | None) -> sim.Sensor | None:
+def load_sensor(value: str) -> sim.Sensor | None:
+    se = sim.load_state_estimation(value)
+    if isinstance(se, sim.Sensor):
+        return se
+    print(f"Invalid sensor {se}")
+    return None
+
+
+def load_sensors(value: str) -> list[sim.Sensor]:
+    ds = yaml.safe_load(value)
+    ses = (sim.load_sensor(yaml.dump(d)) for d in ds)
+    return [se for se in ses if se]
+
+
+def make_sensor(value: SensorLike | None) -> sim.Sensor | None:
     if isinstance(value, dict):
         value = yaml.dump(value)
     if isinstance(value, str):
-        se = sim.load_state_estimation(value)
-        if isinstance(se, sim.Sensor):
-            value = se
-        else:
-            value = None
-            print(f"Invalid sensor {se}")
+        value = load_sensor(value)
     return value
 
 
-def get_sensor_as_dict(
-        sensor: sim.Sensor | None | str | dict[str, Any]) -> dict[str, Any]:
+def make_sensors(value: SensorSequenceLike) -> list[sim.Sensor]:
+    if isinstance(value, str):
+        return load_sensors(value)
+    return [x for x in (make_sensor(se) for se in value) if x]
+
+
+def get_sensor_as_dict(sensor: SensorLike | None) -> dict[str, Any]:
     if sensor is None:
         return {}
     if isinstance(sensor, dict):
         return sensor
     if isinstance(sensor, sim.Sensor):
         sensor = sim.dump(sensor)
-    return cast(dict[str, Any], yaml.safe_load(sensor))
+    return cast("dict[str, Any]", yaml.safe_load(sensor))
 
 
 @dc.dataclass
@@ -58,12 +72,15 @@ class GroupConfig:
 
     :param observation: The observations configuration.
 
-    :param sensor: A sensor to produce observations for the agents.
-                   If a :py:class:`str`, it will be interpreted as the YAML
-                   representation of a sensor.
-                   If a :py:class:`dict`, it will be dumped to YAML and
-                   then treated as a :py:class:`str`.
-                   If None, it will use the agents' own state estimation, if a sensor.
+    :param sensor: An optional sensor that will be added to :py:obj:`sensors`.
+
+    :param sensors: A sequence of sensor to generate observations for the agents
+                    or its YAML representation. If
+                    Items of class :py:class:`str` will be interpreted as the YAML
+                    representation of a sensor.
+                    Items of class :py:class:`dict` will be dumped to YAML and
+                    then treated as a :py:class:`str`.
+                    If empty, it will use the agents' own sensors.
 
     :param reward: An optional reward function to use.
 
@@ -76,6 +93,13 @@ class GroupConfig:
 
     :param deterministic: Whether the agents apply such policy deterministically.
 
+    :param terminate_on_success: Whether to terminate when the agent succeeds
+
+    :param terminate_on_failure: Whether to terminate when the agent fails
+
+    :param success_condition: Optional success condition
+
+    :param failure_condition: Optional failure condition
     """
     indices: Indices = Indices.all()
     """The indices of the agents in the :py:attr:`navground.sim.World.agents` list"""
@@ -83,8 +107,9 @@ class GroupConfig:
     """The actions configuration"""
     observation: ObservationConfig | None = None
     """The observations configuration"""
-    sensor: sim.Sensor | str | dict[str, Any] | None = None
-    """A sensor to produce observations for the agents"""
+    sensor: dc.InitVar[SensorLike | None] = None
+    sensors: SensorSequenceLike = dc.field(default_factory=list)
+    """List of sensors to generate observations for the agents"""
     reward: Reward | None = None
     """The reward function"""
     color: str = ''
@@ -95,9 +120,23 @@ class GroupConfig:
     """The policy assigned to the agents (during evaluation)"""
     deterministic: bool = False
     """Whether the agents apply such policy deterministically"""
+    terminate_on_success: bool | None = None
+    """Whether to terminate when the agent succeeds"""
+    terminate_on_failure: bool | None = None
+    """Whether to terminate when the agent fails"""
+    success_condition: TerminationCondition | None = None
+    """Success condition"""
+    failure_condition: TerminationCondition | None = None
+    """Failure condition"""
 
-    def __post_init__(self) -> None:
+    def __post_init__(self, sensor: SensorLike | None) -> None:
         self.indices = Indices(self.indices)
+        self.sensors = make_sensors(self.sensors)
+        sensor = make_sensor(sensor)
+        if sensor:
+            if not isinstance(self.sensors, list):
+                self.sensors = []
+            self.sensors.append(sensor)
 
     @property
     def asdict(self) -> dict[str, Any]:
@@ -121,7 +160,9 @@ class GroupConfig:
             rs['reward'] = self.reward.asdict
         if self.indices:
             rs['indices'] = self.indices.asdict
-        rs['sensor'] = get_sensor_as_dict(self.sensor)
+        rs['terminate_on_success'] = self.terminate_on_success
+        rs['terminate_on_failure'] = self.terminate_on_failure
+        rs['sensors'] = [get_sensor_as_dict(sensor) for sensor in self.sensors]
         return rs
 
     @classmethod
@@ -134,14 +175,16 @@ class GroupConfig:
         }
         kwargs: dict[str, Any] = {
             k: value[k]
-            for k in ('color', 'tag', 'deterministic', 'sensor') if k in value
+            for k in ('color', 'tag', 'deterministic', 'sensors', 'sensor',
+                      'terminate_on_success', 'terminate_on_failure')
+            if k in value
         }
-        kwargs.update((k, cast(JSONAble, item_cls).from_dict(value[k]))
+        kwargs.update((k, cast("JSONAble", item_cls).from_dict(value[k]))
                       for k, item_cls in loadables.items() if k in value)
         return GroupConfig(**kwargs)
 
-    def get_sensor(self) -> sim.Sensor | None:
-        return make_sensor(self.sensor)
+    def get_sensors(self) -> list[sim.Sensor]:
+        return make_sensors(self.sensors)
 
 
 def get_first_reward(groups: Collection[GroupConfig]) -> Reward | None:
@@ -173,8 +216,8 @@ def merge_groups_configs(groups: Collection[GroupConfig],
                 g = dc.replace(g1, indices=indices)
                 if g1.action is None:
                     g.action = g2.action
-                if g1.sensor is None:
-                    g.sensor = g2.sensor
+                if not g1.sensors:
+                    g.sensors = g2.sensors
                 if g1.reward is None:
                     g.reward = g2.reward
                 if g1.observation is None:
@@ -185,5 +228,13 @@ def merge_groups_configs(groups: Collection[GroupConfig],
                     g.tag = g2.tag
                 if g1.policy is None:
                     g.policy = g2.policy
+                if g1.terminate_on_success is None:
+                    g.terminate_on_success = g2.terminate_on_success
+                if g1.terminate_on_failure is None:
+                    g.terminate_on_failure = g2.terminate_on_failure
+                if g1.success_condition is None:
+                    g.success_condition = g2.success_condition
+                if g1.failure_condition is None:
+                    g.failure_condition = g2.failure_condition
                 gs.append(g)
     return gs

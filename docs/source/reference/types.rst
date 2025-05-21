@@ -50,6 +50,21 @@ Types
 
    A rectangular region defined by bottom-left and top-right vertices.
 
+.. py:type:: SensorLike
+   :canonical: sim.Sensor | str | dict[str, Any]
+
+   Anything that can be converted to a sensor (possibly through YAML).
+
+.. py:type:: SensorSequenceLike
+   :canonical: Sequence[SensorLike] | str
+
+   Anything that can be converted to a list of sensor (possibly through YAML).
+
+.. py:type:: TerminationCondition
+   :canonical: Callable[[sim.Agent, sim.World], bool]
+
+   A condition that mark an agent as terminated with success/failure (return value).
+
 .. py:currentmodule:: navground.learning.indices
 
 .. py:type:: IndicesLike
@@ -78,5 +93,14 @@ Types
    :canonical: PolicyPredictor | PolicyPredictorWithInfo
 
 .. autofunction:: accept_info
+
+
+.. py:type:: PyTorchObs
+   :module: navground.learning.types
+   :canonical: torch.Tensor | dict[str, torch.Tensor]
+
+.. autoclass:: navground.learning.types.PyTorchPolicy
+   :members: __call__, forward
+   :exclude-members: __init__
 
 

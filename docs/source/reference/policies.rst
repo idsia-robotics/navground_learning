@@ -46,3 +46,42 @@ Ordering-invariant extractor
    :members:
 
 .. autofunction:: navground.learning.policies.order_invariant.make_order_invariant_flatten_extractor
+
+
+Centralized training with communication (SAC)
+=============================================
+
+.. autoclass:: navground.learning.policies.centralized_policy_with_comm.SACPolicyWithComm
+   :members:
+
+.. autoclass:: navground.learning.policies.centralized_policy_with_comm.DistributedCommPolicy
+   :members:
+
+Split MLP Policy (SAC)
+======================
+
+.. py:type:: InputSpec
+   :module: navground.learning.policies.split_sac_policy
+   :canonical: slice | Collection[str] | None
+
+   Which inputs to use: a slice of a box observation space, a collection of keys of a dict observation or all (for None).
+
+.. py:type:: NetArch
+   :module: navground.learning.policies.split_sac_policy
+   :canonical: list[int] | dict[str, list[int]] | None
+
+   An (optional) network architecture
+
+
+.. py:type:: ActorSpec
+   :module: navground.learning.policies.split_sac_policy
+   :canonical: tuple[int, InputSpec, NetArch]
+
+   The specifics of a sub-module: output size, input specs and network architecture.
+
+.. autoclass:: navground.learning.policies.split_sac_policy.SplitSACPolicy
+   :members:
+
+.. autoclass:: navground.learning.policies.split_sac_policy.AlternateActorCallback
+   :members:
+

@@ -9,10 +9,13 @@ from navground import sim
 
 from ..config import GroupConfig, merge_groups_configs
 from ..env import BaseEnv
+from ..indices import join_indices
 from ..internal.base_env import NavgroundBaseEnv
 from ..parallel_env import BaseParallelEnv
 from ..probes.reward import RewardProbe
-from ..types import AnyPolicyPredictor, Bounds, PathLike, Reward
+from ..probes.success import SuccessProbe
+from ..types import (AnyPolicyPredictor, Bounds, ObservationTransform,
+                     PathLike, Reward)
 from .scenario import InitPolicyBehavior
 
 if TYPE_CHECKING:
@@ -54,10 +57,11 @@ def make_experiment(scenario: sim.Scenario,
     :returns:   The experiment
     """
     experiment = sim.Experiment()
+    experiment.terminate_when_all_idle_or_stuck = False
     if not groups:
         groups = [GroupConfig(policy=policy)]
     if groups:
-        experiment.scenario = copy.copy(scenario)
+        experiment.scenario = copy.deepcopy(scenario)
         init = InitPolicyBehavior(
             groups=groups,
             bounds=bounds,
@@ -77,7 +81,10 @@ def make_experiment_with_env(env: BaseEnv | BaseParallelEnv | VecEnv,
                              policy: AnyPolicyPredictor | PathLike = '',
                              reward: Reward | None = None,
                              record_reward: bool = True,
-                             deterministic: bool = True) -> sim.Experiment:
+                             record_success: bool = True,
+                             deterministic: bool = True,
+                             grouped: bool = False,
+                             pre: ObservationTransform | None = None) -> sim.Experiment:
     """
     Similar to :py:func:`make_experiment` but using the configuration stored in
     an environment:
@@ -89,13 +96,12 @@ def make_experiment_with_env(env: BaseEnv | BaseParallelEnv | VecEnv,
     :param  reward:                    The default reward to record
                                        (when not specified in the group config)
     :param  record_reward:             Whether to record the rewards
+    :param  record_success:             Whether to record the success
     :param  policy:                    The default policy
                                        (when not specified in the group config)
-    :param  bounds:                    Optional termination boundaries
-    :param  terminate_outside_bounds:  Whether to terminate
-                                       if some of the agents exits the boundaries
+    :param  grouped:                   Whether the policy is grouped.
     :param  deterministic:             Whether to apply the policies deterministically
-
+    :param  pre:                       An optional transformation to apply to observations
 
     :returns:   The experiment
     """
@@ -103,7 +109,14 @@ def make_experiment_with_env(env: BaseEnv | BaseParallelEnv | VecEnv,
 
     if not groups:
         groups = [GroupConfig(policy=policy)]
+    # Should not be anymore necessary as `get_attr` is added in `make_vec_from_penv`
+    # if isinstance(env, VecEnv):
+    #     try:
+    #         env = env.unwrapped.vec_envs[0].par_env
+    #     except Exception:
+    #         pass
     if isinstance(env, VecEnv):
+
         scenario: sim.Scenario | None = env.get_attr('_scenario')[0]
         max_duration: float = env.get_attr('max_duration')[0]
         time_step: float = env.get_attr('time_step')[0]
@@ -120,15 +133,26 @@ def make_experiment_with_env(env: BaseEnv | BaseParallelEnv | VecEnv,
         possible_agents = env.unwrapped._possible_agents
 
     experiment = sim.Experiment()
+    experiment.terminate_when_all_idle_or_stuck = False
     if scenario:
-        experiment.scenario = copy.copy(scenario)
+        experiment.scenario = copy.deepcopy(scenario)
     if max_duration > 0:
         experiment.steps = int(max_duration / time_step)
     init = InitPolicyBehavior.with_env(env=env,
                                        groups=groups,
-                                       deterministic=deterministic)
+                                       deterministic=deterministic,
+                                       grouped=grouped,
+                                       pre=pre)
     experiment.scenario.add_init(init)
     groups = merge_groups_configs(groups, env_groups, len(possible_agents))
+    if record_success:
+        indices = join_indices(
+            (group.indices for group in groups
+             if group.success_condition or group.failure_condition),
+            len(possible_agents))
+        if indices:
+            experiment.add_record_probe("success",
+                                        SuccessProbe.with_indices(indices))
     if record_reward:
         experiment.add_record_probe(
             "reward", partial(RewardProbe, groups=groups, reward=reward))
