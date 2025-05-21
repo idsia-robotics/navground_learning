@@ -1,0 +1,1191 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>PettingZoo &#8212; navground_learning 0.2.pre documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="../../_static/documentation_options.js?v=4dd0fb91"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/basics/PettingZoo';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="TorchRL" href="TorchRL.html" />
+    <link rel="prev" title="Gymnasium" href="Gymnasium.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">navground_learning 0.2.pre documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">Tutorials</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="index.html">Basics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Gymnasium.html">Gymnasium</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">PettingZoo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TorchRL.html">TorchRL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Behavior.html">Using a ML policy in Navground</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../empty/index.html">Empty environment</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../empty/Direction.html">Learn to follow a direction.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../empty/Pose.html">Learn to reach a pose</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../corridor_with_obstacle/index.html">Corridor with obstacle</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../corridor_with_obstacle/Scenario.html">Scenario</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../corridor_with_obstacle/Learning.html">Learning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../crossing/index.html">Crossing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../crossing/Training-SA.html">Training one agent among many agents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../crossing/Analysis-SA.html">Performance of policies trained in single-agent environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../crossing/Training-MA.html">Training agents among peers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../crossing/Analysis-MA.html">Performance of policies trained in multi-agent environment</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../periodic_crossing/index.html">Periodic Crossing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../periodic_crossing/SameSpeed.html">Uniform speeds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../periodic_crossing/DifferentSpeed.html">Different speeds</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../pad/index.html">Exclusive crossing on a pad</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../pad/Scenario.html">Scenario</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pad/Behaviors.html">Model-based behaviors</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../pad/SingleAgent/index.html">Single ML agent meets <cite>Dummy</cite> agent</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../pad/SingleAgent/Dummy-Continuos.html">Continous actions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pad/SingleAgent/Dummy-Discrete.html">Discrete actions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../pad/Centralized/Centralized.html">Centralized policy trained with SAC</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../pad/Distributed/index.html">Distributed policy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../pad/Distributed/parallel_sac.html">Parallel SAC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pad/Distributed/Distributed-Discrete-PPO.html">Parallel PPO with discrete actions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pad/Distributed/Distributed-BenchMARL.html">BenchMARL</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../pad/Communication/index.html">Distributed policy with communication</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../pad/Communication/parallel_sac.html">Parallel SAC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pad/Communication/Comm-PPO-Discrete.html">Parallel PPO with discrete actions and MLP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pad/Communication/Comm-SAC-CentralizedTraining.html">Distributed policy with comm, trained centrally</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pad/Communication/benchmarl.html">BenchMARL</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../guides/index.html">Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../guides/extend.html">How to extend</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../reference/index.html">Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/types.html">Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/indices.html">Indices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/config.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/rewards.html">Rewards functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/env.html">Single-agent Gymnasium Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/parallel_env.html">Multi-agent Pettingzoo Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/wrappers.html">Wrappers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/policies.html">Policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/il.html">Imitation Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/evaluation.html">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/io.html">Saving and Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/onnx.html">Onnx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/navground.html">Navground Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/utils.html">Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/examples.html">Examples</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>PettingZoo</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#A-single-group">A single group</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Two-groups">Two groups</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#State">State</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Converto-to-a-Gymansium-environement">Converto to a Gymansium environement</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Vectorized-Environement">Vectorized Environement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Joint-Environement">Joint Environement</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Convert-from-a-Gymnasium-Env">Convert from a Gymnasium Env</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Saving-and-loading">Saving and loading</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="PettingZoo">
+<h1>PettingZoo<a class="headerlink" href="#PettingZoo" title="Link to this heading">#</a></h1>
+<p>This notebook showcases the integration between navground and PettingZoo, the “multi-agent” version of Gymnasium. We focus on the differences compared to with Gymnasium: have a look at <a class="reference internal" href="Gymnasium.html"><span class="doc">the Gymnasium notebook</span></a> for the common parts (e.g., rendering).</p>
+<p>While in Gymnasium we control a single navground agent (which may move among many other agents controlled by navground), with PettingZoo we can control multiple agents, even all the agents of a navground simulation.</p>
+<p>To start, we load the same scenario with 20 agents and the same sensor</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">navground</span><span class="w"> </span><span class="kn">import</span> <span class="n">sim</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">navground</span><span class="w"> </span><span class="kn">import</span> <span class="n">sim</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;scenario.yaml&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">scenario</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">load_scenario</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;sensor.yaml&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">sensor</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">load_state_estimation</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<section id="A-single-group">
+<h2>A single group<a class="headerlink" href="#A-single-group" title="Link to this heading">#</a></h2>
+<p>Now, instead of a single agent, we want to control a group of agents with a policy acting on the selected sensor. We define the PettingZoo environment, controlling the first 10 agents, <em>sharing</em> the same configuration.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">navground.learning.parallel_env</span><span class="w"> </span><span class="kn">import</span> <span class="n">shared_parallel_env</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">navground.learning</span><span class="w"> </span><span class="kn">import</span> <span class="n">DefaultObservationConfig</span><span class="p">,</span> <span class="n">ControlActionConfig</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">navground.learning.rewards</span><span class="w"> </span><span class="kn">import</span> <span class="n">SocialReward</span>
+
+<span class="n">observation_config</span> <span class="o">=</span> <span class="n">DefaultObservationConfig</span><span class="p">(</span><span class="n">include_target_direction</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                              <span class="n">include_target_distance</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">action_config</span> <span class="o">=</span> <span class="n">ControlActionConfig</span><span class="p">()</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">shared_parallel_env</span><span class="p">(</span>
+    <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span>
+    <span class="n">indices</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="n">sensor</span><span class="o">=</span><span class="n">sensor</span><span class="p">,</span>
+    <span class="n">action</span><span class="o">=</span><span class="n">action_config</span><span class="p">,</span>
+    <span class="n">observation</span><span class="o">=</span><span class="n">observation_config</span><span class="p">,</span>
+    <span class="n">reward</span><span class="o">=</span><span class="n">SocialReward</span><span class="p">(),</span>
+    <span class="n">time_step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">max_duration</span><span class="o">=</span><span class="mf">60.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>All agents have the same observation and action spaces has configured</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;We are controlling </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">possible_agents</span><span class="p">)</span><span class="si">}</span><span class="s1"> agents&#39;</span><span class="p">)</span>
+
+<span class="n">observation_space</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">observation_space</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">action_space</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="n">action_space</span> <span class="ow">and</span> <span class="n">env</span><span class="o">.</span><span class="n">observation_space</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="n">observation_space</span>
+       <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">env</span><span class="o">.</span><span class="n">possible_agents</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;They share the same observation </span><span class="si">{</span><span class="n">observation_space</span><span class="si">}</span><span class="s1"> and action </span><span class="si">{</span><span class="n">action_space</span><span class="si">}</span><span class="s1"> spaces&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+We are controlling 10 agents
+They share the same observation Dict(&#39;neighbors/position&#39;: Box(-5.0, 5.0, (5, 2), float32), &#39;neighbors/radius&#39;: Box(0.0, 0.1, (5,), float32), &#39;neighbors/valid&#39;: Box(0, 1, (5,), uint8), &#39;neighbors/velocity&#39;: Box(-0.12, 0.12, (5, 2), float32), &#39;ego_target_direction&#39;: Box(-1.0, 1.0, (2,), float32), &#39;ego_target_distance&#39;: Box(0.0, 5.0, (1,), float32)) and action Box(-1.0, 1.0, (2,), float32) spaces
+</pre></div></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">info</span></code> map returned by <code class="docutils literal notranslate"><span class="pre">reset(...)</span></code> and <code class="docutils literal notranslate"><span class="pre">step(...)</span></code> contains the action computed by original navground behavior, in this case <code class="docutils literal notranslate"><span class="pre">HL</span></code>, for each of the 10 agents.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">observations</span><span class="p">,</span> <span class="n">infos</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Observation #0: </span><span class="si">{</span><span class="n">observations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Info #0: </span><span class="si">{</span><span class="n">infos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Observation #0: {&#39;ego_target_distance&#39;: array([1.3484901], dtype=float32), &#39;ego_target_direction&#39;: array([ 1.0000000e+00, -1.5725663e-08], dtype=float32), &#39;neighbors/position&#39;: array([[-0.00738173, -0.30817246],
+       [-0.38925827,  0.01894906],
+       [-0.46368217, -0.4778133 ],
+       [ 0.15306982, -0.6674728 ],
+       [ 0.5088892 , -0.62434775]], dtype=float32), &#39;neighbors/radius&#39;: array([0.1, 0.1, 0.1, 0.1, 0.1], dtype=float32), &#39;neighbors/valid&#39;: array([1, 1, 1, 1, 1], dtype=uint8), &#39;neighbors/velocity&#39;: array([[0., 0.],
+       [0., 0.],
+       [0., 0.],
+       [0., 0.],
+       [0., 0.]], dtype=float32)}
+Info #0: {&#39;navground_action&#39;: array([0.32967997, 0.        ])}
+</pre></div></div>
+</div>
+<p>Let’s collect the reward from the original controller</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_rewards</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">actions</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">info</span><span class="p">[</span><span class="s1">&#39;navground_action&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">infos</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+    <span class="n">observations</span><span class="p">,</span> <span class="n">rewards</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">infos</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
+    <span class="n">all_rewards</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">rewards</span><span class="o">.</span><span class="n">values</span><span class="p">())))</span>
+    <span class="n">done</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bitwise_or</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">terminated</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span> <span class="nb">list</span><span class="p">(</span><span class="n">truncated</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">done</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;reset after </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1"> steps&#39;</span><span class="p">)</span>
+        <span class="n">observations</span><span class="p">,</span> <span class="n">infos</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;mean reward </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">all_rewards</span><span class="p">)</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+reset after 600 steps
+mean reward -0.252
+</pre></div></div>
+</div>
+<p>and compare it with the reward from a random policy</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">observations</span><span class="p">,</span> <span class="n">infos</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<span class="n">all_rewards</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">actions</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)}</span>
+    <span class="n">observations</span><span class="p">,</span> <span class="n">rewards</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">infos</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
+    <span class="n">all_rewards</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">rewards</span><span class="o">.</span><span class="n">values</span><span class="p">())))</span>
+    <span class="n">done</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bitwise_or</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">terminated</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span> <span class="nb">list</span><span class="p">(</span><span class="n">truncated</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">done</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;reset after </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1"> steps&#39;</span><span class="p">)</span>
+        <span class="n">observations</span><span class="p">,</span> <span class="n">infos</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;mean reward </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">all_rewards</span><span class="p">)</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+reset after 600 steps
+mean reward -1.059
+</pre></div></div>
+</div>
+<p>We want to use a machine learning policy to generate to action. For instance, a random policy, like</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">navground.learning.policies.random_predictor</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomPredictor</span>
+
+<span class="n">policies</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">RandomPredictor</span><span class="p">(</span><span class="n">observation_space</span><span class="o">=</span><span class="n">env</span><span class="o">.</span><span class="n">observation_space</span><span class="p">(</span><span class="n">i</span><span class="p">),</span>
+                               <span class="n">action_space</span><span class="o">=</span><span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">env</span><span class="o">.</span><span class="n">agents</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>Policies output a tuple <code class="docutils literal notranslate"><span class="pre">(action,</span> <span class="pre">state)</span></code>. Therefore the new loop is</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">observations</span><span class="p">,</span> <span class="n">infos</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<span class="n">rewards</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">actions</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">policies</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">observations</span><span class="p">[</span><span class="n">i</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">env</span><span class="o">.</span><span class="n">agents</span><span class="p">}</span>
+    <span class="n">observations</span><span class="p">,</span> <span class="n">rewards</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">infos</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
+    <span class="n">all_rewards</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">rewards</span><span class="o">.</span><span class="n">values</span><span class="p">())))</span>
+    <span class="n">done</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bitwise_or</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">terminated</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span> <span class="nb">list</span><span class="p">(</span><span class="n">truncated</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">done</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;reset after </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1"> steps&#39;</span><span class="p">)</span>
+        <span class="n">observations</span><span class="p">,</span> <span class="n">infos</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;mean reward </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">all_rewards</span><span class="p">)</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+reset after 600 steps
+mean reward -1.034
+</pre></div></div>
+</div>
+</section>
+<section id="Two-groups">
+<h2>Two groups<a class="headerlink" href="#Two-groups" title="Link to this heading">#</a></h2>
+<p>Let us now consider the more complex case where we want to control agents using different sensors and/or configurations. For instance, we want to control the first 10 agents like before and the second 10 agents using a lidar scanner. Let say we also want to control the second group in acceleration vs the first group in speed.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lidar</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">load_state_estimation</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">type: Lidar</span>
+<span class="s2">resolution: 100</span>
+<span class="s2">range: 5.0</span>
+<span class="s2">name: lidar</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">navground.learning.parallel_env</span><span class="w"> </span><span class="kn">import</span> <span class="n">parallel_env</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">navground.learning</span><span class="w"> </span><span class="kn">import</span> <span class="n">GroupConfig</span>
+
+<span class="n">first_group</span> <span class="o">=</span> <span class="n">GroupConfig</span><span class="p">(</span><span class="n">indices</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">sensor</span><span class="o">=</span><span class="n">sensor</span><span class="p">,</span>
+                          <span class="n">observation</span> <span class="o">=</span> <span class="n">DefaultObservationConfig</span><span class="p">(</span><span class="n">include_target_distance</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+                          <span class="n">action</span> <span class="o">=</span> <span class="n">ControlActionConfig</span><span class="p">(),</span>
+                          <span class="n">reward</span><span class="o">=</span><span class="n">SocialReward</span><span class="p">(),</span> <span class="n">tag</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">)</span>
+<span class="n">second_group</span> <span class="o">=</span> <span class="n">GroupConfig</span><span class="p">(</span><span class="n">indices</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">sensor</span><span class="o">=</span><span class="n">lidar</span><span class="p">,</span>
+                           <span class="n">observation</span> <span class="o">=</span> <span class="n">DefaultObservationConfig</span><span class="p">(),</span>
+                           <span class="n">action</span> <span class="o">=</span> <span class="n">ControlActionConfig</span><span class="p">(</span><span class="n">use_acceleration_action</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                                        <span class="n">max_acceleration</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                                                        <span class="n">max_angular_acceleration</span><span class="o">=</span><span class="mf">10.0</span><span class="p">),</span>
+                           <span class="n">reward</span><span class="o">=</span><span class="n">SocialReward</span><span class="p">(),</span> <span class="n">tag</span><span class="o">=</span><span class="s1">&#39;second&#39;</span><span class="p">)</span>
+
+<span class="n">env2</span> <span class="o">=</span> <span class="n">parallel_env</span><span class="p">(</span><span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="p">[</span><span class="n">first_group</span><span class="p">,</span> <span class="n">second_group</span><span class="p">],</span>
+                    <span class="n">time_step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">max_duration</span><span class="o">=</span><span class="mf">60.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The two groups uses now different observation spaces</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env2</span><span class="o">.</span><span class="n">observation_space</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Dict(&#39;neighbors/position&#39;: Box(-5.0, 5.0, (5, 2), float32), &#39;neighbors/radius&#39;: Box(0.0, 0.1, (5,), float32), &#39;neighbors/valid&#39;: Box(0, 1, (5,), uint8), &#39;neighbors/velocity&#39;: Box(-0.12, 0.12, (5, 2), float32), &#39;ego_target_direction&#39;: Box(-1.0, 1.0, (2,), float32))
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env2</span><span class="o">.</span><span class="n">observation_space</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Dict(&#39;lidar/fov&#39;: Box(0.0, 6.2831855, (1,), float32), &#39;lidar/max_range&#39;: Box(0.0, 10.0, (1,), float32), &#39;lidar/range&#39;: Box(0.0, 5.0, (100,), float32), &#39;lidar/start_angle&#39;: Box(-6.2831855, 6.2831855, (1,), float32), &#39;ego_target_direction&#39;: Box(-1.0, 1.0, (2,), float32))
+</pre></div></div>
+</div>
+<p>and differnet maps between actions and commands</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env2</span><span class="o">.</span><span class="n">get_cmd_from_action</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">time_step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Twist2((0.120000, 0.000000), 2.553191, frame=Frame.relative)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env2</span><span class="o">.</span><span class="n">get_cmd_from_action</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">time_step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Twist2((0.100000, 0.000000), 1.000000, frame=Frame.relative)
+</pre></div></div>
+</div>
+</section>
+<section id="State">
+<h2>State<a class="headerlink" href="#State" title="Link to this heading">#</a></h2>
+<p>PettingZoo environment expose a global state too, which we configure through a <code class="docutils literal notranslate"><span class="pre">StateConfig</span></code>. Next, we configure the global state for the same 2-group environment to include all 2D positions:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">navground.learning</span><span class="w"> </span><span class="kn">import</span> <span class="n">DefaultStateConfig</span>
+
+<span class="n">state_config</span> <span class="o">=</span> <span class="n">DefaultStateConfig</span><span class="p">(</span><span class="n">include_position</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">env_state</span> <span class="o">=</span> <span class="n">parallel_env</span><span class="p">(</span><span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">state_config</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="p">[</span><span class="n">first_group</span><span class="p">,</span> <span class="n">second_group</span><span class="p">],</span>
+                         <span class="n">time_step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">max_duration</span><span class="o">=</span><span class="mf">60.0</span><span class="p">)</span>
+<span class="n">env_state</span><span class="o">.</span><span class="n">state_space</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Box(-2.0, 2.0, (40,), float32)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env_state</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<span class="n">env_state</span><span class="o">.</span><span class="n">state</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+array([ 0.18549144,  0.35280955,  0.8253108 ,  1.3351982 ,  0.42879337,
+        1.4013637 ,  0.04322448,  1.2935146 , -0.29011178,  0.46954215,
+        0.61308354, -0.44533634, -0.23716867, -0.7693684 ,  1.4887372 ,
+       -1.6844907 ,  1.7619184 , -0.863906  , -0.44292223, -0.08487248,
+        1.1511286 ,  1.1025013 ,  0.097995  , -0.04596518,  0.21168919,
+       -0.43155256,  1.712881  ,  1.2181036 , -1.5547919 , -0.6635826 ,
+       -1.5689087 ,  0.56305325, -1.8984411 , -0.454994  ,  1.2372903 ,
+        1.8097478 ,  1.0569957 , -1.366667  ,  1.375972  ,  1.4343923 ],
+      dtype=float32)
+</pre></div></div>
+</div>
+</section>
+<section id="Converto-to-a-Gymansium-environement">
+<h2>Converto to a Gymansium environement<a class="headerlink" href="#Converto-to-a-Gymansium-environement" title="Link to this heading">#</a></h2>
+<p>We can always transform multi-agent to single-agent environements. In the most general case, we can concatenate observations and actions and sum rewards.</p>
+<p>When agents share the same configuration (and in particular action and observation spaces), we can stack observations and actions instead.</p>
+<section id="Vectorized-Environement">
+<h3>Vectorized Environement<a class="headerlink" href="#Vectorized-Environement" title="Link to this heading">#</a></h3>
+<p>We can look at one multi-agent environement with <code class="docutils literal notranslate"><span class="pre">N</span></code> agents like <code class="docutils literal notranslate"><span class="pre">N</span></code> stacked single-agent evironments composing a vectorized single-agent evironment.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env3</span> <span class="o">=</span> <span class="n">shared_parallel_env</span><span class="p">(</span>
+    <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span>
+    <span class="n">sensor</span><span class="o">=</span><span class="n">sensor</span><span class="p">,</span>
+    <span class="n">indices</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="n">action</span><span class="o">=</span><span class="n">action_config</span><span class="p">,</span>
+    <span class="n">observation</span><span class="o">=</span><span class="n">observation_config</span><span class="p">,</span>
+    <span class="n">reward</span><span class="o">=</span><span class="n">SocialReward</span><span class="p">(),</span>
+    <span class="n">state</span><span class="o">=</span><span class="n">state_config</span><span class="p">,</span>
+    <span class="n">time_step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">max_duration</span><span class="o">=</span><span class="mf">60.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">supersuit</span>
+
+<span class="n">venv</span> <span class="o">=</span> <span class="n">supersuit</span><span class="o">.</span><span class="n">pettingzoo_env_to_vec_env_v1</span><span class="p">(</span><span class="n">env3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>with</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">venv</span><span class="o">.</span><span class="n">num_envs</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+10
+</pre></div></div>
+</div>
+<p>environments that represents the individual agents.</p>
+<p>This vector env follows the Gymnasium API, stacking together observation, actions of the individual agents.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">venv</span><span class="o">.</span><span class="n">observation_space</span><span class="p">,</span> <span class="n">venv</span><span class="o">.</span><span class="n">action_space</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(Dict(&#39;neighbors/position&#39;: Box(-5.0, 5.0, (5, 2), float32), &#39;neighbors/radius&#39;: Box(0.0, 0.1, (5,), float32), &#39;neighbors/valid&#39;: Box(0, 1, (5,), uint8), &#39;neighbors/velocity&#39;: Box(-0.12, 0.12, (5, 2), float32), &#39;ego_target_direction&#39;: Box(-1.0, 1.0, (2,), float32), &#39;ego_target_distance&#39;: Box(0.0, 5.0, (1,), float32)),
+ Box(-1.0, 1.0, (2,), float32))
+</pre></div></div>
+</div>
+<p>If we want instead an vector env to follows the SB3 API, we can use (even stacking multiple vectorized envs together)</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">venv1</span> <span class="o">=</span> <span class="n">supersuit</span><span class="o">.</span><span class="n">concat_vec_envs_v1</span><span class="p">(</span><span class="n">venv</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">num_cpus</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">base_class</span><span class="o">=</span><span class="s2">&quot;stable_baselines3&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">venv1</span><span class="o">.</span><span class="n">num_envs</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+20
+</pre></div></div>
+</div>
+</section>
+<section id="Joint-Environement">
+<h3>Joint Environement<a class="headerlink" href="#Joint-Environement" title="Link to this heading">#</a></h3>
+<p>A joint environnment is similar but rewards (<code class="docutils literal notranslate"><span class="pre">sum</span></code>), terminations (<code class="docutils literal notranslate"><span class="pre">all</span></code>) and truncation (<code class="docutils literal notranslate"><span class="pre">any</span></code>) are aggregared together, resulting in a single Gymnasium environment:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">navground.learning.parallel_env</span><span class="w"> </span><span class="kn">import</span> <span class="n">JointEnv</span>
+
+<span class="n">jenv</span> <span class="o">=</span> <span class="n">JointEnv</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+<span class="n">jenv</span><span class="o">.</span><span class="n">observation_space</span><span class="p">,</span> <span class="n">jenv</span><span class="o">.</span><span class="n">action_space</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(Dict(&#39;ego_target_direction&#39;: Box(-1.0, 1.0, (10, 2), float32), &#39;ego_target_distance&#39;: Box(0.0, 5.0, (10, 1), float32), &#39;neighbors/position&#39;: Box(-5.0, 5.0, (10, 5, 2), float32), &#39;neighbors/radius&#39;: Box(0.0, 0.1, (10, 5), float32), &#39;neighbors/valid&#39;: Box(0.0, 1.0, (10, 5), float32), &#39;neighbors/velocity&#39;: Box(-0.12, 0.12, (10, 5, 2), float32)),
+ Box(-1.0, 1.0, (10, 2), float32))
+</pre></div></div>
+</div>
+<p>It can be configured to use the global state as observations:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">jenv</span> <span class="o">=</span> <span class="n">JointEnv</span><span class="p">(</span><span class="n">env_state</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">jenv</span><span class="o">.</span><span class="n">observation_space</span><span class="p">,</span> <span class="n">jenv</span><span class="o">.</span><span class="n">action_space</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(Box(-2.0, 2.0, (40,), float32), Box(-1.0, 1.0, (20, 2), float32))
+</pre></div></div>
+</div>
+</section>
+</section>
+<section id="Convert-from-a-Gymnasium-Env">
+<h2>Convert from a Gymnasium Env<a class="headerlink" href="#Convert-from-a-Gymnasium-Env" title="Link to this heading">#</a></h2>
+<p>If we have a single agent navground enviroment that uses a multi-agent scenario, we can convert it to a parallel environment, where all controlled agents share the same configuration, like for <code class="docutils literal notranslate"><span class="pre">shared_parallel_env</span></code>.</p>
+<p>Let us load the environment we saved in the previous notebook</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">navground.learning</span><span class="w"> </span><span class="kn">import</span> <span class="n">io</span>
+
+<span class="n">sa_env</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">load_env</span><span class="p">(</span><span class="s1">&#39;env.yaml&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>and covert it to a parallel environment, controlling 10 (out of the total 20) agents.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">navground.learning.parallel_env</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_shared_parallel_env_with_env</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env4</span> <span class="o">=</span> <span class="n">make_shared_parallel_env_with_env</span><span class="p">(</span><span class="n">env</span><span class="o">=</span><span class="n">sa_env</span><span class="p">,</span> <span class="n">indices</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env4</span><span class="o">.</span><span class="n">possible_agents</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+</pre></div></div>
+</div>
+</section>
+<section id="Saving-and-loading">
+<h2>Saving and loading<a class="headerlink" href="#Saving-and-loading" title="Link to this heading">#</a></h2>
+<p>The multi-agent PettingZoo environment supports the same YAML representation like the single-agent Gymnasium environment and we can save it and load it from a YAML file.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">io</span><span class="o">.</span><span class="n">save_env</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="s1">&#39;penv.yaml&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Let us check that the <code class="docutils literal notranslate"><span class="pre">groups</span></code> field is coherent with the configuration we have just provided: a single group of 10 agents (indices 0, 1, …, 9).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">safe_dump</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">asdict</span><span class="p">[</span><span class="s1">&#39;groups&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+- action:
+    dof: null
+    dtype: &#39;&#39;
+    fix_orientation: false
+    has_wheels: null
+    max_acceleration: .inf
+    max_angular_acceleration: .inf
+    max_angular_speed: .inf
+    max_speed: .inf
+    type: Control
+    use_acceleration_action: false
+    use_wheels: false
+  indices:
+    start: 0
+    step: 1
+    stop: 10
+    type: slice
+  observation:
+    dof: null
+    dtype: &#39;&#39;
+    flat: false
+    flat_values: false
+    history: 1
+    ignore_keys: []
+    include_angular_speed: false
+    include_radius: false
+    include_target_angular_speed: false
+    include_target_direction: true
+    include_target_direction_validity: false
+    include_target_distance: true
+    include_target_distance_validity: false
+    include_target_orientation: false
+    include_target_orientation_validity: false
+    include_target_speed: false
+    include_velocity: false
+    keys: null
+    max_angular_speed: .inf
+    max_radius: .inf
+    max_speed: .inf
+    max_target_distance: .inf
+    normalize: false
+    sort_keys: false
+    type: Default
+  reward:
+    alpha: 0.0
+    beta: 1.0
+    critical_safety_margin: 0.0
+    default_social_margin: 0.0
+    safety_margin: null
+    social_margins: {}
+    type: Social
+  sensors:
+  - include_valid: true
+    include_x: true
+    include_y: true
+    max_id: 0
+    max_radius: 0.100000001
+    max_speed: 0.119999997
+    name: neighbors
+    number: 5
+    range: 5
+    type: Discs
+    use_nearest_point: true
+  terminate_on_failure: true
+  terminate_on_success: true
+
+</pre></div></div>
+</div>
+<p>We also export the two-group environments that we are going to use in the next notebook.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">io</span><span class="o">.</span><span class="n">save_env</span><span class="p">(</span><span class="n">env2</span><span class="p">,</span> <span class="s1">&#39;penv2.yaml&#39;</span><span class="p">)</span>
+<span class="n">io</span><span class="o">.</span><span class="n">save_env</span><span class="p">(</span><span class="n">env_state</span><span class="p">,</span> <span class="s1">&#39;penv_state.yaml&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Gymnasium.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Gymnasium</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="TorchRL.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">TorchRL</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#A-single-group">A single group</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Two-groups">Two groups</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#State">State</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Converto-to-a-Gymansium-environement">Converto to a Gymansium environement</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Vectorized-Environement">Vectorized Environement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Joint-Environement">Joint Environement</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Convert-from-a-Gymnasium-Env">Convert from a Gymnasium Env</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Saving-and-loading">Saving and loading</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jerome Guzzi et al. (IDSIA, USI-SUPSI)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Jerome Guzzi et al. (IDSIA, USI-SUPSI).
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

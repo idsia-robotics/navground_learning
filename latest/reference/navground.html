@@ -1,0 +1,1191 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Navground Components &#8212; navground_learning 0.2.pre documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="../_static/documentation_options.js?v=4dd0fb91"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/navground';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Utils" href="utils.html" />
+    <link rel="prev" title="Onnx" href="onnx.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">navground_learning 0.2.pre documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/index.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../tutorials/basics/index.html">Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/basics/Gymnasium.html">Gymnasium</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/basics/PettingZoo.html">PettingZoo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/basics/TorchRL.html">TorchRL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/basics/Behavior.html">Using a ML policy in Navground</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../tutorials/empty/index.html">Empty environment</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/empty/Direction.html">Learn to follow a direction.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/empty/Pose.html">Learn to reach a pose</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../tutorials/corridor_with_obstacle/index.html">Corridor with obstacle</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/corridor_with_obstacle/Scenario.html">Scenario</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/corridor_with_obstacle/Learning.html">Learning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../tutorials/crossing/index.html">Crossing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/crossing/Training-SA.html">Training one agent among many agents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/crossing/Analysis-SA.html">Performance of policies trained in single-agent environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/crossing/Training-MA.html">Training agents among peers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/crossing/Analysis-MA.html">Performance of policies trained in multi-agent environment</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../tutorials/periodic_crossing/index.html">Periodic Crossing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/periodic_crossing/SameSpeed.html">Uniform speeds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/periodic_crossing/DifferentSpeed.html">Different speeds</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../tutorials/pad/index.html">Exclusive crossing on a pad</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/pad/Scenario.html">Scenario</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/pad/Behaviors.html">Model-based behaviors</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../tutorials/pad/SingleAgent/index.html">Single ML agent meets <cite>Dummy</cite> agent</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../tutorials/pad/SingleAgent/Dummy-Continuos.html">Continous actions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutorials/pad/SingleAgent/Dummy-Discrete.html">Discrete actions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/pad/Centralized/Centralized.html">Centralized policy trained with SAC</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../tutorials/pad/Distributed/index.html">Distributed policy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../tutorials/pad/Distributed/parallel_sac.html">Parallel SAC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutorials/pad/Distributed/Distributed-Discrete-PPO.html">Parallel PPO with discrete actions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutorials/pad/Distributed/Distributed-BenchMARL.html">BenchMARL</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../tutorials/pad/Communication/index.html">Distributed policy with communication</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../tutorials/pad/Communication/parallel_sac.html">Parallel SAC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutorials/pad/Communication/Comm-PPO-Discrete.html">Parallel PPO with discrete actions and MLP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutorials/pad/Communication/Comm-SAC-CentralizedTraining.html">Distributed policy with comm, trained centrally</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutorials/pad/Communication/benchmarl.html">BenchMARL</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../guides/index.html">Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guides/extend.html">How to extend</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="types.html">Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indices.html">Indices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rewards.html">Rewards functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="env.html">Single-agent Gymnasium Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel_env.html">Multi-agent Pettingzoo Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wrappers.html">Wrappers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="policies.html">Policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="il.html">Imitation Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="evaluation.html">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html">Saving and Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="onnx.html">Onnx</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Navground Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html">Examples</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Navground Components</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#behaviors">Behaviors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#policybehavior">PolicyBehavior</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.behaviors.PolicyBehavior"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#groupedpolicybehavior">GroupedPolicyBehavior</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.behaviors.GroupedPolicyBehavior"><code class="docutils literal notranslate"><span class="pre">GroupedPolicyBehavior</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pad">Pad</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.behaviors.pad.DistributedPadBehavior"><code class="docutils literal notranslate"><span class="pre">DistributedPadBehavior</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.behaviors.pad.DistributedPadBehavior.pad_width"><code class="docutils literal notranslate"><span class="pre">DistributedPadBehavior.pad_width</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.behaviors.pad.CentralizedPadBehavior"><code class="docutils literal notranslate"><span class="pre">CentralizedPadBehavior</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.behaviors.pad.StopAtPadBehavior"><code class="docutils literal notranslate"><span class="pre">StopAtPadBehavior</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.behaviors.pad.StopAtPadBehavior.pad_width"><code class="docutils literal notranslate"><span class="pre">StopAtPadBehavior.pad_width</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.behaviors.pad.StopAtPadBehavior.tau"><code class="docutils literal notranslate"><span class="pre">StopAtPadBehavior.tau</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scenarios">Scenarios</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corridorwithobstacle">CorridorWithObstacle</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.scenarios.CorridorWithObstacle"><code class="docutils literal notranslate"><span class="pre">CorridorWithObstacle</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.scenarios.CorridorWithObstacle.init_world"><code class="docutils literal notranslate"><span class="pre">CorridorWithObstacle.init_world()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.scenarios.CorridorWithObstacle.length"><code class="docutils literal notranslate"><span class="pre">CorridorWithObstacle.length</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.scenarios.CorridorWithObstacle.max_radius"><code class="docutils literal notranslate"><span class="pre">CorridorWithObstacle.max_radius</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.scenarios.CorridorWithObstacle.min_radius"><code class="docutils literal notranslate"><span class="pre">CorridorWithObstacle.min_radius</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.scenarios.CorridorWithObstacle.width"><code class="docutils literal notranslate"><span class="pre">CorridorWithObstacle.width</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forward">Forward</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.scenarios.ForwardScenario"><code class="docutils literal notranslate"><span class="pre">ForwardScenario</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.scenarios.ForwardScenario.init_world"><code class="docutils literal notranslate"><span class="pre">ForwardScenario.init_world()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Pad</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.scenarios.PadScenario"><code class="docutils literal notranslate"><span class="pre">PadScenario</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.scenarios.pad.render_kwargs"><code class="docutils literal notranslate"><span class="pre">render_kwargs()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-estimations">State Estimations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.state_estimations.CommSensor"><code class="docutils literal notranslate"><span class="pre">CommSensor</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probes">Probes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.probes.GymProbe"><code class="docutils literal notranslate"><span class="pre">GymProbe</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.probes.GymProbe.with_env"><code class="docutils literal notranslate"><span class="pre">GymProbe.with_env()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.probes.RewardProbe"><code class="docutils literal notranslate"><span class="pre">RewardProbe</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.probes.RewardProbe.dtype"><code class="docutils literal notranslate"><span class="pre">RewardProbe.dtype</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.probes.RewardProbe.with_reward"><code class="docutils literal notranslate"><span class="pre">RewardProbe.with_reward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.probes.SuccessProbe"><code class="docutils literal notranslate"><span class="pre">SuccessProbe</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.probes.SuccessProbe.dtype"><code class="docutils literal notranslate"><span class="pre">SuccessProbe.dtype</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.probes.SuccessProbe.with_indices"><code class="docutils literal notranslate"><span class="pre">SuccessProbe.with_indices()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.probes.CommProbe"><code class="docutils literal notranslate"><span class="pre">CommProbe</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.probes.CommProbe.dtype"><code class="docutils literal notranslate"><span class="pre">CommProbe.dtype</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="navground-components">
+<h1>Navground Components<a class="headerlink" href="#navground-components" title="Link to this heading">#</a></h1>
+<section id="behaviors">
+<h2>Behaviors<a class="headerlink" href="#behaviors" title="Link to this heading">#</a></h2>
+<p><code class="xref py py-mod docutils literal notranslate"><span class="pre">navground.learning.behaviors</span></code></p>
+<section id="policybehavior">
+<span id="module-navground.learning.behaviors"></span><h3>PolicyBehavior<a class="headerlink" href="#policybehavior" title="Link to this heading">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="navground.learning.behaviors.PolicyBehavior">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PolicyBehavior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kinematics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/core/python/kinematics/kinematics.html#navground.core.Kinematics" title="(in navground)"><span class="pre">core.Kinematics</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">policy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="types.html#navground.learning.types.AnyPolicyPredictor" title="navground.learning.types.AnyPolicyPredictor"><span class="pre">AnyPolicyPredictor</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">policy_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="types.html#navground.learning.types.PathLike" title="navground.learning.types.PathLike"><span class="pre">PathLike</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="config.html#navground.learning.config.ControlActionConfig" title="navground.learning.config.ControlActionConfig"><span class="pre">ControlActionConfig</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">ControlActionConfig()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observation_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="config.html#navground.learning.config.DefaultObservationConfig" title="navground.learning.config.DefaultObservationConfig"><span class="pre">DefaultObservationConfig</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">DefaultObservationConfig(ignore_keys=[])</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deterministic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ObservationTransform</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#navground.learning.behaviors.PolicyBehavior" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BasePolicyMixin</span></code>, <a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/core/python/behaviors/behavior.html#navground.core.Behavior" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Behavior</span></code></a></p>
+<p>A navigation behavior that evaluates a ML policy</p>
+<p><em>Registered properties</em>:</p>
+<ul class="simple">
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">policy_path</span></code> (str)</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">flat</span></code> (bool)</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">history</span></code> (int)</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">fix_orientation</span></code> (bool)</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">include_target_direction</span></code> (bool)</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">include_target_direction_validity</span></code> (bool)</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">include_target_distance</span></code> (bool)</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">include_target_distance_validity</span></code> (bool)</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">include_target_speed</span></code> (bool)</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">include_target_angular_speed</span></code> (bool)</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">include_velocity</span></code> (bool)</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">include_angular_speed</span></code> (bool)</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">include_radius</span></code> (bool)</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">use_wheels</span></code> (bool)</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">use_acceleration_action</span></code> (bool)</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">max_acceleration</span></code> (float)</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">max_angular_acceleration</span></code> (float)</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">deterministic</span></code> (bool)</p></li>
+</ul>
+<p><em>State</em>: <a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/core/python/state/sensing.html#navground.core.SensingState" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">core.SensingState</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kinematics</strong> (<a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/core/python/kinematics/kinematics.html#navground.core.Kinematics" title="(in navground)"><em>core.Kinematics</em></a><em> | </em><em>None</em>) – The agent kinematics</p></li>
+<li><p><strong>radius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – The agent radius</p></li>
+<li><p><strong>policy</strong> (<a class="reference internal" href="types.html#navground.learning.types.AnyPolicyPredictor" title="navground.learning.types.AnyPolicyPredictor"><em>AnyPolicyPredictor</em></a><em> | </em><em>None</em>) – The policy</p></li>
+<li><p><strong>action_config</strong> (<a class="reference internal" href="config.html#navground.learning.config.ControlActionConfig" title="navground.learning.config.ControlActionConfig"><em>ControlActionConfig</em></a>) – Configures which actions the policy generates</p></li>
+<li><p><strong>observation_config</strong> (<a class="reference internal" href="config.html#navground.learning.config.DefaultObservationConfig" title="navground.learning.config.DefaultObservationConfig"><em>DefaultObservationConfig</em></a>) – Configures which observations the policy consumes</p></li>
+<li><p><strong>deterministic</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – Whether the policy evaluation is deterministic</p></li>
+<li><p><strong>pre</strong> (<em>ObservationTransform</em><em> | </em><em>None</em>) – Optional input (observations) transformation</p></li>
+<li><p><strong>policy_path</strong> (<a class="reference internal" href="types.html#navground.learning.types.PathLike" title="navground.learning.types.PathLike"><em>PathLike</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="groupedpolicybehavior">
+<h3>GroupedPolicyBehavior<a class="headerlink" href="#groupedpolicybehavior" title="Link to this heading">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="navground.learning.behaviors.GroupedPolicyBehavior">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GroupedPolicyBehavior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kinematics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/core/python/kinematics/kinematics.html#navground.core.Kinematics" title="(in navground)"><span class="pre">core.Kinematics</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">policy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="types.html#navground.learning.types.AnyPolicyPredictor" title="navground.learning.types.AnyPolicyPredictor"><span class="pre">AnyPolicyPredictor</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">policy_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="types.html#navground.learning.types.PathLike" title="navground.learning.types.PathLike"><span class="pre">PathLike</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="config.html#navground.learning.config.ControlActionConfig" title="navground.learning.config.ControlActionConfig"><span class="pre">ControlActionConfig</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">ControlActionConfig()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observation_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="config.html#navground.learning.config.DefaultObservationConfig" title="navground.learning.config.DefaultObservationConfig"><span class="pre">DefaultObservationConfig</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">DefaultObservationConfig(ignore_keys=[])</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deterministic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ObservationTransform</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#navground.learning.behaviors.GroupedPolicyBehavior" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BasePolicyMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">BehaviorGroupMember</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kinematics</strong> (<a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/core/python/kinematics/kinematics.html#navground.core.Kinematics" title="(in navground)"><em>core.Kinematics</em></a><em> | </em><em>None</em>)</p></li>
+<li><p><strong>radius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>)</p></li>
+<li><p><strong>policy</strong> (<a class="reference internal" href="types.html#navground.learning.types.AnyPolicyPredictor" title="navground.learning.types.AnyPolicyPredictor"><em>AnyPolicyPredictor</em></a><em> | </em><em>None</em>)</p></li>
+<li><p><strong>policy_path</strong> (<a class="reference internal" href="types.html#navground.learning.types.PathLike" title="navground.learning.types.PathLike"><em>PathLike</em></a>)</p></li>
+<li><p><strong>action_config</strong> (<a class="reference internal" href="config.html#navground.learning.config.ControlActionConfig" title="navground.learning.config.ControlActionConfig"><em>ControlActionConfig</em></a>)</p></li>
+<li><p><strong>observation_config</strong> (<a class="reference internal" href="config.html#navground.learning.config.DefaultObservationConfig" title="navground.learning.config.DefaultObservationConfig"><em>DefaultObservationConfig</em></a>)</p></li>
+<li><p><strong>deterministic</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>)</p></li>
+<li><p><strong>pre</strong> (<em>ObservationTransform</em><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="pad">
+<h3>Pad<a class="headerlink" href="#pad" title="Link to this heading">#</a></h3>
+<p><code class="xref py py-mod docutils literal notranslate"><span class="pre">navground.learning.behaviors.pad</span></code></p>
+<dl class="py class" id="module-navground.learning.behaviors.pad">
+<dt class="sig sig-object py" id="navground.learning.behaviors.pad.DistributedPadBehavior">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DistributedPadBehavior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kinematics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/core/python/kinematics/kinematics.html#navground.core.Kinematics" title="(in navground)"><span class="pre">Kinematics</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#navground.learning.behaviors.pad.DistributedPadBehavior" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/core/python/behaviors/behavior.html#navground.core.Behavior" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Behavior</span></code></a></p>
+<p>A centralized behavior that applies a (quasi) optimal strategy
+in <a class="reference internal" href="#navground.learning.scenarios.PadScenario" title="navground.learning.scenarios.PadScenario"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground.learning.scenarios.PadScenario</span></code></a>:</p>
+<ul>
+<li><p>if both agents have already passed the mid-point of the pad,
+or at least one agent has already passed the pad:
+they advance at full speed</p></li>
+<li><p>if both agents are in the first half of the pad:
+if the fastest way for one agent to exit first from the path
+is to move backwards:
+the agent move forward at full speed, while the
+other keeps advancing at full speed</p></li>
+<li><p>else:
+the agent predicted to exit the pad second, adjust its speed like</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>speed = min(optimal_speed,
+            distance_to_enter_pad / other_agent_time_to_exit_the_pad)``
+</pre></div>
+</div>
+<p>where the computation uses the other agent <em>current speed</em> to predict:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>other_agent_time_to_exit_the_pad = (
+    other_agent_distance_to_exit_pad / other_agent_current_speed)``
+</pre></div>
+</div>
+</li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kinematics</strong> (<a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/core/python/kinematics/kinematics.html#navground.core.Kinematics" title="(in navground)"><em>core.Kinematics</em></a><em> | </em><em>None</em>)</p></li>
+<li><p><strong>radius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>)</p></li>
+<li><p><strong>pad_width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="navground.learning.behaviors.pad.DistributedPadBehavior.pad_width">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pad_width</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></em><a class="headerlink" href="#navground.learning.behaviors.pad.DistributedPadBehavior.pad_width" title="Link to this definition">#</a></dt>
+<dd><p>The pad width</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pad width</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="navground.learning.behaviors.pad.CentralizedPadBehavior">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CentralizedPadBehavior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kinematics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/core/python/kinematics/kinematics.html#navground.core.Kinematics" title="(in navground)"><span class="pre">Kinematics</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#navground.learning.behaviors.pad.CentralizedPadBehavior" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BehaviorGroupMember</span></code></p>
+<p>A centralized behavior that applies a (quasi) optimal strategy
+in <a class="reference internal" href="#navground.learning.scenarios.PadScenario" title="navground.learning.scenarios.PadScenario"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground.learning.scenarios.PadScenario</span></code></a>:</p>
+<ul>
+<li><p>if both agents have already passed the mid-point of the pad,
+or at least one agent has already passed the pad:
+they advance at full speed</p></li>
+<li><p>if both agents are in the first half of the pad:
+if the fastest way for one agent to exit first from the path
+is to move backwards:
+the agent move forward at full speed, while the
+other keeps advancing at full speed</p></li>
+<li><p>else:
+the agent predicted to exit the pad second, adjust its speed like</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>speed = min(optimal_speed,
+            distance_to_enter_pad / other_agent_time_to_exit_the_pad)``
+</pre></div>
+</div>
+<p>where the computation uses the other agent <em>optimal speed</em> to predict:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>other_agent_time_to_exit_the_pad = (
+    other_agent_distance_to_exit_pad / other_agent_optional_speed)``
+</pre></div>
+</div>
+</li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kinematics</strong> (<a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/core/python/kinematics/kinematics.html#navground.core.Kinematics" title="(in navground)"><em>core.Kinematics</em></a><em> | </em><em>None</em>)</p></li>
+<li><p><strong>radius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>)</p></li>
+<li><p><strong>pad_width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="navground.learning.behaviors.pad.StopAtPadBehavior">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">StopAtPadBehavior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kinematics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/core/python/kinematics/kinematics.html#navground.core.Kinematics" title="(in navground)"><span class="pre">Kinematics</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#navground.learning.behaviors.pad.StopAtPadBehavior" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/core/python/behaviors/behavior.html#navground.core.Behavior" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Behavior</span></code></a></p>
+<p>A centralized behavior for
+<a class="reference internal" href="#navground.learning.scenarios.PadScenario" title="navground.learning.scenarios.PadScenario"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground.learning.scenarios.PadScenario</span></code></a>, that
+stops the agent before entering the pad.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kinematics</strong> (<a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/core/python/kinematics/kinematics.html#navground.core.Kinematics" title="(in navground)"><em>core.Kinematics</em></a><em> | </em><em>None</em>)</p></li>
+<li><p><strong>radius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>)</p></li>
+<li><p><strong>pad_width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>)</p></li>
+<li><p><strong>tau</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="navground.learning.behaviors.pad.StopAtPadBehavior.pad_width">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pad_width</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></em><a class="headerlink" href="#navground.learning.behaviors.pad.StopAtPadBehavior.pad_width" title="Link to this definition">#</a></dt>
+<dd><p>The pad width</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pad width</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="navground.learning.behaviors.pad.StopAtPadBehavior.tau">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tau</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></em><a class="headerlink" href="#navground.learning.behaviors.pad.StopAtPadBehavior.tau" title="Link to this definition">#</a></dt>
+<dd><p>The braking time</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>braking time</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+<section id="scenarios">
+<h2>Scenarios<a class="headerlink" href="#scenarios" title="Link to this heading">#</a></h2>
+<p><code class="xref py py-mod docutils literal notranslate"><span class="pre">navground.learning.scenarios</span></code></p>
+<section id="corridorwithobstacle">
+<span id="module-navground.learning.scenarios"></span><h3>CorridorWithObstacle<a class="headerlink" href="#corridorwithobstacle" title="Link to this heading">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="navground.learning.scenarios.CorridorWithObstacle">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CorridorWithObstacle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_radius</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_radius</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#navground.learning.scenarios.CorridorWithObstacle" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/scenarios/scenario.html#navground.sim.Scenario" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Scenario</span></code></a></p>
+<p>Simple worlds with</p>
+<ul class="simple">
+<li><p>one agent that starts at <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">~U(0,</span> <span class="pre">width))</span></code>
+and wants to travel towards <code class="docutils literal notranslate"><span class="pre">+x</span></code></p></li>
+<li><p>two long horizontal walls at <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">width</span></code></p></li>
+<li><p>one circular obstacle at <code class="docutils literal notranslate"><span class="pre">~(length,</span> <span class="pre">U(0,</span> <span class="pre">width))</span></code> with radius
+<code class="docutils literal notranslate"><span class="pre">~U(min_radius,</span> <span class="pre">max_radius)</span></code></p></li>
+</ul>
+<p>The simulation finishes when the agent reaches <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&gt;=</span> <span class="pre">2</span> <span class="pre">length</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>length</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – The position of the obstacle</p></li>
+<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – The width of the corridor</p></li>
+<li><p><strong>min_radius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – The minimal obstacle radius</p></li>
+<li><p><strong>max_radius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – The maximal obstacle radius</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="navground.learning.scenarios.CorridorWithObstacle.init_world">
+<span class="sig-name descname"><span class="pre">init_world</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">world</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/world.html#navground.sim.World" title="(in navground)"><span class="pre">World</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#navground.learning.scenarios.CorridorWithObstacle.init_world" title="Link to this definition">#</a></dt>
+<dd><p>Initializes the world.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>world</strong> (<a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/world.html#navground.sim.World" title="(in navground)"><em>World</em></a>) – The world</p></li>
+<li><p><strong>seed</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em> | </em><em>None</em>) – The seed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="navground.learning.scenarios.CorridorWithObstacle.length">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">length</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></em><a class="headerlink" href="#navground.learning.scenarios.CorridorWithObstacle.length" title="Link to this definition">#</a></dt>
+<dd><p>The length of the corridor as the position of the obstacle</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="navground.learning.scenarios.CorridorWithObstacle.max_radius">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">max_radius</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></em><a class="headerlink" href="#navground.learning.scenarios.CorridorWithObstacle.max_radius" title="Link to this definition">#</a></dt>
+<dd><p>The maximal obstacle radius</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="navground.learning.scenarios.CorridorWithObstacle.min_radius">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">min_radius</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></em><a class="headerlink" href="#navground.learning.scenarios.CorridorWithObstacle.min_radius" title="Link to this definition">#</a></dt>
+<dd><p>The minimal obstacle radius</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="navground.learning.scenarios.CorridorWithObstacle.width">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">width</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></em><a class="headerlink" href="#navground.learning.scenarios.CorridorWithObstacle.width" title="Link to this definition">#</a></dt>
+<dd><p>The width of the corridor</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="forward">
+<h3>Forward<a class="headerlink" href="#forward" title="Link to this heading">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="navground.learning.scenarios.ForwardScenario">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ForwardScenario</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">6.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_number_of_obstacles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_number_of_obstacles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_obstacle_radius</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_obstacle_radius</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">margin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">periodic_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">periodic_y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#navground.learning.scenarios.ForwardScenario" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/scenarios/scenario.html#navground.sim.Scenario" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Scenario</span></code></a></p>
+<p>Periodic worlds with agents traveling in (constant) random
+target directions between random obstacles:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – The width of the (periodic) cell</p></li>
+<li><p><strong>length</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – The length of the (periodic) cell</p></li>
+<li><p><strong>min_number_of_obstacles</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – The minimum number of obstacles</p></li>
+<li><p><strong>max_number_of_obstacles</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – The maximum number of obstacles</p></li>
+<li><p><strong>min_obstacle_radius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – The minimal obstacles radius</p></li>
+<li><p><strong>max_obstacle_radius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – The maximal obstacles radius</p></li>
+<li><p><strong>margin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – The margin between agents at init</p></li>
+<li><p><strong>periodic_x</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – Whether the world is periodic along the x-axis</p></li>
+<li><p><strong>periodic_y</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – Whether the world is periodic along the y-axis</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="navground.learning.scenarios.ForwardScenario.init_world">
+<span class="sig-name descname"><span class="pre">init_world</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">world</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/world.html#navground.sim.World" title="(in navground)"><span class="pre">World</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#navground.learning.scenarios.ForwardScenario.init_world" title="Link to this definition">#</a></dt>
+<dd><p>Initializes the world.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>world</strong> (<a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/world.html#navground.sim.World" title="(in navground)"><em>World</em></a>) – The world</p></li>
+<li><p><strong>seed</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em> | </em><em>None</em>) – The seed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="id1">
+<h3>Pad<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="navground.learning.scenarios.PadScenario">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PadScenario</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_walls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_min_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_max_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_in_opposite_sides</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_tolerance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#navground.learning.scenarios.PadScenario" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/scenarios/scenario.html#navground.sim.Scenario" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Scenario</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>length</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>)</p></li>
+<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>)</p></li>
+<li><p><strong>with_walls</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>)</p></li>
+<li><p><strong>start_min_x</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>)</p></li>
+<li><p><strong>start_max_x</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>)</p></li>
+<li><p><strong>start_in_opposite_sides</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>)</p></li>
+<li><p><strong>pad_tolerance</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>)</p></li>
+<li><p><strong>pad_width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="navground.learning.scenarios.pad.render_kwargs">
+<span class="sig-name descname"><span class="pre">render_kwargs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">high</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_low</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_high</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">1)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stroke</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'white'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">binarize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#navground.learning.scenarios.pad.render_kwargs" title="Link to this definition">#</a></dt>
+<dd><p>The kwargs to pass to the world renderer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>comm</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – Whether to display transmitted messages using a LED.</p></li>
+<li><p><strong>low</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – The message lower bound</p></li>
+<li><p><strong>high</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – The message upper bound</p></li>
+<li><p><strong>color_low</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>]</em>) – The color associated to lower-valued messages</p></li>
+<li><p><strong>color_high</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>]</em>) – The color associated to higher-valued messages</p></li>
+<li><p><strong>stroke</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – The color of the LED boundary</p></li>
+<li><p><strong>binarize</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – Whether to binary message values.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The kwargs</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)">dict</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><em>Any</em></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+<section id="state-estimations">
+<h2>State Estimations<a class="headerlink" href="#state-estimations" title="Link to this heading">#</a></h2>
+<p><code class="xref py py-mod docutils literal notranslate"><span class="pre">navground.learning.state_estimations</span></code></p>
+<dl class="py class" id="module-navground.learning.state_estimations">
+<dt class="sig sig-object py" id="navground.learning.state_estimations.CommSensor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CommSensor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">binarize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#navground.learning.state_estimations.CommSensor" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/state_estimations/sensor.html#navground.sim.Sensor" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sensor</span></code></a></p>
+<p>A sensor that receive messages broadcasted by other agents.
+that it stores in field “comm”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>binarize</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – Whether to binarize the received message</p></li>
+<li><p><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – The message size</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – The namespace</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="probes">
+<h2>Probes<a class="headerlink" href="#probes" title="Link to this heading">#</a></h2>
+<p><code class="xref py py-mod docutils literal notranslate"><span class="pre">navground.learning.probes</span></code></p>
+<dl class="py class" id="module-navground.learning.probes">
+<dt class="sig sig-object py" id="navground.learning.probes.GymProbe">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GymProbe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Collection" title="(in Python v3.13)"><span class="pre">Collection</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="config.html#navground.learning.config.GroupConfig" title="navground.learning.config.group.GroupConfig"><span class="pre">GroupConfig</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#navground.learning.probes.GymProbe" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/experiment/probes.html#navground.sim.Probe" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Probe</span></code></a></p>
+<p>A probe to record observation, rewards and actions, like
+during a rollout. Internally uses a
+<a class="reference external" href="https://imitation.readthedocs.io/en/latest/_api/imitation.data.rollout.html#imitation.data.rollout.TrajectoryAccumulator" title="(in imitation v1.0.1.dev241103240)"><code class="xref py py-class docutils literal notranslate"><span class="pre">imitation.data.rollout.TrajectoryAccumulator</span></code></a>
+to store the data, which it writes to datasets
+only at the end of the run:</p>
+<ul class="simple">
+<li><p>observations/&lt;agent_index&gt;/&lt;key&gt;</p></li>
+<li><p>actions/&lt;agent_index&gt;</p></li>
+<li><p>rewards/&lt;agent_index&gt;</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>groups</strong> (<em>Collection</em><em>[</em><a class="reference internal" href="config.html#navground.learning.config.GroupConfig" title="navground.learning.config.GroupConfig"><em>GroupConfig</em></a><em>]</em>) – The configuration of the groups</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="navground.learning.probes.GymProbe.with_env">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">with_env</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="env.html#navground.learning.env.BaseEnv" title="navground.learning.env.BaseEnv"><span class="pre">BaseEnv</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="parallel_env.html#navground.learning.parallel_env.BaseParallelEnv" title="navground.learning.parallel_env.BaseParallelEnv"><span class="pre">BaseParallelEnv</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#navground.learning.probes.GymProbe" title="navground.learning.probes.GymProbe"><span class="pre">GymProbe</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#navground.learning.probes.GymProbe.with_env" title="Link to this definition">#</a></dt>
+<dd><p>Creates a probe factory to record all actions and observations
+in an environment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>env</strong> (<a class="reference internal" href="env.html#navground.learning.env.BaseEnv" title="navground.learning.env.BaseEnv"><em>BaseEnv</em></a><em> | </em><a class="reference internal" href="parallel_env.html#navground.learning.parallel_env.BaseParallelEnv" title="navground.learning.parallel_env.BaseParallelEnv"><em>BaseParallelEnv</em></a>) – The environment</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A callable that can be added to runs or experiments,
+using <a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/experiment/run.html#navground.sim.ExperimentalRun.add_record_probe" title="(in navground)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">navground.sim.ExperimentalRun.add_record_probe()</span></code></a> or
+<a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/experiment/experiment.html#navground.sim.Experiment.add_record_probe" title="(in navground)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">navground.sim.Experiment.add_record_probe()</span></code></a></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Callable[[], <a class="reference internal" href="#navground.learning.probes.GymProbe" title="navground.learning.probes.GymProbe">GymProbe</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="navground.learning.probes.RewardProbe">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RewardProbe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/experiment/dataset.html#navground.sim.Dataset" title="(in navground)"><span class="pre">Dataset</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Collection" title="(in Python v3.13)"><span class="pre">Collection</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="config.html#navground.learning.config.GroupConfig" title="navground.learning.config.group.GroupConfig"><span class="pre">GroupConfig</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reward</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="types.html#navground.learning.types.Reward" title="navground.learning.types.Reward"><span class="pre">Reward</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#navground.learning.probes.RewardProbe" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/experiment/probes.html#navground.sim.RecordProbe" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">RecordProbe</span></code></a></p>
+<p>A probe to record rewards to a single dataset
+of shape <code class="docutils literal notranslate"><span class="pre">(#agents,</span> <span class="pre">#steps)</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ds</strong> (<a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/experiment/dataset.html#navground.sim.Dataset" title="(in navground)"><em>sim.Dataset</em></a>) – The dataset</p></li>
+<li><p><strong>groups</strong> (<em>Collection</em><em>[</em><a class="reference internal" href="config.html#navground.learning.config.GroupConfig" title="navground.learning.config.GroupConfig"><em>GroupConfig</em></a><em>]</em>) – The configuration of the groups</p></li>
+<li><p><strong>reward</strong> (<a class="reference internal" href="types.html#navground.learning.types.Reward" title="navground.learning.types.Reward"><em>Reward</em></a><em> | </em><em>None</em>) – The reward function</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="navground.learning.probes.RewardProbe.dtype">
+<span class="sig-name descname"><span class="pre">dtype</span></span><a class="headerlink" href="#navground.learning.probes.RewardProbe.dtype" title="Link to this definition">#</a></dt>
+<dd><p>alias of <a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float64</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="navground.learning.probes.RewardProbe.with_reward">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">with_reward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reward</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="types.html#navground.learning.types.Reward" title="navground.learning.types.Reward"><span class="pre">Reward</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/experiment/dataset.html#navground.sim.Dataset" title="(in navground)"><span class="pre">Dataset</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#navground.learning.probes.RewardProbe" title="navground.learning.probes.reward.RewardProbe"><span class="pre">RewardProbe</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#navground.learning.probes.RewardProbe.with_reward" title="Link to this definition">#</a></dt>
+<dd><p>Creates a probe factory to record a reward</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>reward</strong> (<a class="reference internal" href="types.html#navground.learning.types.Reward" title="navground.learning.types.Reward"><em>Reward</em></a>) – The reward</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A callable that can be added to runs or experiments using
+<a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/experiment/run.html#navground.sim.ExperimentalRun.add_record_probe" title="(in navground)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">navground.sim.ExperimentalRun.add_record_probe()</span></code></a> or
+<a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/experiment/experiment.html#navground.sim.Experiment.add_record_probe" title="(in navground)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">navground.sim.Experiment.add_record_probe()</span></code></a>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><em>Callable</em></a>[[<a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/experiment/dataset.html#navground.sim.Dataset" title="(in navground)"><em>Dataset</em></a>], <a class="reference internal" href="#navground.learning.probes.RewardProbe" title="navground.learning.probes.reward.RewardProbe"><em>RewardProbe</em></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="navground.learning.probes.SuccessProbe">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SuccessProbe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/experiment/dataset.html#navground.sim.Dataset" title="(in navground)"><span class="pre">Dataset</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">indices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="indices.html#navground.learning.indices.Indices" title="navground.learning.indices.Indices"><span class="pre">Indices</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#slice" title="(in Python v3.13)"><span class="pre">slice</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.13)"><span class="pre">set</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'ALL'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Indices.all()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_success</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/agent.html#navground.sim.Agent" title="(in navground)"><span class="pre">Agent</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/world.html#navground.sim.World" title="(in navground)"><span class="pre">World</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_failure</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/agent.html#navground.sim.Agent" title="(in navground)"><span class="pre">Agent</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/world.html#navground.sim.World" title="(in navground)"><span class="pre">World</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#navground.learning.probes.SuccessProbe" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/experiment/probes.html#navground.sim.RecordProbe" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">RecordProbe</span></code></a></p>
+<p>A probe that records successes statuses to a single dataset
+of shape <code class="docutils literal notranslate"><span class="pre">(#agents,</span> <span class="pre">)</span></code>, where</p>
+<ul class="simple">
+<li><p>-1 = unknown</p></li>
+<li><p>0 = failure</p></li>
+<li><p>1 = success</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ds</strong> (<a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/experiment/dataset.html#navground.sim.Dataset" title="(in navground)"><em>sim.Dataset</em></a>) – The dataset</p></li>
+<li><p><strong>indices</strong> (<a class="reference internal" href="types.html#navground.learning.indices.IndicesLike" title="navground.learning.indices.IndicesLike"><em>IndicesLike</em></a>) – The indices of the agents to record</p></li>
+<li><p><strong>is_success</strong> (<em>Condition</em><em> | </em><em>None</em>) – Success condition</p></li>
+<li><p><strong>is_success</strong> – Failure condition</p></li>
+<li><p><strong>is_failure</strong> (<em>Condition</em><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="navground.learning.probes.SuccessProbe.dtype">
+<span class="sig-name descname"><span class="pre">dtype</span></span><a class="headerlink" href="#navground.learning.probes.SuccessProbe.dtype" title="Link to this definition">#</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">int8</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="navground.learning.probes.SuccessProbe.with_indices">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">with_indices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="indices.html#navground.learning.indices.Indices" title="navground.learning.indices.Indices"><span class="pre">Indices</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#slice" title="(in Python v3.13)"><span class="pre">slice</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.13)"><span class="pre">set</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'ALL'</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/experiment/dataset.html#navground.sim.Dataset" title="(in navground)"><span class="pre">Dataset</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#navground.learning.probes.SuccessProbe" title="navground.learning.probes.success.SuccessProbe"><span class="pre">SuccessProbe</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#navground.learning.probes.SuccessProbe.with_indices" title="Link to this definition">#</a></dt>
+<dd><p>Creates a probe factory to record success statuses.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>indices</strong> (<a class="reference internal" href="indices.html#navground.learning.indices.Indices" title="navground.learning.indices.Indices"><em>Indices</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#slice" title="(in Python v3.13)"><em>slice</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>] </em><em>| </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>] </em><em>| </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.13)"><em>set</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>] </em><em>| </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><em>Literal</em></a><em>[</em><em>'ALL'</em><em>]</em>) – The indices of the agents to record</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A callable that can be added to runs or experiments using
+<a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/experiment/run.html#navground.sim.ExperimentalRun.add_record_probe" title="(in navground)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">navground.sim.ExperimentalRun.add_record_probe()</span></code></a> or
+<a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/experiment/experiment.html#navground.sim.Experiment.add_record_probe" title="(in navground)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">navground.sim.Experiment.add_record_probe()</span></code></a>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><em>Callable</em></a>[[<a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/experiment/dataset.html#navground.sim.Dataset" title="(in navground)"><em>Dataset</em></a>], <a class="reference internal" href="#navground.learning.probes.SuccessProbe" title="navground.learning.probes.success.SuccessProbe"><em>SuccessProbe</em></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="navground.learning.probes.CommProbe">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CommProbe</span></span><a class="headerlink" href="#navground.learning.probes.CommProbe" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/experiment/probes.html#navground.sim.RecordProbe" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">RecordProbe</span></code></a></p>
+<p>A probe that records transmitted messages to a single dataset
+of shape <code class="docutils literal notranslate"><span class="pre">(#agents,</span> <span class="pre">message</span> <span class="pre">size)</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="navground.learning.probes.CommProbe.dtype">
+<span class="sig-name descname"><span class="pre">dtype</span></span><a class="headerlink" href="#navground.learning.probes.CommProbe.dtype" title="Link to this definition">#</a></dt>
+<dd><p>alias of <a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float32" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float32</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="onnx.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Onnx</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="utils.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Utils</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#behaviors">Behaviors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#policybehavior">PolicyBehavior</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.behaviors.PolicyBehavior"><code class="docutils literal notranslate"><span class="pre">PolicyBehavior</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#groupedpolicybehavior">GroupedPolicyBehavior</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.behaviors.GroupedPolicyBehavior"><code class="docutils literal notranslate"><span class="pre">GroupedPolicyBehavior</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pad">Pad</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.behaviors.pad.DistributedPadBehavior"><code class="docutils literal notranslate"><span class="pre">DistributedPadBehavior</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.behaviors.pad.DistributedPadBehavior.pad_width"><code class="docutils literal notranslate"><span class="pre">DistributedPadBehavior.pad_width</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.behaviors.pad.CentralizedPadBehavior"><code class="docutils literal notranslate"><span class="pre">CentralizedPadBehavior</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.behaviors.pad.StopAtPadBehavior"><code class="docutils literal notranslate"><span class="pre">StopAtPadBehavior</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.behaviors.pad.StopAtPadBehavior.pad_width"><code class="docutils literal notranslate"><span class="pre">StopAtPadBehavior.pad_width</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.behaviors.pad.StopAtPadBehavior.tau"><code class="docutils literal notranslate"><span class="pre">StopAtPadBehavior.tau</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scenarios">Scenarios</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corridorwithobstacle">CorridorWithObstacle</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.scenarios.CorridorWithObstacle"><code class="docutils literal notranslate"><span class="pre">CorridorWithObstacle</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.scenarios.CorridorWithObstacle.init_world"><code class="docutils literal notranslate"><span class="pre">CorridorWithObstacle.init_world()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.scenarios.CorridorWithObstacle.length"><code class="docutils literal notranslate"><span class="pre">CorridorWithObstacle.length</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.scenarios.CorridorWithObstacle.max_radius"><code class="docutils literal notranslate"><span class="pre">CorridorWithObstacle.max_radius</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.scenarios.CorridorWithObstacle.min_radius"><code class="docutils literal notranslate"><span class="pre">CorridorWithObstacle.min_radius</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.scenarios.CorridorWithObstacle.width"><code class="docutils literal notranslate"><span class="pre">CorridorWithObstacle.width</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forward">Forward</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.scenarios.ForwardScenario"><code class="docutils literal notranslate"><span class="pre">ForwardScenario</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.scenarios.ForwardScenario.init_world"><code class="docutils literal notranslate"><span class="pre">ForwardScenario.init_world()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Pad</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.scenarios.PadScenario"><code class="docutils literal notranslate"><span class="pre">PadScenario</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.scenarios.pad.render_kwargs"><code class="docutils literal notranslate"><span class="pre">render_kwargs()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-estimations">State Estimations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.state_estimations.CommSensor"><code class="docutils literal notranslate"><span class="pre">CommSensor</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probes">Probes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.probes.GymProbe"><code class="docutils literal notranslate"><span class="pre">GymProbe</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.probes.GymProbe.with_env"><code class="docutils literal notranslate"><span class="pre">GymProbe.with_env()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.probes.RewardProbe"><code class="docutils literal notranslate"><span class="pre">RewardProbe</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.probes.RewardProbe.dtype"><code class="docutils literal notranslate"><span class="pre">RewardProbe.dtype</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.probes.RewardProbe.with_reward"><code class="docutils literal notranslate"><span class="pre">RewardProbe.with_reward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.probes.SuccessProbe"><code class="docutils literal notranslate"><span class="pre">SuccessProbe</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.probes.SuccessProbe.dtype"><code class="docutils literal notranslate"><span class="pre">SuccessProbe.dtype</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.probes.SuccessProbe.with_indices"><code class="docutils literal notranslate"><span class="pre">SuccessProbe.with_indices()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.probes.CommProbe"><code class="docutils literal notranslate"><span class="pre">CommProbe</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.probes.CommProbe.dtype"><code class="docutils literal notranslate"><span class="pre">CommProbe.dtype</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jerome Guzzi et al. (IDSIA, USI-SUPSI)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Jerome Guzzi et al. (IDSIA, USI-SUPSI).
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,2 +1,4 @@
 .doctrees
 *.doctree
+.DS_Store
+.buildinfo.bak

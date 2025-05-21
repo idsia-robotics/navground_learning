@@ -1,0 +1,665 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Reference &#8212; navground_learning 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="../_static/documentation_options.js?v=9f0261fb"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/index';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Types" href="types.html" />
+    <link rel="prev" title="How to extend" href="../guides/extend.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">navground_learning 0.1.0 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/index.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../tutorials/basics/index.html">Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/basics/Gymnasium.html">Gymnasium Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/basics/PettingZoo.html">Navground-PettingZoo integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/basics/Behavior.html">Using a ML policy in Navground</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/empty/empty.html">Empty environment</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../tutorials/corridor_with_obstacle/index.html">Corridor with obstacle</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/corridor_with_obstacle/Scenario.html">Scenario</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/corridor_with_obstacle/Learning.html">Learning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../tutorials/crossing/index.html">Crossing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/crossing/Training-SA.html">Training one agent among many agents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/crossing/Analysis-SA.html">Performance of policies trained in single-agent environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/crossing/Training-MA.html">Training agents among peers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/crossing/Analysis-MA.html">Performance of policies trained in multi-agent environment</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../tutorials/periodic_crossing/index.html">Periodic Crossing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/periodic_crossing/SameSpeed.html">Uniform speeds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/periodic_crossing/DifferentSpeed.html">Different speeds</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../guides/index.html">Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guides/extend.html">How to extend</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="types.html">Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indices.html">Indices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rewards.html">Rewards functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="env.html">Single-agent Gymnasium Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel_env.html">Multi-agent Pettingzoo Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="policies.html">Policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="il.html">Imitation Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="evaluation.html">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html">Saving and Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="onnx.html">Onnx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="navground.html">Navground Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html">Examples</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Reference</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="reference">
+<h1>Reference<a class="headerlink" href="#reference" title="Link to this heading">#</a></h1>
+<p><code class="xref py py-mod docutils literal notranslate"><span class="pre">navground.learning</span></code></p>
+<div class="toctree-wrapper compound" id="module-navground.learning">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="types.html">Types</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="types.html#navground.learning.types.Array"><code class="docutils literal notranslate"><span class="pre">Array</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#navground.learning.types.Observation"><code class="docutils literal notranslate"><span class="pre">Observation</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#navground.learning.types.Action"><code class="docutils literal notranslate"><span class="pre">Action</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#navground.learning.types.State"><code class="docutils literal notranslate"><span class="pre">State</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#navground.learning.types.EpisodeStart"><code class="docutils literal notranslate"><span class="pre">EpisodeStart</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#navground.learning.types.Info"><code class="docutils literal notranslate"><span class="pre">Info</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#navground.learning.types.PathLike"><code class="docutils literal notranslate"><span class="pre">PathLike</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#navground.learning.types.Bounds"><code class="docutils literal notranslate"><span class="pre">Bounds</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#navground.learning.indices.IndicesLike"><code class="docutils literal notranslate"><span class="pre">IndicesLike</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#navground.learning.types.Reward"><code class="docutils literal notranslate"><span class="pre">Reward</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="types.html#navground.learning.types.Reward.__call__"><code class="docutils literal notranslate"><span class="pre">Reward.__call__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#navground.learning.types.PolicyPredictor"><code class="docutils literal notranslate"><span class="pre">PolicyPredictor</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="types.html#navground.learning.types.PolicyPredictor.predict"><code class="docutils literal notranslate"><span class="pre">PolicyPredictor.predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#navground.learning.types.PolicyPredictorWithInfo"><code class="docutils literal notranslate"><span class="pre">PolicyPredictorWithInfo</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="types.html#navground.learning.types.PolicyPredictorWithInfo.predict"><code class="docutils literal notranslate"><span class="pre">PolicyPredictorWithInfo.predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#navground.learning.types.AnyPolicyPredictor"><code class="docutils literal notranslate"><span class="pre">AnyPolicyPredictor</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#navground.learning.types.accept_info"><code class="docutils literal notranslate"><span class="pre">accept_info()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="indices.html">Indices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="indices.html#navground.learning.indices.T"><code class="docutils literal notranslate"><span class="pre">T</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="indices.html#navground.learning.indices.Indices"><code class="docutils literal notranslate"><span class="pre">Indices</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="indices.html#navground.learning.indices.Indices.all"><code class="docutils literal notranslate"><span class="pre">Indices.all()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="indices.html#navground.learning.indices.Indices.as_set"><code class="docutils literal notranslate"><span class="pre">Indices.as_set()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="indices.html#navground.learning.indices.Indices.from_dict"><code class="docutils literal notranslate"><span class="pre">Indices.from_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="indices.html#navground.learning.indices.Indices.intersect"><code class="docutils literal notranslate"><span class="pre">Indices.intersect()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="indices.html#navground.learning.indices.Indices.sub_dict"><code class="docutils literal notranslate"><span class="pre">Indices.sub_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="indices.html#navground.learning.indices.Indices.sub_sequence"><code class="docutils literal notranslate"><span class="pre">Indices.sub_sequence()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="indices.html#navground.learning.indices.Indices.asdict"><code class="docutils literal notranslate"><span class="pre">Indices.asdict</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="indices.html#navground.learning.indices.Indices.lowest"><code class="docutils literal notranslate"><span class="pre">Indices.lowest</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="config.html#actions">Actions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="config.html#base-class">Base class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#end-to-end">End-to-end</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#behavior-modulation">Behavior Modulation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#observations">Observations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="config.html#id1">Base class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#default">Default</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#group">Group</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="config.html#navground.learning.config.GroupConfig"><code class="docutils literal notranslate"><span class="pre">GroupConfig</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#navground.learning.config.merge_groups_configs"><code class="docutils literal notranslate"><span class="pre">merge_groups_configs()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rewards.html">Rewards functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rewards.html#null">Null</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rewards.html#navground.learning.rewards.NullReward"><code class="docutils literal notranslate"><span class="pre">NullReward</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rewards.html#efficacy">Efficacy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rewards.html#navground.learning.rewards.EfficacyReward"><code class="docutils literal notranslate"><span class="pre">EfficacyReward</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rewards.html#social">Social</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rewards.html#navground.learning.rewards.SocialReward"><code class="docutils literal notranslate"><span class="pre">SocialReward</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="env.html">Single-agent Gymnasium Environment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="env.html#navground.learning.env.BaseEnv"><code class="docutils literal notranslate"><span class="pre">BaseEnv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="env.html#navground.learning.env.NavgroundEnv"><code class="docutils literal notranslate"><span class="pre">NavgroundEnv</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="env.html#navground.learning.env.NavgroundEnv.from_dict"><code class="docutils literal notranslate"><span class="pre">NavgroundEnv.from_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="env.html#navground.learning.env.NavgroundEnv.reset"><code class="docutils literal notranslate"><span class="pre">NavgroundEnv.reset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="env.html#navground.learning.env.NavgroundEnv.step"><code class="docutils literal notranslate"><span class="pre">NavgroundEnv.step()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="env.html#navground.learning.env.NavgroundEnv.asdict"><code class="docutils literal notranslate"><span class="pre">NavgroundEnv.asdict</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="env.html#navground.learning.env.NavgroundEnv.init_args"><code class="docutils literal notranslate"><span class="pre">NavgroundEnv.init_args</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="env.html#navground.learning.env.NavgroundEnv.policy"><code class="docutils literal notranslate"><span class="pre">NavgroundEnv.policy</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="env.html#navground.learning.env.NavgroundEnv.scenario"><code class="docutils literal notranslate"><span class="pre">NavgroundEnv.scenario</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="parallel_env.html">Multi-agent Pettingzoo Environment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="parallel_env.html#navground.learning.parallel_env.BaseParallelEnv"><code class="docutils literal notranslate"><span class="pre">BaseParallelEnv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel_env.html#navground.learning.parallel_env.MultiAgentNavgroundEnv"><code class="docutils literal notranslate"><span class="pre">MultiAgentNavgroundEnv</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="parallel_env.html#navground.learning.parallel_env.MultiAgentNavgroundEnv.from_dict"><code class="docutils literal notranslate"><span class="pre">MultiAgentNavgroundEnv.from_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="parallel_env.html#navground.learning.parallel_env.MultiAgentNavgroundEnv.get_policy"><code class="docutils literal notranslate"><span class="pre">MultiAgentNavgroundEnv.get_policy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="parallel_env.html#navground.learning.parallel_env.MultiAgentNavgroundEnv.reset"><code class="docutils literal notranslate"><span class="pre">MultiAgentNavgroundEnv.reset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="parallel_env.html#navground.learning.parallel_env.MultiAgentNavgroundEnv.step"><code class="docutils literal notranslate"><span class="pre">MultiAgentNavgroundEnv.step()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="parallel_env.html#navground.learning.parallel_env.MultiAgentNavgroundEnv.asdict"><code class="docutils literal notranslate"><span class="pre">MultiAgentNavgroundEnv.asdict</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="parallel_env.html#navground.learning.parallel_env.MultiAgentNavgroundEnv.init_args"><code class="docutils literal notranslate"><span class="pre">MultiAgentNavgroundEnv.init_args</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="parallel_env.html#navground.learning.parallel_env.MultiAgentNavgroundEnv.scenario"><code class="docutils literal notranslate"><span class="pre">MultiAgentNavgroundEnv.scenario</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="parallel_env.html#navground.learning.parallel_env.shared_parallel_env"><code class="docutils literal notranslate"><span class="pre">shared_parallel_env()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel_env.html#navground.learning.parallel_env.parallel_env"><code class="docutils literal notranslate"><span class="pre">parallel_env()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel_env.html#navground.learning.parallel_env.make_vec_from_penv"><code class="docutils literal notranslate"><span class="pre">make_vec_from_penv()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel_env.html#navground.learning.parallel_env.make_shared_parallel_env_with_env"><code class="docutils literal notranslate"><span class="pre">make_shared_parallel_env_with_env()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="policies.html">Policies</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="policies.html#null">Null</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="policies.html#navground.learning.policies.null_policy.NullPolicy"><code class="docutils literal notranslate"><span class="pre">NullPolicy</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="policies.html#navground.learning.policies.null_predictor.NullPredictor"><code class="docutils literal notranslate"><span class="pre">NullPredictor</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="policies.html#random">Random</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="policies.html#navground.learning.policies.random_policy.RandomPolicy"><code class="docutils literal notranslate"><span class="pre">RandomPolicy</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="policies.html#navground.learning.policies.random_predictor.RandomPredictor"><code class="docutils literal notranslate"><span class="pre">RandomPredictor</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="policies.html#info">Info</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="policies.html#navground.learning.policies.info_predictor.InfoPolicy"><code class="docutils literal notranslate"><span class="pre">InfoPolicy</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="policies.html#ordering-invariant-extractor">Ordering-invariant extractor</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="policies.html#navground.learning.policies.Reduction"><code class="docutils literal notranslate"><span class="pre">Reduction</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="policies.html#navground.learning.policies.order_invariant.OrderInvariantCombinedExtractor"><code class="docutils literal notranslate"><span class="pre">OrderInvariantCombinedExtractor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="policies.html#navground.learning.policies.order_invariant.OrderInvariantFlattenExtractor"><code class="docutils literal notranslate"><span class="pre">OrderInvariantFlattenExtractor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="policies.html#navground.learning.policies.order_invariant.make_order_invariant_flatten_extractor"><code class="docutils literal notranslate"><span class="pre">make_order_invariant_flatten_extractor()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="il.html">Imitation Learning</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="il.html#navground.learning.il.PolicyCallableWithInfo"><code class="docutils literal notranslate"><span class="pre">PolicyCallableWithInfo</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="il.html#navground.learning.il.AnyPolicy"><code class="docutils literal notranslate"><span class="pre">AnyPolicy</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="il.html#navground.learning.il.PolicyCallable"><code class="docutils literal notranslate"><span class="pre">PolicyCallable</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="il.html#navground.learning.il.rollout.generate_trajectories"><code class="docutils literal notranslate"><span class="pre">generate_trajectories()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="il.html#utilities">Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="il.html#navground.learning.il.make_vec_from_env"><code class="docutils literal notranslate"><span class="pre">make_vec_from_env()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="il.html#navground.learning.il.make_vec_from_penv"><code class="docutils literal notranslate"><span class="pre">make_vec_from_penv()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="il.html#navground.learning.il.setup_tqdm"><code class="docutils literal notranslate"><span class="pre">setup_tqdm()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="il.html#base-class">Base class</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="il.html#navground.learning.il.BaseILAlgorithm"><code class="docutils literal notranslate"><span class="pre">BaseILAlgorithm</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="il.html#behavior-cloning">Behavior Cloning</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="il.html#navground.learning.il.BC"><code class="docutils literal notranslate"><span class="pre">BC</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="il.html#dagger">DAgger</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="il.html#navground.learning.il.DAgger"><code class="docutils literal notranslate"><span class="pre">DAgger</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="evaluation.html#policy">Policy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="evaluation.html#navground.learning.evaluation.evaluate_policy"><code class="docutils literal notranslate"><span class="pre">evaluate_policy()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="evaluation.html#policies">Policies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="evaluation.html#navground.learning.evaluation.evaluate_policies"><code class="docutils literal notranslate"><span class="pre">evaluate_policies()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="evaluation.html#navground-policy">Navground policy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="evaluation.html#navground.learning.evaluation.evaluate"><code class="docutils literal notranslate"><span class="pre">evaluate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="evaluation.html#navground.learning.evaluation.evaluate_with_experiment"><code class="docutils literal notranslate"><span class="pre">evaluate_with_experiment()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="evaluation.html#navground.learning.evaluation.evaluate_with_experiment_and_env"><code class="docutils literal notranslate"><span class="pre">evaluate_with_experiment_and_env()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="evaluation.html#scenarios">Scenarios</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="evaluation.html#navground.learning.evaluation.InitPolicyBehavior"><code class="docutils literal notranslate"><span class="pre">InitPolicyBehavior</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="evaluation.html#experiments">Experiments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="evaluation.html#navground.learning.evaluation.make_experiment"><code class="docutils literal notranslate"><span class="pre">make_experiment()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="evaluation.html#navground.learning.evaluation.make_experiment_with_env"><code class="docutils literal notranslate"><span class="pre">make_experiment_with_env()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="evaluation.html#logging">Logging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="evaluation.html#navground.learning.evaluation.TrajectoryPlotConfig"><code class="docutils literal notranslate"><span class="pre">TrajectoryPlotConfig</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="evaluation.html#navground.learning.evaluation.VideoConfig"><code class="docutils literal notranslate"><span class="pre">VideoConfig</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="evaluation.html#navground.learning.evaluation.config_eval_log"><code class="docutils literal notranslate"><span class="pre">config_eval_log()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">Saving and Loading</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="io.html#navground.learning.io.save_env"><code class="docutils literal notranslate"><span class="pre">save_env()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#navground.learning.io.load_env"><code class="docutils literal notranslate"><span class="pre">load_env()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#navground.learning.io.export_behavior"><code class="docutils literal notranslate"><span class="pre">export_behavior()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#navground.learning.io.export_policy_as_behavior"><code class="docutils literal notranslate"><span class="pre">export_policy_as_behavior()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#navground.learning.io.load_behavior"><code class="docutils literal notranslate"><span class="pre">load_behavior()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="onnx.html">Onnx</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="onnx.html#exporting">Exporting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="onnx.html#navground.learning.onnx.export"><code class="docutils literal notranslate"><span class="pre">export()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="onnx.html#inference">Inference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="onnx.html#navground.learning.onnx.OnnxPolicy"><code class="docutils literal notranslate"><span class="pre">OnnxPolicy</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="navground.html">Navground Components</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="navground.html#behaviors">Behaviors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="navground.html#policybehavior">PolicyBehavior</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="navground.html#scenarios">Scenarios</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="navground.html#corridorwithobstacle">CorridorWithObstacle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="navground.html#forward">Forward</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="navground.html#probes">Probes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="navground.html#navground.learning.probes.GymProbe"><code class="docutils literal notranslate"><span class="pre">GymProbe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="navground.html#navground.learning.probes.RewardProbe"><code class="docutils literal notranslate"><span class="pre">RewardProbe</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#corridor">Corridor</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples.html#navground.learning.examples.corridor_with_obstacle.get_env"><code class="docutils literal notranslate"><span class="pre">get_env()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#crossing">Crossing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples.html#navground.learning.examples.cross.get_env"><code class="docutils literal notranslate"><span class="pre">get_env()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../guides/extend.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">How to extend</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="types.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Types</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jerome Guzzi et al. (IDSIA, USI-SUPSI)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Jerome Guzzi et al. (IDSIA, USI-SUPSI).
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
