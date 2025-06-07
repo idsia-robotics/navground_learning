@@ -42,13 +42,16 @@ def _run_video(fn: Callable,
         bounds = sim.bounds_for_world(world)
     else:
         bounds = None
-    r = fn(world=world,
-           time_step=run.time_step,
-           duration=run.final_sim_time,
-           factor=factor,
-           fps=factor / run.time_step,
-           bounds=bounds,
-           **kwargs)
+    if run.final_sim_time:
+        r = fn(world=world,
+               time_step=run.time_step,
+               duration=run.final_sim_time,
+               factor=factor,
+               fps=factor / run.time_step,
+               bounds=bounds,
+               **kwargs)
+    else:
+        r = None
     world._close()
     return r
 
