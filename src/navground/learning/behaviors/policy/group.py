@@ -37,7 +37,7 @@ class GroupedPolicyBehavior(BasePolicyMixin,
                             name="GroupPolicy",
                             include_properties_of=[BasePolicyMixin]):
 
-    _groups: dict[int, GroupPolicyBehavior] = {}
+    _groups: dict[int, core.BehaviorGroup] = {}
 
     def __init__(self,
                  kinematics: core.Kinematics | None = None,
@@ -62,7 +62,7 @@ class GroupedPolicyBehavior(BasePolicyMixin,
             raise RuntimeError("Policy not set")
         return GroupPolicyBehavior(policy)
 
-    def get_groups(self) -> dict[int, GroupPolicyBehavior]:
+    def get_groups(self) -> dict[int, core.BehaviorGroup]:
         return self._groups
 
     def get_group_hash(self) -> int:

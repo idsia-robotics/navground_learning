@@ -195,10 +195,12 @@ class ControlActionConfig(ConfigWithKinematic,
                 accs = self._compute_wheels_value_from_action(
                     action, self.max_acceleration)
                 speeds = np.asarray(behavior.wheel_speeds) + accs * time_step
-                return behavior.twist_from_wheel_speeds(speeds)
+                return behavior.twist_from_wheel_speeds(
+                    speeds)  # type: ignore[arg-type]
             speeds = self._compute_wheels_value_from_action(
                 action, self.max_speed)
-            return behavior.twist_from_wheel_speeds(speeds)
+            return behavior.twist_from_wheel_speeds(
+                speeds)  # type: ignore[arg-type]
         if self.use_acceleration_action:
             assert behavior is not None
             acc = self._compute_value_from_action(

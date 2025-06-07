@@ -77,7 +77,7 @@ class CentralizedPadBehavior(core.BehaviorGroupMember, name="CentralizedPad"):
 
     """
 
-    _groups: dict[int, PadGroupBehavior] = {}
+    _groups: dict[int, core.BehaviorGroup] = {}
 
     def __init__(self,
                  kinematics: core.Kinematics | None = None,
@@ -96,8 +96,8 @@ class CentralizedPadBehavior(core.BehaviorGroupMember, name="CentralizedPad"):
     def pad_width(self, value: float) -> None:
         self._pad_width = max(0, value)
 
-    def make_group(self) -> PadGroupBehavior:
+    def make_group(self) -> core.BehaviorGroup:
         return PadGroupBehavior(pad_width=self.pad_width)
 
-    def get_groups(self) -> dict[int, PadGroupBehavior]:
+    def get_groups(self) -> dict[int, core.BehaviorGroup]:
         return self._groups

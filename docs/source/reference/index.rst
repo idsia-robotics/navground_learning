@@ -11,6 +11,7 @@ Reference
 
    types
    indices
+   register
    config
    rewards
    env

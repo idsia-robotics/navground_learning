@@ -141,8 +141,8 @@ def get_env(action: ControlActionConfig,
     :param      state:                 The global state config
                                        (only relevant if ``multi_agent=True``)
     :param      multi_agent:           Whether the environments controls both agents
-    :param      kwargs:                Keywords arguments passed
-                                       to :py:class:`navground.learning.Scenario`.
+    :param      kwargs:                Keywords arguments passed to
+                                       :py:class:`navground.learning.scenarios.PadScenario`.
 
     :returns: A Parallel PettingZoo environment if `multi_agent` is set,
         else a Gymnasium environment.

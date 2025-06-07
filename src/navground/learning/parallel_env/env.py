@@ -272,7 +272,7 @@ def shared_parallel_env(
     :param indices: The world indices of the agent to control.
                     All other agents are controlled solely by navground.
 
-    :param sensor: An optional sensor that will be added to :py:obj:`sensors`.
+    :param sensor: An optional sensor that will be added to ``sensors``.
 
     :param sensors: A sequence of sensor to generate observations for the agents
                     or its YAML representation. If

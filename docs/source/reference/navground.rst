@@ -14,6 +14,7 @@ PolicyBehavior
 
 .. autoclass:: PolicyBehavior
    :members:
+   :inherited-members:
    :show-inheritance:
 
 GroupedPolicyBehavior
@@ -21,6 +22,7 @@ GroupedPolicyBehavior
 
 .. autoclass:: GroupedPolicyBehavior
    :members:
+   :inherited-members:
    :show-inheritance:
 
 Pad

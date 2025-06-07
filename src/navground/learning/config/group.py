@@ -61,7 +61,7 @@ class GroupConfig:
     Group configurations can be stuck. For instance, the configuration provided
     to define the environment for training needs needs to define at least
     :py:attr:`indices`, :py:attr:`action` and
-    :py:attr:`observation`, and possibly also the :py:attr:`sensor`.
+    :py:attr:`observation`, and possibly also one :py:attr:`sensors`.
     Instead, for evaluation, we may provide just the policy,
     as the agents are already configured.
 

@@ -46,16 +46,20 @@ class DataclassConfig:
                                  for name, value in nodef_f_vals)
         return f"{self.__class__.__name__}({nodef_f_repr})"
 
-    def get_dict(self) -> dict[str, Any]:
+    def _get_dict(self) -> dict[str, Any]:
         return dc.asdict(self)
 
     @classmethod
-    def make_from_dict(cls, value: Mapping[str, Any]) -> Any:
+    def _make_from_dict(cls, value: Mapping[str, Any]) -> Any:
         return cls(**value)
 
 
 @dc.dataclass(repr=False)
 class ConfigWithKinematic(DataclassConfig):
+    """
+    An internal helper class that configures kinematics properties
+    """
+
     max_speed: float = np.inf
     """The maximal speed of the agent"""
     max_angular_speed: float = np.inf
@@ -64,6 +68,12 @@ class ConfigWithKinematic(DataclassConfig):
     """The number of degrees of freedom of the agent"""
 
     def configure_kinematics(self, behavior: core.Behavior) -> None:
+        """
+        Configure the fields that are not yet set from the behavior's
+        kinematics.
+
+        :param      behavior:  The behavior
+        """
         kinematics = behavior.kinematics
         if not kinematics:
             return

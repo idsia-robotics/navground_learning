@@ -194,9 +194,9 @@ class SocialReward(Reward, register_name="Social"):
             r += np.clip(0, 1, agent.behavior.efficacy) - 1
         return r
 
-    def get_dict(self) -> dict[str, Any]:
+    def _get_dict(self) -> dict[str, Any]:
         return dc.asdict(self)
 
     @classmethod
-    def make_from_dict(cls, value: Mapping[str, Any]) -> Self:
+    def _make_from_dict(cls, value: Mapping[str, Any]) -> Self:
         return cls(**value)

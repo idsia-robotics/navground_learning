@@ -24,6 +24,7 @@ Continuous
 
 .. autoclass:: ControlActionConfig
    :members:
+   :inherited-members:
 
 Discrete
 """"""""
@@ -61,6 +62,7 @@ Behavior Modulation
 
 .. autoclass:: ModulationActionConfig
    :members:
+   :inherited-members:
 
 Observations
 ============
@@ -76,6 +78,7 @@ Default
 
 .. autoclass:: DefaultObservationConfig
    :members:
+   :inherited-members:
 
 State
 =====
@@ -91,12 +94,14 @@ Default
 
 .. autoclass:: DefaultStateConfig
    :members:
+   :inherited-members:
 
 Group
 =====
 
 .. autoclass:: GroupConfig
    :members:
+   :inherited-members:
 
 .. autofunction:: merge_groups_configs
 

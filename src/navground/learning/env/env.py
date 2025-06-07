@@ -47,7 +47,7 @@ class NavgroundEnv(NavgroundBaseEnv, BaseEnv):
     :param agent_index: The world index of the selected agent,
                         must be smaller than the number of agents.
 
-    :param sensor: An optional sensor that will be added to :py:obj:`sensors`.
+    :param sensor: An optional sensor that will be added to ``sensors``.
 
     :param sensors: A sequence of sensor to generate observations for the agents
                     or its YAML representation. If

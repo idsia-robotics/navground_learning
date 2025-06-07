@@ -390,6 +390,8 @@ class NavgroundBaseEnv:
                seed: int | None = None,
                options: dict[str, Any] | None = None) -> ResetReturn:
         world = self._world
+        if world:
+            world._close()
         self._world = sim.World()
         if seed is None and world:
             self._world.copy_random_generator(world)
@@ -399,6 +401,7 @@ class NavgroundBaseEnv:
             return {}, {}
         self._scenario.init_world(self._world, seed=seed)
         self._scenario.apply_inits(self._world)
+        world._prepare()
         # Update dry does change last_cmd. Let's cache it to restore it afterwards
         last_cmds = [a.last_cmd for a in self._world.agents]
         self._world.update_dry(self.time_step, advance_time=False)

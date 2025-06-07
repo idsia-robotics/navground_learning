@@ -60,6 +60,11 @@ Types
 
    Anything that can be converted to a list of sensor (possibly through YAML).
 
+.. py:type:: ObservationTransform
+   :canonical: Callable[[Observation], Observation]
+
+   Processing of observations
+
 .. py:type:: TerminationCondition
    :canonical: Callable[[sim.Agent, sim.World], bool]
 

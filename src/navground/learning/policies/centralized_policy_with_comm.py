@@ -189,7 +189,7 @@ class SACPolicyWithComm(SACPolicy):
         Constructs a new instance.
 
         Same parameters of the super class :py:class:`SACPolicy` constructor,
-        with the addition of :py:obj:`actor_specs`.
+        with the addition of ``actor_specs``.
 
         :param      comm_space:    The comm space.
         :param      comm_net_arch: The comm network MLP specs

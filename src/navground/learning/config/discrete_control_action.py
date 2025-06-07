@@ -41,12 +41,12 @@ class DiscreteControlActionConfig(ControlActionConfig,
     """
     Configuration of the conversion between *discrete* control actions
     and control commands. Actions are either command accelerations
-    or command velocities, depending on :py:attr:`use_acceleration_action`.
+    or command velocities, depending on :py:attr:`ControlActionConfig.use_acceleration_action`.
 
-    Discrete actions are first converted to the :py:class:`super class <ControlActionConfig>`
-    continuous action and then to control commands.
+    Discrete actions are first converted to continuous action and then,
+    by the super class :py:class:`ControlActionConfig`, to control commands.
 
-    The action space :py:class:`gym.spaces.Discrete` is discrete.
+    The action space :py:class:`gymnasium.spaces.Discrete` is discrete.
     Values are encoded using a ternary numeral system,
     where for every dimension:
 
