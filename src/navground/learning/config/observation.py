@@ -88,6 +88,20 @@ class DefaultObservationConfig(ConfigWithKinematic,
 
     :param keys: Which keys to select
 
+    :param include_position: Whether to include the behavior position
+        Coordinates are only included if the related interval has length > 0,
+        e.g., ``min_x < max`` for the x-coordinate.
+
+    :param max_x: The upper bound of x-coordinate
+
+    :param max_y: The upper bound of y-coordinate
+
+    :param min_x: The lower bound of x-coordinate
+
+    :param min_y: The lower bound of y-coordinate
+
+    :param include_orientation: Whether to include the behavior orientation
+
     """
 
     flat: bool = False
@@ -133,6 +147,18 @@ class DefaultObservationConfig(ConfigWithKinematic,
     """Whether to sort the keys"""
     keys: Sequence[str] | None = None
     """Which keys to select"""
+    include_position: bool = False
+    """Whether to include the behavior position"""
+    max_x: float = math.inf
+    """The maximal x-coordinate"""
+    max_y: float = math.inf
+    """The maximal y-coordinate"""
+    min_x: float = -math.inf
+    """The minimal x-coordinate"""
+    min_y: float = -math.inf
+    """The minimal y-coordinate"""
+    include_orientation: bool = False
+    """Whether to include the behavior orientation"""
 
     def __post_init__(self) -> None:
         super().__post_init__()
@@ -192,8 +218,8 @@ class DefaultObservationConfig(ConfigWithKinematic,
                         continue
                     self._rescale_fn[key] = normalize(value.low, value.high,
                                                       -1, 1)
-                    # dtype = cast('np.typing.NDArray[np.floating[Any]]',
-                    #              value.dtype)
+                    #dtype = cast('np.typing.NDArray[np.floating[Any]]',
+                    #value.dtype)
                     space[key] = gym.spaces.Box(low=-1,
                                                 high=1,
                                                 shape=value.shape,
@@ -210,7 +236,6 @@ class DefaultObservationConfig(ConfigWithKinematic,
             if self.include_target_direction_validity:
                 ds['ego_target_direction_valid'] = gym.spaces.Box(
                     0, 1, (1, ), dtype=np.uint8)
-                # gym.spaces.Discrete(n=2)
         if self.include_target_distance:
             ds['ego_target_distance'] = gym.spaces.Box(
                 0, self.max_target_distance, (1, ), dtype=FloatType)
@@ -247,6 +272,33 @@ class DefaultObservationConfig(ConfigWithKinematic,
         if self.include_target_angular_speed:
             ds['ego_target_angular_speed'] = gym.spaces.Box(
                 0, self.max_angular_speed, (1, ), dtype=FloatType)
+        if self.include_position:
+            high = []
+            low = []
+            if self.max_x > self.min_x:
+                self.include_x = True
+                high.append(self.max_x)
+                low.append(self.min_x)
+            else:
+                self.include_x = False
+            if self.max_y > self.min_y:
+                self.include_y = True
+                high.append(self.max_y)
+                low.append(self.min_y)
+            else:
+                self.include_y = False
+            if len(high):
+                ds['ego_position'] = gym.spaces.Box(np.asarray(low),
+                                                    np.asarray(high),
+                                                    (len(high), ),
+                                                    dtype=FloatType)
+            else:
+                self.include_position = False
+        if self.include_orientation:
+            ds['ego_orientation'] = gym.spaces.Box(-1,
+                                                   1, (2, ),
+                                                   dtype=FloatType)
+
         return gym.spaces.Dict(ds)
 
     def _rescale(self, obs: dict[str, Array]) -> None:
@@ -294,7 +346,9 @@ class DefaultObservationConfig(ConfigWithKinematic,
                 ks = {k: rs[k] for k in self.keys if k in rs}.items()
             return gym.spaces.Dict([(k, v) for k, v in ks
                                     if k not in self.ignore_keys])
-        return gym.spaces.Dict(**sensing_space, **self._make_state_space())
+        return gym.spaces.Dict(
+            **sensing_space,  # type: ignore[arg-type]
+            **self._make_state_space())  # type: ignore[arg-type]
 
     @property
     def space(self) -> gym.Space[Any]:
@@ -333,6 +387,15 @@ class DefaultObservationConfig(ConfigWithKinematic,
                                                    dtype=FloatType)
             if self.include_radius:
                 rs['ego_radius'] = np.array([behavior.radius], dtype=FloatType)
+            if self.include_position:
+                ps = behavior.position
+                if not self.include_x:
+                    ps = ps[1:]
+                if not self.include_y:
+                    ps = ps[:-1]
+                rs['ego_position'] = ps
+            if self.include_orientation:
+                rs['ego_orientation'] = core.unit(behavior.orientation)
             self._add_target(behavior, rs)
         return rs
 
@@ -369,25 +432,7 @@ class DefaultObservationConfig(ConfigWithKinematic,
             rs['ego_target_speed'] = np.array(
                 [min(behavior.get_target_speed(), self.max_speed)],
                 dtype=FloatType)
-
         if self.include_target_angular_speed:
             w = min(behavior.get_target_angular_speed(),
                     self.max_angular_speed)
             rs['ego_target_angular_speed'] = np.array([w], dtype=FloatType)
-
-    # def _add_target(self, behavior: core.Behavior,
-    #                 rs: dict[str, np.ndarray]) -> None:
-    #     if behavior.target.position is not None:
-    #         p = core.to_relative(behavior.target.position - behavior.position,
-    #                              behavior.pose)
-    #         dist = np.linalg.norm(p)
-    #         if self.include_target_direction:
-    #             if dist > 0:
-    #                 p = p / dist
-    #             rs['ego_target_direction'] = p
-    #         if self.include_target_distance:
-    #             rs['ego_target_distance'] = np.array(
-    #                 [min(dist, behavior.horizon)])
-    #     elif behavior.target.direction is not None and self.include_target_direction:
-    #         rs['ego_target_direction'] = core.to_relative(
-    #             behavior.target.direction, behavior.pose)
