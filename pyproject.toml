@@ -59,7 +59,7 @@ all = [
   "torch>=2.4",
   "onnx",
   "tqdm",
-  "benchmarl@git+https://github.com/jeguzzi/BenchMARL@main",
+  "benchmarl",
   "torchrl",
   "pandas",
   "matplotlib"
