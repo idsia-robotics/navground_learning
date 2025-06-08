@@ -32,10 +32,10 @@ jobs:
     strategy:
       matrix:
         python-version:
-          # - "3.10"
-          # - "3.11"
+          - "3.10"
+          - "3.11"
           - "3.12"
-          # - "3.13"
+          - "3.13"
     name: Test Python 📦
     needs:
       - build
@@ -50,9 +50,6 @@ jobs:
         with:
           name: python-package-distributions
           path: dist
-      - run: ls -lah .
-      - run: ls -lah dist
-      - run: ls -lah test
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
