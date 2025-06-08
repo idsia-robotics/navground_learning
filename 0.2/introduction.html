@@ -1,0 +1,959 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Introduction &#8212; navground_learning 0.2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/jquery.js?v=5d32c60e"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="_static/documentation_options.js?v=858f0523"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'introduction';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="installation.html" />
+    <link rel="prev" title="Welcome to navground_learning’s documentation!" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">navground_learning 0.2 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="tutorials/index.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tutorials/basics/index.html">Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/basics/Gymnasium.html">Gymnasium</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/basics/PettingZoo.html">PettingZoo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/basics/TorchRL.html">TorchRL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/basics/Behavior.html">Using a ML policy in Navground</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tutorials/empty/index.html">Empty environment</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/empty/Direction.html">Learn to follow a direction.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/empty/Pose.html">Learn to reach a pose</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tutorials/corridor_with_obstacle/index.html">Corridor with obstacle</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/corridor_with_obstacle/Scenario.html">Scenario</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/corridor_with_obstacle/Learning.html">Learning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tutorials/crossing/index.html">Crossing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/crossing/Training-SA.html">Training one agent among many agents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/crossing/Analysis-SA.html">Performance of policies trained in single-agent environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/crossing/Training-MA.html">Training agents among peers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/crossing/Analysis-MA.html">Performance of policies trained in multi-agent environment</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tutorials/periodic_crossing/index.html">Periodic Crossing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/periodic_crossing/SameSpeed.html">Uniform speeds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/periodic_crossing/DifferentSpeed.html">Different speeds</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tutorials/pad/index.html">Exclusive crossing on a pad</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/pad/Scenario.html">Scenario</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/pad/Behaviors.html">Model-based behaviors</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="tutorials/pad/SingleAgent/index.html">Single ML agent meets Dummy agent</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="tutorials/pad/SingleAgent/Dummy-Continuos.html">Continous actions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tutorials/pad/SingleAgent/Dummy-Discrete.html">Discrete actions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/pad/Centralized/Centralized.html">Centralized policy trained with SAC</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="tutorials/pad/Distributed/index.html">Distributed policy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="tutorials/pad/Distributed/parallel_sac.html">Parallel SAC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tutorials/pad/Distributed/Distributed-Discrete-PPO.html">Parallel PPO with discrete actions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tutorials/pad/Distributed/Distributed-BenchMARL.html">BenchMARL</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="tutorials/pad/Communication/index.html">Distributed policy with communication</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="tutorials/pad/Communication/parallel_sac.html">Parallel SAC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tutorials/pad/Communication/Comm-PPO-Discrete.html">Parallel PPO with discrete actions and MLP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tutorials/pad/Communication/Comm-SAC-CentralizedTraining.html">Distributed policy with comm, trained centrally</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tutorials/pad/Communication/benchmarl.html">BenchMARL</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="guides/index.html">Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="guides/extend.html">How to extend</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="reference/index.html">Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/types.html">Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/indices.html">Indices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/register.html">Register</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/config.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/rewards.html">Rewards functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/env.html">Single-agent Gymnasium Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/parallel_env.html">Multi-agent Pettingzoo Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/wrappers.html">Wrappers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/policies.html">Policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/il.html">Imitation Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/evaluation.html">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/io.html">Saving and Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/onnx.html">Onnx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/navground.html">Navground Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/utils.html">Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/examples.html">Examples</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#navground-gymnasium-integration">Navground-Gymnasium integration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gymnasium">Gymnasium</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pettingzoo">PettingZoo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#torchrl">TorchRL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#navground">Navground</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#navground-gymnasium-environment">Navground Gymnasium Environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pettingzoo-navground-environment">PettingZoo Navground Environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#torchrl-navground-environment">TorchRL Navground Environment</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-ml-policies-in-navground">Train ML policies in navground</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imitation-learning">Imitation Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reinforcement-learning">Reinforcement Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-multi-agent-learning">Parallel Multi-agent Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-agent-reinforcement-learning-with-benchmarl">Multi-agent Reinforcement Learning with BenchMARL</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-ml-policies-in-navground">Use ML policies in navground</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgement-and-disclaimer">Acknowledgement and disclaimer</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h1>
+<p>This packages contains tools to train and use Machine Learning models inside a navground simulation.</p>
+<section id="navground-gymnasium-integration">
+<h2>Navground-Gymnasium integration<a class="headerlink" href="#navground-gymnasium-integration" title="Link to this heading">#</a></h2>
+<section id="gymnasium">
+<h3>Gymnasium<a class="headerlink" href="#gymnasium" title="Link to this heading">#</a></h3>
+<p><a class="reference external" href="https://gymnasium.farama.org">Gymnasium</a> by the Farama Foundation, which replaces the discontinued <a class="reference external" href="https://www.gymlibrary.dev/index.html">Gym</a> by OpenAI, is a Python package with a standardized API for reinforcement learning. The image and the example below are taken from <a class="reference external" href="https://gymnasium.farama.org/content/basic_usage">Gymnasium’s docs</a>.</p>
+<p>At its core, Gymnasium implements the typical Markov Decision Process cycle of “observe → think → act → get reward”:</p>
+<figure class="align-default" id="id5">
+<a class="reference internal image-reference" href="https://gymnasium.farama.org/_images/AE_loop.png"><img alt="https://gymnasium.farama.org/_images/AE_loop.png" src="https://gymnasium.farama.org/_images/AE_loop.png" style="width: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The MDP cycle standardized by Gymnasium environments</span><a class="headerlink" href="#id5" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple">
+<li><p>the process is initialized</p></li>
+<li><p>and updated iteratively:</p>
+<ul class="simple">
+<li><p>the agent applies an action</p></li>
+<li><p>and gets observation and reward</p></li>
+</ul>
+</li>
+<li><p>until the process ends</p></li>
+</ol>
+<p>which, using the API, is typically implemented like</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">gymnasium</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gym</span>
+
+<span class="n">environment</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s2">&quot;MyEnviroment&quot;</span><span class="p">)</span>
+<span class="n">observation</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">environment</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">action</span> <span class="o">=</span> <span class="n">my_policy</span><span class="p">(</span><span class="n">observation</span><span class="p">)</span>
+    <span class="n">observation</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">environment</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">terminated</span> <span class="ow">or</span> <span class="n">truncated</span><span class="p">:</span>
+        <span class="n">observation</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+<span class="n">env</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Environments include everything needed to run specific simulations. There are several available, ranging from Atari-like games to 3D robotics simulations.</p>
+</section>
+<section id="pettingzoo">
+<h3>PettingZoo<a class="headerlink" href="#pettingzoo" title="Link to this heading">#</a></h3>
+<p><a class="reference external" href="https://pettingzoo.farama.org">PettingZoo</a> also by the Farama Foundation, extends Gymnasium to multi-agent system. It support two API:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://pettingzoo.farama.org/api/aec">AEC</a>, in which agents act one at the time, like in turn-based games;</p></li>
+<li><p><a class="reference external" href="https://pettingzoo.farama.org/api/parallel">Parallel</a>, in which agents at the same time and is more suitable to interact with navground.</p></li>
+</ul>
+<p>The Parallel API is similar to Gymnasium, with the difference that actions, rewards, observations, …, are indexed by an agent identifier:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pettingzoo</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pz</span>
+
+<span class="n">environment</span> <span class="o">=</span> <span class="n">MyMultiAgentEnviroment</span><span class="p">()</span>
+<span class="n">observations</span><span class="p">,</span> <span class="n">infos</span> <span class="o">=</span> <span class="n">environment</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">actions</span> <span class="o">=</span> <span class="p">{</span><span class="n">index</span><span class="p">:</span> <span class="n">my_policy</span><span class="p">(</span><span class="n">observation</span><span class="p">)</span>
+               <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">observation</span> <span class="ow">in</span> <span class="n">observations</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+    <span class="n">observations</span><span class="p">,</span> <span class="n">rewards</span><span class="p">,</span> <span class="n">terminations</span><span class="p">,</span> <span class="n">truncations</span><span class="p">,</span> <span class="n">infos</span> <span class="o">=</span> <span class="n">environment</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
+
+    <span class="c1"># Instead of looking at terminations and truncations</span>
+    <span class="c1"># we can directly check that there are still some agents alive</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">env</span><span class="o">.</span><span class="n">agents</span><span class="p">:</span>
+         <span class="k">break</span>
+
+<span class="n">env</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We can convert between environments with AEC and Parallel API using
+<a class="reference external" href="https://pettingzoo.farama.org/api/wrappers/pz_wrappers/#conversion-wrappers">convertion wrappers</a>.</p>
+<p>Moreover, we can convert PettingZoo environments in which all agents share the same action and observation spaces to
+a vectorized Gymnasium environment that concatenate all the actions, observations and other infos using  <a class="reference external" href="https://github.com/Farama-Foundation/SuperSuit/blob/master/supersuit/vector/vector_constructors.py">SuperSuit wrappers</a>. This way, we can use ML libraries that works with Gymanasium to train distributed multi-agent systems.</p>
+</div>
+</section>
+<section id="torchrl">
+<h3>TorchRL<a class="headerlink" href="#torchrl" title="Link to this heading">#</a></h3>
+<p><a class="reference external" href="https://docs.pytorch.org/rl/stable/index.html">TorchRL</a> is an open-source Reinforcement Learning (RL) library for PyTorch.</p>
+<p>TorchRL environments are based on the same Markov Decision Process cycle but with a different API: <code class="docutils literal notranslate"><span class="pre">environment.step</span></code> input and output are both dictionaries from <a class="reference external" href="https://docs.pytorch.org/tensordict/stable/index.html">tensordict</a> that holds actions, observations, rewards, … in separate keys.</p>
+<p>TorchRL environment can be constructed from Gymnasium and PettingZoo environments (among others).
+The following is a cycle in TorchRL similar to the previous ones.
+Note that TorchRL policies also operates on dictionaries for tensors (input and output).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">torchrl.envs</span><span class="w"> </span><span class="kn">import</span> <span class="n">GymEnv</span>
+
+<span class="n">environment</span> <span class="o">=</span> <span class="n">GymEnv</span><span class="p">(</span><span class="s2">&quot;MyEnviroment&quot;</span><span class="p">)</span>
+<span class="n">environment</span><span class="o">.</span><span class="n">set_seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">td</span> <span class="o">=</span> <span class="n">environment</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">td</span> <span class="o">=</span> <span class="n">my_torchrl_policy</span><span class="p">(</span><span class="n">td</span><span class="p">)</span>
+    <span class="n">td</span> <span class="o">=</span> <span class="n">environment</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">td</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">td</span><span class="p">[</span><span class="s1">&#39;next&#39;</span><span class="p">,</span> <span class="s1">&#39;terminated&#39;</span><span class="p">]</span> <span class="ow">or</span> <span class="n">td</span><span class="p">[</span><span class="s1">&#39;next&#39;</span><span class="p">,</span> <span class="s1">&#39;truncated&#39;</span><span class="p">]:</span>
+        <span class="n">td</span> <span class="o">=</span> <span class="n">environment</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+<span class="n">environment</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>One important difference between PettingZoo and TorchRL environments is that agents can be grouped together. For examples, in an environment with 2 green agents and 2 blue agents (where same-colored agents would share the same type of actions and observations), the dictionary <code class="docutils literal notranslate"><span class="pre">td</span></code> in the example above would have keys like <code class="docutils literal notranslate"><span class="pre">(&quot;green&quot;,</span> <span class="pre">&quot;next&quot;,</span> <span class="pre">&quot;observation&quot;)</span></code> and <code class="docutils literal notranslate"><span class="pre">(&quot;blue&quot;,</span> <span class="pre">&quot;next&quot;,</span> <span class="pre">&quot;observation&quot;)</span></code> that hold tensors with the observation form <em>both</em> agents of the same color.</p>
+</section>
+<section id="navground">
+<h3>Navground<a class="headerlink" href="#navground" title="Link to this heading">#</a></h3>
+<p><a class="reference external" href="https://idsia-robotics.github.io/navground/_build/html/index.html">Navground</a> simulations have a similar cycle where</p>
+<ol class="arabic simple">
+<li><p>a world is initialized from a <em>scenario</em></p></li>
+<li><p>and updated iteratively:</p>
+<ul class="simple">
+<li><p>agents update the environment <em>state estimation</em> (i.e., using a sensor)</p></li>
+<li><p>agents compute and actuate a control commands from a <em>navigation behavior</em></p></li>
+<li><p>the physics is updated resolving collisions</p></li>
+</ul>
+</li>
+<li><p>until the simulation ends</p></li>
+</ol>
+<p>The API is slightly simpler</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">navground</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sim</span>
+
+<span class="n">scenario</span> <span class="o">=</span> <span class="n">MyScenario</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">world</span> <span class="o">=</span> <span class="n">scenario</span><span class="o">.</span><span class="n">make_world</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">world</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">time_step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>as <a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/world.html#navground.sim.World.update" title="(in navground)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">navground.sim.World.update()</span></code></a> groups together the steps of policy (in navground <em>behavior</em>) evaluation and actuation.</p>
+<p>Navground simulations may features many diverse agents types, using different kinematics, tasks, state estimation, and navigation behaviors.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Navground is extensible. You can implement new behaviors, tasks, scenarios and in particular new sensor models, in C++ or in Python.
+Therefore, we can build a custom navigation environment for machine learning, where agents use a particular sensing models, by sub-classing <a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/state_estimations/sensor.html#navground.sim.Sensor" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground.sim.Sensor</span></code></a>.</p>
+</div>
+</section>
+<section id="navground-gymnasium-environment">
+<h3>Navground Gymnasium Environment<a class="headerlink" href="#navground-gymnasium-environment" title="Link to this heading">#</a></h3>
+<p><a class="reference internal" href="reference/env.html#navground.learning.env.NavgroundEnv" title="navground.learning.env.NavgroundEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">env.NavgroundEnv</span></code></a> wraps a <a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/scenarios/scenario.html#navground.sim.Scenario" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground.sim.Scenario</span></code></a> in an <a class="reference external" href="https://gymnasium.farama.org/api/env/#gymnasium.Env" title="(in Gymnasium)"><code class="xref py py-class docutils literal notranslate"><span class="pre">gymnasium.Env</span></code></a> that conforms to the standard API expected by gymnasium, with actions and observations linked to a <em>single</em> navground agent. In particular (with some simplifications):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">NavgroundEnv</span><span class="p">(</span><span class="n">scenario</span><span class="p">:</span> <span class="n">sim</span><span class="o">.</span><span class="n">Scenario</span><span class="p">,</span>
+             <span class="n">action_config</span><span class="p">:</span> <span class="n">ActionConfig</span><span class="p">,</span>
+             <span class="n">observation_config</span><span class="p">:</span> <span class="n">ObservationConfig</span><span class="p">,</span>
+             <span class="n">sensor</span><span class="p">:</span> <span class="n">sim</span><span class="o">.</span><span class="n">Sensor</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>instantiates a gymnasium environment whose worlds will be spawned using a navground scenario. If specified, the agent will use a sensor to generate observations, instead of its predefined state estimation. The action and observation spaces of the agent can be customized, for instance whether to include the distance to the target, or to control the agent orientation.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">NavgroundEnv</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Initializes a navground world from the navground scenario using a random seed and selects one of navground agents.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">NavgroundEnv</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">typing</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Passes the action to the selected navground agent, updates the navground world and return the selected navground agent’s observations and reward.</p>
+<p>By specifying</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="reference/config.html#navground.learning.config.ObservationConfig" title="navground.learning.config.ObservationConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">ObservationConfig</span></code></a>, we control how to
+convert a <a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/core/python/state/sensing.html#navground.core.SensingState" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground.core.SensingState</span></code></a> to gymnasium observations. As of now, as single concrete class is implemented:</p>
+<ul>
+<li><p><a class="reference internal" href="reference/config.html#navground.learning.config.DefaultObservationConfig" title="navground.learning.config.DefaultObservationConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">DefaultObservationConfig</span></code></a> that configures which parts of the ego-state and target information to include in the observations.</p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="reference/config.html#navground.learning.config.ActionConfig" title="navground.learning.config.ActionConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActionConfig</span></code></a>, we control how to
+convert gymnasium actions to <a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/core/python/common.html#navground.core.Twist2" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground.core.Twist2</span></code></a> to be actuated by a  <a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/core/python/behaviors/behavior.html#navground.core.Behavior" title="(in navground)"><code class="xref py py-class docutils literal notranslate"><span class="pre">navground.core.Behavior</span></code></a>, with different subclasses:</p>
+<ul>
+<li><p><a class="reference internal" href="reference/config.html#navground.learning.config.ControlActionConfig" title="navground.learning.config.ControlActionConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">ControlActionConfig</span></code></a> where the policy outputs a control command</p></li>
+<li><p><a class="reference internal" href="reference/config.html#navground.learning.config.ModulationActionConfig" title="navground.learning.config.ModulationActionConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModulationActionConfig</span></code></a> where the policy outputs parameters of an underlying deterministic navigation behavior.</p></li>
+</ul>
+</li>
+</ul>
+<p>For example, to create a single a single-agent environment:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">gymnasium</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gym</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">navground</span><span class="w"> </span><span class="kn">import</span> <span class="n">sim</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">navground.learning</span><span class="w"> </span><span class="kn">import</span> <span class="n">DefaultObservationConfig</span><span class="p">,</span> <span class="n">ControlActionConfig</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">navground.learning.rewards</span><span class="w"> </span><span class="kn">import</span> <span class="n">SocialReward</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s1">&#39;navground.learning.env:navground&#39;</span><span class="p">,</span>
+               <span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span>
+               <span class="n">sensor</span><span class="o">=</span><span class="n">sensor</span><span class="p">,</span>
+               <span class="n">action</span><span class="o">=</span><span class="n">ControlActionConfig</span><span class="p">(),</span>
+               <span class="n">observation</span><span class="o">=</span><span class="n">DefaultObservationConfig</span><span class="p">(),</span>
+               <span class="n">reward</span><span class="o">=</span><span class="n">SocialReward</span><span class="p">(),</span>
+               <span class="n">time_step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+               <span class="n">max_episode_steps</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="pettingzoo-navground-environment">
+<h3>PettingZoo Navground Environment<a class="headerlink" href="#pettingzoo-navground-environment" title="Link to this heading">#</a></h3>
+<p>Similarly, <a class="reference internal" href="reference/parallel_env.html#navground.learning.parallel_env.MultiAgentNavgroundEnv" title="navground.learning.parallel_env.MultiAgentNavgroundEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">parallel_env.MultiAgentNavgroundEnv</span></code></a> provides a environment for which actions and observations are linked to a <em>multiple</em> navground agents.</p>
+<p><a class="reference internal" href="reference/parallel_env.html#navground.learning.parallel_env.parallel_env" title="navground.learning.parallel_env.parallel_env"><code class="xref py py-func docutils literal notranslate"><span class="pre">parallel_env.parallel_env()</span></code></a> instantiate an environment where different agents may use different configurations (such as action spaces, rewards, …), while
+<a class="reference internal" href="reference/parallel_env.html#navground.learning.parallel_env.shared_parallel_env" title="navground.learning.parallel_env.shared_parallel_env"><code class="xref py py-func docutils literal notranslate"><span class="pre">parallel_env.shared_parallel_env()</span></code></a> instantiate an environment where all specified agents share the same configuration.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">gymnasium</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gym</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">navground</span><span class="w"> </span><span class="kn">import</span> <span class="n">sim</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">navground.learning.parallel_env</span><span class="w"> </span><span class="kn">import</span> <span class="n">shared_parallel_env</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">navground.learning</span><span class="w"> </span><span class="kn">import</span> <span class="n">DefaultObservationConfig</span><span class="p">,</span> <span class="n">ControlActionConfig</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">navground.learning.rewards</span><span class="w"> </span><span class="kn">import</span> <span class="n">SocialReward</span>
+
+<span class="n">penv</span> <span class="o">=</span> <span class="n">shared_parallel_env</span><span class="p">(</span><span class="n">scenario</span><span class="o">=</span><span class="n">scenario</span><span class="p">,</span>
+                           <span class="n">sensor</span><span class="o">=</span><span class="n">sensor</span><span class="p">,</span>
+                           <span class="n">action</span><span class="o">=</span><span class="n">ControlActionConfig</span><span class="p">(),</span>
+                           <span class="n">observation</span><span class="o">=</span><span class="n">DefaultObservationConfig</span><span class="p">(),</span>
+                           <span class="n">reward</span><span class="o">=</span><span class="n">SocialReward</span><span class="p">(),</span>
+                           <span class="n">time_step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+                           <span class="n">max_episode_steps</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The rest of the functionality is very similar to the Gymnasium Environment (and in fact, they share the same base class), but conform to the PettingZoo API instead.</p>
+<p>For example, to create a single a multi-agent environment, where all agents share the same configuration:</p>
+</section>
+<section id="torchrl-navground-environment">
+<h3>TorchRL Navground Environment<a class="headerlink" href="#torchrl-navground-environment" title="Link to this heading">#</a></h3>
+<p>Navground and TorchRL both support PettingZoo environments, therefore it is is straightforward to create TorchRL environments with navground components:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">torchrl.envs.libs.pettingzoo</span><span class="w"> </span><span class="kn">import</span> <span class="n">PettingZooWrapper</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">navground.learning.parallel_env</span><span class="w"> </span><span class="kn">import</span> <span class="n">shared_parallel_env</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">navground.learning.wrappers.name_wrapper</span><span class="w"> </span><span class="kn">import</span> <span class="n">NameWrapper</span>
+
+<span class="n">penv</span> <span class="o">=</span> <span class="n">shared_parallel_env</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">PettingZooWrapper</span><span class="p">(</span><span class="n">NameWrapper</span><span class="p">(</span><span class="n">penv</span><span class="p">),</span>
+                        <span class="n">categorical_actions</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                        <span class="n">device</span><span class="o">=</span><span class="s1">&#39;cpu&#39;</span><span class="p">,</span>
+                        <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                        <span class="n">return_state</span><span class="o">=</span><span class="n">penv</span><span class="o">.</span><span class="n">has_state</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="reference/wrappers.html#navground.learning.wrappers.NameWrapper" title="navground.learning.wrappers.name_wrapper.NameWrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">wrappers.name_wrapper.NameWrapper</span></code></a> converts from an environment where agents are indexed by integers to one where they are indexed by strings, which TorchRL requires.</p>
+<p>Function <a class="reference internal" href="reference/utils.html#navground.learning.utils.benchmarl.make_env" title="navground.learning.utils.benchmarl.make_env"><code class="xref py py-func docutils literal notranslate"><span class="pre">utils.benchmarl.make_env()</span></code></a> provides the same functionality.</p>
+</section>
+</section>
+<section id="train-ml-policies-in-navground">
+<h2>Train ML policies in navground<a class="headerlink" href="#train-ml-policies-in-navground" title="Link to this heading">#</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Have a look at the <a class="reference internal" href="tutorials/index.html"><span class="doc">tutorials</span></a> to see the interaction between gymnasium and navground in action and how to use it to train a navigation policy using IL or RL.</p>
+</div>
+<section id="imitation-learning">
+<h3>Imitation Learning<a class="headerlink" href="#imitation-learning" title="Link to this heading">#</a></h3>
+<p>Using the navground environments, we can train a policy that imitates
+one of the navigation behaviors implemented in navground, using any of the available sensors.</p>
+<p>We include helper classes that wraps the Python package <a class="reference external" href="https://imitation.readthedocs.io/en/latest/">imitation</a> by the Center for Human-Compatible AI
+to offer simplified interface, yet nothing prevent to use the original API.</p>
+<p>To learn to imitate a behavior, we can run</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">gymnasium</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gym</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">navground.learning.env</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">navground.learning.il</span><span class="w"> </span><span class="kn">import</span> <span class="n">BC</span><span class="p">,</span> <span class="n">DAgger</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s2">&quot;navground&quot;</span><span class="p">,</span> <span class="n">scenario</span><span class="o">=...</span><span class="p">,</span> <span class="n">sensor</span><span class="o">=...</span><span class="p">,</span>
+               <span class="n">observation_config</span><span class="o">=...</span><span class="p">,</span> <span class="n">action_config</span><span class="o">=...</span><span class="p">,</span>
+               <span class="n">max_episode_steps</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Behavior cloning</span>
+<span class="n">bc</span> <span class="o">=</span> <span class="n">BC</span><span class="p">(</span><span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">,</span> <span class="n">runs</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">bc</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="n">n_epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">bc</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;BC&quot;</span><span class="p">)</span>
+
+<span class="c1"># DAgger</span>
+<span class="n">dagger</span> <span class="o">=</span> <span class="n">DAgger</span><span class="p">(</span><span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">)</span>
+<span class="n">dagger</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="n">total_timesteps</span><span class="o">=</span><span class="mi">10_000</span><span class="p">,</span>
+             <span class="n">rollout_round_min_timesteps</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">dagger</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;DAgger&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="reinforcement-learning">
+<h3>Reinforcement Learning<a class="headerlink" href="#reinforcement-learning" title="Link to this heading">#</a></h3>
+<p>Using the navground-gymnasium environment, we can train a policy to navigate among other agents controlled by navground, for instance using the RL algorithm implemented in <a class="reference external" href="https://stable-baselines3.readthedocs.io/">Stable-Baselines3</a> by
+DLR-RM.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">gymnasium</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gym</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">navground.learning.env</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">stable_baselines3</span><span class="w"> </span><span class="kn">import</span> <span class="n">SAC</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s2">&quot;navground&quot;</span><span class="p">,</span> <span class="n">scenario</span><span class="o">=...</span><span class="p">,</span> <span class="n">sensor</span><span class="o">=...</span><span class="p">,</span>
+               <span class="n">observation_config</span><span class="o">=...</span><span class="p">,</span> <span class="n">action_config</span><span class="o">=...</span><span class="p">,</span>
+               <span class="n">max_episode_steps</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">sac</span> <span class="o">=</span> <span class="n">SAC</span><span class="p">(</span><span class="s2">&quot;MlpPolicy&quot;</span><span class="p">,</span> <span class="n">env</span><span class="p">)</span>
+<span class="n">sac</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="n">total_timesteps</span><span class="o">=</span><span class="mi">10_000</span><span class="p">)</span>
+<span class="n">sac</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;SAC&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="parallel-multi-agent-learning">
+<h3>Parallel Multi-agent Learning<a class="headerlink" href="#parallel-multi-agent-learning" title="Link to this heading">#</a></h3>
+<p>Using the multi-agent navground-gymnasium environment, we can train a policy in parallel for all agents in the environment, that is, the agents
+learn to navigate among peers that are learning the <em>same</em> policy.
+We instantiate the parallel environment using <a class="reference internal" href="reference/parallel_env.html#navground.learning.parallel_env.shared_parallel_env" title="navground.learning.parallel_env.shared_parallel_env"><code class="xref py py-func docutils literal notranslate"><span class="pre">parallel_env.shared_parallel_env()</span></code></a>, and transform it to a Stable-Baseline compatible (sigle-agent) vectorized environment using <a class="reference internal" href="reference/parallel_env.html#navground.learning.parallel_env.make_vec_from_penv" title="navground.learning.parallel_env.make_vec_from_penv"><code class="xref py py-func docutils literal notranslate"><span class="pre">parallel_env.make_vec_from_penv()</span></code></a>. While learning, from the view-point of the <code class="docutils literal notranslate"><span class="pre">SAC</span></code> algorithm, rollouts will generate by a single agent in <code class="docutils literal notranslate"><span class="pre">n</span></code> environments that compose <code class="docutils literal notranslate"><span class="pre">venv</span></code>, while in reality they will be generate in a single <code class="docutils literal notranslate"><span class="pre">penv</span></code> by <code class="docutils literal notranslate"><span class="pre">n</span></code> agents.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">gymnasium</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gym</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">navground.learning.parallel_env</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_vec_from_penv</span><span class="p">,</span> <span class="n">shared_parallel_env</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">stable_baselines3</span><span class="w"> </span><span class="kn">import</span> <span class="n">SAC</span>
+
+<span class="n">penv</span> <span class="o">=</span> <span class="n">shared_parallel_env</span><span class="p">(</span><span class="n">scenario</span><span class="o">=...</span><span class="p">,</span> <span class="n">sensor</span><span class="o">=...</span><span class="p">,</span>
+                           <span class="n">observation_config</span><span class="o">=...</span><span class="p">,</span> <span class="n">action_config</span><span class="o">=...</span><span class="p">,</span>
+                           <span class="n">max_episode_steps</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">venv</span> <span class="o">=</span> <span class="n">make_vec_from_penv</span><span class="p">(</span><span class="n">penv</span><span class="p">)</span>
+<span class="n">psac</span> <span class="o">=</span> <span class="n">SAC</span><span class="p">(</span><span class="s2">&quot;MlpPolicy&quot;</span><span class="p">,</span> <span class="n">venv</span><span class="p">)</span>
+<span class="n">psac_ma</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="n">total_timesteps</span><span class="o">=</span><span class="mi">10_000</span><span class="p">)</span>
+<span class="n">psac</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;PSAC&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="multi-agent-reinforcement-learning-with-benchmarl">
+<h3>Multi-agent Reinforcement Learning with BenchMARL<a class="headerlink" href="#multi-agent-reinforcement-learning-with-benchmarl" title="Link to this heading">#</a></h3>
+<p><a class="reference external" href="https://github.com/facebookresearch/BenchMARL">BenchMARL</a> provides implementation of Multi-agent Reinforcement Learning algorithms that extend behind the parallel Multi-agent Reinforcement Learning family just described. They can tackle problems that features heterogeneous agents, which therefore do not share the same policy and cannot be “stacked” together. Moreover, MARL-specific  algorithm are designed to reduce instabilities that arise in multi-agent training, where agents learn policies among other agents that keep evolving their behavior.</p>
+<p>We provide utilities that simplify training navigation policies with BenchMARL, like for example, using the multi-agent version of SAC:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">navground.learning.parallel_env</span><span class="w"> </span><span class="kn">import</span> <span class="n">shared_parallel_env</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">benchmarl.algorithms</span><span class="w"> </span><span class="kn">import</span> <span class="n">MasacConfig</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">benchmarl.models.mlp</span><span class="w"> </span><span class="kn">import</span> <span class="n">MlpConfig</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">benchmarl.experiment</span><span class="w"> </span><span class="kn">import</span> <span class="n">ExperimentConfig</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">navground.learning.utils.benchmarl</span><span class="w"> </span><span class="kn">import</span> <span class="n">NavgroundExperiment</span>
+
+<span class="n">penv</span> <span class="o">=</span> <span class="n">shared_parallel_env</span><span class="p">(</span><span class="n">scenario</span><span class="o">=...</span><span class="p">,</span> <span class="n">sensor</span><span class="o">=...</span><span class="p">,</span>
+                           <span class="n">observation_config</span><span class="o">=...</span><span class="p">,</span> <span class="n">action_config</span><span class="o">=...</span><span class="p">,</span>
+                           <span class="n">max_episode_steps</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">masac_exp</span> <span class="o">=</span> <span class="n">NavgroundExperiment</span><span class="p">(</span>
+    <span class="n">env</span><span class="o">=</span><span class="n">penv</span><span class="p">,</span>
+    <span class="n">config</span><span class="o">=</span><span class="n">ExperimentConfig</span><span class="o">.</span><span class="n">get_from_yaml</span><span class="p">(),</span>
+    <span class="n">model_config</span><span class="o">=</span><span class="n">MlpConfig</span><span class="o">.</span><span class="n">get_from_yaml</span><span class="p">(),</span>
+    <span class="n">algorithm_config</span><span class="o">=</span><span class="n">MasacConfig</span><span class="o">.</span><span class="n">get_from_yaml</span><span class="p">(),</span>
+    <span class="n">seed</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+<span class="n">masac_exp</span><span class="o">.</span><span class="n">run_for</span><span class="p">(</span><span class="n">iterations</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="evaluation">
+<h2>Evaluation<a class="headerlink" href="#evaluation" title="Link to this heading">#</a></h2>
+<p>Once trained, we can evaluate the policies with common tools, such as
+<a class="reference external" href="https://stable-baselines3.readthedocs.io/en/master/common/evaluation.html#stable_baselines3.common.evaluation.evaluate_policy" title="(in Stable Baselines3 vmaster (2.6.1a1 ))"><code class="xref py py-func docutils literal notranslate"><span class="pre">stable_baselines3.common.evaluation.evaluate_policy()</span></code></a> and its extensions in <a class="reference internal" href="reference/evaluation.html#module-navground.learning.evaluation" title="navground.learning.evaluation"><code class="xref py py-mod docutils literal notranslate"><span class="pre">evaluation</span></code></a> that supports parallel environments with groups using different policies.</p>
+<section id="use-ml-policies-in-navground">
+<h3>Use ML policies in navground<a class="headerlink" href="#use-ml-policies-in-navground" title="Link to this heading">#</a></h3>
+<p>Evaluation can also be performed using the tools available in navground,
+which are specifically designed to support large experiments with many runs and agents, distributing the work over multiple processor if desired.</p>
+<p>Once we have trained a policy (and possibly exported it to onnx using <a class="reference internal" href="reference/onnx.html#navground.learning.onnx.export" title="navground.learning.onnx.export"><code class="xref py py-func docutils literal notranslate"><span class="pre">onnx.export()</span></code></a>), <a class="reference internal" href="reference/navground.html#navground.learning.behaviors.PolicyBehavior" title="navground.learning.behaviors.PolicyBehavior"><code class="xref py py-class docutils literal notranslate"><span class="pre">behaviors.PolicyBehavior</span></code></a> executes it as a navigation behavior in navground. As a basic example, we can load it and assign it to some of the agents in the simulation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">navground</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sim</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">gymnasium</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gym</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">navground.learning.behaviors</span><span class="w"> </span><span class="kn">import</span> <span class="n">PolicyBehavior</span>
+
+<span class="c1"># we load the same scenario and sensor used to train the policy</span>
+<span class="n">scenario</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">Scenario</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">sensor</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">Sensor</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">world</span> <span class="o">=</span> <span class="n">scenario</span><span class="o">.</span><span class="n">make_world</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># and configure the first five agents to use the policy</span>
+<span class="c1"># instead of the original behavior</span>
+<span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">world</span><span class="o">.</span><span class="n">agents</span><span class="p">[:</span><span class="mi">5</span><span class="p">]:</span>
+   <span class="n">agent</span><span class="o">.</span><span class="n">behavior</span> <span class="o">=</span> <span class="n">PolicyBehavior</span><span class="o">.</span><span class="n">clone_behavior</span><span class="p">(</span>
+      <span class="n">agent</span><span class="o">.</span><span class="n">behavior</span><span class="p">,</span> <span class="n">policy</span><span class="o">=</span><span class="s1">&#39;policy.onnx&#39;</span><span class="p">,</span>
+      <span class="n">action_config</span><span class="o">=...</span><span class="p">,</span> <span class="n">observation_config</span><span class="o">=...</span><span class="p">)</span>
+   <span class="n">agent</span><span class="o">.</span><span class="n">state_estimation</span> <span class="o">=</span> <span class="n">sensor</span>
+
+<span class="n">world</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">time_step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>After training a policy using BenchMARL, we need extract a compatible policy using
+<a class="reference internal" href="reference/utils.html#navground.learning.utils.benchmarl.NavgroundExperiment.get_single_agent_policy" title="navground.learning.utils.benchmarl.NavgroundExperiment.get_single_agent_policy"><code class="xref py py-meth docutils literal notranslate"><span class="pre">utils.benchmarl.NavgroundExperiment.get_single_agent_policy()</span></code></a>
+that transforms a TorchRL policy to a PyTorch policy.</p>
+</div>
+<p>In practice, we do not need to perform the configuration manually. Instead, we can load it from a YAML file (exported e.g. using <a class="reference internal" href="reference/io.html#navground.learning.io.export_policy_as_behavior" title="navground.learning.io.export_policy_as_behavior"><code class="xref py py-func docutils literal notranslate"><span class="pre">io.export_policy_as_behavior()</span></code></a>), like common in navground:</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">scenario.yaml</span><a class="headerlink" href="#id6" title="Link to this code">#</a></div>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">groups</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">    </span><span class="nt">behavior</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PolicyBehavior</span>
+<span class="w">      </span><span class="nt">policy_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">policy.onnx</span>
+<span class="w">      </span><span class="c1"># action and observation config</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="w">    </span><span class="nt">state_estimation</span><span class="p">:</span>
+<span class="w">      </span><span class="c1"># sensor config</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="w">    </span><span class="c1"># remaining of the agents config</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+</pre></div>
+</div>
+</div>
+<p>When loaded, the 5 agents in this group will use the policy to navigate</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">navground</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sim</span>
+
+<span class="c1"># loads the navground.learning components such as PolicyBehavior</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">load_plugins</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;scenario.yaml&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+   <span class="n">scenario</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">Scenario</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+<span class="n">world</span> <span class="o">=</span> <span class="n">scenario</span><span class="o">.</span><span class="n">make_world</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">world</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">time_step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>or we could embed it in an experiment to record trajectories and performance metrics:</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">experiment.yaml</span><a class="headerlink" href="#id7" title="Link to this code">#</a></div>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="nt">runs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w"> </span><span class="nt">time_step</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span>
+<span class="w"> </span><span class="nt">steps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10000</span>
+<span class="w"> </span><span class="nt">record_pose</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w"> </span><span class="nt">record_efficacy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w"> </span><span class="nt">scenario</span><span class="p">:</span>
+<span class="w">     </span><span class="nt">groups</span><span class="p">:</span>
+<span class="w">       </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">         </span><span class="nt">behavior</span><span class="p">:</span>
+<span class="w">           </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PolicyBehavior</span>
+<span class="w">           </span><span class="nt">policy_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">policy.onnx</span>
+<span class="w">         </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="acknowledgement-and-disclaimer">
+<h2>Acknowledgement and disclaimer<a class="headerlink" href="#acknowledgement-and-disclaimer" title="Link to this heading">#</a></h2>
+<p>The work was supported in part by <a class="reference external" href="https://rexasi-pro.spindoxlabs.com">REXASI-PRO</a> H-EU project, call HORIZON-CL4-2021-HUMAN-01-01, Grant agreement no. 101070028.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="https://rexasi-pro.spindoxlabs.com/wp-content/uploads/2023/01/Bianco-Viola-Moderno-Minimalista-Logo-e1675187551324.png"><img alt="REXASI-PRO logo" src="https://rexasi-pro.spindoxlabs.com/wp-content/uploads/2023/01/Bianco-Viola-Moderno-Minimalista-Logo-e1675187551324.png" style="width: 300px;" />
+</a>
+</figure>
+<p>The work has been partially funded by the European Union. Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union or the European Commission. Neither the European Union nor the European Commission can be held responsible for them.</p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Welcome to navground_learning’s documentation!</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="installation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Installation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#navground-gymnasium-integration">Navground-Gymnasium integration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gymnasium">Gymnasium</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pettingzoo">PettingZoo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#torchrl">TorchRL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#navground">Navground</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#navground-gymnasium-environment">Navground Gymnasium Environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pettingzoo-navground-environment">PettingZoo Navground Environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#torchrl-navground-environment">TorchRL Navground Environment</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-ml-policies-in-navground">Train ML policies in navground</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imitation-learning">Imitation Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reinforcement-learning">Reinforcement Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-multi-agent-learning">Parallel Multi-agent Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-agent-reinforcement-learning-with-benchmarl">Multi-agent Reinforcement Learning with BenchMARL</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-ml-policies-in-navground">Use ML policies in navground</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgement-and-disclaimer">Acknowledgement and disclaimer</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jerome Guzzi et al. (IDSIA, USI-SUPSI)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Jerome Guzzi et al. (IDSIA, USI-SUPSI).
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

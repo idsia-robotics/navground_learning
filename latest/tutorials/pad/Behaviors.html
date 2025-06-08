@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Model-based behaviors &#8212; navground_learning 0.2.pre documentation</title>
+    <title>Model-based behaviors &#8212; navground_learning 0.3.pre documentation</title>
   
   
   
@@ -39,7 +39,7 @@
 
     <script src="../../_static/jquery.js?v=5d32c60e"></script>
     <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../../_static/documentation_options.js?v=4dd0fb91"></script>
+    <script src="../../_static/documentation_options.js?v=291f2bd5"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
@@ -139,7 +139,7 @@
   
   
   
-    <p class="title logo__title">navground_learning 0.2.pre documentation</p>
+    <p class="title logo__title">navground_learning 0.3.pre documentation</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -192,7 +192,7 @@
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="index.html">Exclusive crossing on a pad</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="Scenario.html">Scenario</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">Model-based behaviors</a></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="SingleAgent/index.html">Single ML agent meets <cite>Dummy</cite> agent</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="SingleAgent/index.html">Single ML agent meets Dummy agent</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="SingleAgent/Dummy-Continuos.html">Continous actions</a></li>
 <li class="toctree-l4"><a class="reference internal" href="SingleAgent/Dummy-Discrete.html">Discrete actions</a></li>
 </ul>
@@ -222,6 +222,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../reference/index.html">Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/types.html">Types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/indices.html">Indices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/register.html">Register</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/config.html">Configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/rewards.html">Rewards functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/env.html">Single-agent Gymnasium Environment</a></li>
@@ -401,7 +402,7 @@ document.write(`
   <section id="Model-based-behaviors">
 <h1>Model-based behaviors<a class="headerlink" href="#Model-based-behaviors" title="Link to this heading">#</a></h1>
 <p>In this notebook we measure the performance of 4 model-based navigation behaviors:</p>
-<p><code class="docutils literal notranslate"><span class="pre">Dummy</span></code>: which ignores the pad and the other agent.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Dummy</span></code>, which ignores the pad and the other agent.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -524,16 +525,16 @@ document.write(`
 <p>We compute the reward distribution when the agents start from oppositing sides of the map. The reward function is composed by two terms:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">-</span> <span class="pre">efficacy</span></code> (i.e., 0 if moving forwards at full desired speed)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pad_penality</span></code> when two agents are on the pad at the same time.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pad_penalty</span></code> when two agents are on the pad at the same time.</p></li>
 </ul>
-<p>here, we compute the reward for <code class="docutils literal notranslate"><span class="pre">pad_penality=1</span></code>, which we will later use to pick a penality that balance the tendency to stop and cross the pad.</p>
+<p>here, we compute the reward for <code class="docutils literal notranslate"><span class="pre">pad_penalty=1</span></code>, which we will later use to pick a penalty that balance the tendency to stop and cross the pad.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">navground.learning.examples.pad</span><span class="w"> </span><span class="kn">import</span> <span class="n">PadReward</span>
 
-<span class="n">reward</span> <span class="o">=</span> <span class="n">PadReward</span><span class="p">(</span><span class="n">pad_penality</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">reward</span> <span class="o">=</span> <span class="n">PadReward</span><span class="p">(</span><span class="n">pad_penalty</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -965,7 +966,7 @@ Penality: 12.96
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Single ML agent meets <cite>Dummy</cite> agent</p>
+        <p class="prev-next-title">Single ML agent meets Dummy agent</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

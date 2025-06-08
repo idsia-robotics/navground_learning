@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Reference &#8212; navground_learning 0.2.pre documentation</title>
+    <title>Reference &#8212; navground_learning 0.3.pre documentation</title>
   
   
   
@@ -38,12 +38,14 @@
 
     <script src="../_static/jquery.js?v=5d32c60e"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../_static/documentation_options.js?v=4dd0fb91"></script>
+    <script src="../_static/documentation_options.js?v=291f2bd5"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'reference/index';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -136,7 +138,7 @@
   
   
   
-    <p class="title logo__title">navground_learning 0.2.pre documentation</p>
+    <p class="title logo__title">navground_learning 0.3.pre documentation</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -189,7 +191,7 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="../tutorials/pad/index.html">Exclusive crossing on a pad</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../tutorials/pad/Scenario.html">Scenario</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../tutorials/pad/Behaviors.html">Model-based behaviors</a></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../tutorials/pad/SingleAgent/index.html">Single ML agent meets <cite>Dummy</cite> agent</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../tutorials/pad/SingleAgent/index.html">Single ML agent meets Dummy agent</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../tutorials/pad/SingleAgent/Dummy-Continuos.html">Continous actions</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../tutorials/pad/SingleAgent/Dummy-Discrete.html">Discrete actions</a></li>
 </ul>
@@ -219,6 +221,7 @@
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="types.html">Types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="indices.html">Indices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="register.html">Register</a></li>
 <li class="toctree-l2"><a class="reference internal" href="config.html">Configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rewards.html">Rewards functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="env.html">Single-agent Gymnasium Environment</a></li>
@@ -400,6 +403,7 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="types.html#navground.learning.types.Bounds"><code class="docutils literal notranslate"><span class="pre">Bounds</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="types.html#navground.learning.types.SensorLike"><code class="docutils literal notranslate"><span class="pre">SensorLike</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="types.html#navground.learning.types.SensorSequenceLike"><code class="docutils literal notranslate"><span class="pre">SensorSequenceLike</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#navground.learning.types.ObservationTransform"><code class="docutils literal notranslate"><span class="pre">ObservationTransform</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="types.html#navground.learning.types.TerminationCondition"><code class="docutils literal notranslate"><span class="pre">TerminationCondition</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="types.html#navground.learning.indices.IndicesLike"><code class="docutils literal notranslate"><span class="pre">IndicesLike</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="types.html#navground.learning.types.Reward"><code class="docutils literal notranslate"><span class="pre">Reward</span></code></a><ul>
@@ -438,6 +442,16 @@ document.write(`
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="indices.html#navground.learning.indices.join_indices"><code class="docutils literal notranslate"><span class="pre">join_indices()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="register.html">Register</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="register.html#navground.learning.register.Registrable"><code class="docutils literal notranslate"><span class="pre">Registrable</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="register.html#navground.learning.register.Registrable._get_dict"><code class="docutils literal notranslate"><span class="pre">Registrable._get_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="register.html#navground.learning.register.Registrable._make_from_dict"><code class="docutils literal notranslate"><span class="pre">Registrable._make_from_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="register.html#navground.learning.register.Registrable.from_dict"><code class="docutils literal notranslate"><span class="pre">Registrable.from_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="register.html#navground.learning.register.Registrable.asdict"><code class="docutils literal notranslate"><span class="pre">Registrable.asdict</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="config.html">Configuration</a><ul>

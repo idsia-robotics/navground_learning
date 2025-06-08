@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Types &#8212; navground_learning 0.2.pre documentation</title>
+    <title>Types &#8212; navground_learning 0.3.pre documentation</title>
   
   
   
@@ -38,7 +38,7 @@
 
     <script src="../_static/jquery.js?v=5d32c60e"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../_static/documentation_options.js?v=4dd0fb91"></script>
+    <script src="../_static/documentation_options.js?v=291f2bd5"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
@@ -136,7 +136,7 @@
   
   
   
-    <p class="title logo__title">navground_learning 0.2.pre documentation</p>
+    <p class="title logo__title">navground_learning 0.3.pre documentation</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -189,7 +189,7 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="../tutorials/pad/index.html">Exclusive crossing on a pad</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../tutorials/pad/Scenario.html">Scenario</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../tutorials/pad/Behaviors.html">Model-based behaviors</a></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../tutorials/pad/SingleAgent/index.html">Single ML agent meets <cite>Dummy</cite> agent</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../tutorials/pad/SingleAgent/index.html">Single ML agent meets Dummy agent</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../tutorials/pad/SingleAgent/Dummy-Continuos.html">Continous actions</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../tutorials/pad/SingleAgent/Dummy-Discrete.html">Discrete actions</a></li>
 </ul>
@@ -219,6 +219,7 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="indices.html">Indices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="register.html">Register</a></li>
 <li class="toctree-l2"><a class="reference internal" href="config.html">Configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rewards.html">Rewards functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="env.html">Single-agent Gymnasium Environment</a></li>
@@ -392,6 +393,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.types.Bounds"><code class="docutils literal notranslate"><span class="pre">Bounds</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.types.SensorLike"><code class="docutils literal notranslate"><span class="pre">SensorLike</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.types.SensorSequenceLike"><code class="docutils literal notranslate"><span class="pre">SensorSequenceLike</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.types.ObservationTransform"><code class="docutils literal notranslate"><span class="pre">ObservationTransform</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.types.TerminationCondition"><code class="docutils literal notranslate"><span class="pre">TerminationCondition</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.indices.IndicesLike"><code class="docutils literal notranslate"><span class="pre">IndicesLike</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.types.Reward"><code class="docutils literal notranslate"><span class="pre">Reward</span></code></a><ul class="nav section-nav flex-column">
@@ -484,13 +486,19 @@ document.write(`
 
 <dl class="py type">
 <dt class="sig sig-object py" id="navground.learning.types.SensorSequenceLike">
-<em class="property"><span class="pre">type</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SensorSequenceLike</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">SensorLike</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#navground.learning.types.SensorSequenceLike" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">type</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SensorSequenceLike</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#navground.learning.types.SensorLike" title="navground.learning.types.SensorLike"><span class="pre">SensorLike</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#navground.learning.types.SensorSequenceLike" title="Link to this definition">#</a></dt>
 <dd><p>Anything that can be converted to a list of sensor (possibly through YAML).</p>
 </dd></dl>
 
 <dl class="py type">
+<dt class="sig sig-object py" id="navground.learning.types.ObservationTransform">
+<em class="property"><span class="pre">type</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ObservationTransform</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#navground.learning.types.Observation" title="navground.learning.types.Observation"><span class="pre">Observation</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#navground.learning.types.Observation" title="navground.learning.types.Observation"><span class="pre">Observation</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#navground.learning.types.ObservationTransform" title="Link to this definition">#</a></dt>
+<dd><p>Processing of observations</p>
+</dd></dl>
+
+<dl class="py type">
 <dt class="sig sig-object py" id="navground.learning.types.TerminationCondition">
-<em class="property"><span class="pre">type</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TerminationCondition</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">sim.Agent</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">sim.World</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#navground.learning.types.TerminationCondition" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">type</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TerminationCondition</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/agent.html#navground.sim.Agent" title="(in navground)"><span class="pre">sim.Agent</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://idsia-robotics.github.io/navground/latest/reference/sim/python/world.html#navground.sim.World" title="(in navground)"><span class="pre">sim.World</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#navground.learning.types.TerminationCondition" title="Link to this definition">#</a></dt>
 <dd><p>A condition that mark an agent as terminated with success/failure (return value).</p>
 </dd></dl>
 
@@ -503,7 +511,7 @@ document.write(`
 <dl class="py class">
 <dt class="sig sig-object py" id="navground.learning.types.Reward">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Reward</span></span><a class="headerlink" href="#navground.learning.types.Reward" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Registrable</span></code></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a>, <a class="reference internal" href="register.html#navground.learning.register.Registrable" title="navground.learning.register.Registrable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Registrable</span></code></a></p>
 <p>The reward protocol is a callable to compute
 scalar rewards for individual agents.</p>
 <dl class="py method">
@@ -639,12 +647,12 @@ from <a class="reference internal" href="#navground.learning.types.PolicyPredict
 <dd><p>Bases: <a class="reference internal" href="#navground.learning.types.PolicyPredictor" title="navground.learning.types.PolicyPredictor"><code class="xref py py-class docutils literal notranslate"><span class="pre">PolicyPredictor</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Protocol" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Protocol</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="navground.learning.types.PyTorchPolicy.__call__">
-<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">PyTorchObs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deterministic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v2.7)"><span class="pre">torch.Tensor</span></a></span></span><a class="headerlink" href="#navground.learning.types.PyTorchPolicy.__call__" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#navground.learning.types.PyTorchObs" title="navground.learning.types.PyTorchObs"><span class="pre">PyTorchObs</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">deterministic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v2.7)"><span class="pre">torch.Tensor</span></a></span></span><a class="headerlink" href="#navground.learning.types.PyTorchPolicy.__call__" title="Link to this definition">#</a></dt>
 <dd><p>Evaluate the policy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>obs</strong> (<em>PyTorchObs</em>) – The observations</p></li>
+<li><p><strong>obs</strong> (<a class="reference internal" href="#navground.learning.types.PyTorchObs" title="navground.learning.types.PyTorchObs"><em>PyTorchObs</em></a>) – The observations</p></li>
 <li><p><strong>deterministic</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – Whether or not to return deterministic actions.</p></li>
 </ul>
 </dd>
@@ -656,12 +664,12 @@ from <a class="reference internal" href="#navground.learning.types.PolicyPredict
 
 <dl class="py method">
 <dt class="sig sig-object py" id="navground.learning.types.PyTorchPolicy.forward">
-<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">PyTorchObs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deterministic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v2.7)"><span class="pre">torch.Tensor</span></a></span></span><a class="headerlink" href="#navground.learning.types.PyTorchPolicy.forward" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#navground.learning.types.PyTorchObs" title="navground.learning.types.PyTorchObs"><span class="pre">PyTorchObs</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">deterministic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v2.7)"><span class="pre">torch.Tensor</span></a></span></span><a class="headerlink" href="#navground.learning.types.PyTorchPolicy.forward" title="Link to this definition">#</a></dt>
 <dd><p>Evaluate the policy</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>obs</strong> (<em>PyTorchObs</em>) – The observations</p></li>
+<li><p><strong>obs</strong> (<a class="reference internal" href="#navground.learning.types.PyTorchObs" title="navground.learning.types.PyTorchObs"><em>PyTorchObs</em></a>) – The observations</p></li>
 <li><p><strong>deterministic</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – Whether or not to return deterministic actions.</p></li>
 </ul>
 </dd>
@@ -730,6 +738,7 @@ from <a class="reference internal" href="#navground.learning.types.PolicyPredict
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.types.Bounds"><code class="docutils literal notranslate"><span class="pre">Bounds</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.types.SensorLike"><code class="docutils literal notranslate"><span class="pre">SensorLike</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.types.SensorSequenceLike"><code class="docutils literal notranslate"><span class="pre">SensorSequenceLike</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.types.ObservationTransform"><code class="docutils literal notranslate"><span class="pre">ObservationTransform</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.types.TerminationCondition"><code class="docutils literal notranslate"><span class="pre">TerminationCondition</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.indices.IndicesLike"><code class="docutils literal notranslate"><span class="pre">IndicesLike</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#navground.learning.types.Reward"><code class="docutils literal notranslate"><span class="pre">Reward</span></code></a><ul class="nav section-nav flex-column">

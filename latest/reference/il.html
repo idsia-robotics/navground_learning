@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Imitation Learning &#8212; navground_learning 0.2.pre documentation</title>
+    <title>Imitation Learning &#8212; navground_learning 0.3.pre documentation</title>
   
   
   
@@ -38,7 +38,7 @@
 
     <script src="../_static/jquery.js?v=5d32c60e"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../_static/documentation_options.js?v=4dd0fb91"></script>
+    <script src="../_static/documentation_options.js?v=291f2bd5"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
@@ -136,7 +136,7 @@
   
   
   
-    <p class="title logo__title">navground_learning 0.2.pre documentation</p>
+    <p class="title logo__title">navground_learning 0.3.pre documentation</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -189,7 +189,7 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="../tutorials/pad/index.html">Exclusive crossing on a pad</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../tutorials/pad/Scenario.html">Scenario</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../tutorials/pad/Behaviors.html">Model-based behaviors</a></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../tutorials/pad/SingleAgent/index.html">Single ML agent meets <cite>Dummy</cite> agent</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../tutorials/pad/SingleAgent/index.html">Single ML agent meets Dummy agent</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../tutorials/pad/SingleAgent/Dummy-Continuos.html">Continous actions</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../tutorials/pad/SingleAgent/Dummy-Discrete.html">Discrete actions</a></li>
 </ul>
@@ -219,6 +219,7 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="types.html">Types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="indices.html">Indices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="register.html">Register</a></li>
 <li class="toctree-l2"><a class="reference internal" href="config.html">Configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rewards.html">Rewards functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="env.html">Single-agent Gymnasium Environment</a></li>
@@ -491,7 +492,7 @@ to add support for <a class="reference internal" href="#navground.learning.il.Po
 <h2>Utilities<a class="headerlink" href="#utilities" title="Link to this heading">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="navground.learning.il.make_vec_from_env">
-<span class="sig-name descname"><span class="pre">make_vec_from_env</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">env:</span> <span class="pre">gym.Env[Any,</span> <span class="pre">Any],</span> <span class="pre">parallel:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False,</span> <span class="pre">num_envs:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">1,</span> <span class="pre">rng:</span> <span class="pre">np.random.Generator</span> <span class="pre">=</span> <span class="pre">Generator(PCG64)</span> <span class="pre">at</span> <span class="pre">0x164543D80</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://stable-baselines3.readthedocs.io/en/master/guide/vec_envs.html#stable_baselines3.common.vec_env.VecEnv" title="(in Stable Baselines3 vmaster (2.6.1a1 ))"><span class="pre">VecEnv</span></a></span></span><a class="headerlink" href="#navground.learning.il.make_vec_from_env" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">make_vec_from_env</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">env:</span> <span class="pre">gym.Env[Any,</span> <span class="pre">Any],</span> <span class="pre">parallel:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False,</span> <span class="pre">num_envs:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">1,</span> <span class="pre">rng:</span> <span class="pre">np.random.Generator</span> <span class="pre">=</span> <span class="pre">Generator(PCG64)</span> <span class="pre">at</span> <span class="pre">0x15EA012A0</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://stable-baselines3.readthedocs.io/en/master/guide/vec_envs.html#stable_baselines3.common.vec_env.VecEnv" title="(in Stable Baselines3 vmaster (2.6.1a1 ))"><span class="pre">VecEnv</span></a></span></span><a class="headerlink" href="#navground.learning.il.make_vec_from_env" title="Link to this definition">#</a></dt>
 <dd><p>Creates an imitation-compatible vectorized enviroment.
 Just a tiny wrapped on <a class="reference external" href="https://imitation.readthedocs.io/en/latest/_api/imitation.util.util.html#imitation.util.util.make_vec_env" title="(in imitation v1.0.1.dev241103240)"><code class="xref py py-func docutils literal notranslate"><span class="pre">imitation.util.util.make_vec_env()</span></code></a>
 that reads <code class="docutils literal notranslate"><span class="pre">env_id</span></code> and  <code class="docutils literal notranslate"><span class="pre">env_make_kwargs</span></code> from the env.</p>
