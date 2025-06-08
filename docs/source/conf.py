@@ -13,7 +13,7 @@ from sphinx.addnodes import pending_xref
 project = 'navground_learning'
 copyright = '2024, Jerome Guzzi et al. (IDSIA, USI-SUPSI)'
 author = 'Jerome Guzzi et al. (IDSIA, USI-SUPSI)'
-release = '0.2.pre'
+release = '0.2'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
