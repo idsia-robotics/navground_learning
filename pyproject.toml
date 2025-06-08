@@ -61,7 +61,8 @@ all = [
   "tqdm",
   "benchmarl@git+https://github.com/jeguzzi/BenchMARL@main",
   "torchrl",
-  "pandas"
+  "pandas",
+  "matplotlib"
 ]
 [project.urls]
 Homepage = "https://github.com/idsia-robotics/navground_learning"

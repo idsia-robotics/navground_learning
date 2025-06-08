@@ -5,7 +5,6 @@ from typing import Any, cast
 
 import gymnasium as gym
 import numpy as np
-from matplotlib import pyplot as plt
 from navground import sim
 
 from ...config import ControlActionConfig, ObservationConfig, StateConfig
@@ -188,6 +187,8 @@ def plot_policy(policy: Any,
                 cmap: str = 'RdYlGn',
                 title='Distributed policy',
                 speed: float = 0.01):
+    from matplotlib import pyplot as plt
+
     xs = np.linspace(-1, 1, 101, dtype=np.float32)
     ys = np.linspace(-2, 2, 101, dtype=np.float32)
     xv, yv = np.meshgrid(xs, ys)
@@ -228,6 +229,8 @@ def plot_policy_with_comm(policy: Any,
                           title='Distributed policy with comm',
                           speed: float = 0.01,
                           binarize: bool | None = None):
+    from matplotlib import pyplot as plt
+
     xs = np.linspace(-1, 1, 101, dtype=np.float32)
     if isinstance(policy.observation_space, gym.spaces.Dict):
         if binarize is None:

@@ -20,7 +20,6 @@ from benchmarl.experiment import Experiment  # type: ignore[import-not-found]
 from ...config import GroupConfig
 from ...indices import Indices
 from ...parallel_env import MultiAgentNavgroundEnv
-from ..plot import LogField, plot_logs
 from .evaluate import evaluate_policy
 from .navground_task import NavgroundTaskClass
 from .policy import SingleAgentPolicy
@@ -362,6 +361,8 @@ class NavgroundExperiment(Experiment):
         :param      lenght_high:  An optional upper bound to scale the reward
         :param      two_axis:     Whether to use two axis (only if there are two fields)
         """
+        from ..plot import LogField, plot_logs
+
         fields: list[LogField] = []
         if reward:
             fields.append(
