@@ -1,6 +1,14 @@
 name: Build and test
 on:
   workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+      - 'releases/**'
+  push:
+    branches:
+      - main
+      - 'releases/**'
 jobs:
   build:
     name: Build Python 📦
@@ -38,16 +46,13 @@ jobs:
           cache: 'pip'
       - name: Install
         run: |
-          wheels=( dist/*.whl )
-          pip install ${wheels[0]}
+          find dist -name '*.whl' -exec pip install {} \;
           pip install pytest
       - name: Test Gymnasium
         run: pytest test/test_gymnasium.py
       - name: Test PettingZoo
         run: pytest test/test_pettingzoo.py
       - name: Install torchrl
-        run: |
-          wheels=( dist/*.whl )
-          pip install ${wheels[0]}[torchrl]
+        run: find dist -name '*.whl' -exec pip install {}[torchrl] \;
       - name: Test TorchRL
         run: pytest test/test_torchrl.py
