@@ -1,0 +1,89 @@
+groups:
+- action:
+    dof: null
+    dtype: ''
+    fix_orientation: false
+    has_wheels: null
+    max_acceleration: 1.0
+    max_angular_acceleration: 10.0
+    max_angular_speed: .inf
+    max_speed: .inf
+    type: Control
+    use_acceleration_action: true
+    use_wheels: false
+  indices:
+    type: all
+  observation:
+    dof: null
+    dtype: ''
+    flat: true
+    history: 1
+    include_angular_speed: true
+    include_radius: false
+    include_target_angular_speed: false
+    include_target_direction: true
+    include_target_direction_validity: false
+    include_target_distance: true
+    include_target_distance_validity: false
+    include_target_speed: false
+    include_velocity: true
+    max_angular_speed: .inf
+    max_radius: .inf
+    max_speed: .inf
+    max_target_distance: .inf
+    type: Default
+  reward:
+    alpha: 0.0
+    beta: 1.0
+    critical_safety_margin: 0.0
+    default_social_margin: 0.0
+    safety_margin: null
+    social_margins: {}
+    type: Social
+  sensor:
+    include_valid: true
+    max_id: 0
+    max_radius: 0
+    max_speed: 0.119999997
+    name: ''
+    number: 5
+    range: 5
+    type: Discs
+    use_nearest_point: true
+max_duration: 60.0
+realtime_factor: 1.0
+render_kwargs: {}
+render_mode: null
+scenario:
+  add_safety_to_agent_margin: true
+  agent_margin: 0.100000001
+  groups:
+  - behavior:
+      eta: 0.5
+      horizon: 5
+      optimal_speed: 0.119999997
+      safety_margin: 0.0500000007
+      tau: 0.25
+      type: HL
+    color: gray
+    control_period: 0.100000001
+    kinematics:
+      max_speed: 0.119999997
+      type: 2WDiff
+      wheel_axis: 0.0939999968
+    number: 20
+    radius: 0.100000001
+    speed_tolerance: 0.0199999996
+    state_estimation:
+      range: 5
+      type: Bounded
+    type: thymio
+  obstacles: []
+  side: 4
+  target_margin: 0.100000001
+  tolerance: 0.5
+  type: Cross
+stuck_timeout: 1
+terminate_outside_bounds: false
+time_step: 0.1
+type: MultiAgentNavgroundEnv

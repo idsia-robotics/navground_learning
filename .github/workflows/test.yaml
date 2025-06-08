@@ -1,0 +1,53 @@
+name: Build and test
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    name: Build Python 📦
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
+          cache: 'pip'
+      - name: Install deps
+        run: pip install -U pip build setuptools_git_versioning
+      - name: Build
+        run: python -m build
+      - name: Store the distribution packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/
+  test:
+    name: Test Python 📦
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download all the dists
+        uses: actions/download-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
+          cache: 'pip'
+      - name: Install
+        run: |
+          wheels=( dist/*.whl )
+          pip install ${wheels[0]}
+          pip install pytest
+      - name: Test Gymnasium
+        run: pytest test/test_gymnasium.py
+      - name: Test PettingZoo
+        run: pytest test/test_pettingzoo.py
+      - name: Install torchrl
+        run: |
+          wheels=( dist/*.whl )
+          pip install ${wheels[0]}[torchrl]
+      - name: Test TorchRL
+        run: pytest test/test_torchrl.py
