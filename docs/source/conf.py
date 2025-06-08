@@ -87,6 +87,10 @@ html_static_path = ['_static']
 
 reftarget_aliases = {}
 reftarget_aliases['py'] = {
+    'AlgorithmConfig': 'benchmarl.algorithms.common.AlgorithmConfig',
+    'ExperimentConfig': 'benchmarl.experiment.ExperimentConfig',
+    'ModelConfig': 'benchmarl.models.common.ModelConfig',
+    'EnvBase': 'torchrl.envs.EnvBase',
     'gym.Env': 'gymnasium.Env',
     'Axes': 'matplotlib.axes.Axes',
     'Path': 'pathlib.Path',

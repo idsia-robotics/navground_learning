@@ -20,20 +20,20 @@ from ...types import Reward, SensorSequenceLike
 @dc.dataclass
 class PadReward(EfficacyReward, register_name="Pad"):
     """
-    An efficacy reward that also penalizes by ``pad_penality`` when both
+    An efficacy reward that also penalizes by ``pad_penalty`` when both
     agents are inside the pad area.
 
     When ``neighbor_weight > 0``, it includes the efficacy of the neighbor,
     weighted accordingly.
     """
-    pad_penality: float = 10
+    pad_penalty: float = 10
     neighbor_weight: float = 0
 
     def __call__(self, agent: sim.Agent, world: sim.World,
                  time_step: float) -> float:
         r = super().__call__(agent, world, time_step)
         if are_two_agents_on_the_pad(world, 0):
-            r -= self.pad_penality
+            r -= self.pad_penalty
         if self.neighbor_weight:
             r += self.neighbor_weight * sum(
                 EfficacyReward.__call__(self, other, world, time_step)

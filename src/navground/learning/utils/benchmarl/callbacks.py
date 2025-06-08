@@ -13,8 +13,8 @@ if TYPE_CHECKING:
 
 class ExportPolicyCallback(Callback):
     """
-    Export the policy. The best model gets exported as "best_policy.onnx".
-    The others as "policy_<iterations>.onnx".
+    Export the policy. The best model gets exported as ``"best_policy.onnx"``.
+    The others as ``"policy_<iterations>.onnx"``.
 
     :param export_all: Whether to export all (vs just the best) policies.
     """

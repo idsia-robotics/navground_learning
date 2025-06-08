@@ -2,7 +2,7 @@
 Corridor with obstacle
 ======================
 
-In a series of two notebooks, we look at a simple but more interesting scenario than :doc:`../empty/empty`.
+In a series of two notebooks, we look at a simple but more interesting scenario than :doc:`../empty/index`.
 
 In the first notebook, we explore the scenario defined as
 

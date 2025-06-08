@@ -12,11 +12,14 @@ from .evaluate import evaluate_policy
 from .navground_experiment import NavgroundExperiment
 from .policy import SingleAgentPolicy
 from .split_mlp import SplitMlpConfig
+from typing import TYPE_CHECKING
 
+if TYPE_CHECKING:
+    from torchrl.envs import EnvBase  # type: ignore
 
 def make_env(env: MultiAgentNavgroundEnv,
              seed: int = 0,
-             categorical_actions: bool = False) -> PettingZooWrapper:
+             categorical_actions: bool = False) -> EnvBase:
     return PettingZooWrapper(NameWrapper(MultiAgentNavgroundEnv(**env._spec)),
                              categorical_actions=categorical_actions,
                              device='cpu',

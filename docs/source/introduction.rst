@@ -40,7 +40,7 @@ which, using the API, is typically implemented like
    observation, info = environment.reset()
    
    for _ in range(1000):
-       action = evaluate_my_policy(observation)
+       action = my_policy(observation)
        observation, reward, terminated, truncated, info = environment.step(action)
    
        if terminated or truncated:
@@ -69,7 +69,7 @@ The Parallel API is similar to Gymnasium, with the difference that actions, rewa
    observations, infos = environment.reset()
    
    for _ in range(1000):
-       actions = {index: evaluate_my_policy(observation) 
+       actions = {index: my_policy(observation) 
                   for index, observation in observations.items()}
        observations, rewards, terminations, truncations, infos = environment.step(actions)
 
@@ -80,7 +80,6 @@ The Parallel API is similar to Gymnasium, with the difference that actions, rewa
       
    env.close()
 
-
 .. note::
 
    We can convert between environments with AEC and Parallel API using
@@ -89,6 +88,35 @@ The Parallel API is similar to Gymnasium, with the difference that actions, rewa
    Moreover, we can convert PettingZoo environments in which all agents share the same action and observation spaces to 
    a vectorized Gymnasium environment that concatenate all the actions, observations and other infos using  `SuperSuit wrappers <https://github.com/Farama-Foundation/SuperSuit/blob/master/supersuit/vector/vector_constructors.py>`_. This way, we can use ML libraries that works with Gymanasium to train distributed multi-agent systems.
 
+TorchRL
+-------
+
+`TorchRL <https://docs.pytorch.org/rl/stable/index.html>`_ is an open-source Reinforcement Learning (RL) library for PyTorch.
+
+TorchRL environments are based on the same Markov Decision Process cycle but with a different API: ``environment.step`` input and output are both dictionaries from `tensordict <https://docs.pytorch.org/tensordict/stable/index.html>`_ that holds actions, observations, rewards, ... in separate keys.
+
+TorchRL environment can be constructed from Gymnasium and PettingZoo environments (among others).
+The following is a cycle in TorchRL similar to the previous ones.
+Note that TorchRL policies also operates on dictionaries for tensors (input and output).
+
+.. code-block:: python
+   
+   from torchrl.envs import GymEnv
+   
+   environment = GymEnv("MyEnviroment")
+   environment.set_seed(0)
+   td = environment.reset()
+   
+   for _ in range(1000):
+       td = my_torchrl_policy(td)
+       td = environment.step(td)
+   
+       if td['next', 'terminated'] or td['next', 'truncated']:
+           td = environment.reset()
+   
+   environment.close()
+
+One important difference between PettingZoo and TorchRL environments is that agents can be grouped together. For examples, in an environment with 2 green agents and 2 blue agents (where same-colored agents would share the same type of actions and observations), the dictionary ``td`` in the example above would have keys like ``("green", "next", "observation")`` and ``("blue", "next", "observation")`` that hold tensors with the observation form *both* agents of the same color.
 
 Navground
 ---------
@@ -166,6 +194,25 @@ By specifying
   - :py:class:`.ControlActionConfig` where the policy outputs a control command
   - :py:class:`.ModulationActionConfig` where the policy outputs parameters of an underlying deterministic navigation behavior.
 
+For example, to create a single a single-agent environment: 
+
+.. code-block:: python
+
+   import gymnasium as gym
+   from navground import sim
+   from navground.learning import DefaultObservationConfig, ControlActionConfig
+   from navground.learning.rewards import SocialReward
+
+   env = gym.make('navground.learning.env:navground',
+                  scenario=scenario,
+                  sensor=sensor,
+                  action=ControlActionConfig(),
+                  observation=DefaultObservationConfig(),
+                  reward=SocialReward(),
+                  time_step=0.1,
+                  max_episode_steps=600)
+
+
 PettingZoo Navground Environment
 --------------------------------
 
@@ -174,15 +221,56 @@ Similarly, :py:class:`.parallel_env.MultiAgentNavgroundEnv` provides a environme
 :py:func:`.parallel_env.parallel_env` instantiate an environment where different agents may use different configurations (such as action spaces, rewards, ...), while
 :py:func:`.parallel_env.shared_parallel_env` instantiate an environment where all specified agents share the same configuration.
 
+.. code-block:: python
+
+   import gymnasium as gym
+   from navground import sim
+   from navground.learning.parallel_env import shared_parallel_env
+   from navground.learning import DefaultObservationConfig, ControlActionConfig
+   from navground.learning.rewards import SocialReward
+
+   penv = shared_parallel_env(scenario=scenario,
+                              sensor=sensor,
+                              action=ControlActionConfig(),
+                              observation=DefaultObservationConfig(),
+                              reward=SocialReward(),
+                              time_step=0.1,
+                              max_episode_steps=600)
+   
+
 The rest of the functionality is very similar to the Gymnasium Environment (and in fact, they share the same base class), but conform to the PettingZoo API instead.
 
+For example, to create a single a multi-agent environment, where all agents share the same configuration:
+
+
+TorchRL Navground Environment
+-----------------------------
+
+Navground and TorchRL both support PettingZoo environments, therefore it is is straightforward to create TorchRL environments with navground components:
+
+.. code-block:: python
+
+   from torchrl.envs.libs.pettingzoo import PettingZooWrapper 
+   from navground.learning.parallel_env import shared_parallel_env
+   from navground.learning.wrappers.name_wrapper import NameWrapper
+
+   penv = shared_parallel_env(...)
+   env = PettingZooWrapper(NameWrapper(penv),
+                           categorical_actions=False,
+                           device='cpu',
+                           seed=0,
+                           return_state=penv.has_state) 
+
+:py:class:`.wrappers.name_wrapper.NameWrapper` converts from an environment where agents are indexed by integers to one where they are indexed by strings, which TorchRL requires.
+
+Function :py:func:`.utils.benchmarl.make_env` provides the same functionality.
 
 Train ML policies in navground 
 ==============================
 
 .. note::
 
-   Have a look at the tutorials to see the interaction between gymnasium and navground in action and how to use it to train a navigation policy using IL or RL.
+   Have a look at the :doc:`tutorials <tutorials/index>` to see the interaction between gymnasium and navground in action and how to use it to train a navigation policy using IL or RL.
 
 Imitation Learning
 ------------------
@@ -258,6 +346,33 @@ We instantiate the parallel environment using :py:func:`.parallel_env.shared_par
    psac.save("PSAC")
 
 
+Multi-agent Reinforcement Learning with BenchMARL
+-------------------------------------------------
+
+`BenchMARL <https://github.com/facebookresearch/BenchMARL>`_ provides implementation of Multi-agent Reinforcement Learning algorithms that extend behind the parallel Multi-agent Reinforcement Learning family just described. They can tackle problems that features heterogeneous agents, which therefore do not share the same policy and cannot be "stacked" together. Moreover, MARL-specific  algorithm are designed to reduce instabilities that arise in multi-agent training, where agents learn policies among other agents that keep evolving their behavior.
+
+We provide utilities that simplify training navigation policies with BenchMARL, like for example, using the multi-agent version of SAC:
+
+.. code-block:: python
+
+   from navground.learning.parallel_env import shared_parallel_env
+   from benchmarl.algorithms import MasacConfig
+   from benchmarl.models.mlp import MlpConfig
+   from benchmarl.experiment import ExperimentConfig
+   from navground.learning.utils.benchmarl import NavgroundExperiment
+
+   penv = shared_parallel_env(scenario=..., sensor=...,
+                              observation_config=..., action_config=..., 
+                              max_episode_steps=100)
+   masac_exp = NavgroundExperiment(
+       env=penv,
+       config=ExperimentConfig.get_from_yaml(),
+       model_config=MlpConfig.get_from_yaml(),
+       algorithm_config=MasacConfig.get_from_yaml(),
+       seed=0
+   )
+   masac_exp.run_for(iterations=20)
+
 Evaluation
 ==========
 
@@ -293,6 +408,14 @@ Once we have trained a policy (and possibly exported it to onnx using :py:func:`
       agent.state_estimation = sensor
    
    world.run(time_step=0.1, steps=1000)
+
+
+.. note::
+
+   After training a policy using BenchMARL, we need extract a compatible policy using 
+   :py:meth:`.utils.benchmarl.NavgroundExperiment.get_single_agent_policy`
+   that transforms a TorchRL policy to a PyTorch policy.
+
 
 In practice, we do not need to perform the configuration manually. Instead, we can load it from a YAML file (exported e.g. using :py:func:`.io.export_policy_as_behavior`), like common in navground:
 
@@ -350,7 +473,7 @@ Acknowledgement and disclaimer
 
 The work was supported in part by `REXASI-PRO <https://rexasi-pro.spindoxlabs.com>`_ H-EU project, call HORIZON-CL4-2021-HUMAN-01-01, Grant agreement no. 101070028.
 
-.. image:: https://rexasi-pro.spindoxlabs.com/wp-content/uploads/2023/01/Bianco-Viola-Moderno-Minimalista-Logo-e1675187551324.png
+.. figure:: https://rexasi-pro.spindoxlabs.com/wp-content/uploads/2023/01/Bianco-Viola-Moderno-Minimalista-Logo-e1675187551324.png
   :width: 300
   :alt: REXASI-PRO logo
 

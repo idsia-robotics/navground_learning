@@ -400,13 +400,11 @@ class NavgroundExperiment(Experiment):
         This method expects the same folder structure created when an experiment is run.
         The checkpoint file (``restore_file``) is in the checkpoints directory
         and a config.pkl file is
-        present a level above at restore_file/../../config.pkl
+        present a level above at ``restore_file/../../config.pkl``
 
-        Args:
-            restore_file (str): The checkpoint file (.pt) of the experiment reload.
+        :param restore_file: The checkpoint file (.pt) of the experiment reload.
 
-        Returns:
-            The reloaded experiment.
+        :returns: The reloaded experiment.
 
         """
         import os

@@ -142,7 +142,7 @@ class SocialReward(Reward, register_name="Social"):
     """The weight of safety margin violations"""
     critical_safety_margin: float = 0.0
     """
-       The value above which we assign a maximal penality
+       The value above which we assign a maximal penalty
        to safety margin violations
     """
     safety_margin: float | None = None

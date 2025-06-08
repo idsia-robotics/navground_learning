@@ -21,11 +21,21 @@ from .split_mlp import SplitMlp, SplitMlpPolicy
 def _has_batch_dim(observation: Array, flat_dims: int) -> bool:
     return len(observation.shape) == 2 or observation.shape[0] != flat_dims
 
-
 class SingleAgentPolicy(torch.nn.Module):
+    """
+    This class conforms to :py:class:`navground.learning.types.PyTorchPolicy`
+    and is construction from a TorchRL policy.
+    """
 
     def __init__(self, observation_space: gym.Space,
                  action_space: gym.spaces.Box, policy: Any):
+        """
+        Constructs a new instance.
+
+        :param      observation_space:  The observation space
+        :param      action_space:       The action space
+        :param      policy:             The TorchRL policy
+        """
         super().__init__()
         self.observation_space = observation_space
         self.action_space = action_space
@@ -55,7 +65,7 @@ class SingleAgentPolicy(torch.nn.Module):
                 model = actor.module[0]
         else:
             model = actor.module[0]
-        self.model = self.copy_model(model)
+        self.model = self._copy_model(model)
         if isinstance(observation_space, gym.spaces.Dict):
             self._uses_dict = True
             self._flat_dims = {
@@ -105,7 +115,7 @@ class SingleAgentPolicy(torch.nn.Module):
                 act = act.flatten()
             return act, None
 
-    def copy_model(self, model: torch.nn.Module) -> torch.nn.Module:
+    def _copy_model(self, model: torch.nn.Module) -> torch.nn.Module:
         if isinstance(model, Mlp):
             return MlpPolicy(model)
         if isinstance(model, SplitMlp):

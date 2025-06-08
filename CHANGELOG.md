@@ -1,8 +1,8 @@
 # Changelog
 
-## [0.2] TODO
+## [0.2] 2025-08-06
 
-Minor release with many significant additions, such as support for:
+We release several significant additions, such as support for:
 
 - TorchRL and BenchMARL: several SoA MARL algorithms that support heterogeneous groups too.
 
@@ -42,6 +42,8 @@ Minor release with many significant additions, such as support for:
 - Behavior `GroupedPolicyBehavior` that evaluates a policy for a *group* of agents at once.
 
 - Options to specify how `DefaultObservationConfig` should handle dict spaces: flatten sub-spaces, ignore some keys, sort the keys, normalize values. 
+
+- Optional position and orientation observations in `DefaultObservationConfig`.
 
 - Parallel environment wrappers
 	- `NameWrapper` to index agent by string, like agent_0, agent_1, ... .

@@ -11,7 +11,7 @@ Implicitly, they learn to
 - encode their state in a message that is usefull for the other agent
 - decode the recevied message and to navigate safely (i.e., avoiding stepping on the pad at the same time).
 
-To promote exchanging usefull information, during training, we can add a bit of the (efficacy) neighbor penality to the agent reward.
+To promote exchanging usefull information, during training, we can add a bit of the (efficacy) neighbor penalty to the agent reward.
 
 Instability
 ===========
