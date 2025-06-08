@@ -46,7 +46,7 @@ inference = [
   'onnx'
 ]
 torchrl = [
-  "benchmarl@git+https://github.com/jeguzzi/BenchMARL@main",
+  "benchmarl",
   "torchrl",
 ]
 all = [

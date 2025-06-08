@@ -63,6 +63,6 @@ jobs:
       - name: Test PettingZoo
         run: pytest test/test_pettingzoo.py
       - name: Install torchrl
-        run: find dist -name '*.whl' -exec pip install {}[torchrl] \;
+        run: pip install torchrl git+https://github.com/jeguzzi/BenchMARL.git@main
       - name: Test TorchRL
         run: pytest test/test_torchrl.py

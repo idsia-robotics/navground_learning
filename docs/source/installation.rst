@@ -15,3 +15,13 @@ If you prefer to install the latest developments from github:
 .. code-block:: console
 
 	 pip install git+https://github.com/idsia-robotics/navground_learning.git@main[all]
+
+
+Install our fork of BenchMARL that adds:
+
+- possible testing environments that are different that the training environments
+- logging success rates
+
+.. code-block:: console
+
+   pip install git+https://github.com/jeguzzi/BenchMARL.git@main
