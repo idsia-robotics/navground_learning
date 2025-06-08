@@ -35,7 +35,12 @@ jobs:
         with:
           name: python-package-distributions
           path: dist
+      - run: ls -lah dist
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          sparse-checkout: test
+      - run: ls -lah dist
       - uses: actions/setup-python@v5
         with:
           python-version: 3.12
