@@ -17,10 +17,10 @@ authors = [
 maintainers = [
   {name = "Jerome Guzzi", email = "jerome@idsia.ch"}
 ]
-description = "A Python package that interfaces navground with gymnasium to learn navigating using IL and RL."
+description = "A Python package that interfaces navground with ML-libraries to learn navigating using IL and RL."
 readme = "README.md"
 license = {file = "LICENSE"}
-keywords = ["navigation", "navground", "gymnasium", "pettingzoo", 
+keywords = ["navigation", "navground", "gymnasium", "pettingzoo", "torchrl",
             "imitation-learning", "reinforcement-learning"]
 classifiers = [
   "Development Status :: 4 - Beta",
@@ -45,6 +45,10 @@ inference = [
   'onnxruntime>=1.20.0',
   'onnx'
 ]
+torchrl = [
+  "benchmarl@git+https://github.com/jeguzzi/BenchMARL@main",
+  "torchrl",
+]
 all = [
   "navground[all]",
   "pettingzoo>=1.24.3",
@@ -54,7 +58,10 @@ all = [
   "onnxruntime",
   "torch>=2.4",
   "onnx",
-  "tqdm"
+  "tqdm",
+  "benchmarl@git+https://github.com/jeguzzi/BenchMARL@main",
+  "torchrl",
+  "pandas"
 ]
 [project.urls]
 Homepage = "https://github.com/idsia-robotics/navground_learning"
@@ -73,14 +80,18 @@ universal = true
 
 [tool.setuptools-git-versioning]
 enabled = true
-starting_version = "0.1.1"
+starting_version = "0.2.0"
 # dirty_template = "{tag}-{ccount}+{branch}"
 
 [project.entry-points.navground_behaviors]
-policy = "navground.learning.behaviors.policy:PolicyBehavior"
+policy = "navground.learning.behaviors:PolicyBehavior"
+group_policy = "navground.learning.behaviors:GroupedPolicyBehavior"
 [project.entry-points.navground_scenarios]
-forward = "navground.learning.scenarios.forward:ForwardScenario"
-corridor_with_obstacle = "navground.learning.scenarios.corridor_with_obstacle:CorridorWithObstacle"
+forward = "navground.learning.scenarios:ForwardScenario"
+corridor_with_obstacle = "navground.learning.scenarios:CorridorWithObstacle"
+pad = "navground.learning.scenarios:PadScenario"
+[project.entry-points.navground_state_estimations]
+comm = "navground.learning.state_estimations:CommSensor"
 
 [tool.mypy]
 implicit_reexport = true
