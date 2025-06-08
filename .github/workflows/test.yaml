@@ -29,6 +29,13 @@ jobs:
           name: python-package-distributions
           path: dist/
   test:
+    strategy:
+      matrix:
+        python-version:
+          # - "3.10"
+          # - "3.11"
+          - "3.12"
+          # - "3.13"
     name: Test Python 📦
     needs:
       - build
@@ -39,15 +46,16 @@ jobs:
         with:
           name: python-package-distributions
           path: dist
-      - run: ls -lah dist
+      - run: ls -lah .
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           sparse-checkout: test
-      - run: ls -lah dist
+          path: test
+      - run: ls -lah .
       - uses: actions/setup-python@v5
         with:
-          python-version: 3.12
+          python-version: ${{ matrix.python-version }}
           cache: 'pip'
       - name: Install
         run: |
