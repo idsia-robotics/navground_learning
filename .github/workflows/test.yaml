@@ -41,18 +41,18 @@ jobs:
       - build
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          sparse-checkout: test
       - name: Download all the dists
         uses: actions/download-artifact@v4
         with:
           name: python-package-distributions
           path: dist
       - run: ls -lah .
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          sparse-checkout: test
-          path: test
-      - run: ls -lah .
+      - run: ls -lah dist
+      - run: ls -lah test
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
