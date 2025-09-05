@@ -11,7 +11,7 @@ on:
       - 'releases/**'
 jobs:
   build:
-    name: Build Python 📦
+    name: BuildPython
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -36,7 +36,7 @@ jobs:
           - "3.11"
           - "3.12"
           - "3.13"
-    name: Test Python 📦
+    name: TestPython
     needs:
       - build
     runs-on: ubuntu-latest
