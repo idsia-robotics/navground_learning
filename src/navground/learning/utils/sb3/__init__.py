@@ -33,7 +33,10 @@ def callbacks(venv: VecEnv,
                                  **kwargs)
     else:
         video_cb = None
-    callback_on_new_best = ExportOnnxCallback() if export_to_onnx else None
+    callback_on_new_best = ExportOnnxCallback(lambda _: 'best_model') if export_to_onnx else None
+    if not video_cb and export_to_onnx:
+        video_cb = ExportOnnxCallback(lambda cb: f'model_{cb.model.num_timesteps}')
+
     eval_cb = EvalCallback(venv,
                            best_model_save_path=str(best_model_save_path),
                            eval_freq=eval_freq,
