@@ -62,7 +62,8 @@ all = [
   "benchmarl",
   "torchrl",
   "pandas",
-  "matplotlib"
+  "matplotlib",
+  "moviepy"
 ]
 [project.urls]
 Homepage = "https://github.com/idsia-robotics/navground_learning"
