@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.3] unreleased
+
+### Added
+
+- Group observation transformations
+- Option to `ExportOnnxCallback` to configure the file name
+
+### Fixed
+
+- Robot default wheel axis in pad scenario.
+
 ## [0.2] 2025-08-06
 
 We release several significant additions, such as support for:

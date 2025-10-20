@@ -10,7 +10,7 @@ from navground.sim.ui import svg_color
 
 def make_thymio() -> sim.Agent:
     kinematics = core.kinematics.TwoWheelsDifferentialDriveKinematics(
-        wheel_axis=0.94,
+        wheel_axis=0.094,
         max_speed=0.166,
         max_forward_speed=0.14,
         max_backward_speed=0.14)

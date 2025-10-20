@@ -15,7 +15,7 @@ from navground import sim
 
 from ..config import GroupConfig
 from ..env import BaseEnv
-from ..types import AnyPolicyPredictor, PathLike
+from ..types import AnyPolicyPredictor, PathLike, ObservationTransform, GroupObservationsTransform
 from .experiment import make_experiment_with_env
 
 if TYPE_CHECKING:
@@ -154,6 +154,8 @@ class EvalLog:
                  use_multiprocess: bool = False,
                  use_onnx: bool = True,
                  grouped: bool = False,
+                 pre: ObservationTransform | None = None,
+                 group_pre: GroupObservationsTransform | None = None,
                  every: int = 1):
         self.plot_config = plot_config
         self.video_config = video_config
@@ -170,6 +172,8 @@ class EvalLog:
         self.use_multiprocess = use_multiprocess
         self.use_onnx = use_onnx or self.processes > 1
         self.grouped = grouped
+        self.pre = pre
+        self.group_pre = group_pre
         self.every = every
         self._count = 0
 
@@ -222,7 +226,9 @@ class EvalLog:
         exp = make_experiment_with_env(env=env,
                                        groups=[group],
                                        record_reward=self.record_reward,
-                                       grouped=self.grouped)
+                                       grouped=self.grouped,
+                                       pre=self.pre,
+                                       group_pre=self.group_pre)
         self.eval_exp = exp
         self.eval_exp.number_of_runs = self.number_of_runs
         self.eval_exp.record_config.pose = self.record_pose
@@ -395,7 +401,9 @@ def config_eval_log(
         processes: int = 1,
         use_multiprocess: bool = False,
         use_onnx: bool = True,
-        grouped: bool = False) -> None:
+        grouped: bool = False,
+        pre: ObservationTransform | None = None,
+        group_pre: GroupObservationsTransform | None = None) -> None:
     """
     Configure the model logger to log additional data:
 
@@ -423,6 +431,10 @@ def config_eval_log(
     :param      use_multiprocess:  Whether to use ``multiprocess`` instead of ``multiprocessing``
     :param      use_onnx:          Whether to use onnx for inference
     :param      grouped:           Whether the policy is grouped.
+    :param      pre:               An optional transformation to apply to observations
+                                   of all individual agents
+    :param      group_pre:         An optional transformation to apply to observations
+                                   of all groups
     """
     from stable_baselines3.common.off_policy_algorithm import \
         OffPolicyAlgorithm
@@ -445,6 +457,8 @@ def config_eval_log(
                   use_multiprocess=use_multiprocess,
                   use_onnx=use_onnx,
                   grouped=grouped,
+                  pre=pre,
+                  group_pre=group_pre,
                   every=every)
     if isinstance(model, OffPolicyAlgorithm):
         logger = model.logger

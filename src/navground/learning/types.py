@@ -35,6 +35,9 @@ Bounds: TypeAlias = tuple[np.typing.NDArray[np.floating[Any]],
                           np.typing.NDArray[np.floating[Any]]]
 
 ObservationTransform: TypeAlias = Callable[[Observation], Observation]
+GroupObservations: TypeAlias = dict[int, Observation]
+GroupObservationsTransform: TypeAlias = Callable[[GroupObservations],
+                                                 GroupObservations]
 
 SensorLike: TypeAlias = sim.Sensor | str | dict[str, Any]
 SensorSequenceLike: TypeAlias = Sequence[SensorLike] | str

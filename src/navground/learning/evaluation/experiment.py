@@ -14,22 +14,26 @@ from ..internal.base_env import NavgroundBaseEnv
 from ..parallel_env import BaseParallelEnv
 from ..probes.reward import RewardProbe
 from ..probes.success import SuccessProbe
-from ..types import (AnyPolicyPredictor, Bounds, ObservationTransform,
-                     PathLike, Reward)
+from ..types import (AnyPolicyPredictor, Bounds, GroupObservationsTransform,
+                     ObservationTransform, PathLike, Reward)
 from .scenario import InitPolicyBehavior
 
 if TYPE_CHECKING:
     from stable_baselines3.common.vec_env import VecEnv
 
 
-def make_experiment(scenario: sim.Scenario,
-                    groups: Collection[GroupConfig] = tuple(),
-                    reward: Reward | None = None,
-                    record_reward: bool = True,
-                    policy: AnyPolicyPredictor | PathLike = '',
-                    bounds: Bounds | None = None,
-                    terminate_outside_bounds: bool = True,
-                    deterministic: bool = True) -> sim.Experiment:
+def make_experiment(
+        scenario: sim.Scenario,
+        groups: Collection[GroupConfig] = tuple(),
+        reward: Reward | None = None,
+        record_reward: bool = True,
+        policy: AnyPolicyPredictor | PathLike = '',
+        bounds: Bounds | None = None,
+        terminate_outside_bounds: bool = True,
+        deterministic: bool = True,
+        grouped: bool = False,
+        pre: ObservationTransform | None = None,
+        group_pre: GroupObservationsTransform | None = None) -> sim.Experiment:
     """
     Initializes an navground experiment where groups of agents
     are configured with possibly different policies and
@@ -53,13 +57,23 @@ def make_experiment(scenario: sim.Scenario,
     :param  terminate_outside_bounds:  Whether to terminate
                                        if some of the agents exits the boundaries
     :param  deterministic:             Whether to apply the policies deterministically
+    :param  grouped:                   Whether the policy is grouped.
+    :param  pre:                       An optional transformation to apply to observations
+                                       of all individual agents
+    :param  group_pre:                 An optional transformation to apply to observations
+                                       of all groups
 
     :returns:   The experiment
     """
     experiment = sim.Experiment()
     experiment.terminate_when_all_idle_or_stuck = False
     if not groups:
-        groups = [GroupConfig(policy=policy)]
+        groups = [
+            GroupConfig(policy=policy,
+                        grouped=grouped,
+                        pre=pre,
+                        group_pre=group_pre)
+        ]
     if groups:
         experiment.scenario = copy.deepcopy(scenario)
         init = InitPolicyBehavior(
@@ -76,15 +90,17 @@ def make_experiment(scenario: sim.Scenario,
     return experiment
 
 
-def make_experiment_with_env(env: BaseEnv | BaseParallelEnv | VecEnv,
-                             groups: Collection[GroupConfig] = tuple(),
-                             policy: AnyPolicyPredictor | PathLike = '',
-                             reward: Reward | None = None,
-                             record_reward: bool = True,
-                             record_success: bool = True,
-                             deterministic: bool = True,
-                             grouped: bool = False,
-                             pre: ObservationTransform | None = None) -> sim.Experiment:
+def make_experiment_with_env(
+        env: BaseEnv | BaseParallelEnv | VecEnv,
+        groups: Collection[GroupConfig] = tuple(),
+        policy: AnyPolicyPredictor | PathLike = '',
+        reward: Reward | None = None,
+        record_reward: bool = True,
+        record_success: bool = True,
+        deterministic: bool = True,
+        grouped: bool = False,
+        pre: ObservationTransform | None = None,
+        group_pre: GroupObservationsTransform | None = None) -> sim.Experiment:
     """
     Similar to :py:func:`make_experiment` but using the configuration stored in
     an environment:
@@ -99,16 +115,24 @@ def make_experiment_with_env(env: BaseEnv | BaseParallelEnv | VecEnv,
     :param  record_success:             Whether to record the success
     :param  policy:                    The default policy
                                        (when not specified in the group config)
-    :param  grouped:                   Whether the policy is grouped.
     :param  deterministic:             Whether to apply the policies deterministically
+    :param  grouped:                   Whether the policy is grouped.
     :param  pre:                       An optional transformation to apply to observations
+                                       of all individual agents
+    :param  group_pre:                 An optional transformation to apply to observations
+                                       of all groups
 
     :returns:   The experiment
     """
     from stable_baselines3.common.vec_env import VecEnv
 
     if not groups:
-        groups = [GroupConfig(policy=policy)]
+        groups = [
+            GroupConfig(policy=policy,
+                        grouped=grouped,
+                        pre=pre,
+                        group_pre=group_pre)
+        ]
     # Should not be anymore necessary as `get_attr` is added in `make_vec_from_penv`
     # if isinstance(env, VecEnv):
     #     try:
@@ -140,9 +164,7 @@ def make_experiment_with_env(env: BaseEnv | BaseParallelEnv | VecEnv,
         experiment.steps = int(max_duration / time_step)
     init = InitPolicyBehavior.with_env(env=env,
                                        groups=groups,
-                                       deterministic=deterministic,
-                                       grouped=grouped,
-                                       pre=pre)
+                                       deterministic=deterministic)
     experiment.scenario.add_init(init)
     groups = merge_groups_configs(groups, env_groups, len(possible_agents))
     if record_success:
