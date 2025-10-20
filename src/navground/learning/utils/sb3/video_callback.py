@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 
     from ...env import BaseEnv
     from ...parallel_env import BaseParallelEnv
-    from ...types import PathLike
+    from ...types import PathLike, GroupObservationsTransform, ObservationTransform
 
 from ...evaluation import make_experiment_with_env, record_run_video
 
@@ -26,6 +26,8 @@ class VideoCallback(BaseCallback):
                  save_path: PathLike | None = None,
                  number: int = 1,
                  grouped: bool = False,
+                 pre: ObservationTransform | None = None,
+                 group_pre: GroupObservationsTransform | None = None,
                  video_format: str = 'mp4',
                  policy: Any = None,
                  **kwargs: Any) -> None:
@@ -36,6 +38,10 @@ class VideoCallback(BaseCallback):
         :param      save_path:     Where to save the videos
         :param      number:        The number of videos per evaluation
         :param      grouped:       Whether the policy is grouped
+        :param      pre:           An optional transformation to apply to observations
+                                   of all individual agents
+        :param      group_pre:     An optional transformation to apply to observations
+                                   of all groups
         :param      video_format:  The video format
         :param      policy:        The policy
         :param      kwargs:        The keywords arguments passed to the renderer
@@ -49,6 +55,8 @@ class VideoCallback(BaseCallback):
         self.render_kwargs = kwargs
         self.grouped = grouped
         self.policy = policy
+        self.pre = pre
+        self.group_pre = group_pre,
 
     def _on_step(self):
         if self.save_path is None:
@@ -60,7 +68,9 @@ class VideoCallback(BaseCallback):
                                                 policy=policy,
                                                 record_reward=False,
                                                 grouped=self.grouped,
-                                                record_success=False)
+                                                record_success=False,
+                                                pre=self.pre,
+                                                group_pre=self.group_pre)
         for i in range(self.number):
             name = f'{self.num_timesteps}_{i}.{self.format}'
             record_run_video(self.exp,

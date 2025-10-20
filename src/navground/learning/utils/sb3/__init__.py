@@ -26,16 +26,17 @@ def callbacks(venv: VecEnv,
               export_to_onnx: bool = False,
               **kwargs: Any) -> list[BaseCallback]:
     if number_of_videos > 0:
-        video_cb = VideoCallback(video_env or venv,
-                                 number=number_of_videos,
-                                 factor=4,
-                                 policy=video_policy,
-                                 **kwargs)
+        vcb: BaseCallback | None = VideoCallback(video_env or venv,
+                                                 number=number_of_videos,
+                                                 factor=4,
+                                                 policy=video_policy,
+                                                 **kwargs)
     else:
-        video_cb = None
-    callback_on_new_best = ExportOnnxCallback(lambda _: 'best_model') if export_to_onnx else None
-    if not video_cb and export_to_onnx:
-        video_cb = ExportOnnxCallback(lambda cb: f'model_{cb.model.num_timesteps}')
+        vcb = None
+    callback_on_new_best = ExportOnnxCallback(
+        lambda _: 'best_model') if export_to_onnx else None
+    if not vcb and export_to_onnx:
+        vcb = ExportOnnxCallback(lambda cb: f'model_{cb.model.num_timesteps}')
 
     eval_cb = EvalCallback(venv,
                            best_model_save_path=str(best_model_save_path),
@@ -44,7 +45,7 @@ def callbacks(venv: VecEnv,
                            render=False,
                            n_eval_episodes=n_eval_episodes,
                            verbose=0,
-                           callback_after_eval=video_cb,
+                           callback_after_eval=vcb,
                            callback_on_new_best=callback_on_new_best)
     return [eval_cb, ProgressBarWithRewardCallback(every=update_bar_every)]
 

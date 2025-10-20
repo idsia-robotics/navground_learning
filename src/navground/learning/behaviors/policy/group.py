@@ -6,8 +6,16 @@ from navground import core
 
 from ...config import ControlActionConfig, DefaultObservationConfig
 from ...parallel_env.join import stack_observations
-from ...types import AnyPolicyPredictor, ObservationTransform, PathLike
+from ...types import (AnyPolicyPredictor, Observation, ObservationTransform,
+                      PathLike, GroupObservationsTransform)
 from .base import BasePolicyMixin
+
+
+def get_obs(behavior: GroupedPolicyBehavior) -> Observation:
+    obs = behavior.update_observation()
+    if behavior._pre:
+        obs = behavior._pre(obs)
+    return obs
 
 
 class GroupPolicyBehavior(core.BehaviorGroup):
@@ -15,15 +23,20 @@ class GroupPolicyBehavior(core.BehaviorGroup):
     def __init__(self, policy: AnyPolicyPredictor):
         super().__init__()
         self.policy = policy
+        self._pre: GroupObservationsTransform | None = None
+
+    def set_pre(self, value: GroupObservationsTransform | None) -> None:
+        self._pre = value
 
     def compute_cmds(self, time_step: float) -> list[core.Twist2]:
-
         behaviors = cast('list[GroupedPolicyBehavior]', self.members)
-
-        obs = stack_observations({
-            i: behavior.update_observation()
+        obss = {
+            i: get_obs(behavior)
             for i, behavior in enumerate(behaviors)
-        })
+        }
+        if self._pre:
+            obss = self._pre(obss)
+        obs = stack_observations(obss)
         acts, _ = self.policy.predict(obs, deterministic=True)
         acts = acts.reshape(len(self.members), -1)
         return [
@@ -53,9 +66,14 @@ class GroupedPolicyBehavior(BasePolicyMixin,
                                  observation_config, deterministic, pre)
         core.BehaviorGroupMember.__init__(self, kinematics, radius)
 
+    def set_group_pre(self, value: GroupObservationsTransform | None) -> None:
+        if isinstance(self.group, GroupPolicyBehavior):
+            self.group.set_pre(value)
+
     def make_group(self) -> core.BehaviorGroup:
         if self.policy_path:
-            policy: AnyPolicyPredictor | None = self.load_policy(self.policy_path)
+            policy: AnyPolicyPredictor | None = self.load_policy(
+                self.policy_path)
         else:
             policy = self._policy
         if not policy:

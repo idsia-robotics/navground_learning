@@ -16,7 +16,8 @@ if TYPE_CHECKING:
 
     from ..env import BaseEnv
     from ..parallel_env import BaseParallelEnv
-    from ..types import AnyPolicyPredictor, PathLike
+    from ..types import (AnyPolicyPredictor, GroupObservationsTransform,
+                         ObservationTransform, PathLike)
 
 
 def _run_video(fn: Callable,
@@ -124,6 +125,8 @@ def display_episode_video(env: BaseEnv | BaseParallelEnv | VecEnv,
                           factor: int = 1,
                           seed: int = 0,
                           grouped: bool = False,
+                          pre: ObservationTransform | None = None,
+                          group_pre: GroupObservationsTransform | None = None,
                           use_world_bounds: bool = True,
                           of: int = 1,
                           select: int = 0,
@@ -138,6 +141,10 @@ def display_episode_video(env: BaseEnv | BaseParallelEnv | VecEnv,
     :param      factor:            The real-time factor
     :param      seed:              The seed (only applies if ``of == 0``)
     :param      grouped:           Whether the policy is grouped
+    :param      pre:               An optional transformation to apply to observations
+                                   of all individual agents
+    :param      group_pre:         An optional transformation to apply to observations
+                                   of all groups
     :param      use_world_bounds:  Whether to keep the initial world bounds
     :param      select:            Which episode to select
                                    (ordered by reward, only applies if ``of > 0``)
@@ -150,6 +157,8 @@ def display_episode_video(env: BaseEnv | BaseParallelEnv | VecEnv,
                                    policy=policy,
                                    record_reward=of > 0,
                                    grouped=grouped,
+                                   pre=pre,
+                                   group_pre=group_pre,
                                    record_success=False)
     return display_run_video(exp,
                              factor=factor,
@@ -166,6 +175,8 @@ def record_episode_video(env: BaseEnv | BaseParallelEnv | VecEnv,
                          factor: int = 1,
                          seed: int = 0,
                          grouped: bool = False,
+                         pre: ObservationTransform | None = None,
+                         group_pre: GroupObservationsTransform | None = None,
                          use_world_bounds: bool = True,
                          of: int = 1,
                          select: int = 0,
@@ -181,6 +192,10 @@ def record_episode_video(env: BaseEnv | BaseParallelEnv | VecEnv,
     :param      factor:            The real-time factor
     :param      seed:              The seed (only applies if ``of == 0``)
     :param      grouped:           Whether the policy is grouped
+    :param      pre:               An optional transformation to apply to observations
+                                   of all individual agents
+    :param      group_pre:         An optional transformation to apply to observations
+                                   of all groups
     :param      use_world_bounds:  Whether to keep the initial world bounds
     :param      select:            Which episode to select
                                    (ordered by reward, only applies if ``of > 0``)
@@ -193,6 +208,8 @@ def record_episode_video(env: BaseEnv | BaseParallelEnv | VecEnv,
                                    policy=policy,
                                    record_reward=of > 0,
                                    grouped=grouped,
+                                   pre=pre,
+                                   group_pre=group_pre,
                                    record_success=False)
     record_run_video(exp,
                      path=path,

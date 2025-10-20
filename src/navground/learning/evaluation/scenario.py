@@ -13,7 +13,8 @@ from ..env import BaseEnv
 from ..indices import Indices, IndicesLike
 from ..internal.base_env import NavgroundBaseEnv
 from ..parallel_env import BaseParallelEnv
-from ..types import AnyPolicyPredictor, Bounds, ObservationTransform, PathLike
+from ..types import (AnyPolicyPredictor, Bounds, GroupObservationsTransform,
+                     ObservationTransform, PathLike)
 
 if TYPE_CHECKING:
     from stable_baselines3.common.vec_env import VecEnv
@@ -21,15 +22,17 @@ if TYPE_CHECKING:
 AnyPolicyBehavior = PolicyBehavior | GroupedPolicyBehavior
 
 
-def set_policy_behavior(world: sim.World,
-                        indices: IndicesLike,
-                        policy: AnyPolicyPredictor | PathLike,
-                        action_config: ControlActionConfig,
-                        observation_config: DefaultObservationConfig,
-                        sensors: Sequence[sim.Sensor] = tuple(),
-                        deterministic: bool = True,
-                        grouped: bool = False,
-                        pre: ObservationTransform | None = None) -> set[int]:
+def set_policy_behavior(
+        world: sim.World,
+        indices: IndicesLike,
+        policy: AnyPolicyPredictor | PathLike,
+        action_config: ControlActionConfig,
+        observation_config: DefaultObservationConfig,
+        sensors: Sequence[sim.Sensor] = tuple(),
+        deterministic: bool = True,
+        grouped: bool = False,
+        pre: ObservationTransform | None = None,
+        group_pre: GroupObservationsTransform | None = None) -> set[int]:
     indices = Indices(indices)
     all_indices = indices.as_set(len(world.agents))
     if grouped:
@@ -46,6 +49,8 @@ def set_policy_behavior(world: sim.World,
                 observation_config=observation_config,
                 deterministic=deterministic,
                 pre=pre)
+            if group_pre and isinstance(agent.behavior, GroupedPolicyBehavior):
+                agent.behavior.set_group_pre(group_pre)
             if sensors:
                 agent.state_estimations = list(sensors)
         else:
@@ -53,12 +58,15 @@ def set_policy_behavior(world: sim.World,
     return set(all_indices)
 
 
-def set_policy_behavior_with_env(world: sim.World,
-                                 env: BaseEnv | BaseParallelEnv | VecEnv,
-                                 policy: AnyPolicyPredictor | PathLike,
-                                 indices: IndicesLike = "ALL",
-                                 deterministic: bool = True,
-                                 grouped: bool = False) -> set[int]:
+def set_policy_behavior_with_env(
+        world: sim.World,
+        env: BaseEnv | BaseParallelEnv | VecEnv,
+        policy: AnyPolicyPredictor | PathLike,
+        indices: IndicesLike = "ALL",
+        deterministic: bool = True,
+        grouped: bool = False,
+        pre: ObservationTransform | None = None,
+        group_pre: GroupObservationsTransform | None = None) -> set[int]:
     indices = Indices(indices)
     if not isinstance(env.unwrapped, NavgroundBaseEnv):
         warnings.warn(f"Environment {env} is not a Navground environment.",
@@ -78,7 +86,9 @@ def set_policy_behavior_with_env(world: sim.World,
                                 observation_config=group.observation,
                                 sensors=group.get_sensors(),
                                 deterministic=deterministic,
-                                grouped=grouped)
+                                grouped=grouped,
+                                pre=pre,
+                                group_pre=group_pre)
             all_indices |= group_indices
     return all_indices
 
@@ -177,24 +187,18 @@ class InitPolicyBehavior:
     :param bounds: Optional termination boundaries
     :param terminate_outside_bounds: Whether to terminate
         if some of the agents exits the boundaries
-    :param  grouped:       Whether the policy is grouped.
     :param  deterministic: Whether to apply the policies deterministically
-    :param  pre:           An optional transformation to apply to observations
     """
 
     def __init__(self,
                  groups: Collection[GroupConfig] = tuple(),
                  bounds: Bounds | None = None,
                  terminate_outside_bounds: bool = True,
-                 deterministic: bool = True,
-                 grouped: bool = False,
-                 pre: ObservationTransform | None = None) -> None:
+                 deterministic: bool = True) -> None:
         self.groups = groups
         self.bounds = bounds
         self.terminate_outside_bounds = terminate_outside_bounds
         self.deterministic = deterministic
-        self.grouped = grouped
-        self.pre = pre
 
     def __call__(self, world: sim.World, seed: int | None = None) -> None:
         """
@@ -220,8 +224,9 @@ class InitPolicyBehavior:
                     policy=group.policy,
                     indices=group.indices,
                     deterministic=self.deterministic,
-                    grouped=self.grouped,
-                    pre=self.pre)
+                    grouped=group.grouped or False,
+                    pre=group.pre,
+                    group_pre=group.group_pre)
                 agent_indices |= group_indices
                 for i in group_indices:
                     if group.color:
@@ -251,15 +256,12 @@ class InitPolicyBehavior:
             world.set_termination_condition(tc)
 
     @classmethod
-    def with_env(
-            cls,
-            env: BaseEnv | BaseParallelEnv | VecEnv,
-            groups: Collection[GroupConfig] = tuple(),
-            bounds: Bounds | None = None,
-            terminate_outside_bounds: bool | None = None,
-            deterministic: bool = True,
-            grouped: bool = False,
-            pre: ObservationTransform | None = None) -> InitPolicyBehavior:
+    def with_env(cls,
+                 env: BaseEnv | BaseParallelEnv | VecEnv,
+                 groups: Collection[GroupConfig] = tuple(),
+                 bounds: Bounds | None = None,
+                 terminate_outside_bounds: bool | None = None,
+                 deterministic: bool = True) -> InitPolicyBehavior:
         """
         Returns a scenario initializer using the configuration stored in
         an environment.
@@ -271,9 +273,7 @@ class InitPolicyBehavior:
         :param bounds:      Optional termination boundaries
         :param terminate_outside_bounds: Whether to terminate if some of
             the agents exits the boundaries
-        :param  grouped:       Whether the policy is grouped.
         :param  deterministic: Whether to apply the policies deterministically
-        :param  pre:           An optional transformation to apply to observations
 
         :returns:   The scenario initializer.
         """
@@ -300,5 +300,4 @@ class InitPolicyBehavior:
         if terminate_outside_bounds is None:
             terminate_outside_bounds = False
         groups = merge_groups_configs(groups, env_groups, len(possible_agents))
-        return cls(groups, bounds, terminate_outside_bounds, deterministic,
-                   grouped, pre)
+        return cls(groups, bounds, terminate_outside_bounds, deterministic)

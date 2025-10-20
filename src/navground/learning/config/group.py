@@ -8,8 +8,9 @@ import yaml
 from navground import sim
 
 from ..indices import Indices
-from ..types import (AnyPolicyPredictor, JSONAble, PathLike, Reward,
-                     SensorLike, SensorSequenceLike, TerminationCondition)
+from ..types import (AnyPolicyPredictor, GroupObservationsTransform, JSONAble,
+                     ObservationTransform, PathLike, Reward, SensorLike,
+                     SensorSequenceLike, TerminationCondition)
 from .base import ActionConfig, ObservationConfig
 
 
@@ -100,6 +101,12 @@ class GroupConfig:
     :param success_condition: Optional success condition
 
     :param failure_condition: Optional failure condition
+
+    :param grouped: Whether the policy is grouped
+
+    :param pre: An optional transformation to apply to observations
+
+    :param group_pre: An optional transformation to apply to group observations
     """
     indices: Indices = Indices.all()
     """The indices of the agents in the :py:attr:`navground.sim.World.agents` list"""
@@ -128,6 +135,12 @@ class GroupConfig:
     """Success condition"""
     failure_condition: TerminationCondition | None = None
     """Failure condition"""
+    grouped: bool | None = None
+    """Whether the policy is grouped"""
+    pre: ObservationTransform | None = None
+    """An optional transformation to apply to observations of individual agents"""
+    group_pre: GroupObservationsTransform | None = None
+    """An optional transformation to apply to the whole group observations"""
 
     def __post_init__(self, sensor: SensorLike | None) -> None:
         self.indices = Indices(self.indices)
@@ -160,6 +173,8 @@ class GroupConfig:
             rs['reward'] = self.reward.asdict
         if self.indices:
             rs['indices'] = self.indices.asdict
+        if self.grouped:
+            rs['grouped'] = self.grouped
         rs['terminate_on_success'] = self.terminate_on_success
         rs['terminate_on_failure'] = self.terminate_on_failure
         rs['sensors'] = [get_sensor_as_dict(sensor) for sensor in self.sensors]
@@ -176,7 +191,7 @@ class GroupConfig:
         kwargs: dict[str, Any] = {
             k: value[k]
             for k in ('color', 'tag', 'deterministic', 'sensors', 'sensor',
-                      'terminate_on_success', 'terminate_on_failure')
+                      'terminate_on_success', 'terminate_on_failure', 'grouped')
             if k in value
         }
         kwargs.update((k, cast("JSONAble", item_cls).from_dict(value[k]))
@@ -236,5 +251,11 @@ def merge_groups_configs(groups: Collection[GroupConfig],
                     g.success_condition = g2.success_condition
                 if g1.failure_condition is None:
                     g.failure_condition = g2.failure_condition
+                if g1.grouped is None:
+                    g.grouped = g2.grouped
+                if g1.pre is None:
+                    g.pre = g2.pre
+                if g1.group_pre is None:
+                    g.group_pre = g2.group_pre
                 gs.append(g)
     return gs
