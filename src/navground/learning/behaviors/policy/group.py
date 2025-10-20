@@ -62,13 +62,13 @@ class GroupedPolicyBehavior(BasePolicyMixin,
                  DefaultObservationConfig = DefaultObservationConfig(),
                  deterministic: bool = False,
                  pre: ObservationTransform | None = None):
+        self._group_pre: GroupObservationsTransform | None = None
         BasePolicyMixin.__init__(self, policy, policy_path, action_config,
                                  observation_config, deterministic, pre)
         core.BehaviorGroupMember.__init__(self, kinematics, radius)
 
     def set_group_pre(self, value: GroupObservationsTransform | None) -> None:
-        if isinstance(self.group, GroupPolicyBehavior):
-            self.group.set_pre(value)
+        self._group_pre = value
 
     def make_group(self) -> core.BehaviorGroup:
         if self.policy_path:
@@ -78,7 +78,9 @@ class GroupedPolicyBehavior(BasePolicyMixin,
             policy = self._policy
         if not policy:
             raise RuntimeError("Policy not set")
-        return GroupPolicyBehavior(policy)
+        g = GroupPolicyBehavior(policy)
+        g.set_pre(self._group_pre)
+        return g
 
     def get_groups(self) -> dict[int, core.BehaviorGroup]:
         return self._groups
