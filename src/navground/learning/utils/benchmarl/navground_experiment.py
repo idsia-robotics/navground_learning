@@ -1,21 +1,22 @@
 from __future__ import annotations
 
-# import copy
-from typing import TYPE_CHECKING, Any
+#import copy
+from typing import TYPE_CHECKING, Any, cast
 
 if TYPE_CHECKING:
-    from benchmarl.models.common import ModelConfig  # type: ignore[import-not-found]
-    from benchmarl.algorithms.common import AlgorithmConfig  # type: ignore[import-not-found]
-    from benchmarl.experiment import Callback, ExperimentConfig  # type: ignore[import-not-found]
+    from benchmarl.models.common import ModelConfig  # type: ignore
+    from benchmarl.algorithms.common import AlgorithmConfig  # type: ignore
+    from benchmarl.experiment import Callback, ExperimentConfig  # type: ignore
     from ...types import PathLike
     from ...onnx.policy import OnnxPolicy
     import pandas as pd
     import gymnasium as gym
+    from ...wrappers import NameWrapper
 
 import math
 from pathlib import Path
 
-from benchmarl.experiment import Experiment  # type: ignore[import-not-found]
+from benchmarl.experiment import Experiment
 
 from ...config import GroupConfig
 from ...indices import Indices
@@ -25,7 +26,7 @@ from .navground_task import NavgroundTaskClass
 from .policy import SingleAgentPolicy
 
 
-class NavgroundExperiment(Experiment):
+class NavgroundExperiment(Experiment):  # type: ignore[misc]
     """
     A :py:class:`benchmarl.experiment.Experiment` created from
     a :py:class:`navground.learning.parallel_env.MultiAgentNavgroundEnv`.
@@ -168,7 +169,7 @@ class NavgroundExperiment(Experiment):
 
         :returns:   The agent indices
         """
-        env = self.test_env._env
+        env = cast("NameWrapper", self.test_env._env)
         return env.get_indices(group)
 
     def load_policies(self,
@@ -192,7 +193,7 @@ class NavgroundExperiment(Experiment):
             for group in self.group_map
         ]
 
-    def action_space(self, group: str) -> gym.Space:
+    def action_space(self, group: str) -> gym.Space[Any]:
         """
         Gets the action space associated with a group
 
@@ -205,10 +206,10 @@ class NavgroundExperiment(Experiment):
         agents = self.group_map.get(group, [])
         if not agents:
             raise ValueError(f"Unknown group {group}!")
-        env = self.test_env._env
+        env = cast("NameWrapper", self.test_env._env)
         return env.action_space(agents[0])
 
-    def observation_space(self, group: str) -> gym.Space:
+    def observation_space(self, group: str) -> gym.Space[Any]:
         """
         Gets the observation space associated with a group
 
@@ -221,7 +222,7 @@ class NavgroundExperiment(Experiment):
         agents = self.group_map.get(group, [])
         if not agents:
             raise ValueError(f"Unknown group {group}!")
-        env = self.test_env._env
+        env = cast("NameWrapper", self.test_env._env)
         return env.observation_space(agents[0])
 
     def get_single_agent_policy(self,
@@ -268,7 +269,7 @@ class NavgroundExperiment(Experiment):
                             indices=Indices(self.get_indices(group))))
         return configs
 
-    def run_for(self, iterations: int = 0, steps: int = 0):
+    def run_for(self, iterations: int = 0, steps: int = 0) -> None:
         """
         Train the policy for some iterations and/or steps.
 
@@ -392,7 +393,7 @@ class NavgroundExperiment(Experiment):
                   key='counters_total_frames',
                   **kwargs)
 
-    # Same as Experiment.reload_from_file but loading a NavgroundExperiment.
+#Same as Experiment.reload_from_file but loading a NavgroundExperiment.
     @staticmethod
     def reload_from_file(restore_file: str) -> NavgroundExperiment:
         """
@@ -435,5 +436,5 @@ class NavgroundExperiment(Experiment):
             callbacks=callbacks,
             critic_model_config=critic_model_config,
         )
-        # print(f"\nReloaded experiment {experiment.name} from {restore_file}.")
+#print(f "\nReloaded experiment {experiment.name} from {restore_file}.")
         return experiment

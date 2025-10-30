@@ -1,13 +1,13 @@
 from __future__ import annotations
 
 import dataclasses as dc
-from typing import TYPE_CHECKING, SupportsFloat, cast
+from typing import Any, TYPE_CHECKING, SupportsFloat, cast
 
 import gymnasium as gym
 import numpy as np
 
 if TYPE_CHECKING:
-    from pettingzoo.utils.env import ParallelEnv
+    from ...parallel_env import BaseParallelEnv
 
 from ...types import Action, AnyPolicyPredictor, Array, Observation
 from .env import stack_dict
@@ -23,12 +23,12 @@ class Rollout:
     info: dict[int, dict[str, Array]]
 
 
-def rollout(env: ParallelEnv,
+def rollout(env: BaseParallelEnv,
             max_steps: int = 1000,
             policy: AnyPolicyPredictor | None = None,
             deterministic: bool = True,
             seed: int | None = None,
-            options: dict = {}) -> Rollout:
+            options: dict[str, Any] | None = None) -> Rollout:
     obss: dict[int, list[Observation]] = {i: [] for i in env.possible_agents}
     infos: dict[int, list[dict[str, Array]]] = {
         i: []
@@ -54,8 +54,8 @@ def rollout(env: ParallelEnv,
         obs, rew, term, trunc, info = env.step(act)
         for i, v in obs.items():
             obss[i].append(v)
-        for i, v in rew.items():
-            rews[i].append(v)
+        for i, r in rew.items():
+            rews[i].append(r)
         for i, v in info.items():
             infos[i].append(v)
         if all(term.values()) or any(trunc.values()):

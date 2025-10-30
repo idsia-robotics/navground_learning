@@ -7,11 +7,12 @@ import torch as th
 from navground.core import FloatType
 from stable_baselines3.common.distributions import (
     SquashedDiagGaussianDistribution, StateDependentNoiseDistribution)
+from stable_baselines3.common.policies import BasePolicy
 from stable_baselines3.common.torch_layers import (CombinedExtractor,
                                                    FlattenExtractor,
                                                    create_mlp)
 from stable_baselines3.sac.policies import (LOG_STD_MAX, LOG_STD_MIN, Actor,
-                                            BasePolicy, SACPolicy)
+                                            SACPolicy)
 from torch import nn
 
 if TYPE_CHECKING:
@@ -33,7 +34,7 @@ class StackCombinedExtractor(CombinedExtractor):
 class ActorWithComm(Actor):
 
     def __init__(self,
-                 observation_space: gym.Space,
+                 observation_space: gym.Space[Any],
                  action_space: gym.spaces.Box,
                  net_arch: list[int],
                  features_extractor: nn.Module,
@@ -111,7 +112,8 @@ class ActorWithComm(Actor):
 
     def scale_comm(self, values: th.Tensor) -> th.Tensor:
         # TODO(Jerome): generalize to non-homogeneous comm spaces
-        low, high = self.comm_space.low[0], self.comm_space.high[0]
+        low, high = float(self.comm_space.low[0]), float(
+            self.comm_space.high[0])
         return low + values * (high - low)
 
     def get_action_dist_params(
@@ -131,7 +133,7 @@ class ActorWithComm(Actor):
         features = th.concat([features, *rx], dim=-1)
         features = features.reshape((-1, features.shape[-1]))
         m, le, info = self.get_action_dist_params_after_extraction(features)
-        shape = cast('gym.spaces.Box', self.action_space).shape
+        shape = self.action_space.shape
         s = shape[0] * shape[1]
         return m.reshape((-1, s)), le.reshape((-1, s)), info
 
@@ -164,7 +166,7 @@ class SACPolicyWithComm(SACPolicy):
 
     def __init__(
         self,
-        observation_space: gym.Space,
+        observation_space: gym.Space[Any],
         action_space: gym.spaces.Box,
         lr_schedule: Schedule,
         net_arch: list[int] | dict[str, list[int]] | None = None,

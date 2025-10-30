@@ -5,6 +5,8 @@ import os
 from collections.abc import Callable, Mapping, Sequence
 from typing import TYPE_CHECKING, Any, Protocol, TypeAlias
 
+from navground.sim import Bounds as Bounds  # noqa: F401
+
 if TYPE_CHECKING:
     import gymnasium as gym
     import torch
@@ -28,11 +30,8 @@ Observation: TypeAlias = dict[str, Array] | Array
 Action: TypeAlias = Array
 State: TypeAlias = tuple[Array, ...]
 EpisodeStart: TypeAlias = Array
-Info: TypeAlias = list[dict[str, Array]] | dict[str, Array]
+Info: TypeAlias = dict[str, Any]
 PathLike: TypeAlias = os.PathLike[str] | str
-
-Bounds: TypeAlias = tuple[np.typing.NDArray[np.floating[Any]],
-                          np.typing.NDArray[np.floating[Any]]]
 
 ObservationTransform: TypeAlias = Callable[[Observation], Observation]
 GroupObservations: TypeAlias = dict[int, Observation]
@@ -96,11 +95,11 @@ class PolicyPredictor(Protocol):
     """
 
     @property
-    def action_space(self) -> gym.Space:
+    def action_space(self) -> gym.Space[Any]:
         ...
 
     @property
-    def observation_space(self) -> gym.Space:
+    def observation_space(self) -> gym.Space[Any]:
         ...
 
     def predict(self,
@@ -131,11 +130,11 @@ class PolicyPredictorWithInfo(Protocol):
     """
 
     @property
-    def action_space(self) -> gym.Space:
+    def action_space(self) -> gym.Space[Any]:
         ...
 
     @property
-    def observation_space(self) -> gym.Space:
+    def observation_space(self) -> gym.Space[Any]:
         ...
 
     def predict(self,

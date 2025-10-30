@@ -100,7 +100,7 @@ class DiscreteControlActionWithCommConfig(
     def get_action(self, behavior: core.Behavior, time_step: float) -> Action:
         act = ControlActionConfig.get_action(self, behavior, time_step)
         if hasattr(behavior, '_comm'):
-            comm = behavior._comm  # type: ignore[attr-defined]
+            comm = behavior._comm
         else:
             comm = []
         if len(comm) < self.comm_size:

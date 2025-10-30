@@ -144,7 +144,7 @@ class OrderInvariantCombinedExtractor(BaseFeaturesExtractor):
             if len(z):
                 for reduction in self.reductions:
                     r = reduction(z, 1, False)
-                    if reduction in (th.max, th.min):
+                    if reduction in (th.max, th.min):  # type: ignore[comparison-overlap]
                         r = r.values  # type: ignore
                     encoded_tensor_list.append(r)
             else:
@@ -256,8 +256,7 @@ class OrderInvariantFlattenExtractor(BaseFeaturesExtractor):
                     ri = [1] * len(z.shape)
                     ri[-1] = z.shape[-1]
                     mask = mask.unsqueeze(-1).repeat(*ri)
-                    z = as_masked_tensor(z,
-                                         mask)  # type: ignore[no-untyped-call]
+                    z = as_masked_tensor(z, mask)
                     for reduction in self.reductions:
                         r = reduction(z, -2, False)
                         zs.append(r)

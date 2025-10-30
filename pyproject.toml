@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "navground_learning"
 dependencies = [
   "gymnasium>=1.0.0",
-  "navground>=0.6.0",
+  "navground>=0.7.0",
   "pettingzoo>=1.24.3",
 ]
 

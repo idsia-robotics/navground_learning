@@ -11,7 +11,7 @@ if TYPE_CHECKING:
     from tensordict import TensorDictBase  # type: ignore
 
 
-class ExportPolicyCallback(Callback):
+class ExportPolicyCallback(Callback):  # type: ignore[misc]
     """
     Export the policy. The best model gets exported as ``"best_policy.onnx"``.
     The others as ``"policy_<iterations>.onnx"``.
@@ -23,10 +23,10 @@ class ExportPolicyCallback(Callback):
         super().__init__()
         self.export_all = export_all
 
-    def on_setup(self):
+    def on_setup(self) -> None:
         self.best_reward = -np.inf
 
-    def on_evaluation_end(self, rollouts: list[TensorDictBase]):
+    def on_evaluation_end(self, rollouts: list[TensorDictBase]) -> None:
         reward = 0
         for group in self.experiment.group_map:
             reward += np.sum([
@@ -44,7 +44,7 @@ class ExportPolicyCallback(Callback):
                     group=group)
 
 
-class AlternateActorCallback(Callback):
+class AlternateActorCallback(Callback):  # type: ignore[misc]
 
     def __init__(self,
                  loss: str,

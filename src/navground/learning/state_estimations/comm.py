@@ -45,8 +45,7 @@ class CommSensor(sim.Sensor, name="Comm", include_properties_of=['Sensor']):
         for other in world.agents:
             if other is not agent:
                 if other.behavior and hasattr(other.behavior, "_comm"):
-                    cs.append(
-                        other.behavior._comm)  # type: ignore[attr-defined]
+                    cs.append(other.behavior._comm)
                 else:
                     cs.append(np.zeros(self.size))
         data = np.concatenate(cs, dtype=np.float32)

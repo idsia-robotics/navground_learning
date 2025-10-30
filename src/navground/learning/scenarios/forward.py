@@ -86,9 +86,9 @@ class ForwardScenario(sim.Scenario, name='Forward'):
         if self._min_number_of_obstacles >= self._max_number_of_obstacles:
             number_of_obstacles = self._max_number_of_obstacles
         else:
-            number_of_obstacles = rng.integers(
+            number_of_obstacles = int(rng.integers(
                 low=self._min_number_of_obstacles,
-                high=self._max_number_of_obstacles)
+                high=self._max_number_of_obstacles))
         if number_of_obstacles > 0:
             world.add_random_obstacles(number_of_obstacles,
                                        min_radius=self.min_obstacle_radius,

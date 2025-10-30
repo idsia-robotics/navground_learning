@@ -218,7 +218,7 @@ class ControlActionConfig(ConfigWithKinematic,
         if max_value:
             v = value.velocity[:2] / max_value
         else:
-            v = np.zeros(2, dtype=FloatType)
+            v = core.zeros2()
         # CHANGED(16/4/2025)
         if self.dof == 2:
             v = v[:1]

@@ -3,7 +3,7 @@ from __future__ import annotations
 from navground import core
 
 
-def compute_speeds(values: list[tuple[float, float]], b) -> list[float]:
+def compute_speeds(values: list[tuple[float, float]], b: float) -> list[float]:
     # all have already passed the pad (half-way) or one has already exited the pad
     # => proceed at full speed
     assert len(values) == 2

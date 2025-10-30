@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING, Any
 
 import gymnasium as gym
 import numpy as np
-from pettingzoo.utils.wrappers import BaseParallelWrapper
+from pettingzoo.utils.wrappers.base_parallel import BaseParallelWrapper
 
 if TYPE_CHECKING:
     from pettingzoo.utils.env import ParallelEnv
@@ -37,22 +37,24 @@ def unmask_array(values: Array,
 
 
 def mask_space(
-    value: gym.spaces.Box | gym.spaces.Dict,
+    value: gym.Space[Any],
     indices: Iterable[int] = tuple(),
     keys: Iterable[str] = tuple()
-) -> gym.spaces.Box | gym.spaces.Dict:
-    if isinstance(value, Mapping):
+) -> gym.Space[Any]:
+    if isinstance(value, gym.spaces.Dict):
         keys = set(keys)
         return gym.spaces.Dict({
             k: v
             for k, v in value.items() if k not in keys
         })
-    indices = list(indices)
-    return gym.spaces.Box(np.delete(value.low, indices),
-                          np.delete(value.high, indices))
+    if isinstance(value, gym.spaces.Box):
+        indices = list(indices)
+        return gym.spaces.Box(np.delete(value.low, indices),
+                              np.delete(value.high, indices))
+    raise TypeError(f"Space of type {type(value)} not supported")
 
 
-class MaskWrapper(BaseParallelWrapper):
+class MaskWrapper(BaseParallelWrapper[int, Observation, Action]):
     """
     This wrapper masks some of the observations and/or actions
 
@@ -64,7 +66,7 @@ class MaskWrapper(BaseParallelWrapper):
 
     def __init__(
         self,
-        env: ParallelEnv,
+        env: ParallelEnv[int, Observation, Action],
         observation_indices: Iterable[int] = tuple(),
         observation_keys: Iterable[str] = tuple(),
         action_indices: Iterable[int] = tuple()
@@ -74,12 +76,12 @@ class MaskWrapper(BaseParallelWrapper):
         self._observation_indices = observation_indices
         self._observation_keys = observation_keys
 
-    def observation_space(self, agent):
+    def observation_space(self, agent: Any) -> gym.Space[Any]:
         return mask_space(self.env.observation_space(agent),
                           indices=self._observation_indices,
                           keys=self._observation_keys)
 
-    def action_space(self, agent):
+    def action_space(self, agent: Any) -> gym.Space[Any]:
         return mask_space(self.env.action_space(agent),
                           indices=self._action_indices)
 

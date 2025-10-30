@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import copy
 from collections.abc import Callable
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any, cast
 
 import gymnasium as gym
 
@@ -20,13 +20,13 @@ from ...parallel_env import MultiAgentNavgroundEnv
 from ...wrappers.name_wrapper import NameWrapper
 
 
-class NavgroundTaskClass(TaskClass):
+class NavgroundTaskClass(TaskClass):  # type: ignore[misc]
 
     def __init__(self,
-                 *args,
+                 *args: Any,
                  env: MultiAgentNavgroundEnv,
                  eval_env: MultiAgentNavgroundEnv | None = None,
-                 **kwargs):
+                 **kwargs: Any):
         super().__init__(*args, **kwargs)
         if not eval_env:
             eval_env = env
@@ -91,13 +91,13 @@ class NavgroundTaskClass(TaskClass):
     #     return False
 
     def has_render(self, env: EnvBase) -> bool:
-        return env.render_mode == 'rgb_array'
+        return cast('str | None', env.render_mode) == 'rgb_array'
 
     def max_steps(self, env: EnvBase) -> int:
         return int(env._env.max_duration // env._env.time_step)
 
     def group_map(self, env: EnvBase) -> dict[str, list[str]]:
-        return env.group_map
+        return cast('dict[str, list[str]]', env.group_map)
 
     def state_spec(self, env: EnvBase) -> CompositeSpec | None:
         if 'state' in env.observation_spec:

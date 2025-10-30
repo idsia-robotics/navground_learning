@@ -3,12 +3,12 @@ from __future__ import annotations
 import dataclasses as dc
 from collections.abc import Sequence
 from functools import reduce
-from typing import SupportsFloat, cast
+from typing import Any, SupportsFloat, cast
 
 import gymnasium as gym
 import numpy as np
 
-from ...types import Action, AnyPolicyPredictor, Array, Observation
+from ...types import Action, AnyPolicyPredictor, Array, Observation, accept_info
 
 # Could/should replicate the Torch RL Env.rolling
 # that returns a dictionary of {'action', 'next', ...}
@@ -29,12 +29,15 @@ class Rollout:
     info: dict[str, Array]
 
 
-def rollout(env: gym.Env,
+def rollout(env: gym.Env[Any, Any],
             max_steps: int = 1000,
             policy: AnyPolicyPredictor | None | str = None,
             deterministic: bool = True,
             seed: int | None = None,
-            options: dict = {}) -> Rollout:
+            options: dict[str, Any] | None = None) -> Rollout:
+    pass_info = False
+    if policy is not None and not isinstance(policy, str):
+        pass_info = accept_info(policy.predict)
     obss: list[Observation] = []
     infos: list[dict[str, Array]] = []
     rews: list[SupportsFloat] = []
@@ -46,7 +49,11 @@ def rollout(env: gym.Env,
         elif policy is None:
             act = env.action_space.sample()
         else:
-            act, _ = policy.predict(obs, deterministic=deterministic)
+            if pass_info:
+                kwargs = {'info': info}
+            else:
+                kwargs = {}
+            act, _ = policy.predict(obs, deterministic=deterministic, **kwargs)
         acts.append(act)
         obs, rew, term, trunc, info = env.step(act)
         obss.append(obs)

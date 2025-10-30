@@ -1,10 +1,12 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, cast
 
 if TYPE_CHECKING:
     from tensordict import TensorDictBase  # type: ignore
     from torch import nn
+    from benchmarl.experiment import Experiment  # type: ignore
+    from torchrl.data.tensor_specs import TensorSpec  # type: ignore
 
 import copy
 from collections import ChainMap
@@ -14,13 +16,16 @@ from dataclasses import MISSING, dataclass, field
 import torch
 from torchrl.modules import MultiAgentMLP  # type: ignore
 
-from benchmarl.models.common import Model  # type: ignore[import-not-found]
-from benchmarl.models.common import ModelConfig
+from benchmarl.models.common import Model, ModelConfig  # type: ignore
 
 from ...types import PyTorchObs
 
+InputSpec = slice | Collection[str] | None
+MlpSpec = tuple[int, InputSpec, dict[str, Any]]
 
-def compute_input_size(input_spec, i_spec, keys):
+
+def compute_input_size(input_spec: TensorSpec, i_spec: InputSpec,
+                       keys: Sequence[str]) -> int:
     if i_spec is None:
         return sum([spec.shape[-1] for spec in input_spec])
     if isinstance(i_spec, slice):
@@ -34,7 +39,8 @@ def compute_input_size(input_spec, i_spec, keys):
     # self.input_features =
 
 
-def compute_input(tensordict, i_spec, keys):
+def compute_input(tensordict: TensorDictBase, i_spec: InputSpec,
+                  keys: Sequence[str]) -> torch.Tensor:
     # print('compute_input', i_spec, keys)
     if i_spec is None:
         return torch.cat([tensordict.get(in_key) for in_key in keys], dim=-1)
@@ -46,12 +52,12 @@ def compute_input(tensordict, i_spec, keys):
         dim=-1)
 
 
-class SplitMlp(Model):
+class SplitMlp(Model):  # type: ignore[misc]
 
     def __init__(
         self,
-        mlps_specs=[],
-        **kwargs,
+        mlps_specs: Sequence[MlpSpec] = [],
+        **kwargs: Any,
     ):
         super().__init__(
             input_spec=kwargs.pop("input_spec"),
@@ -106,11 +112,8 @@ class SplitMlp(Model):
         return tensordict
 
 
-InputSpec = slice | Collection[str] | None
-
-
 @dataclass
-class SplitMlpConfig(ModelConfig):
+class SplitMlpConfig(ModelConfig):  # type: ignore[misc]
     """
     A model with a independent MLP sub-models for different dimensions
     of the action space, as specified by ``mlps_specs``, a list of
@@ -143,30 +146,34 @@ class SplitMlpConfig(ModelConfig):
     layer_class: type[nn.Module] = MISSING  # type: ignore[assignment]
 
     activation_class: type[nn.Module] = MISSING  # type: ignore[assignment]
-    activation_kwargs: dict | None = None
+    activation_kwargs: dict[str, Any] | None = None
 
     norm_class: type[nn.Module] | None = None
-    norm_kwargs: dict | None = None
+    norm_kwargs: dict[str, Any] | None = None
 
-    mlps_specs: list[tuple[int, InputSpec,
-                           dict[str, Any]]] = field(default_factory=list)
+    mlps_specs: list[MlpSpec] = field(default_factory=list)
 
     @staticmethod
-    def associated_class():
+    def associated_class() -> type:
         return SplitMlp
 
 
 # https://pytorch.org/docs/main/optim.html#per-parameter-options
 
 
-def select_submlp(experiment, index, lr=1e-4, eps=1e-6):
+def select_submlp(experiment: Experiment,
+                  index: int,
+                  lr: float = 1e-4,
+                  eps: float = 1e-6) -> None:
     split_mlp = experiment.policy[0][0][0]
     mlp = split_mlp.mlps[index]
     experiment.optimizers['agent']['loss_objective'] = torch.optim.Adam(
         mlp.parameters(), eps=eps, lr=lr)
 
 
-def setup_optimizer(experiment, lrs, eps=1e-6):
+def setup_optimizer(experiment: Experiment,
+                    lrs: Sequence[float],
+                    eps: float = 1e-6) -> None:
     split_mlp = experiment.policy[0][0][0]
     params = [{
         'params': mlp.parameters(),
@@ -176,20 +183,24 @@ def setup_optimizer(experiment, lrs, eps=1e-6):
         params, eps=eps)
 
 
-def set_lr(experiment, index, lr):
+def set_lr(experiment: Experiment, index: int, lr: float) -> None:
     experiment.optimizers['agent']['loss_objective'].param_groups[index][
         'lr'] = lr
 
 
-def compute_input_2(obs, i_spec, keys):
+def compute_input_2(obs: PyTorchObs, i_spec: InputSpec,
+                    keys: Sequence[str]) -> torch.Tensor:
     if isinstance(obs, dict):
         if i_spec is None:
-            return torch.cat([obs.get(in_key) for in_key in keys], dim=-1)
-        return torch.cat(
-            [obs.get(in_key) for in_key in keys if in_key in i_spec], dim=-1)
+            return torch.cat([obs[in_key] for in_key in keys], dim=-1)
+        return torch.cat([
+            obs[in_key]
+            for in_key in keys if in_key in cast("Collection[str]", i_spec)
+        ],
+                         dim=-1)
     if i_spec is None:
         return obs
-    return obs[..., i_spec]
+    return obs[..., cast("slice", i_spec)]
 
 
 class SplitMlpPolicy(torch.nn.Module):

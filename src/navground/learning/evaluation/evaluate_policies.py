@@ -8,7 +8,7 @@ import numpy as np
 
 from ..indices import Indices, IndicesLike
 from ..parallel_env import BaseParallelEnv
-from ..types import (Array, Observation, AnyPolicyPredictor, State,
+from ..types import (Array, Observation, Info, AnyPolicyPredictor, State,
                      accept_info)
 
 
@@ -25,6 +25,14 @@ def stack_obs_dict(values: dict[Any, dict[str, Array]],
         })
         for k in keys
     }
+
+
+def stack_info_dict(values: dict[Any, Info]) -> Info:
+    keys = [set(vs.keys()) for vs in values.values()]
+    if not keys:
+        return {}
+    u_keys: set[str] = set.union(*keys)
+    return {k: [vs.get(k, None) for vs in values.values()] for k in u_keys}
 
 
 def evaluate_policies(
@@ -143,12 +151,13 @@ def evaluate_policies(
                 group_obs = indices.sub_dict(observations)
                 if obs_keys:
                     obs: Observation = stack_obs_dict(
-                        cast('dict[Any, dict[str, Array]]', group_obs), obs_keys)
+                        cast('dict[Any, dict[str, Array]]', group_obs),
+                        obs_keys)
                 else:
                     obs = stack_dict(cast('dict[int, Array]', group_obs))
                 episode_start = dones[group]
                 if use_info:
-                    kwargs = {'info': list(indices.sub_dict(infos).values())}
+                    kwargs = {'info': stack_info_dict(indices.sub_dict(infos))}
                 else:
                     kwargs = {}
                 acts, group_state[i] = model.predict(

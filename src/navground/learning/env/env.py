@@ -14,8 +14,8 @@ from ..indices import Indices
 from ..internal.base_env import NavgroundBaseEnv
 from ..policies.info_predictor import InfoPolicy
 from ..rewards import NullReward
-from ..types import (Action, Bounds, Observation, Reward, SensorLike,
-                     SensorSequenceLike, TerminationCondition)
+from ..types import (Action, Observation, Reward, SensorLike,
+                     SensorSequenceLike, TerminationCondition, Bounds)
 
 BaseEnv: TypeAlias = gym.Env[Observation, Action]
 

@@ -87,7 +87,7 @@ def make_composed_space(
 
 def get_relative_target_position(behavior: core.Behavior) -> core.Vector2:
     if behavior.target.position is None:
-        return np.zeros(2, dtype=core.FloatType)
+        return core.zeros2()
     return core.to_relative(behavior.target.position - behavior.position,
                             behavior.pose)
 
