@@ -16,15 +16,15 @@ import numpy as np
 import yaml
 from navground import core, sim
 
-from ..config import GroupConfig, StateConfig, ActionConfig, ObservationConfig
+from ..config import ActionConfig, GroupConfig, ObservationConfig, StateConfig
 from ..policies.info_predictor import InfoPolicy
-from ..types import Action, Array, Bounds, Observation
+from ..types import Action, Array, Bounds, Observation, Info
 from .clock import SyncClock
 from .group import Agent, GymAgent, create_agents_in_groups
 
 StepReturn = tuple[dict[int, Observation], dict[int, float], dict[int, bool],
-                   dict[int, bool], dict[int, dict[str, Action]]]
-ResetReturn = tuple[dict[int, Observation], dict[int, dict[str, Action]]]
+                   dict[int, bool], dict[int, Info]]
+ResetReturn = tuple[dict[int, Observation], dict[int, Info]]
 
 
 def make_scenario(
@@ -505,7 +505,7 @@ class NavgroundBaseEnv:
                                 self.terminate(index)
                                 continue
 
-    def terminate(self, index: int):
+    def terminate(self, index: int) -> None:
         self._termination[index] = True
         if all(self._termination.values()):
             self._terminated = True
@@ -520,7 +520,7 @@ class NavgroundBaseEnv:
             return {i: False for i in self._agents}
         return self._termination
 
-    def truncate(self, index: int):
+    def truncate(self, index: int) -> None:
         self._truncation[index] = True
         self._truncated = True
 
@@ -555,7 +555,7 @@ class NavgroundBaseEnv:
                         self.terminate(index)
                         continue
 
-    def update_truncation(self):
+    def update_truncation(self) -> None:
         if self._world and self.max_duration > 0 and self.max_duration <= self._world.time:
             self._truncated = True
             self._truncation = {i: True for i in self._agents}

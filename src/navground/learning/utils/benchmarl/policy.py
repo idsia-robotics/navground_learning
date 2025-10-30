@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import Any
+from collections.abc import Callable
 
 import gymnasium as gym
 import torch
@@ -10,7 +11,7 @@ from torchrl.modules import ProbabilisticActor  # type: ignore
 from torchrl.modules.distributions.continuous import TanhNormal  # type: ignore
 from torchrl.modules.tensordict_module import SafeProbabilisticModule  # type: ignore
 
-from benchmarl.models.mlp import Mlp  # type: ignore[import-not-found]
+from benchmarl.models.mlp import Mlp  # type: ignore
 
 from ...types import (Action, Array, EpisodeStart, Info, Observation,
                       PyTorchObs, State)
@@ -27,7 +28,7 @@ class SingleAgentPolicy(torch.nn.Module):
     and is construction from a TorchRL policy.
     """
 
-    def __init__(self, observation_space: gym.Space,
+    def __init__(self, observation_space: gym.Space[Any],
                  action_space: gym.spaces.Box, policy: Any):
         """
         Constructs a new instance.
@@ -42,6 +43,7 @@ class SingleAgentPolicy(torch.nn.Module):
         # actor = policy.module[0]
         actor = policy
         dist_module = actor[1]
+        self._tail: Callable[[torch.Tensor], torch.Tensor]
         if isinstance(dist_module, SafeProbabilisticModule):
             if dist_module.distribution_class in (TanhNormal, ):
                 min_act = dist_module.distribution_kwargs['low'][0]

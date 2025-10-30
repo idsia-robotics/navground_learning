@@ -20,14 +20,15 @@ if TYPE_CHECKING:
                          ObservationTransform, PathLike)
 
 
-def _run_video(fn: Callable,
-               experiment: sim.Experiment,
-               factor: int = 1,
-               seed: int = 0,
-               use_world_bounds: bool = True,
-               select: int = 0,
-               of: int = 0,
-               **kwargs) -> Any:
+def _run_video(
+        fn: Callable,  # type: ignore[type-arg]
+        experiment: sim.Experiment,
+        factor: int = 1,
+        seed: int = 0,
+        use_world_bounds: bool = True,
+        select: int = 0,
+        of: int = 0,
+        **kwargs: Any) -> Any:
     if of:
         experiment.run_index = seed
         experiment.run(number_of_runs=of)
@@ -108,15 +109,15 @@ def record_run_video(experiment: sim.Experiment,
     :param      kwargs:            Keywords arguments passed to the renderer
 
     """
-    return _run_video(record_video,
-                      experiment,
-                      path=path,
-                      factor=factor,
-                      seed=seed,
-                      use_world_bounds=use_world_bounds,
-                      select=select,
-                      of=of,
-                      **kwargs)
+    _run_video(record_video,
+               experiment,
+               path=path,
+               factor=factor,
+               seed=seed,
+               use_world_bounds=use_world_bounds,
+               select=select,
+               of=of,
+               **kwargs)
 
 
 def display_episode_video(env: BaseEnv | BaseParallelEnv | VecEnv,
@@ -130,7 +131,7 @@ def display_episode_video(env: BaseEnv | BaseParallelEnv | VecEnv,
                           use_world_bounds: bool = True,
                           of: int = 1,
                           select: int = 0,
-                          **kwargs) -> Any:
+                          **kwargs: Any) -> Any:
     """
     Display the video from one episode of an environment.
 
@@ -180,7 +181,7 @@ def record_episode_video(env: BaseEnv | BaseParallelEnv | VecEnv,
                          use_world_bounds: bool = True,
                          of: int = 1,
                          select: int = 0,
-                         **kwargs):
+                         **kwargs: Any) -> None:
     """
     Record the video from one episode of an environment.
 

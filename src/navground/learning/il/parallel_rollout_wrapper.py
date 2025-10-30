@@ -31,7 +31,7 @@ class RolloutInfoWrapper(BaseParallelWrapper[int, Observation, Action]):
               options: dict[str, Any] | None = None) -> ResetReturn:
         obss, infos = self.env.reset(seed=seed, options=options)
         self._obs = {
-            i: [types.maybe_wrap_in_dictobs(obs)]  # type: ignore[misc]
+            i: [types.maybe_wrap_in_dictobs(obs)]  # type: ignore
             for i, obs in obss.items()
         }
         self._rews = {i: [] for i in obss}
@@ -41,7 +41,7 @@ class RolloutInfoWrapper(BaseParallelWrapper[int, Observation, Action]):
         obss, rews, terms, trucs, infos = self.env.step(actions)
         for i, obs in obss.items():
             self._obs[i].append(
-                types.maybe_wrap_in_dictobs(obs))  # type: ignore[arg-type]
+                types.maybe_wrap_in_dictobs(obs))   # type: ignore
         for i, rew in rews.items():
             self._rews[i].append(rew)
 

@@ -9,12 +9,13 @@ import torch as th
 from stable_baselines3.common.callbacks import BaseCallback
 from stable_baselines3.common.distributions import \
     SquashedDiagGaussianDistribution  # StateDependentNoiseDistribution
+from stable_baselines3.common.policies import BasePolicy
 from stable_baselines3.common.preprocessing import get_action_dim
 from stable_baselines3.common.torch_layers import (CombinedExtractor,
                                                    FlattenExtractor)
 from stable_baselines3.common.utils import get_schedule_fn
 from stable_baselines3.sac import SAC
-from stable_baselines3.sac.policies import Actor, BasePolicy, SACPolicy
+from stable_baselines3.sac.policies import Actor, SACPolicy
 from torch import nn
 
 if TYPE_CHECKING:
@@ -47,8 +48,8 @@ def make_subspace(space: T, inputs: InputSpec) -> T:
     raise ValueError("String indices must be used only with dict spaces")
 
 
-def make_actors(specs: list[ActorSpec], observation_space: gym.Space,
-                action_space: gym.spaces.Box, **kwargs):
+def make_actors(specs: list[ActorSpec], observation_space: gym.Space[Any],
+                action_space: gym.spaces.Box, **kwargs: Any) -> list[Actor]:
     actors = []
     out_index = 0
     for (dims, inputs, net_arch) in specs:
@@ -72,19 +73,22 @@ def make_actors(specs: list[ActorSpec], observation_space: gym.Space,
     return actors
 
 
-def filter_obs(obs, spec: InputSpec):
+def filter_obs(obs: PyTorchObs, spec: InputSpec) -> PyTorchObs:
     if spec is None:
         return obs
     if isinstance(spec, slice):
-        return obs[..., spec]
-    return {k: v for k, v in obs.items() if k in spec}
+        return cast('th.Tensor', obs)[..., spec]
+    return {
+        k: v
+        for k, v in cast('dict[str, th.Tensor]', obs).items() if k in spec
+    }
 
 
 class ActorList(Actor):
 
     def __init__(self,
                  actor_specs: list[ActorSpec],
-                 observation_space: gym.Space,
+                 observation_space: gym.Space[Any],
                  action_space: gym.spaces.Box,
                  normalize_images: bool = True,
                  **kwargs: Any):
@@ -105,7 +109,7 @@ class ActorList(Actor):
             action_dim)
         self.filters = [f for _, f, _ in actor_specs]
 
-    def set_training_mode(self, mode):
+    def set_training_mode(self, mode: bool) -> None:
         for actor in self.actors:
             actor.set_training_mode(mode)
 
@@ -170,7 +174,7 @@ class SplitSACPolicy(SACPolicy):
 
     def __init__(
         self,
-        observation_space: gym.Space,
+        observation_space: gym.Space[Any],
         action_space: gym.spaces.Box,
         lr_schedule: Schedule,
         net_arch: list[int] | dict[str, list[int]] | None = None,

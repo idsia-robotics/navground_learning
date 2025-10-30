@@ -19,19 +19,24 @@ class InfoPolicy:
     :param observation_space:  An optional observation space
     """
 
-    def __init__(self,
-                 action_space: gym.Space[Any],
-                 key: str,
-                 observation_space: gym.Space[Any] = gym.spaces.Dict()) -> None:
+    def __init__(
+        self,
+        action_space: gym.Space[Any],
+        key: str,
+        observation_space: gym.Space[Any] = gym.spaces.Dict()) -> None:
         self.observation_space = observation_space
         self.action_space = action_space
         self.key = key
         self._default = self.action_space.sample() * 0
 
-    def get_actions(self, info: Info) -> Action:
-        if isinstance(info, list):
-            return np.asarray([i.get(self.key, self._default) for i in info])
-        return info.get(self.key, self._default)
+    def get_actions(self, info: Info, n: int) -> Action:
+        if self.key in info:
+            acts = [
+                act if act is not None else self._default
+                for act in info[self.key]
+            ]
+            return np.asarray(acts)
+        return np.stack([self._default] * n)
 
     def predict(self,
                 observation: Observation,
@@ -40,7 +45,8 @@ class InfoPolicy:
                 deterministic: bool = False,
                 info: Info | None = None) -> tuple[Action, State | None]:
         assert info is not None
-        return self.get_actions(info), None
+        n = 0 if episode_start is None else len(episode_start)
+        return self.get_actions(info, n), None
 
     def __call__(self,
                  observation: Observation,

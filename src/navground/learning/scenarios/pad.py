@@ -43,7 +43,7 @@ def _draw_tx_world(world: sim.World,
         b = agent.behavior
         if b and hasattr(b, '_comm'):
 
-            tx = float(b._comm)  # type: ignore[attr-defined]
+            tx = float(b._comm)
             if binarize:
                 if tx > (high + low) / 2:
                     color = svg_color(*color_high)
@@ -190,7 +190,7 @@ class PadScenario(sim.Scenario, name="Pad"):
         while len(world.agents) < 2:
             world.add_agent(self.default_agent())
 
-        def terminate(world: sim.World):
+        def terminate(world: sim.World) -> bool:
             return all(
                 agent.behavior.target.direction.dot(
                     agent.behavior.position) > self.length / 2

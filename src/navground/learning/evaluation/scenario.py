@@ -42,7 +42,7 @@ def set_policy_behavior(
     for i in all_indices:
         agent = world.agents[i]
         if agent.behavior:
-            agent.behavior = behavior_cls.clone_behavior(  # type: ignore[attr-defined]
+            agent.behavior = behavior_cls.clone_behavior(
                 behavior=agent.behavior,
                 policy=policy,
                 action_config=action_config,
@@ -93,10 +93,6 @@ def set_policy_behavior_with_env(
     return all_indices
 
 
-def to_bounds(bb: sim.BoundingBox) -> Bounds:
-    return bb.p1, bb.p2
-
-
 def is_outside(p: core.Vector2, bounds: Bounds) -> bool:
     return any(p < bounds[0]) or any(p > bounds[1])
 
@@ -109,7 +105,7 @@ def is_any_agents_outside(
     def f(world: sim.World) -> bool:
         nonlocal bounds
         if bounds is None:
-            bounds = to_bounds(world.bounding_box)
+            bounds = sim.bounds_of_bounding_box(world.bounding_box)
         return any(
             is_outside(agent.position, bounds)
             for agent in agent_indices.sub_sequence(world.agents))
@@ -122,7 +118,7 @@ def is_outside_world_bounds(
         bounds: Bounds | None = None
 ) -> Callable[[sim.Agent, sim.World], bool]:
     if bounds is None:
-        bounds = to_bounds(world.bounding_box)
+        bounds = sim.bounds_of_bounding_box(world.bounding_box)
 
     def f(agent: sim.Agent, world: sim.World) -> bool:
         return is_outside(agent.position, bounds)

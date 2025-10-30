@@ -92,7 +92,7 @@ def plot_logs(logs: DataFrame,
 def plot_policy(policy: AnyPolicyPredictor,
                 axs: Iterable[Axes] | None = None,
                 fix: dict[str, float | Iterable[float]] = {},
-                colors: Iterable | None = None,
+                colors: Iterable[Any] | None = None,
                 variable: dict[str, tuple[float, float]] = {},
                 actions: dict[int, str] = {},
                 cmap: str = 'RdYlGn',
@@ -100,7 +100,7 @@ def plot_policy(policy: AnyPolicyPredictor,
                 width: float = 5,
                 height: float = 3,
                 label: str = '',
-                **kwargs: Any):
+                **kwargs: Any) -> None:
     in_space = policy.observation_space
     out_space = policy.action_space
     if not isinstance(in_space, gym.spaces.Dict):

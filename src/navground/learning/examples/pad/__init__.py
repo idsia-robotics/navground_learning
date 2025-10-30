@@ -117,7 +117,7 @@ def get_env(action: ControlActionConfig,
             intermediate_success: bool = False,
             include_success: bool = True,
             render_mode: str | None = None,
-            render_kwargs: dict = {},
+            render_kwargs: dict[str, Any] = {},
             state: StateConfig | None = None,
             multi_agent: bool = True,
             **kwargs: Any) -> BaseEnv | BaseParallelEnv:
@@ -185,8 +185,8 @@ def get_env(action: ControlActionConfig,
 
 def plot_policy(policy: Any,
                 cmap: str = 'RdYlGn',
-                title='Distributed policy',
-                speed: float = 0.01):
+                title: str ='Distributed policy',
+                speed: float = 0.01) -> None:
     from matplotlib import pyplot as plt
 
     xs = np.linspace(-1, 1, 101, dtype=np.float32)
@@ -226,9 +226,9 @@ def plot_policy(policy: Any,
 
 def plot_policy_with_comm(policy: Any,
                           cmap: str = 'RdYlGn',
-                          title='Distributed policy with comm',
+                          title: str ='Distributed policy with comm',
                           speed: float = 0.01,
-                          binarize: bool | None = None):
+                          binarize: bool | None = None) -> None:
     from matplotlib import pyplot as plt
 
     xs = np.linspace(-1, 1, 101, dtype=np.float32)
