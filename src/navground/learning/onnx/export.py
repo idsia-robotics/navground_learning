@@ -54,4 +54,5 @@ def export(policy: PyTorchPolicy,
                    opset_version=17,
                    input_names=input_names,
                    dynamic_axes=dynamic_axes,
-                   output_names=["action"])
+                   output_names=["action"],
+                   dynamo=False)
