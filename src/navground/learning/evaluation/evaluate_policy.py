@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import warnings
-from collections.abc import Callable
+from collections.abc import Callable, Sequence
 from typing import TYPE_CHECKING, Any
 
 import numpy as np
@@ -11,6 +11,14 @@ from ..types import AnyPolicyPredictor, accept_info
 
 if TYPE_CHECKING:
     from stable_baselines3.common.vec_env import VecEnv
+
+
+def stack_infos(infos: Sequence[dict[str, Any]]) -> dict[str, Any]:
+    keys = [set(vs.keys()) for vs in infos]
+    if not keys:
+        return {}
+    u_keys: set[str] = set.union(*keys)
+    return {k: [vs.get(k, None) for vs in infos] for k in u_keys}
 
 
 def evaluate_policy(
@@ -67,13 +75,13 @@ def evaluate_policy(
     current_rewards = np.zeros(n_envs)
     current_lengths = np.zeros(n_envs, dtype="int")
     observations = env.reset()
-    infos = env.reset_infos
+    infos = env.reset_infos  # list[dict[str, Any]]
     states = None
     episode_starts = np.ones((env.num_envs, ), dtype=bool)
     pass_info = accept_info(model.predict)
     while (episode_counts < episode_count_targets).any():
         if pass_info:
-            kwargs = {'info': infos}
+            kwargs = {'info': stack_infos(infos)}
         else:
             kwargs = {}
         actions, states = model.predict(

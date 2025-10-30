@@ -11,6 +11,7 @@ if TYPE_CHECKING:
     from ...env import BaseEnv
     from ...parallel_env import BaseParallelEnv
     from ...types import PathLike, GroupObservationsTransform, ObservationTransform
+    from navground import sim
 
 from ...evaluation import make_experiment_with_env, record_run_video
 
@@ -47,8 +48,8 @@ class VideoCallback(BaseCallback):
         :param      kwargs:        The keywords arguments passed to the renderer
         """
         super().__init__()
-        self.exp = None
-        self.save_path = None
+        self.exp: sim.Experiment | None = None
+        self.save_path: Path | None = None
         self.number = number
         self.env = env
         self.format = video_format
@@ -56,11 +57,13 @@ class VideoCallback(BaseCallback):
         self.grouped = grouped
         self.policy = policy
         self.pre = pre
-        self.group_pre = group_pre,
+        self.group_pre = group_pre
 
-    def _on_step(self):
+    def _on_step(self) -> bool:
         if self.save_path is None:
-            self.save_path = Path(self.model.logger.get_dir()) / 'videos'
+            path = self.model.logger.get_dir()
+            assert path
+            self.save_path = Path(path) / 'videos'
             self.save_path.mkdir(parents=True, exist_ok=True)
         if self.exp is None:
             policy = self.policy or self.model.policy

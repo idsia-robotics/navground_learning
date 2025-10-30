@@ -7,10 +7,10 @@ from __future__ import annotations
 import gc
 
 from IPython.core.magic import register_cell_magic
-from IPython import get_ipython
+from IPython.core.getipython import get_ipython
 
 
-@register_cell_magic
+@register_cell_magic  # type: ignore[misc]
 def skip_if(line: str, cell: str) -> None:
     """
     Executes the cell if the condition in ``line`` evaluate to False.
@@ -22,10 +22,10 @@ def skip_if(line: str, cell: str) -> None:
     """
     if eval(line):
         return
-    get_ipython().run_cell(cell)
+    get_ipython().run_cell(cell)  # type: ignore[no-untyped-call]
 
 
-@register_cell_magic
+@register_cell_magic  # type: ignore[misc]
 def run_if(line: str, cell: str) -> None:
     """
     Executes the cell if the condition in ``line`` evaluate to True.
@@ -37,10 +37,10 @@ def run_if(line: str, cell: str) -> None:
     """
     if not eval(line):
         return
-    get_ipython().run_cell(cell)
+    get_ipython().run_cell(cell)  # type: ignore[no-untyped-call]
 
 
-@register_cell_magic
+@register_cell_magic  # type: ignore[misc]
 def run_and_time_if(line: str, cell: str) -> None:
     """
     Executes the cell if the condition in ``line`` evaluate to True
@@ -53,7 +53,7 @@ def run_and_time_if(line: str, cell: str) -> None:
     """
     if not eval(line):
         return
-    get_ipython().magics_manager.magics['cell']['time'](cell=cell)
+    get_ipython().magics_manager.magics['cell']['time'](cell=cell)  # type: ignore[no-untyped-call]
 
 
 def clean_tqdm_rich() -> None:

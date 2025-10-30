@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from torchrl.envs.libs.pettingzoo import PettingZooWrapper  # type: ignore
 
-from benchmarl.experiment import Experiment  # type: ignore[import-not-found]
+from benchmarl.experiment import Experiment  # type: ignore
 
 from ...parallel_env import MultiAgentNavgroundEnv
 from ...types import PathLike

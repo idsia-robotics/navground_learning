@@ -1,23 +1,23 @@
 from __future__ import annotations
 
 from collections.abc import Iterable, Mapping
-from typing import Any, TypeVar, cast, TYPE_CHECKING
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 import gymnasium as gym
 import numpy as np
 from navground import core
 
 from ..env.env import BaseEnv
-from ..types import Action, Array, Observation
+from ..types import Action, Array, Info, Observation
 
 if TYPE_CHECKING:
-    from pettingzoo.utils.env import ParallelEnv
+    from .env import BaseParallelEnv
 
 T = TypeVar('T', bound=gym.Space[Any])
 
 
-def stack_infos(values: dict[int, dict[str, Action]],
-                all_of: set[str] = {'is_success'}) -> dict[str, Action]:
+def stack_infos(values: dict[int, Info],
+                all_of: set[str] = {'is_success'}) -> Info:
     if not values:
         return {}
     rs: dict[str, Any] = {}
@@ -47,7 +47,7 @@ def stack_observations(
     return np.stack(list(cast('dict[int, Array]', values).values()))
 
 
-def stack_box_spaces(spaces: list[gym.spaces.Box]):
+def stack_box_spaces(spaces: list[gym.spaces.Box]) -> gym.spaces.Box:
     low = np.stack([space.low for space in spaces])
     high = np.stack([space.high for space in spaces])
     return gym.spaces.Box(low, high)
@@ -65,15 +65,18 @@ def stack_observation_spaces(values: dict[int, T]) -> T:
             stack_box_spaces([space[k] for space in spaces])
             for k in keys
         })
-    return stack_box_spaces(
-        list(cast('dict[int, gym.spaces.Box]', values).values()))
+
+    return cast(
+        'T',
+        stack_box_spaces(
+            list(cast('dict[int, gym.spaces.Box]', values).values())))
 
 
 def unstack_actions(values: Array, agents: list[int]) -> dict[int, Array]:
     return dict(zip(agents, values, strict=True))
 
 
-def get_state_space(env: ParallelEnv) -> gym.spaces.Box | None:
+def get_state_space(env: BaseParallelEnv) -> gym.spaces.Box | None:
     """
     Gets the state space, first by trying to read
     ``env.state_space`` directly and then from ``env.state``.
@@ -92,10 +95,10 @@ def get_state_space(env: ParallelEnv) -> gym.spaces.Box | None:
     return gym.spaces.Box(low=-np.inf,
                           high=np.inf,
                           shape=state.shape,
-                          dtype=state.dtype)
+                          dtype=state.dtype.type)
 
 
-class JointEnv(gym.Env):
+class JointEnv(gym.Env[Observation, Action]):
     """
     Wraps a multi-agent parallel environment as a single
     agent environment, stacking observation but aggregating
@@ -109,7 +112,7 @@ class JointEnv(gym.Env):
                   (vs the stacked observation).
     """
 
-    def __init__(self, env: ParallelEnv, state: bool = False) -> None:
+    def __init__(self, env: BaseParallelEnv, state: bool = False) -> None:
         self.env = env
         self.use_state = False
         if state:
@@ -159,9 +162,8 @@ class JointEnv(gym.Env):
             vobs = stack_observations(obs)
         return vobs, stack_infos(infos)
 
-    def step(
-        self, action: Action
-    ) -> tuple[Observation, float, bool, bool, dict[str, Array]]:
+    def step(self,
+             action: Action) -> tuple[Observation, float, bool, bool, Info]:
         """
         Conforms to :py:meth:`gymnasium.Env.step`.
 

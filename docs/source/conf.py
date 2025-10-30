@@ -55,7 +55,6 @@ autodoc_type_aliases = {
     'PathLike': 'PathLike',
     'AnyPolicyPredictor': 'AnyPolicyPredictor',
     'T': 'T',
-    'Bounds': 'Bounds',
     'Reduction': 'Reduction',
     'BaseEnv': 'BaseEnv',
     'BaseParallelEnv': 'BaseParallelEnv',
@@ -142,7 +141,6 @@ reftarget_aliases['py'] = {
     'nn.Module': 'torch.nn.Module',
     'th.Tensor': 'torch.Tensor',
     'VecEnv': 'stable_baselines3.common.vec_env.VecEnv',
-    'Bounds': 'navground.learning.types.Bounds',
     'sim.Experiment': 'navground.sim.Experiment',
     'sim.Scenario': 'navground.sim.Scenario',
     'sim.ExperimentalRun': 'navground.sim.ExperimentalRun',
@@ -173,7 +171,7 @@ reftarget_aliases['py'] = {
 
 _types = [
     'PathLike', 'AnyPolicyPredictor', 'Array', 'Action', 'Observation', 'Info',
-    'EpisodeStart', 'State', "IndicesLike", "PolicyCallableWithInfo", 'Bounds',
+    'EpisodeStart', 'State', "IndicesLike", "PolicyCallableWithInfo",
     'T', 'navground.learning.indices.T', 'BaseParallelEnv', 'BaseEnv',
     'Reduction', 'AnyPolicy', 'PolicyCallable', 'gymnasium.core.ObsType',
     'gymnasium.core.ActType', 'rollout.AnyPolicy', 'SensorLike',

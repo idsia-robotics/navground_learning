@@ -3,17 +3,17 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 import torch
-from benchmarl.models.mlp import Mlp, MlpConfig  # type: ignore[import-not-found]
+from benchmarl.models.mlp import Mlp, MlpConfig  # type: ignore
 from torch import nn
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
     from tensordict import TensorDictBase  # type: ignore
 
 
-class FlattenMlp(Mlp):
+class FlattenMlp(Mlp):  # type: ignore[misc]
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any):
         self.flatten = nn.Flatten()
 
     def _forward(self, tensordict: TensorDictBase) -> TensorDictBase:
@@ -46,8 +46,8 @@ class FlattenMlp(Mlp):
 
 
 @dataclass
-class FlattenMlpConfig(MlpConfig):
+class FlattenMlpConfig(MlpConfig):  # type: ignore[misc]
 
     @staticmethod
-    def associated_class():
+    def associated_class() -> type:
         return FlattenMlp

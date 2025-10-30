@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, cast
+from typing import TYPE_CHECKING, Any, cast
+from collections.abc import Iterable
 
 if TYPE_CHECKING:
     from pettingzoo.utils.env import ParallelEnv
@@ -42,7 +43,9 @@ def make_vec_from_penv(env: ParallelEnv[int, Observation, Action],
                                         num_cpus=processes,
                                         base_class="stable_baselines3")
 
-    def get_attr(self, attr_name: str, indices=None) -> list:
+    def get_attr(self: supersuit.vector.MarkovVectorEnv,
+                 attr_name: str,
+                 indices: None | int | Iterable[int] = None) -> Any:
         if indices is None:
             indices = range(num_envs * menv.num_envs)
         if isinstance(indices, int):
@@ -56,7 +59,10 @@ def make_vec_from_penv(env: ParallelEnv[int, Observation, Action],
             return rs[0]
         return rs
 
-    def set_attr(self, attr_name: str, value, indices=None) -> None:
+    def set_attr(self: supersuit.vector.MarkovVectorEnv,
+                 attr_name: str,
+                 value: Any,
+                 indices: None | int | Iterable[int] = None) -> None:
         if indices is None:
             indices = range(num_envs * menv.num_envs)
         if isinstance(indices, int):

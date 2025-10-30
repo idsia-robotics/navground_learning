@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Any
+
 import numpy as np
 from stable_baselines3.common.callbacks import BaseCallback
 from stable_baselines3.common.utils import safe_mean
@@ -13,7 +15,7 @@ class ProgressBarWithRewardCallback(BaseCallback):
     displays a progress bar when training SB3 agent
     using tqdm but includes episodes mean reward and length.
     """
-    pbar: tqdm
+    pbar: tqdm[Any]
 
     def __init__(self, every: int = 1) -> None:
         super().__init__()

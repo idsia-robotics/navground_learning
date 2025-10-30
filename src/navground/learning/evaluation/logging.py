@@ -15,7 +15,9 @@ from navground import sim
 
 from ..config import GroupConfig
 from ..env import BaseEnv
-from ..types import AnyPolicyPredictor, PathLike, ObservationTransform, GroupObservationsTransform
+from ..internal.base_env import NavgroundBaseEnv
+from ..types import (AnyPolicyPredictor, GroupObservationsTransform,
+                     ObservationTransform, PathLike)
 from .experiment import make_experiment_with_env
 
 if TYPE_CHECKING:
@@ -44,7 +46,12 @@ def log_env(writer: SummaryWriter,
     if isinstance(env, VecEnv):
         value = env.get_attr("asdict", [0])[0]
     elif isinstance(env, ParallelEnv):
-        value = env.asdict  # type: ignore
+        if isinstance(env, NavgroundBaseEnv):
+            value = env.asdict
+        elif isinstance(env.unwrapped, NavgroundBaseEnv):
+            value = env.unwrapped.asdict
+        else:
+            raise TypeError(f"Env type {type(env)} not supported")
     else:
         value = env.get_wrapper_attr("asdict")
     log_yaml(writer, "environment", value)
@@ -480,7 +487,7 @@ def _config_sb3(model: OffPolicyAlgorithm, log: EvalLog) -> None:
         log.evaluate(global_step=model.num_timesteps)
         _dump_logs()
 
-    def excluded_save_params(self) -> list[str]:
+    def excluded_save_params(self: OffPolicyAlgorithm) -> list[str]:
         return _excluded_save_params() + ['dump_logs', '_excluded_save_params']
 
     model.dump_logs = MethodType(dump_logs, model)  # type: ignore

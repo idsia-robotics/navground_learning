@@ -272,11 +272,10 @@ class DefaultStateConfig(DataclassConfig, StateConfig,
                         frame=core.Frame.absolute if self.
                         use_absolute_frame else core.Frame.relative)
                     v_values.append(
-                        core.unit(orientation) if orientation else np.
-                        zeros(2, dtype=FloatType))
+                        core.unit(orientation) if orientation else core.zeros2())
                     validity.append(orientation is not None)
                 else:
-                    v_values.append(np.zeros(2, dtype=FloatType))
+                    v_values.append(core.zeros2())
                     validity.append(False)
             rs['target_orientation'] = np.array(v_values, dtype=FloatType)
             rs['target_orientation_valid'] = np.array(validity, np.uint8)
@@ -288,13 +287,12 @@ class DefaultStateConfig(DataclassConfig, StateConfig,
                     direction = agent.behavior.get_target_direction(
                         frame=core.Frame.absolute if self.
                         use_absolute_frame else core.Frame.relative)
-                    v = direction if direction is not None else np.zeros(
-                        2, dtype=FloatType)
+                    v = direction if direction is not None else core.zeros2()
                     if self.use_absolute_frame:
                         v = self._get_components(v)
                     v_values.append(v)
                 else:
-                    v_values.append(np.zeros(2, dtype=FloatType))
+                    v_values.append(core.zeros2())
                     validity.append(False)
             rs['target_direction'] = np.array(v_values, dtype=FloatType)
             rs['target_direction_valid'] = np.array(validity, np.uint8)

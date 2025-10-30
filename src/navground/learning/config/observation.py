@@ -415,7 +415,7 @@ class DefaultObservationConfig(ConfigWithKinematic,
             if orientation is not None:
                 u = core.unit(orientation)
             else:
-                u = np.zeros(2, dtype=FloatType)
+                u = core.zeros2()
             rs['ego_target_orientation'] = u
             if self.include_target_orientation_validity:
                 value = 0 if orientation is None else 1

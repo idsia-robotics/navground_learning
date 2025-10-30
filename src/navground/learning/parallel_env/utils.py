@@ -1,12 +1,14 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, cast
+import types
+from collections.abc import Iterable
+from typing import Any, TYPE_CHECKING, cast
 
 from .env import BaseParallelEnv
-import types
 
 if TYPE_CHECKING:
     from stable_baselines3.common.vec_env import VecEnv
+
 
 def make_vec_from_penv(
     env: BaseParallelEnv,
@@ -50,7 +52,9 @@ def make_vec_from_penv(
                                         num_cpus=processes,
                                         base_class="stable_baselines3")
 
-    def get_attr(self, attr_name: str, indices=None) -> list:
+    def get_attr(self: supersuit.vector.MarkovVectorEnv,
+                 attr_name: str,
+                 indices: None | int | Iterable[int] = None) -> Any:
         if indices is None:
             indices = range(num_envs * menv.num_envs)
         if isinstance(indices, int):
@@ -64,7 +68,10 @@ def make_vec_from_penv(
             return rs[0]
         return rs
 
-    def set_attr(self, attr_name: str, value, indices=None) -> None:
+    def set_attr(self: supersuit.vector.MarkovVectorEnv,
+                 attr_name: str,
+                 value: Any,
+                 indices: None | int | Iterable[int] = None) -> None:
         if indices is None:
             indices = range(num_envs * menv.num_envs)
         if isinstance(indices, int):

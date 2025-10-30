@@ -38,7 +38,7 @@ class OnnxPolicy:
                           it will be reconstructed from the onnx model)
     """
 
-    def __init__(self, path: PathLike, action_space: gym.Space | None = None):
+    def __init__(self, path: PathLike, action_space: gym.Space[Any] | None = None):
         import onnxruntime as ort  # type: ignore[import-untyped]
 
         options = ort.SessionOptions()
@@ -59,7 +59,7 @@ class OnnxPolicy:
         # TODO(Jerome): why can it have more than one output?
         # assert len(ys) == 1, ys
         if action_space is None:
-            self._action_space: gym.Space = space_for_onnx_tensor(ys[0])
+            self._action_space: gym.Space[Any] = space_for_onnx_tensor(ys[0])
         else:
             self._action_space = action_space
 
@@ -111,7 +111,7 @@ class OnnxPolicy:
         return self._observation_space
 
     @property
-    def action_space(self) -> gym.Space:
+    def action_space(self) -> gym.Space[Any]:
         """
         The action space
         """
