@@ -10,6 +10,8 @@
 ### Fixed
 
 - Robot default wheel axis in pad scenario.
+- Onnx export for newer versions of PyTorch.
+- Type hints.
 
 ## [0.2] 2025-08-06
 
