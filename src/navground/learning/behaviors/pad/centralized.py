@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import SupportsFloat
+
 from navground import core
 
 
@@ -31,7 +33,7 @@ class PadGroupBehavior(core.BehaviorGroup):
         super().__init__()
         self.pad_width = 0.5
 
-    def compute_cmds(self, time_step: float) -> list[core.Twist2]:
+    def compute_cmds(self, time_step: SupportsFloat) -> list[core.Twist2]:
         assert len(self.members) == 2 and all(
             behavior.target.direction is not None for behavior in self.members)
         vs = [

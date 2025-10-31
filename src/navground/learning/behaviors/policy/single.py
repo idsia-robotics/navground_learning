@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import warnings
+from typing import SupportsFloat
 
 from navground import core
 
@@ -65,9 +66,10 @@ class PolicyBehavior(BasePolicyMixin, core.Behavior, name="Policy",
         if not self._policy:
             self.init_policy()
 
-    def compute_cmd_internal(self, time_step: float) -> core.Twist2:
+    def compute_cmd_internal(self, time_step: SupportsFloat) -> core.Twist2:
         # if self.check_if_target_satisfied():
         #     return core.Twist2((0, 0), 0, frame=core.Frame.relative)
+        time_step = float(time_step)
         self.prepare()
         if not self._policy:
             warnings.warn("Policy not set", stacklevel=1)

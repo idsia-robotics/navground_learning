@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import SupportsInt
+
 from navground import core, sim
 
 
@@ -38,7 +40,7 @@ class CorridorWithObstacle(sim.Scenario,
         self._min_radius = min_radius
         self._max_radius = max_radius
 
-    def init_world(self, world: sim.World, seed: int | None = None) -> None:
+    def init_world(self, world: sim.World, seed: SupportsInt | None = None) -> None:
         """
         Initializes the world.
 

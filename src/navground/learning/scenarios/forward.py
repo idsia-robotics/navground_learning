@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import SupportsInt
+
 import numpy as np
 from navground import core, sim
 
@@ -44,7 +46,9 @@ class ForwardScenario(sim.Scenario, name='Forward'):
         self._periodic_x = periodic_x
         self._periodic_y = periodic_y
 
-    def init_world(self, world: sim.World, seed: int | None = None) -> None:
+    def init_world(self,
+                   world: sim.World,
+                   seed: SupportsInt | None = None) -> None:
         """
         Initializes the world.
 
@@ -86,9 +90,9 @@ class ForwardScenario(sim.Scenario, name='Forward'):
         if self._min_number_of_obstacles >= self._max_number_of_obstacles:
             number_of_obstacles = self._max_number_of_obstacles
         else:
-            number_of_obstacles = int(rng.integers(
-                low=self._min_number_of_obstacles,
-                high=self._max_number_of_obstacles))
+            number_of_obstacles = int(
+                rng.integers(low=self._min_number_of_obstacles,
+                             high=self._max_number_of_obstacles))
         if number_of_obstacles > 0:
             world.add_random_obstacles(number_of_obstacles,
                                        min_radius=self.min_obstacle_radius,

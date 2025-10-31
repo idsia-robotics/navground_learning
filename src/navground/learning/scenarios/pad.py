@@ -1,7 +1,7 @@
 import math
 from collections.abc import Callable
 from functools import partial
-from typing import Any
+from typing import Any, SupportsInt
 
 import numpy as np
 from navground import core, sim
@@ -177,7 +177,9 @@ class PadScenario(sim.Scenario, name="Pad"):
     def pad_width(self, value: float) -> None:
         self._pad_width = max(0, value)
 
-    def init_world(self, world: sim.World, seed: int | None = None) -> None:
+    def init_world(self,
+                   world: sim.World,
+                   seed: SupportsInt | None = None) -> None:
         super().init_world(world, seed=seed)
         rng = world.random_generator
         world.bounding_box = sim.BoundingBox(-self.length / 2, self.length / 2,
