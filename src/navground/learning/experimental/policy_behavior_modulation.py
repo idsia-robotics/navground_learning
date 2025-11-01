@@ -33,7 +33,7 @@ class PolicyModulation(core.BehaviorModulation):
             policy: Any = None,
             observation_fn: Callable[[core.SensingState], None] | None = None,
             deterministic: bool = True):
-        super().__init__()
+        core.BehaviorModulation.__init__(self)
         self.action_config = action_config
         self.observation_config = observation_config
         self.gym_agent: GymAgent | None = None
@@ -93,7 +93,7 @@ class ModProbe(sim.RecordProbe):
     dtype = float
 
     def __init__(self, ds: sim.Dataset, groups: Collection[GroupConfig]):
-        super().__init__(ds)
+        sim.RecordProbe.__init__(self, ds)
         self._groups = groups
         self.sizes: dict[int, int] = {}
 

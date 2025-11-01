@@ -21,7 +21,7 @@ def get_obs(behavior: GroupedPolicyBehavior) -> Observation:
 class GroupPolicyBehavior(core.BehaviorGroup):
 
     def __init__(self, policy: AnyPolicyPredictor):
-        super().__init__()
+        core.BehaviorGroup.__init__(self)
         self.policy = policy
         self._pre: GroupObservationsTransform | None = None
 

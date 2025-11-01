@@ -11,7 +11,7 @@ class AdvanceTask(sim.Task, name="Advance"):
     def __init__(self,
                  direction: core.Vector2 = core.unit(0),
                  target: float = 1.0) -> None:
-        super().__init__()
+        sim.Task.__init__(self)
         self.direction = direction / np.linalg.norm(direction)
         self.target = target
         self._advancement = 0.0

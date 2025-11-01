@@ -34,7 +34,7 @@ class CorridorWithObstacle(sim.Scenario,
                  width: float = 1.0,
                  min_radius: float = 0.1,
                  max_radius: float = 0.5):
-        super().__init__()
+        sim.Scenario.__init__(self)
         self._length = length
         self._width = width
         self._min_radius = min_radius

@@ -25,7 +25,7 @@ class StopAtPadBehavior(core.Behavior, name="StopAtPad"):
         :param      pad_width:   The pad width
         :param      tau:         The time to break
         """
-        super().__init__(kinematics=kinematics, radius=radius)
+        core.Behavior.__init__(self, kinematics=kinematics, radius=radius)
         self._pad_width = pad_width
         self._tau = tau
 

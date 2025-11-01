@@ -35,7 +35,7 @@ class ForwardScenario(sim.Scenario, name='Forward'):
         periodic_x: bool = True,
         periodic_y: bool = True,
     ) -> None:
-        super().__init__()
+        sim.Scenario.__init__(self)
         self._width = width
         self._length = length
         self._min_number_of_obstacles = min_number_of_obstacles

@@ -13,7 +13,7 @@ class SelectionBehavior(core.Behavior, name="Selection"):
                  kinematics: core.Kinematics | None = None,
                  radius: float = 0.0,
                  behaviors: Collection[core.Behavior] = tuple()):
-        super().__init__(kinematics, radius)
+        core.Behavior.__init__(self, kinematics, radius)
         self.behaviors = list(behaviors)
         self._state = core.GeometricState()
         self._index = 0

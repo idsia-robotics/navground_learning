@@ -95,7 +95,7 @@ class PadScenario(sim.Scenario, name="Pad"):
                  start_in_opposite_sides: bool = True,
                  pad_tolerance: float = 0.01,
                  pad_width: float = 0.5):
-        super().__init__()
+        sim.Scenario.__init__(self)
         self._length = length
         self._width = width
         self._with_walls = with_walls

@@ -46,7 +46,7 @@ class DistributedPadBehavior(core.Behavior, name="Pad"):
         :param      radius:      The radius
         :param      pad_width:   The pad width
         """
-        super().__init__(kinematics=kinematics, radius=radius)
+        core.Behavior.__init__(self, kinematics=kinematics, radius=radius)
         self._pad_width = pad_width
         self._state = core.GeometricState()
 
