@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import pathlib
 from typing import cast
+import sys
 
 try:
     from typing import Self
@@ -138,8 +139,12 @@ class BasePolicyMixin:
         """
         if not self._policy_path:
             return ''
-        return str(
-            self._policy_path.relative_to(pathlib.Path.cwd(), walk_up=True))
+        if sys.version_info >= (3, 12, 0):
+            return str(
+                self._policy_path.relative_to(pathlib.Path.cwd(), walk_up=True))
+        else:
+            return str(
+                self._policy_path.relative_to(pathlib.Path.cwd()))
         # return str(self._policy_path)
 
     @policy_path.setter
