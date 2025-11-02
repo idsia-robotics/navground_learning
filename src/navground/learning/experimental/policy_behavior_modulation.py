@@ -3,7 +3,7 @@ from __future__ import annotations
 import copy
 from collections.abc import Callable, Collection
 from functools import partial
-from typing import Any, cast
+from typing import Any, SupportsFloat, SupportsInt, cast
 
 from navground import core, sim
 
@@ -33,7 +33,7 @@ class PolicyModulation(core.BehaviorModulation):
             policy: Any = None,
             observation_fn: Callable[[core.SensingState], None] | None = None,
             deterministic: bool = True):
-        super().__init__()
+        core.BehaviorModulation.__init__(self)
         self.action_config = action_config
         self.observation_config = observation_config
         self.gym_agent: GymAgent | None = None
@@ -43,7 +43,7 @@ class PolicyModulation(core.BehaviorModulation):
         self.deterministic = deterministic
         self._old_params: dict[str, Any] = {}
 
-    def pre(self, behavior: core.Behavior, time_step: float) -> None:
+    def pre(self, behavior: core.Behavior, time_step: SupportsFloat) -> None:
         if self.observation_fn:
             self.observation_fn(self.state)
         if not self.gym_agent:
@@ -61,7 +61,7 @@ class PolicyModulation(core.BehaviorModulation):
         behavior.modulated_params = params  # type: ignore
         behavior.modulation_input = obs  # type: ignore
 
-    def post(self, behavior: core.Behavior, time_step: float,
+    def post(self, behavior: core.Behavior, time_step: SupportsFloat,
              cmd: core.Twist2) -> core.Twist2:
         for k, v in self._old_params.items():
             setattr(behavior, k, v)
@@ -69,16 +69,18 @@ class PolicyModulation(core.BehaviorModulation):
 
 
 def add_modulation(groups: Collection[GroupConfig],
-                   policy: Any) -> Callable[[sim.World, int | None], None]:
+                   policy: Any) -> Callable[[sim.World, SupportsInt | None], None]:
 
-    def f(world: sim.World, seed: int | None = None) -> None:
+    def f(world: sim.World, seed: SupportsInt | None = None) -> None:
         for group in groups:
             for agent in group.indices.sub_sequence(world.agents):
+                if not agent.behavior:
+                    continue
                 obs = update_state(group.get_sensors(), world, agent)
                 if group.action and isinstance(
                         group.action,
                         ModulationActionConfig) and group.observation:
-                    agent.behavior.add_modulation(  # type: ignore
+                    agent.behavior.add_modulation(
                         PolicyModulation(group.action, group.observation,
                                          policy, obs))
 
@@ -91,7 +93,7 @@ class ModProbe(sim.RecordProbe):
     dtype = float
 
     def __init__(self, ds: sim.Dataset, groups: Collection[GroupConfig]):
-        super().__init__(ds)
+        sim.RecordProbe.__init__(self, ds)
         self._groups = groups
         self.sizes: dict[int, int] = {}
 

@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import SupportsFloat
+
 from navground import core
 
 
@@ -28,10 +30,10 @@ def compute_speeds(values: list[tuple[float, float]], b: float) -> list[float]:
 class PadGroupBehavior(core.BehaviorGroup):
 
     def __init__(self, pad_width: float = 0.5):
-        super().__init__()
+        core.BehaviorGroup.__init__(self)
         self.pad_width = 0.5
 
-    def compute_cmds(self, time_step: float) -> list[core.Twist2]:
+    def compute_cmds(self, time_step: SupportsFloat) -> list[core.Twist2]:
         assert len(self.members) == 2 and all(
             behavior.target.direction is not None for behavior in self.members)
         vs = [
@@ -83,7 +85,7 @@ class CentralizedPadBehavior(core.BehaviorGroupMember, name="CentralizedPad"):
                  kinematics: core.Kinematics | None = None,
                  radius: float = 0,
                  pad_width: float = 0.5):
-        super().__init__(kinematics, radius)
+        core.BehaviorGroupMember.__init__(self, kinematics, radius)
 
         self._pad_width = pad_width
 

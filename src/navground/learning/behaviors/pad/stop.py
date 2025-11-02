@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import SupportsFloat
+
 from navground import core
 
 
@@ -23,7 +25,7 @@ class StopAtPadBehavior(core.Behavior, name="StopAtPad"):
         :param      pad_width:   The pad width
         :param      tau:         The time to break
         """
-        super().__init__(kinematics=kinematics, radius=radius)
+        core.Behavior.__init__(self, kinematics=kinematics, radius=radius)
         self._pad_width = pad_width
         self._tau = tau
 
@@ -63,8 +65,8 @@ class StopAtPadBehavior(core.Behavior, name="StopAtPad"):
         """
         self._tau = max(0, value)
 
-    def cmd_twist_towards_velocity(self, velocity: core.Vector2,
-                                   time_step: float) -> core.Twist2:
+    def cmd_twist_towards_velocity(self, velocity: core.Vector2Like,
+                                   time_step: SupportsFloat) -> core.Twist2:
         if self.target.direction is None:
             speed = 0.0
         else:

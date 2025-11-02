@@ -34,7 +34,7 @@ class SuccessProbe(sim.RecordProbe):
                  indices: IndicesLike = Indices.all(),
                  is_success: Condition | None = None,
                  is_failure: Condition | None = None):
-        super().__init__(ds)
+        sim.RecordProbe.__init__(self, ds)
         self._indices = Indices(indices)
         self._is_success = is_success
         self._is_failure = is_failure

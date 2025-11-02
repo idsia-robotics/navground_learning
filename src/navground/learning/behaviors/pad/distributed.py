@@ -3,10 +3,10 @@ from __future__ import annotations
 import math
 
 from navground import core
+from typing import SupportsFloat
 
 
 class DistributedPadBehavior(core.Behavior, name="Pad"):
-
     """
     A centralized behavior that applies a (quasi) optimal strategy
     in :py:class:`navground.learning.scenarios.PadScenario`:
@@ -46,7 +46,7 @@ class DistributedPadBehavior(core.Behavior, name="Pad"):
         :param      radius:      The radius
         :param      pad_width:   The pad width
         """
-        super().__init__(kinematics=kinematics, radius=radius)
+        core.Behavior.__init__(self, kinematics=kinematics, radius=radius)
         self._pad_width = pad_width
         self._state = core.GeometricState()
 
@@ -71,8 +71,8 @@ class DistributedPadBehavior(core.Behavior, name="Pad"):
     def get_environment_state(self) -> core.EnvironmentState:
         return self._state
 
-    def cmd_twist_towards_velocity(self, velocity: core.Vector2,
-                                   time_step: float) -> core.Twist2:
+    def cmd_twist_towards_velocity(self, velocity: core.Vector2Like,
+                                   time_step: SupportsFloat) -> core.Twist2:
         assert len(
             self._state.neighbors) == 1 and self.target.direction is not None
         other = self._state.neighbors[0]

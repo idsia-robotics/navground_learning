@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import SupportsFloat
+
 import numpy as np
 from navground import core, sim
 
@@ -9,12 +11,13 @@ class AdvanceTask(sim.Task, name="Advance"):
     def __init__(self,
                  direction: core.Vector2 = core.unit(0),
                  target: float = 1.0) -> None:
-        super().__init__()
+        sim.Task.__init__(self)
         self.direction = direction / np.linalg.norm(direction)
         self.target = target
         self._advancement = 0.0
 
-    def update(self, agent: sim.Agent, world: sim.World, time: float) -> None:
+    def update(self, agent: sim.Agent, world: sim.World,
+               time: SupportsFloat) -> None:
         self._advancement = np.dot(
             agent.pose.position - self._initial_position, self._direction)
         if self.done():

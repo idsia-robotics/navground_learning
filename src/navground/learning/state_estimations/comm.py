@@ -15,7 +15,7 @@ class CommSensor(sim.Sensor, name="Comm", include_properties_of=['Sensor']):
     """
 
     def __init__(self, binarize: bool = True, size: int = 1, name: str = ''):
-        super().__init__(name=name)
+        sim.Sensor.__init__(self, name=name)
         self._binarize = binarize
         self._size = size
 
