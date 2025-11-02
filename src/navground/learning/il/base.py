@@ -2,16 +2,15 @@ from __future__ import annotations
 
 import datetime
 import pathlib as pl
+import sys
 import warnings
 from typing import TYPE_CHECKING, Any
 
-try:
-    from typing import Self
-except ImportError:
-    try:
+if TYPE_CHECKING:
+    if sys.version_info >= (3, 11):
+        from typing import Self
+    else:
         from typing_extensions import Self
-    except ImportError:
-        ...
 
 import gymnasium as gym
 import numpy as np

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import inspect
 import os
+import sys
 from collections.abc import Callable, Mapping, Sequence
 from typing import TYPE_CHECKING, Any, Protocol, TypeAlias
 
@@ -10,14 +11,11 @@ from navground.sim import Bounds as Bounds  # noqa: F401
 if TYPE_CHECKING:
     import gymnasium as gym
     import torch
-
-try:
-    from typing import Self
-except ImportError:
-    try:
+    if sys.version_info >= (3, 11):
+        from typing import Self
+    else:
         from typing_extensions import Self
-    except ImportError:
-        pass
+
 import abc
 
 import numpy as np

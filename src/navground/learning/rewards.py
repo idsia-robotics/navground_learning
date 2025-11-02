@@ -1,16 +1,15 @@
 from __future__ import annotations
 
 import dataclasses as dc
+import sys
 from collections.abc import Mapping
-from typing import Any, cast
+from typing import TYPE_CHECKING, Any, cast
 
-try:
-    from typing import Self
-except ImportError:
-    try:
+if TYPE_CHECKING:
+    if sys.version_info >= (3, 11):
+        from typing import Self
+    else:
         from typing_extensions import Self
-    except ImportError:
-        ...
 
 import numpy as np
 from navground import core, sim

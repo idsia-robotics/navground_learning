@@ -1,16 +1,16 @@
 from __future__ import annotations
 
 import pathlib
-from typing import cast
 import sys
+from typing import TYPE_CHECKING, cast
 
-try:
-    from typing import Self
-except ImportError:
-    try:
+if TYPE_CHECKING:
+    import gymnasium as gym
+    import torch
+    if sys.version_info >= (3, 11):
+        from typing import Self
+    else:
         from typing_extensions import Self
-    except ImportError:
-        ...
 
 from navground import core
 
@@ -139,7 +139,7 @@ class BasePolicyMixin:
         """
         if not self._policy_path:
             return ''
-        if sys.version_info >= (3, 12, 0):
+        if sys.version_info >= (3, 12):
             return str(
                 self._policy_path.relative_to(pathlib.Path.cwd(), walk_up=True))
         else:
