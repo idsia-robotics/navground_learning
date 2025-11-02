@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import warnings
 from collections.abc import Callable, Collection, Iterable, Sequence
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, SupportsInt
 
 from navground import core, sim
 
@@ -105,7 +105,7 @@ def is_any_agents_outside(
     def f(world: sim.World) -> bool:
         nonlocal bounds
         if bounds is None:
-            bounds = sim.bounds_of_bounding_box(world.bounding_box)
+            bounds = world.bounds
         return any(
             is_outside(agent.position, bounds)
             for agent in agent_indices.sub_sequence(world.agents))
@@ -118,7 +118,7 @@ def is_outside_world_bounds(
         bounds: Bounds | None = None
 ) -> Callable[[sim.Agent, sim.World], bool]:
     if bounds is None:
-        bounds = sim.bounds_of_bounding_box(world.bounding_box)
+        bounds = world.bounds
 
     def f(agent: sim.Agent, world: sim.World) -> bool:
         return is_outside(agent.position, bounds)
@@ -196,7 +196,7 @@ class InitPolicyBehavior:
         self.terminate_outside_bounds = terminate_outside_bounds
         self.deterministic = deterministic
 
-    def __call__(self, world: sim.World, seed: int | None = None) -> None:
+    def __call__(self, world: sim.World, seed: SupportsInt | None = None) -> None:
         """
         Configures the policy, sensor, color, ... of the agents according
         to their group.

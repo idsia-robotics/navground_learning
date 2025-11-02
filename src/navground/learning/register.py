@@ -1,15 +1,14 @@
 from __future__ import annotations
 
+import sys
 from collections.abc import Mapping
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
-try:
-    from typing import Self
-except ImportError:
-    try:
+if TYPE_CHECKING:
+    if sys.version_info >= (3, 11):
+        from typing import Self
+    else:
         from typing_extensions import Self
-    except ImportError:
-        pass
 
 
 class Registrable:

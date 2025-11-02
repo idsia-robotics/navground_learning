@@ -14,8 +14,10 @@ class CommProbe(sim.RecordProbe):
 
     def update(self, run: sim.ExperimentalRun) -> None:
         for agent in run.world.agents:
+            if not agent.behavior:
+                continue
             try:
-                comm = agent.behavior._comm  # type: ignore[union-attr]
+                comm = agent.behavior._comm  # type: ignore[attr-defined]
             except AttributeError:
                 continue
             self.data.append(comm)
@@ -23,8 +25,10 @@ class CommProbe(sim.RecordProbe):
     def get_shape(self, world: sim.World) -> list[int]:
         shapes = []
         for agent in world.agents:
+            if not agent.behavior:
+                continue
             try:
-                shapes.append(agent.behavior.  # type: ignore[union-attr]
+                shapes.append(agent.behavior.  # type: ignore[attr-defined]
                               _gym_agent.action_config.comm_space.shape)
             except AttributeError:
                 continue

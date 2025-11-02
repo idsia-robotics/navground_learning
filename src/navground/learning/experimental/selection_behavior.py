@@ -1,8 +1,10 @@
 from __future__ import annotations
 
+from collections.abc import Collection
+from typing import SupportsFloat
+
 import yaml
 from navground import core
-from collections.abc import Collection
 
 
 class SelectionBehavior(core.Behavior, name="Selection"):
@@ -11,7 +13,7 @@ class SelectionBehavior(core.Behavior, name="Selection"):
                  kinematics: core.Kinematics | None = None,
                  radius: float = 0.0,
                  behaviors: Collection[core.Behavior] = tuple()):
-        super().__init__(kinematics, radius)
+        core.Behavior.__init__(self, kinematics, radius)
         self.behaviors = list(behaviors)
         self._state = core.GeometricState()
         self._index = 0
@@ -41,7 +43,7 @@ class SelectionBehavior(core.Behavior, name="Selection"):
     def index(self, value: int) -> None:
         self._index = max(0, value)
 
-    def compute_cmd_internal(self, time_step: float) -> core.Twist2:
+    def compute_cmd_internal(self, time_step: SupportsFloat) -> core.Twist2:
         if self.index < len(self.behaviors):
             behavior = self.behaviors[self.index]
             behavior.set_state_from(self)

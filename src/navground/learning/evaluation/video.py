@@ -41,7 +41,7 @@ def _run_video(
         run = experiment.run_once(seed)
     world = experiment.scenario.make_world(run.seed)
     if use_world_bounds:
-        bounds = sim.bounds_for_world(world)
+        bounds = world.bounds
     else:
         bounds = None
     if run.final_sim_time:

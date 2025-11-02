@@ -1,13 +1,14 @@
 from __future__ import annotations
 
 import pathlib as pl
+import sys
 import warnings
 from collections.abc import Iterator
 from typing import TYPE_CHECKING, cast
 
-try:
+if sys.version_info >= (3, 11):
     from contextlib import chdir  # Python>=3.11
-except ImportError:
+else:
     import contextlib
     import os
 
@@ -161,8 +162,7 @@ def export_policy_as_behavior(path: PathLike,
 
 
 def load_behavior(
-        path: PathLike
-) -> tuple[PolicyBehavior | None, list[sim.Sensor]]:
+        path: PathLike) -> tuple[PolicyBehavior | None, list[sim.Sensor]]:
     """
     Load behavior and sensor previously saved in a directory
     using :py:func:`export_policy_as_behavior`.

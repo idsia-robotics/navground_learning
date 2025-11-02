@@ -29,7 +29,7 @@ class RewardProbe(sim.RecordProbe):
                  ds: sim.Dataset,
                  groups: Collection[GroupConfig] = tuple(),
                  reward: Reward | None = None):
-        super().__init__(ds)
+        sim.RecordProbe.__init__(self, ds)
         self._groups = groups
         self._reward: dict[int, Reward] = {}
         self._default_reward = reward

@@ -1,16 +1,16 @@
 from __future__ import annotations
 
 import logging
+import sys
 from collections.abc import Collection, Mapping
-from typing import Any, cast
+from typing import TYPE_CHECKING, Any, cast
 
-try:
-    from typing import Self
-except ImportError:
-    try:
+if TYPE_CHECKING:
+    if sys.version_info >= (3, 11):
+        from typing import Self
+    else:
         from typing_extensions import Self
-    except ImportError:
-        ...
+
 import gymnasium as gym
 import numpy as np
 import yaml
@@ -18,7 +18,7 @@ from navground import core, sim
 
 from ..config import ActionConfig, GroupConfig, ObservationConfig, StateConfig
 from ..policies.info_predictor import InfoPolicy
-from ..types import Action, Array, Bounds, Observation, Info
+from ..types import Action, Array, Bounds, Info, Observation
 from .clock import SyncClock
 from .group import Agent, GymAgent, create_agents_in_groups
 

@@ -1,13 +1,13 @@
 from __future__ import annotations
 
-from typing import cast
+from typing import SupportsFloat, cast
 
 from navground import core
 
 from ...config import ControlActionConfig, DefaultObservationConfig
 from ...parallel_env.join import stack_observations
-from ...types import (AnyPolicyPredictor, Observation, ObservationTransform,
-                      PathLike, GroupObservationsTransform)
+from ...types import (AnyPolicyPredictor, GroupObservationsTransform,
+                      Observation, ObservationTransform, PathLike)
 from .base import BasePolicyMixin
 
 
@@ -21,26 +21,23 @@ def get_obs(behavior: GroupedPolicyBehavior) -> Observation:
 class GroupPolicyBehavior(core.BehaviorGroup):
 
     def __init__(self, policy: AnyPolicyPredictor):
-        super().__init__()
+        core.BehaviorGroup.__init__(self)
         self.policy = policy
         self._pre: GroupObservationsTransform | None = None
 
     def set_pre(self, value: GroupObservationsTransform | None) -> None:
         self._pre = value
 
-    def compute_cmds(self, time_step: float) -> list[core.Twist2]:
+    def compute_cmds(self, time_step: SupportsFloat) -> list[core.Twist2]:
         behaviors = cast('list[GroupedPolicyBehavior]', self.members)
-        obss = {
-            i: get_obs(behavior)
-            for i, behavior in enumerate(behaviors)
-        }
+        obss = {i: get_obs(behavior) for i, behavior in enumerate(behaviors)}
         if self._pre:
             obss = self._pre(obss)
         obs = stack_observations(obss)
         acts, _ = self.policy.predict(obs, deterministic=True)
         acts = acts.reshape(len(self.members), -1)
         return [
-            behavior.get_cmd_from_action(act, time_step)
+            behavior.get_cmd_from_action(act, float(time_step))
             for behavior, act in zip(behaviors, acts, strict=True)
         ]
 

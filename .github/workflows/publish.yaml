@@ -5,8 +5,7 @@ on:
   push:
     tags:
       - '*'
-    branches:
-      - 'releases/**'
+      - '!*-*'
 jobs:
   build:
     name: Build Python 📦

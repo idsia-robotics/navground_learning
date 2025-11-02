@@ -8,7 +8,7 @@ from typing import Any, SupportsFloat, cast
 import gymnasium as gym
 import numpy as np
 
-from ...types import Action, AnyPolicyPredictor, Array, Observation, accept_info
+from ...types import Action, AnyPolicyPredictor, PolicyPredictorWithInfo, Array, Observation, accept_info
 
 # Could/should replicate the Torch RL Env.rolling
 # that returns a dictionary of {'action', 'next', ...}
@@ -50,10 +50,13 @@ def rollout(env: gym.Env[Any, Any],
             act = env.action_space.sample()
         else:
             if pass_info:
-                kwargs = {'info': info}
+                act, _ = cast(PolicyPredictorWithInfo,
+                              policy).predict(obs,
+                                              deterministic=deterministic,
+                                              info=info)
             else:
-                kwargs = {}
-            act, _ = policy.predict(obs, deterministic=deterministic, **kwargs)
+                act, _ = policy.predict(obs, deterministic=deterministic)
+
         acts.append(act)
         obs, rew, term, trunc, info = env.step(act)
         obss.append(obs)
