@@ -13,7 +13,7 @@ from sphinx.addnodes import pending_xref
 project = 'navground_learning'
 copyright = '2024, Jerome Guzzi et al. (IDSIA, USI-SUPSI)'
 author = 'Jerome Guzzi et al. (IDSIA, USI-SUPSI)'
-release = '0.3.pre'
+release = '0.3.0.dev'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -67,7 +67,7 @@ intersphinx_mapping = {
     'pettingzoo': ('https://pettingzoo.farama.org', None),
     'python': ('https://docs.python.org/3', None),
     'numpy': ('https://numpy.org/doc/stable', None),
-    'torch': ('https://pytorch.org/docs/stable/', None),
+    'torch': ('https://docs.pytorch.org/docs/stable', None),
     'imitation': ('https://imitation.readthedocs.io/en/latest/', None),
     'stable_baselines3':
     ('https://stable-baselines3.readthedocs.io/en/master/', None),
