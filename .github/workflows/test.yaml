@@ -36,6 +36,7 @@ jobs:
           - "3.11"
           - "3.12"
           - "3.13"
+          - "3.14"
     name: TestPython
     needs:
       - build
@@ -57,7 +58,9 @@ jobs:
       - name: Install
         run: |
           find dist -name '*.whl' -exec pip install {} \;
-          pip install pytest
+          pip install pytest mypy
+      - name: Test typing
+        run: mypy -p navground.learning --strict
       - name: Test Gymnasium
         run: pytest test/test_gymnasium.py
       - name: Test PettingZoo
