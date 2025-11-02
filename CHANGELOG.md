@@ -4,14 +4,21 @@
 
 ### Added
 
-- Group observation transformations
-- Option to `ExportOnnxCallback` to configure the file name
+- Added group observation transformations
+- Added option to `ExportOnnxCallback` to configure the file name
 
 ### Fixed
 
-- Robot default wheel axis in pad scenario.
-- Onnx export for newer versions of PyTorch.
-- Type hints.
+- Fixed robot default wheel axis in pad scenario.
+- Fixed onnx export for newer versions of PyTorch.
+- Fixed type annotation.
+- Fixed Python 3.10 and Python 3.11 errors. 
+
+### Changed
+
+- Updated navground to 0.7
+- Replaced `to_bounds` function with `navground.sim.World.bounds`.
+- Changed how `evaluate_policy` and `evaluate_policies` stack infos and how these are consumed by `InfoPolicy`.
 
 ## [0.2] 2025-08-06
 
