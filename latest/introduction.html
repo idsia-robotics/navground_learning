@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Introduction &#8212; navground_learning 0.3.pre documentation</title>
+    <title>Introduction &#8212; navground_learning 0.3.0.dev documentation</title>
   
   
   
@@ -38,7 +38,7 @@
 
     <script src="_static/jquery.js?v=5d32c60e"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="_static/documentation_options.js?v=291f2bd5"></script>
+    <script src="_static/documentation_options.js?v=94739730"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
@@ -136,7 +136,7 @@
   
   
   
-    <p class="title logo__title">navground_learning 0.3.pre documentation</p>
+    <p class="title logo__title">navground_learning 0.3.0.dev documentation</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -640,7 +640,7 @@ convert gymnasium actions to <a class="reference external" href="https://idsia-r
 </pre></div>
 </div>
 <p><a class="reference internal" href="reference/wrappers.html#navground.learning.wrappers.NameWrapper" title="navground.learning.wrappers.name_wrapper.NameWrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">wrappers.name_wrapper.NameWrapper</span></code></a> converts from an environment where agents are indexed by integers to one where they are indexed by strings, which TorchRL requires.</p>
-<p>Function <a class="reference internal" href="reference/utils.html#navground.learning.utils.benchmarl.make_env" title="navground.learning.utils.benchmarl.make_env"><code class="xref py py-func docutils literal notranslate"><span class="pre">utils.benchmarl.make_env()</span></code></a> provides the same functionality.</p>
+<p>Function <code class="xref py py-func docutils literal notranslate"><span class="pre">utils.benchmarl.make_env()</span></code> provides the same functionality.</p>
 </section>
 </section>
 <section id="train-ml-policies-in-navground">
@@ -741,7 +741,7 @@ We instantiate the parallel environment using <a class="reference internal" href
 <section id="evaluation">
 <h2>Evaluation<a class="headerlink" href="#evaluation" title="Link to this heading">#</a></h2>
 <p>Once trained, we can evaluate the policies with common tools, such as
-<a class="reference external" href="https://stable-baselines3.readthedocs.io/en/master/common/evaluation.html#stable_baselines3.common.evaluation.evaluate_policy" title="(in Stable Baselines3 vmaster (2.6.1a1 ))"><code class="xref py py-func docutils literal notranslate"><span class="pre">stable_baselines3.common.evaluation.evaluate_policy()</span></code></a> and its extensions in <a class="reference internal" href="reference/evaluation.html#module-navground.learning.evaluation" title="navground.learning.evaluation"><code class="xref py py-mod docutils literal notranslate"><span class="pre">evaluation</span></code></a> that supports parallel environments with groups using different policies.</p>
+<a class="reference external" href="https://stable-baselines3.readthedocs.io/en/master/common/evaluation.html#stable_baselines3.common.evaluation.evaluate_policy" title="(in Stable Baselines3 vmaster (2.7.1a3 ))"><code class="xref py py-func docutils literal notranslate"><span class="pre">stable_baselines3.common.evaluation.evaluate_policy()</span></code></a> and its extensions in <a class="reference internal" href="reference/evaluation.html#module-navground.learning.evaluation" title="navground.learning.evaluation"><code class="xref py py-mod docutils literal notranslate"><span class="pre">evaluation</span></code></a> that supports parallel environments with groups using different policies.</p>
 <section id="use-ml-policies-in-navground">
 <h3>Use ML policies in navground<a class="headerlink" href="#use-ml-policies-in-navground" title="Link to this heading">#</a></h3>
 <p>Evaluation can also be performed using the tools available in navground,
@@ -770,7 +770,7 @@ which are specifically designed to support large experiments with many runs and 
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>After training a policy using BenchMARL, we need extract a compatible policy using
-<a class="reference internal" href="reference/utils.html#navground.learning.utils.benchmarl.NavgroundExperiment.get_single_agent_policy" title="navground.learning.utils.benchmarl.NavgroundExperiment.get_single_agent_policy"><code class="xref py py-meth docutils literal notranslate"><span class="pre">utils.benchmarl.NavgroundExperiment.get_single_agent_policy()</span></code></a>
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">utils.benchmarl.NavgroundExperiment.get_single_agent_policy()</span></code>
 that transforms a TorchRL policy to a PyTorch policy.</p>
 </div>
 <p>In practice, we do not need to perform the configuration manually. Instead, we can load it from a YAML file (exported e.g. using <a class="reference internal" href="reference/io.html#navground.learning.io.export_policy_as_behavior" title="navground.learning.io.export_policy_as_behavior"><code class="xref py py-func docutils literal notranslate"><span class="pre">io.export_policy_as_behavior()</span></code></a>), like common in navground:</p>
