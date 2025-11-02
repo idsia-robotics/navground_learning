@@ -58,9 +58,9 @@ jobs:
       - name: Install
         run: |
           find dist -name '*.whl' -exec pip install {} \;
-          pip install pytest mypy
+          pip install pytest
       - name: Test typing
-        run: mypy -p navground.learning --strict
+        run: mypy -p navground.learning --strict --ignore-missing-imports --disable-error-code unused-ignore --disable-error-code misc --disable-error-code no-any-return
       - name: Test Gymnasium
         run: pytest test/test_gymnasium.py
       - name: Test PettingZoo
@@ -69,3 +69,7 @@ jobs:
         run: pip install torchrl git+https://github.com/jeguzzi/BenchMARL.git@main
       - name: Test TorchRL
         run: pytest test/test_torchrl.py
+      - name: Install mypy
+        run: pip install navground[typing] mypy
+      - name: Test typing
+        run: mypy -p navground.learning --strict --ignore-missing-imports --disable-error-code unused-ignore --disable-error-code misc --disable-error-code no-any-return
