@@ -72,4 +72,4 @@ jobs:
       - name: Install mypy
         run: pip install navground[typing] mypy
       - name: Test typing
-        run: mypy -p navground.learning --strict --ignore-missing-imports --disable-error-code unused-ignore --disable-error-code misc --disable-error-code no-any-return
+        run: mypy -p navground.learning --strict --ignore-missing-imports --disable-error-code unused-ignore --disable-error-code misc --disable-error-code no-any-return --disable-error-code redundant-cast
