@@ -64,8 +64,10 @@ jobs:
       - name: Test PettingZoo
         run: pytest test/test_pettingzoo.py
       - name: Install torchrl
+        if: ${{ matrix.python-version != 3.14}}
         run: pip install torchrl git+https://github.com/jeguzzi/BenchMARL.git@main
       - name: Test TorchRL
+        if: ${{ matrix.python-version != 3.14}}
         run: pytest test/test_torchrl.py
       - name: Install mypy
         run: pip install navground[typing] mypy
